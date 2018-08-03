@@ -1,0 +1,10 @@
+{
+  "docs": {
+    "Intro": ["index"],
+    "Installation": ["installation/install"],
+    "Quickstart": ["running/running"],
+    "Web Application": [],
+    "Mobile Application" : [],
+    "Api Server": []
+  }
+}
