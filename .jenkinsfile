@@ -1,7 +1,4 @@
 pipeline {
-  environment {
-  }
-
   stages {
     stage('Build') {
       steps {
@@ -17,12 +14,6 @@ pipeline {
       steps {
         echo "Master only builds"
       }
-    }
-  }
-
-  post {
-    script {
-      echo "End of all things"
     }
   }
 }
