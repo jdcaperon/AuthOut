@@ -1,0 +1,28 @@
+pipeline {
+  environment {
+  }
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          echo "Build Step"
+        }
+      }
+    }
+    stage('Build and Publish Image') {
+      when {
+        branch 'master'  //only run these steps on the master branch
+      }
+      steps {
+        echo "Master only builds"
+      }
+    }
+  }
+
+  post {
+    script {
+      echo "End of all things"
+    }
+  }
+}
