@@ -38,7 +38,15 @@ pipeline {
       steps {
         script {
           echo "Building Server"
-          sh "cd server && gradle build"
+          sh "cd server && ./gradlew build"
+        }
+      }
+    }
+    stage('Test Server') {
+      steps {
+        script {
+          echo "Testing Server"
+          sh "cd server && ./gradlew test"
         }
       }
     }
