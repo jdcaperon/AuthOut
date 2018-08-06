@@ -42,14 +42,6 @@ pipeline {
         }
       }
     }
-    stage('Test Server') {
-      steps {
-        script {
-          echo "Testing Server"
-          sh "cd server && ./gradlew test"
-        }
-      }
-    }
     stage('Build and Publish Image') {
       when {
         branch 'master'
