@@ -6,8 +6,10 @@ pipeline {
       steps {
         script {
           echo "Building the documentation website"
+          sh "mkdir -p build/docs"
           sh "cd docs && yarn"
-          sh "cd docs/website && yarn && yarn build"
+          sh "cd docs/website && yarn && yarn run build"
+          sh "cp -r docs/website/build/* build/docs"
         }
       }
     }
@@ -36,6 +38,7 @@ pipeline {
       steps {
         script {
           echo "Building Server"
+          sh "cd server && gradle build"
         }
       }
     }
