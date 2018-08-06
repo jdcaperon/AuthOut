@@ -6,7 +6,9 @@ pipeline {
       steps {
         script {
           echo "Building the documentation website"
-          sh "ls"
+          sh "cd docs && yarn"
+          sh "cd website && yarn"
+          sh "yarn build"
         }
       }
     }
