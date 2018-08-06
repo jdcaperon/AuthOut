@@ -2,19 +2,56 @@ pipeline {
   agent any
   
   stages {
-    stage('Build') {
+    stage('Build Docs') {
       steps {
         script {
-          echo "Build Step"
+          echo "Building the documentation website"
+          ls
+        }
+      }
+    }
+    stage('Build Product Web') {
+      steps {
+        script {
+          echo "Building Product Website"
+        }
+      }
+    }
+    stage('Build Web application') {
+      steps {
+        script {
+          echo "Building Web application"
+        }
+      }
+    }
+    stage('Build Android application') {
+      steps {
+        script {
+          echo "Building Android application"
+        }
+      }
+    }
+    stage('Build Server') {
+      steps {
+        script {
+          echo "Building Server"
         }
       }
     }
     stage('Build and Publish Image') {
       when {
-        branch 'master'  //only run these steps on the master branch
+        branch 'master'
       }
       steps {
-        echo "Master only builds"
+        echo "Publishing to master"
+      }
+    }
+    stage('Publish to develop') {
+      when {
+        branch 'develop'
+      }
+      steps {
+        echo "Publishing to develop"
       }
     }
   }
