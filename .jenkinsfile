@@ -49,7 +49,7 @@ pipeline {
     }
     stage('Build and Publish Image') {
       when {
-        expression {env.BRANCH_NAME == 'origin/master'}
+        expression {env.GIT_BRANCH == 'origin/master'}
       }
       steps {
         echo "Publishing to master"
@@ -57,7 +57,7 @@ pipeline {
     }
     stage('Publish to develop') {
       when {
-        branch 'develop'
+        expression {env.GIT_BRANCH == 'origin/develop'}
       }
       steps {
         echo "Publishing to develop"
