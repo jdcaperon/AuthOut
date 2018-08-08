@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Build and Publish Image') {
       when {
-        branch 'master'
+        branch 'origin/master'
       }
       steps {
         echo "Publishing to master"
