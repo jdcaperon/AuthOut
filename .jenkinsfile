@@ -42,7 +42,7 @@ pipeline {
         }
       }
     }
-    stage('Build and Publish Image') {
+    stage('Publish to master') {
       when {
         expression {env.GIT_BRANCH == 'origin/master'}
       }
