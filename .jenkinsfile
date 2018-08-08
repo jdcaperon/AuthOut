@@ -17,7 +17,7 @@ pipeline {
       steps {
         script {
           echo "Building Product Website"
-          echo "Testing build on push"
+          echo "Testing build on push!"
         }
       }
     }
