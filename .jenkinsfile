@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Build and Publish Image') {
       when {
-        expression {${GIT_BRANCH} == 'origin/master'}
+        expression {env.BRANCH_NAME == 'origin/master'}
       }
       steps {
         echo "Publishing to master"
