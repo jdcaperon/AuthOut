@@ -48,6 +48,7 @@ pipeline {
       }
       steps {
         echo "Publishing to master"
+        slackSend color: 'good', message: 'Publishing to master'
       }
     }
     stage('Publish to develop') {
