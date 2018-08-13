@@ -1,7 +1,7 @@
 server {
   server_name deco3801.wisebaldone.com;
 
-  listen[::]:443 ssl ipv6only=on;
+  listen [::]:443 ssl ipv6only=on;
   listen 443 ssl;
 
   ssl_certificate /etc/letsencrypt/live/deco3801.wisebaldone.com/fullchain.pem;
