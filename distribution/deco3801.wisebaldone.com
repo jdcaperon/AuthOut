@@ -11,20 +11,20 @@ server {
   
 
   location /app {
-    root /var/www/deco3801.wisebaldone.com/app
+    root /var/www/deco3801.wisebaldone.com/app;
   }
 
   location /api {
     # this will be changed to a proxy
-    root /var/www/deco3801.wisebaldone.com/api
+    root /var/www/deco3801.wisebaldone.com/api;
   }
 
   location /docs {
-    root /var/www/deco3801.wisebaldone.com/docs
+    root /var/www/deco3801.wisebaldone.com/docs;
   }
 
   location / {
-    root /var/www/deco3801.wisebaldone.com/html
+    root /var/www/deco3801.wisebaldone.com/html;
   }
 }
 
