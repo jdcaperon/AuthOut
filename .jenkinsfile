@@ -63,7 +63,7 @@ pipeline {
             sshpass -e scp -o stricthostkeychecking=no -r distribution/ rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
           '''
         // Reboot nginx
-
+        }
       }
     }
   }
