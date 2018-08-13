@@ -2,7 +2,7 @@
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
-    "build": "spectacle -t static/api static/api.yml && docusaurus-build",
+    "build": "docusaurus-build && spectacle -t build/AuthOut/api static/api.yml",
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",
     "version": "docusaurus-version",

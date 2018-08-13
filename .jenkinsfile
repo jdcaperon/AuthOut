@@ -59,11 +59,12 @@ pipeline {
         echo "Publishing to develop"
         withCredentials([string(credentialsId: 'betaPass', variable: 'SSHPASS')]) {
           sh '''
-            sshpass -e scp -o stricthostkeychecking=no -r build/docs rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/docs
-            sshpass -e scp -o stricthostkeychecking=no -r distribution/ rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
+            sshpass -e scp -o stricthostkeychecking=no -r build/docs/AuthOut/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/docs
+            sshpass -e scp -o stricthostkeychecking=no -r distribution/* rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
+            sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo systemctl restart nginx'
           '''
         // Reboot nginx
-
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 server {
   server_name deco3801.wisebaldone.com;
 
-  listen[::]:443 ssl ipv6only=on;
+  listen [::]:443 ssl ipv6only=on;
   listen 443 ssl;
 
   ssl_certificate /etc/letsencrypt/live/deco3801.wisebaldone.com/fullchain.pem;
@@ -9,22 +9,14 @@ server {
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
   
-
-  location /app {
-    root /var/www/deco3801.wisebaldone.com/app
-  }
-
+  
   location /api {
     # this will be changed to a proxy
-    root /var/www/deco3801.wisebaldone.com/api
-  }
-
-  location /docs {
-    root /var/www/deco3801.wisebaldone.com/docs
+    root /var/www/deco3801.wisebaldone.com/api;
   }
 
   location / {
-    root /var/www/deco3801.wisebaldone.com/html
+    root /var/www/deco3801.wisebaldone.com;
   }
 }
 
@@ -35,7 +27,7 @@ server {
 
   server_name deco3801.wisebaldone.com;
   listen 80;
-  listen[::]:80;
+  listen [::]:80;
 
   return 404;
 }
