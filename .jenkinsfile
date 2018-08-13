@@ -42,12 +42,13 @@ pipeline {
         }
       }
     }
-    stage('Build and Publish Image') {
+    stage('Publish to master') {
       when {
         expression {env.GIT_BRANCH == 'origin/master'}
       }
       steps {
         echo "Publishing to master"
+        slackSend color: 'good', message: 'Publishing to master'
       }
     }
     stage('Publish to develop') {
@@ -56,6 +57,13 @@ pipeline {
       }
       steps {
         echo "Publishing to develop"
+        withCredentials([string(credentialsId: 'betaPass', variable: 'SSHPASS')]) {
+          sh '''
+            sshpass -e scp -o stricthostkeychecking=no -r build/docs rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/docs
+            sshpass -e scp -o stricthostkeychecking=no -r distribution/ rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
+          '''
+        // Reboot nginx
+
       }
     }
   }
