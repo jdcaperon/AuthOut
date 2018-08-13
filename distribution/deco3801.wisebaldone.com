@@ -35,7 +35,7 @@ server {
 
   server_name deco3801.wisebaldone.com;
   listen 80;
-  listen[::]:80;
+  listen [::]:80;
 
   return 404;
 }
