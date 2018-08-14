@@ -19,7 +19,7 @@ server {
     root /var/www/deco3801.wisebaldone.com;
   }
 
-  location /aop {
+  location /app {
     root /var/www/deco3801.wisebaldone.com;
   }
 
