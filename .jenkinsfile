@@ -13,10 +13,13 @@ pipeline {
         }
       }
     }
-    stage('Build Product Web') {
+    stage('Build & Test Product Web') {
       steps {
         script {
           echo "Building Product Website"
+          sh "mkdir -p build/product"
+          sh "cd product && yarn test && yarn build"
+          sh "cp -r product/build/* build/product"
         }
       }
     }
@@ -31,6 +34,7 @@ pipeline {
       steps {
         script {
           echo "Building Android application"
+          sh "cd android/AuthOut && ./gradlew build"
         }
       }
     }
@@ -60,7 +64,11 @@ pipeline {
         withCredentials([string(credentialsId: 'betaPass', variable: 'SSHPASS')]) {
           sh '''
             sshpass -e scp -o stricthostkeychecking=no -r build/docs/AuthOut/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/docs
+
+            sshpass -e scp -o stricthostkeychecking=no -r build/product/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/html
+
             sshpass -e scp -o stricthostkeychecking=no -r distribution/* rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
+
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo systemctl restart nginx'
           '''
         // Reboot nginx
