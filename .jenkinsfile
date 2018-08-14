@@ -18,7 +18,7 @@ pipeline {
         script {
           echo "Building Product Website"
           sh "mkdir -p build/product"
-          sh "cd product && yarn && yarn test && yarn build"
+          sh "cd product && yarn && yarn testall && yarn build"
           sh "cp -r product/build/* build/product"
         }
       }
@@ -52,7 +52,6 @@ pipeline {
       }
       steps {
         echo "Publishing to master"
-        slackSend color: 'good', message: 'Publishing to master'
       }
     }
     stage('Publish to develop') {
@@ -74,6 +73,17 @@ pipeline {
         // Reboot nginx
         }
       }
+    }
+  }
+  post {
+    success {
+      slackSend color: 'good', message: '${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) succedded'
+    }
+    failure {
+      slackSend color: 'danger', message: '${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) failed'
+    }
+    unstable {
+      slackSend color: 'warning', message: '${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) is unstable'
     }
   }
 }
