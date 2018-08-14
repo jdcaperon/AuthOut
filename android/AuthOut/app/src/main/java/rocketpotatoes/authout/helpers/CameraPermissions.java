@@ -40,7 +40,7 @@ public class CameraPermissions {
     }
 
     /** Opens settings in order to change permissions
-     * 
+     *
      * @param activity - the activity in which to launch the permission settings
      */
     public static void launchAppSettings(Activity activity) {
