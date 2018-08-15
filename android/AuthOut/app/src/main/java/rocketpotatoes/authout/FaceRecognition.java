@@ -14,17 +14,14 @@ public class FaceRecognition extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_recognition);
 
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (!CameraPermissions.hasPermissionForCamera(this)) {
-            CameraPermissions.askForCameraPermission(this);
+        if (null == savedInstanceState) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, CameraFragment.newInstance())
+                    .commit();
         }
 
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
