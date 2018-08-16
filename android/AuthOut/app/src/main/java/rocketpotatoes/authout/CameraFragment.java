@@ -66,7 +66,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import rocketpotatoes.authout.helpers.CameraPermissions;
+import rocketpotatoes.authout.helpers.*;
 
 public class CameraFragment extends Fragment {
 
@@ -82,6 +82,10 @@ public class CameraFragment extends Fragment {
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+
+
+    private static final Display display = new Display();
+
 
     /**
      * Tag for the {@link Log}.
@@ -344,23 +348,6 @@ public class CameraFragment extends Fragment {
     };
 
     /**
-     * Shows a {@link Toast} on the UI thread.
-     *
-     * @param text The message to show
-     */
-    private void showToast(final String text) {
-        final Activity activity = getActivity();
-        if (activity != null) {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    /**
      * Given {@code choices} of {@code Size}s supported by a camera, choose the smallest one that
      * is at least as large as the respective texture view size, and that is at most as large as the
      * respective max size, and whose aspect ratio matches with the specified value. If such size
@@ -469,9 +456,9 @@ public class CameraFragment extends Fragment {
                 CameraCharacteristics characteristics
                         = manager.getCameraCharacteristics(cameraId);
 
-                // We don't use a front facing camera in this sample.
                 Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
+                // If it's not a front facing camera we keep looking.
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
                     continue;
                 }
 
@@ -531,6 +518,11 @@ public class CameraFragment extends Fragment {
                     maxPreviewWidth = MAX_PREVIEW_WIDTH;
                 }
 
+                maxPreviewWidth = maxPreviewWidth > MAX_PREVIEW_WIDTH ?
+                                                    MAX_PREVIEW_WIDTH : maxPreviewWidth;
+                maxPreviewHeight = maxPreviewHeight > MAX_PREVIEW_HEIGHT ?
+                                                      MAX_PREVIEW_HEIGHT : maxPreviewHeight;
+
                 if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
                     maxPreviewHeight = MAX_PREVIEW_HEIGHT;
                 }
@@ -564,10 +556,7 @@ public class CameraFragment extends Fragment {
         } catch (NullPointerException e) {
             // Currently an NPE is thrown when the Camera2API is used but not supported on the
             // device this code runs.
-            /*ErrorDialog.newInstance(getString(R.string.camera_error))
-                    .show(getChildFragmentManager(), FRAGMENT_DIALOG);*/
-
-            ErrorDialog.newInstance("Error") //TODO ADD PROPER LIKE ABOVE
+            Display.ErrorDialog.newInstance(getString(R.string.camera2_error))
                     .show(getChildFragmentManager(), FRAGMENT_DIALOG);
         }
     }
@@ -576,6 +565,8 @@ public class CameraFragment extends Fragment {
      * Opens the camera specified by {@link CameraFragment#mCameraId}.
      */
     private void openCamera(int width, int height) {
+        //if (!CameraPermissions.hasPermissionForCamera(getActivity())) {
+        //    CameraPermissions.askForCameraPermission(getActivity());
         if (!CameraPermissions.hasPermissionForCamera(getActivity())) {
             CameraPermissions.askForCameraPermission(getActivity());
         } else {
@@ -587,7 +578,6 @@ public class CameraFragment extends Fragment {
                 if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
                     throw new RuntimeException("Time out waiting to lock camera opening.");
                 }
-                mCameraId = "1";
                 //This highlight error is incorrect. Im checking above. Trust.
                 manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
             } catch (CameraAccessException e) {
@@ -682,8 +672,6 @@ public class CameraFragment extends Fragment {
                                 // Auto focus should be continuous for camera preview.
                                 mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE,
                                         CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-                                // Flash is automatically enabled when necessary.
-                                setAutoFlash(mPreviewRequestBuilder);
 
                                 // Finally, we start displaying the camera preview.
                                 mPreviewRequest = mPreviewRequestBuilder.build();
@@ -697,7 +685,7 @@ public class CameraFragment extends Fragment {
                         @Override
                         public void onConfigureFailed(
                                 @NonNull CameraCaptureSession cameraCaptureSession) {
-                            showToast("Failed");
+                            display.showToast("Failed", getActivity());
                         }
                     }, null
             );
@@ -799,7 +787,6 @@ public class CameraFragment extends Fragment {
             // Use the same AE and AF modes as the preview.
             captureBuilder.set(CaptureRequest.CONTROL_AF_MODE,
                     CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            setAutoFlash(captureBuilder);
 
             // Orientation
             int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
@@ -812,7 +799,7 @@ public class CameraFragment extends Fragment {
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
+                    display.showToast("Saved: " + mFile, getActivity());
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
                 }
@@ -849,7 +836,6 @@ public class CameraFragment extends Fragment {
             // Reset the auto-focus trigger
             mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
                     CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
-            setAutoFlash(mPreviewRequestBuilder);
             mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback,
                     mBackgroundHandler);
             // After this, the camera will go back to the normal state of preview.
@@ -858,14 +844,6 @@ public class CameraFragment extends Fragment {
                     mBackgroundHandler);
         } catch (CameraAccessException e) {
             e.printStackTrace();
-        }
-    }
-
-
-    private void setAutoFlash(CaptureRequest.Builder requestBuilder) {
-        if (mFlashSupported) {
-            requestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
-                    CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
         }
     }
 
@@ -923,38 +901,6 @@ public class CameraFragment extends Fragment {
             // We cast here to ensure the multiplications won't overflow
             return Long.signum((long) lhs.getWidth() * lhs.getHeight() -
                     (long) rhs.getWidth() * rhs.getHeight());
-        }
-
-    }
-
-    /**
-     * Shows an error message dialog.
-     */
-    public static class ErrorDialog extends DialogFragment {
-
-        private static final String ARG_MESSAGE = "message";
-
-        public static ErrorDialog newInstance(String message) {
-            ErrorDialog dialog = new ErrorDialog();
-            Bundle args = new Bundle();
-            args.putString(ARG_MESSAGE, message);
-            dialog.setArguments(args);
-            return dialog;
-        }
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Activity activity = getActivity();
-            return new AlertDialog.Builder(activity)
-                    .setMessage(getArguments().getString(ARG_MESSAGE))
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            activity.finish();
-                        }
-                    })
-                    .create();
         }
 
     }
