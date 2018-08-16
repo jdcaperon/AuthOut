@@ -2,36 +2,52 @@ package rocketpotatoes.authout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import rocketpotatoes.authout.helpers.*;
+import com.camerakit.CameraKit;
+import com.camerakit.CameraKitView;
 
 public class FaceRecognition extends AppCompatActivity {
+
+    private CameraKitView cameraKitView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_recognition);
+        cameraKitView = findViewById(R.id.camera);
+        cameraKitView.setFacing(CameraKit.FACING_FRONT);
 
-        if (null == savedInstanceState) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, CameraFragment.newInstance())
-                    .commit();
-        }
+
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        cameraKitView.onStart();
+    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
-        if (!CameraPermissions.hasPermissionForCamera(this)) {
-            Toast.makeText(this, getString(R.string.request_permissions), Toast.LENGTH_LONG)
-                    .show();
-            if (!CameraPermissions.shouldShowRequestPermissionRationale(this)) {
-                // Permission denied with checking "Do not ask again".
-                CameraPermissions.launchAppSettings(this);
-            }
-            finish();
-        }
+    protected void onResume() {
+        super.onResume();
+        cameraKitView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        cameraKitView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        cameraKitView.onStop();
+        super.onStop();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
