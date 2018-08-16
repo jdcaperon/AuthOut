@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://dl.bintray.com/camerakit/camerakit-android-snapshots' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
@@ -21,6 +22,11 @@ allprojects {
         jcenter()
     }
 }
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
