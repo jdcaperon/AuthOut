@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:mContext="com.medcords.mhcpanel.activity.CreatePatientRecordActivity">
+
+    <com.camerakit.CameraKitView
+        android:id="@+id/cameraKitView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:keepScreenOn="true"
+        app:camera_facing="back"
+        app:camera_flash="on" />
+
+        <ImageButton
+            android:id="@+id/btCapture"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/darker_gray"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:onClick="onCaptureButtonClicked"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_camera"
+            tools:ignore="NewApi" />
+
+
+</RelativeLayout>
