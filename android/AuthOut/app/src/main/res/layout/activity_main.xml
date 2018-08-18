@@ -14,20 +14,5 @@
         android:keepScreenOn="true"
         app:camera_facing="front"/>
 
-    <ImageButton
-        android:id="@+id/btCapture"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:background="@android:color/darker_gray"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        android:onClick="onCaptureButtonClicked"
-        android:padding="8dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_camera"
-        tools:ignore="NewApi" />
-
 
 </RelativeLayout>

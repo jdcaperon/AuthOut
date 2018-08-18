@@ -20,6 +20,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     private CameraKitView cameraKitView;
     private FaceDetector faceDetector;
+    private Bitmap currentImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,31 +31,51 @@ public class MainActivity extends AppCompatActivity {
         cameraKitView = findViewById(R.id.cameraKitView);
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
+                .setProminentFaceOnly(true)
                 .build();
+
+        handler.postDelayed(runnable, 200);
     }
 
-    public void onCaptureButtonClicked(View view) {
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            takePicture();
+            Face face = faceProcessing();
+            if (face != null) {
+                Log.i("MainActivity", "Face Detected");
+                Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.i("MainActivity", "No Face Detected");
+                Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
+            }
+            handler.postDelayed(this, 200);
+        }
+    };
+
+    /**
+     * Instructs a picture to be taken and sets {@link MainActivity#currentImage}
+     */
+    public void takePicture() {
         cameraKitView.captureImage(new CameraKitView.ImageCallback() {
             @Override
             public void onImage(CameraKitView cameraKitView, byte[] bytes) {
+                currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                Log.i("random", currentImage.toString());
                 Log.i("MainActivity", "Image captured");
-                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-
-
-                Frame outputFrame = new Frame.Builder().setBitmap(bmp).build();
-                SparseArray<Face> sparseArray = faceDetector.detect(outputFrame);
-                try {
-                    Toast.makeText(MainActivity.this, "Detected " + sparseArray.size(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-
-                    Toast.makeText(MainActivity.this, sparseArray.get(0).toString() , Toast.LENGTH_SHORT).show();
-                }
-
-
-
             }
         });
+    }
+
+    public Face faceProcessing() {
+        if (currentImage == null) return null;
+
+        Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
+        SparseArray<Face> sparseArray = faceDetector.detect(outputFrame);
+        if (sparseArray.size() == 0) return null;
+
+        return sparseArray.valueAt(0);
     }
 
     @Override
