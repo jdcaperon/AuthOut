@@ -31,6 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.camerakit:camerakit:1.0.0-Snapshot'
-    implementation 'com.facebook.fresco:fresco:1.9.0'
     implementation 'com.google.android.gms:play-services-vision:15.0.2'
 }
