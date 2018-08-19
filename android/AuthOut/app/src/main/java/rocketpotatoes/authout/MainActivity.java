@@ -18,20 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private FaceDetector faceDetector;
     private Bitmap currentImage;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-
-        cameraKitView = findViewById(R.id.cameraKitView);
-        faceDetector = new FaceDetector.Builder(this)
-                .setTrackingEnabled(true)
-                .setProminentFaceOnly(true)
-                .build();
-
-        handler.postDelayed(runnable, 200);
-    }
 
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
@@ -49,6 +35,22 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(this, 200);
         }
     };
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+
+        cameraKitView = findViewById(R.id.cameraKitView);
+        faceDetector = new FaceDetector.Builder(this)
+                .setTrackingEnabled(true)
+                .setProminentFaceOnly(true)
+                .build();
+
+        handler.postDelayed(runnable, 200);
+    }
 
     /**
      * Instructs a picture to be taken and sets {@link MainActivity#currentImage}
@@ -77,12 +79,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        handler.postDelayed(runnable, 200);
         cameraKitView.onResume();
     }
 
     @Override
     protected void onPause() {
         cameraKitView.onPause();
+        handler.removeCallbacks(runnable);
         super.onPause();
     }
+
 }
