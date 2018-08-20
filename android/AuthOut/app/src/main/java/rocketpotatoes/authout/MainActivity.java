@@ -14,12 +14,17 @@ import com.google.android.gms.vision.face.*;
 import com.camerakit.CameraKitView;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int TIME_BETWEEN_PHOTOS = 500;
+    private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
     private CameraKitView cameraKitView;
     private FaceDetector faceDetector;
-    private Bitmap currentImage;
-
-
+    //private Bitmap currentImage;
+    private byte[] currentImage;
+    private PostRequest postRequest = new PostRequest();
+    // Handler for intermittent execution
     private Handler handler = new Handler();
+
+    /** Runnable to be executed every {@link MainActivity#TIME_BETWEEN_PHOTOS} milliseconds */
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -28,11 +33,12 @@ public class MainActivity extends AppCompatActivity {
             if (face != null) {
                 Log.i("MainActivity", "Face Detected");
                 Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
+                //postRequest.doInBackground(AUTHOUT_SERVER_URL, );
             } else {
                 Log.i("MainActivity", "No Face Detected");
                 Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
             }
-            handler.postDelayed(this, 200);
+            handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
         }
     };
 
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 .setProminentFaceOnly(true)
                 .build();
 
-        handler.postDelayed(runnable, 200);
+        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
     }
 
     /**
@@ -59,17 +65,22 @@ public class MainActivity extends AppCompatActivity {
         cameraKitView.captureImage(new CameraKitView.ImageCallback() {
             @Override
             public void onImage(CameraKitView cameraKitView, byte[] bytes) {
-                currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                Log.i("random", currentImage.toString());
+                currentImage = bytes;
+                //currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 Log.i("MainActivity", "Image captured");
             }
         });
     }
 
+    /**
+     * Handles the currently selected {@link MainActivity#currentImage} and detects any faces
+     * @return a {@link Face} of the most prominent face
+     */
     public Face faceProcessing() {
         if (currentImage == null) return null;
-
-        Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
+        Bitmap bmp = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
+        //Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
+        Frame outputFrame = new Frame.Builder().setBitmap(bmp).build();
         SparseArray<Face> sparseArray = faceDetector.detect(outputFrame);
         if (sparseArray.size() == 0) return null;
 
@@ -79,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, 200);
+        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
         cameraKitView.onResume();
     }
 
