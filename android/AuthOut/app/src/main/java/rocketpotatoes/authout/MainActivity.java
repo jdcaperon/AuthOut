@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
     private CameraKitView cameraKitView;
     private FaceDetector faceDetector;
-    //private Bitmap currentImage;
-    private byte[] currentImage;
+    private Bitmap currentImage;
+    //private byte[] currentImage;
     private PostRequest postRequest = new PostRequest();
     // Handler for intermittent execution
     private Handler handler = new Handler();
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         cameraKitView.captureImage(new CameraKitView.ImageCallback() {
             @Override
             public void onImage(CameraKitView cameraKitView, byte[] bytes) {
-                currentImage = bytes;
-                //currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                //currentImage = bytes;
+                currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 Log.i("MainActivity", "Image captured");
             }
         });
@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public Face faceProcessing() {
         if (currentImage == null) return null;
-        Bitmap bmp = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
-        //Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
-        Frame outputFrame = new Frame.Builder().setBitmap(bmp).build();
+        //Bitmap bmp = BitmapFactory.decodeByteArray(currentImage, 0, currentImage.length);
+        //Frame outputFrame = new Frame.Builder().setBitmap(bmp).build();
+        Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
         SparseArray<Face> sparseArray = faceDetector.detect(outputFrame);
         if (sparseArray.size() == 0) return null;
 
