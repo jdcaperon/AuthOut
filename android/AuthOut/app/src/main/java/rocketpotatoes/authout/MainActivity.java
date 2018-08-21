@@ -2,6 +2,7 @@ package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,12 @@ import com.camerakit.CameraKitView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
@@ -30,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private CameraKitView cameraKitView;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
-    private byte[] currentImageBytes;
     private RequestQueue requestQueue;
 
     // Handler for intermittent execution
@@ -45,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
             if (face != null) {
                 Log.i("MainActivity", "Face Detected");
                 Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
+                requestQueue.add(createRequest());
 
-
-                //requestQueue.add(createRequest();
-
+                //stop the handler from taking photos until the response is received
+                handler.removeCallbacks(this);
             } else {    
-                Log.i("MainActivity", "No Face Detected");
+                Log.v("MainActivity", "No Face Detected");
                 Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
+                handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
             }
-            handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
         }
     };
 
@@ -71,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         requestQueue = Volley.newRequestQueue(this);
-        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
     }
 
     @Override
@@ -88,20 +93,36 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-
-    private JsonObjectRequest createRequest(String base64Image) {
+    /**
+     * Creates a {@link JsonObjectRequest} with a listener in order to handle response
+     * @return a {@link JsonObjectRequest}
+     */
+    private JsonObjectRequest createRequest() {
         JSONObject json = new JSONObject();
-        Log.i("Image", base64Image);
+
+        //bitmap to base64 string
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        currentImage.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        String userPhoto = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        //Adding contents to request
         try {
-            json.put("Image", base64Image);
+            json.put("UserPhoto", userPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return new JsonObjectRequest
-                (Request.Method.POST, AUTHOUT_SERVER_URL, null , new Response.Listener<JSONObject>() {
+                (Request.Method.POST, AUTHOUT_SERVER_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", response.toString());
+                        Log.i("Response", response.toString().substring(0, 100));
+                        //TODO if face is matched onResponse should move to the next activity with
+                        //TODO user ID specified in order to progress.
+
+                        //TODO if the user ID isn't found, then restart the picture handler
+                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -121,8 +142,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onImage(CameraKitView cameraKitView, byte[] bytes) {
                 currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                currentImageBytes = bytes;
-                Log.i("MainActivity", "Image captured");
             }
         });
     }
