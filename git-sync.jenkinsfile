@@ -4,7 +4,7 @@ pipeline {
         stage('Sync') {
             steps {
                 sh '''
-                git remote add centeral s4359540@source.eait.uq.edu.au:deco3801rocketpotatoes
+                git remote add centeral s4359540@source.eait.uq.edu.au:deco3801-rocketpotatoes
                 git push centeral
                 '''
             }
