@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages {
+        stage('Sync') {
+            steps {
+                sh '''
+                git remote add centeral s4359540@source.eait.uq.edu.au:deco3801rocketpotatoes
+                git push centeral
+                '''
+            }
+        }
+    }
+}
