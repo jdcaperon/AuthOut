@@ -4,7 +4,7 @@ pipeline {
         stage('Sync') {
             steps {
                 sh '''
-                git --all push centeral
+                git push --all centeral
                 '''
             }
         }
