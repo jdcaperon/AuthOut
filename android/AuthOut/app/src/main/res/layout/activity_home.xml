@@ -53,18 +53,20 @@
 
         <Button
             android:id="@+id/buttonSignIn"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="128dp"
             android:layout_height="96dp"
             android:layout_marginEnd="16dp"
-            android:text="Sign-In"
+            android:text="@string/sign_in"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/buttonSignOut"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="128dp"
             android:layout_height="96dp"
             android:layout_marginStart="16dp"
-            android:text="Sign-Out"
+            android:text="@string/sign_out"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 

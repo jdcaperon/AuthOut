@@ -20,15 +20,6 @@ public class HomeActivity extends AppCompatActivity {
         cameraKitView = findViewById(R.id.camera);
     }
 
-    public void onCaptureButtonClicked(View view) {
-        cameraKitView.captureImage(new CameraKitView.ImageCallback() {
-            @Override
-            public void onImage(CameraKitView cameraKitView, byte[] bytes) {
-                Log.i("MainActivity", "Image captured");
-            }
-        });
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
