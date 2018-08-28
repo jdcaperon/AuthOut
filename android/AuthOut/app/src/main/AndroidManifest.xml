@@ -4,16 +4,21 @@
     package="rocketpotatoes.authout">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="true" />
 
     <application
-        tools:ignore="GoogleAppIndexingWarning"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".FaceRecognition">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".UserConfirmActivity" />
+        <activity android:name=".SelectStudentActivity" />
+        <activity android:name=".ConfirmationActivity" />
     </application>
 
 </manifest>
