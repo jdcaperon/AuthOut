@@ -2,9 +2,9 @@ package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
@@ -16,9 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.camerakit.CameraKitView;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.*;
-import com.camerakit.CameraKitView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //stop the handler from taking photos until the response is received
                 handler.removeCallbacks(this);
-            } else {    
+            } else {
                 Log.v("MainActivity", "No Face Detected");
                 Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
                 handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cameraKitView = findViewById(R.id.cameraKitView);
+
+        cameraKitView.setAdjustViewBounds(true);
+
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
                 .setProminentFaceOnly(true)
