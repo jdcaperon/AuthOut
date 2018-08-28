@@ -10,6 +10,7 @@ pipeline {
                 git checkout master
                 git push --mirror https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
                 '''
+                echo "Published git changes"
             }
         }
     }
