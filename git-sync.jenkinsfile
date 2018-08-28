@@ -7,7 +7,6 @@ pipeline {
             }
             steps {
                 sh '''
-                git checkout master
                 for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
                 git push --all https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
                 '''
