@@ -28,7 +28,7 @@ import java.io.ByteArrayOutputStream;
 public class MainActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
-    private CameraKitView cameraKitView;
+    private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
     private RequestQueue requestQueue;
@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        cameraKitView = findViewById(R.id.cameraKitView);
+        camera = findViewById(R.id.camera);
 
-        cameraKitView.setAdjustViewBounds(true);
+        camera.setAdjustViewBounds(true);
 
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
-        cameraKitView.onResume();
+        camera.onResume();
     }
 
     @Override
     protected void onPause() {
-        cameraKitView.onPause();
+        camera.onPause();
         handler.removeCallbacks(runnable);
         super.onPause();
     }
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
      * Instructs a picture to be taken and sets {@link MainActivity#currentImage}
      */
     public void takePicture() {
-        cameraKitView.captureImage(new CameraKitView.ImageCallback() {
+        camera.captureImage(new CameraKitView.ImageCallback() {
             @Override
             public void onImage(CameraKitView cameraKitView, byte[] bytes) {
                 currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);

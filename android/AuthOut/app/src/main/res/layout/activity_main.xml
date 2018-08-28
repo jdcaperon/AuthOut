@@ -8,7 +8,7 @@
     tools:mContext="com.medcords.mhcpanel.activity.CreatePatientRecordActivity">
 
     <com.camerakit.CameraKitView
-        android:id="@+id/cameraKitView"
+        android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:keepScreenOn="true"
