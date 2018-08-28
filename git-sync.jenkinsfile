@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh '''
                 git checkout master
-                git push --all --mirror https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
+                git push --mirror https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
                 '''
             }
         }
