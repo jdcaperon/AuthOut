@@ -2,9 +2,12 @@ pipeline {
     agent any
     stages {
         stage('Sync') {
+            enviroment {
+                ACCESS_KEY = credentials('UQLOGIN')
+            }
             steps {
                 sh '''
-                git push --all https://s4359540:${UQLOGIN}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
+                git push --all https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
                 '''
             }
         }
