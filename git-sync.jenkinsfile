@@ -8,7 +8,8 @@ pipeline {
             steps {
                 sh '''
                 git checkout master
-                git push --mirror https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
+                for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
+                git push --all https://s4359540:${ACCESS_KEY}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
                 '''
                 echo "Published git changes"
             }
