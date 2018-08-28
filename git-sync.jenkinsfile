@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
         stage('Sync') {
-            enviroment {
+            environment {
                 ACCESS_KEY = credentials('UQLOGIN')
             }
             steps {
