@@ -4,7 +4,7 @@ pipeline {
         stage('Sync') {
             steps {
                 sh '''
-                git push --all centeral
+                git push --all https://s4359540:${UQLOGIN}@source.eait.uq.edu.au/git/deco3801-rocketpotatoes
                 '''
             }
         }
