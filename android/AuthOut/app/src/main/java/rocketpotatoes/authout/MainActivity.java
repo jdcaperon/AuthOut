@@ -3,6 +3,8 @@ package rocketpotatoes.authout;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.PointF;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +28,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
                     Log.i("MainActivity", "Face Detected");
                     Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
-                    requestQueue.add(createRequest());
+                    requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
 
                     //stop the handler from taking photos until the response is received
                     handler.removeCallbacks(this);
@@ -69,13 +74,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //
+        //get screen size in order to get face size in relation to total screen size
         display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
@@ -103,17 +107,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a {@link JsonObjectRequest} with a listener in order to handle response
-     * @return a {@link JsonObjectRequest}
+     * Crops the current image to the prominent face and converts to {@link Base64} string
+     * @param faceWidth    - the width of the face in pixels
+     * @param faceHeight   - the height of the face in pixels
+     * @param facePosition - a {@link Point} of the top left of the image
+     * @return Base64 String of the Face data
      */
-    private JsonObjectRequest createRequest() {
-        JSONObject json = new JSONObject();
+    public String currentFaceToBase64(float faceWidth, float faceHeight, PointF facePosition) {
+        int FACE_CROP_OFFSET = 10; //pixels
+
+        int bottomRightXPos = Math.max(0, Math.round(facePosition.x) - FACE_CROP_OFFSET);
+        int bottomRightYPos = Math.max(0, Math.round(facePosition.y) - FACE_CROP_OFFSET);
+
+        int totalCropWidth = Math.min(currentImage.getWidth(),
+                Math.round(faceWidth) + (FACE_CROP_OFFSET * 2)); //Offset added to either side
+        int totalCropHeight = Math.min(currentImage.getHeight(),
+                Math.round(faceHeight) + (FACE_CROP_OFFSET * 2));
+
+        Bitmap bitmapToSend = Bitmap.createBitmap(
+                currentImage, bottomRightXPos, bottomRightYPos, totalCropWidth, totalCropHeight);
 
         //bitmap to base64 string
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        currentImage.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        bitmapToSend.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String userPhoto = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    /**
+     * Creates a {@link JsonObjectRequest} with a listener in order to handle response
+     * @return a {@link JsonObjectRequest}
+     */
+    private JsonObjectRequest createRequest(String userPhoto) {
+        JSONObject json = new JSONObject();
 
         //Adding contents to request
         try {
