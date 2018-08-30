@@ -2,12 +2,14 @@ package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Display;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,11 +29,15 @@ import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
+    private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.70;
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
     private CameraKitView cameraKitView;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
     private RequestQueue requestQueue;
+
+    private Display display;
+    private Point screenSize = new Point();
 
     // Handler for intermittent execution
     private Handler handler = new Handler();
@@ -42,13 +48,19 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             takePicture();
             Face face = faceProcessing();
+            // Ensure face is appropriate size to move forwards
             if (face != null) {
-                Log.i("MainActivity", "Face Detected");
-                Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
-                requestQueue.add(createRequest());
+                if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
+                    Log.i("MainActivity", "Face Detected");
+                    Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
+                    requestQueue.add(createRequest());
 
-                //stop the handler from taking photos until the response is received
-                handler.removeCallbacks(this);
+                    //stop the handler from taking photos until the response is received
+                    handler.removeCallbacks(this);
+                } else {
+                    Toast.makeText(MainActivity.this, "Please move closer to the camera", Toast.LENGTH_LONG).show();
+                    handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
+                }
             } else {    
                 Log.v("MainActivity", "No Face Detected");
                 Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
@@ -61,8 +73,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
+        //
+        display = getWindowManager().getDefaultDisplay();
+        display.getSize(screenSize);
 
         cameraKitView = findViewById(R.id.cameraKitView);
         faceDetector = new FaceDetector.Builder(this)
