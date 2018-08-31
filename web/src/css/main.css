@@ -60,8 +60,8 @@ html, body {
 
 .material-icons.lighter {
     color: rgba(255,255,255,.5);
-font-size: 24px;
- padding:0px 10px;
- display: inline-flex;
-vertical-align: top;
+    font-size: 24px;
+    padding:0px 10px;
+    display: inline-flex;
+    vertical-align: top;
 }
