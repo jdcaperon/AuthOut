@@ -1,5 +1,6 @@
 package rocketpotatoes.authout;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -60,6 +61,15 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
+    public void onPressSignIn(View view) {
+        Intent intent = new Intent(this, UserConfirmActivity.class);
+        startActivity(intent);
+    }
+
+    public void onPressSignOut(View view){
+        Intent intent = new Intent(this, UserConfirmActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
