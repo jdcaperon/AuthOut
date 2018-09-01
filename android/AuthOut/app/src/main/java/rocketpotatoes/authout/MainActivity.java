@@ -24,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.*;
 import com.camerakit.CameraKitView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +34,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
@@ -162,11 +166,12 @@ public class MainActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_SERVER_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", response.toString().substring(0, 100));
-                        //TODO if face is matched onResponse should move to the next activity with
-                        //TODO user ID specified in order to progress.
+                        //TODO Create and set parent object here
+                        Log.i("Response", response.toString());
+                        //TODO if face is matched onResponse should move to the next activity
+                        //TODO if the response is null/not matched we move to a different activity
 
-                        //TODO if the user ID isn't found, then restart the picture handler
+                        //TODO Remove this once implementation is finished above.
                         handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                     }
                 }, new Response.ErrorListener() {
