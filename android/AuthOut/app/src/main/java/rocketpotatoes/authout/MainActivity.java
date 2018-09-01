@@ -2,13 +2,10 @@ package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-<<<<<<< HEAD
 import android.os.Bundle;
-=======
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Environment;
->>>>>>> afe38502f58bc3441cafd5066b90fa79bf97b61b
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,12 +24,9 @@ import com.android.volley.toolbox.Volley;
 import com.camerakit.CameraKitView;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.*;
-<<<<<<< HEAD
-=======
 import com.camerakit.CameraKitView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
->>>>>>> afe38502f58bc3441cafd5066b90fa79bf97b61b
 
 import org.json.JSONException;
 import org.json.JSONObject;
