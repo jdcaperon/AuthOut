@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //create dialog to show if necessary
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Please move closer to the camera");
-        builder.setMessage("We need you to move a little bit closer to sign you in.");
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
+        builder.setTitle("Move closer");
+        builder.setMessage("Please move closer to the camera.");
         moveCloserDialog = builder.create();
 
         //get screen size in order to get face size in relation to total screen size
