@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private FaceDetector faceDetector;
     private Bitmap currentImage;
     private RequestQueue requestQueue;
+    private AlertDialog moveCloserDialog;
 
-    private Display display;
     private Point screenSize = new Point();
 
     // Handler for intermittent execution
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            moveCloserDialog.dismiss();
             takePicture();
             Face face = faceProcessing();
             // Ensure face is appropriate size to move forwards
@@ -63,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
                     //stop the handler from taking photos until the response is received
                     handler.removeCallbacks(this);
                 } else {
-                    Toast.makeText(MainActivity.this, "Please move closer to the camera", Toast.LENGTH_LONG).show();
-                    handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
+                    moveCloserDialog.show();
+                    //Toast.makeText(MainActivity.this, "Please move closer to the camera", Toast.LENGTH_LONG).show();
+                    handler.postDelayed(this, TIME_BETWEEN_PHOTOS * 4);
                 }
             } else {    
                 Log.v("MainActivity", "No Face Detected");
@@ -79,8 +82,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //create dialog to show if necessary
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Please move closer to the camera");
+        builder.setMessage("We need you to move a little bit closer to sign you in.");
+        moveCloserDialog = builder.create();
+
         //get screen size in order to get face size in relation to total screen size
-        display = getWindowManager().getDefaultDisplay();
+        Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
         cameraKitView = findViewById(R.id.cameraKitView);
@@ -119,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
         int bottomRightXPos = Math.max(0, Math.round(facePosition.x) - FACE_CROP_OFFSET);
         int bottomRightYPos = Math.max(0, Math.round(facePosition.y) - FACE_CROP_OFFSET);
 
-        int totalCropWidth = Math.min(currentImage.getWidth(),
-                Math.round(faceWidth) + (FACE_CROP_OFFSET * 2)); //Offset added to either side
-        int totalCropHeight = Math.min(currentImage.getHeight(),
+        int totalCropWidth = Math.min(currentImage.getWidth() - bottomRightXPos,
+                Math.round(faceWidth) + (FACE_CROP_OFFSET * 2));
+        int totalCropHeight = Math.min(currentImage.getHeight() - bottomRightYPos,
                 Math.round(faceHeight) + (FACE_CROP_OFFSET * 2));
 
         Bitmap bitmapToSend = Bitmap.createBitmap(
