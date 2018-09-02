@@ -42,37 +42,4 @@ public class Parent {
     public List<Child> getChildren() {
         return children;
     }
-
-    public void updateButtonOptions(Parent parent) {
-        parent = null; //todo actual parent implementation or initiation
-
-        List<Child> children = parent.getChildren();
-        getOptionByChildren(children);
-
-    }
-
-    /** Checks if a single option can be fit to a list of children.
-     * 
-     * @param children - a list of child objects to check
-     * @return a {@link DynamicButtonOption} of which button form to take
-     */
-    public Enum getOptionByChildren(List<Child> children) {
-        String signedInText = "Signed-In";
-        if (children.size() == 0) return DynamicButtonOption.NOT_COMPATIBLE;
-        if (children.size() == 1) {
-            if (children.get(0).getStatus().equals(signedInText)) {
-                return DynamicButtonOption.SIGN_IN;
-            }
-            return DynamicButtonOption.SIGN_OUT;
-        } else {
-            for (int i = 0; i < children.size() - 1; i++) {
-                if (!children.get(i).getStatus().equals(children.get(i + 1).getStatus())) {
-                    return DynamicButtonOption.NOT_COMPATIBLE;
-                }
-            }
-        }
-        return children.get(0).getStatus().equals(signedInText) ?
-                DynamicButtonOption.SIGN_IN : DynamicButtonOption.SIGN_OUT;
-    }
-
 }
