@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
-        cameraKitView = findViewById(R.id.cameraKitView);
+        cameraKitView = findViewById(R.id.camera);
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
                 .setProminentFaceOnly(true)

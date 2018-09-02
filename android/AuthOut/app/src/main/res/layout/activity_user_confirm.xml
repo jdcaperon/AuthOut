@@ -65,7 +65,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_portrait_black_24dp"
+            android:src="@drawable/ic_portrait_black_24dp"
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="227dp" />
     </FrameLayout>

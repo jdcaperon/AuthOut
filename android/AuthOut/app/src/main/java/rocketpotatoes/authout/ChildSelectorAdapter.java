@@ -2,27 +2,48 @@ package rocketpotatoes.authout;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-class ChildSelectorAdapter extends RecyclerView.Adapter {
+import java.util.List;
 
-    public ChildSelectorAdapter(Object p0) {
-        
+class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.MyViewHolder> {
+
+    private List<Child> childList;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView name;
+
+        public MyViewHolder(View view) {
+            super(view);
+            name = (TextView) view.findViewById(R.id.childlist_name);
+        }
+    }
+
+    public ChildSelectorAdapter(List<Child> ChildList) {
+        this.childList = ChildList;
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Child child = childList.get(position);
+        holder.name.setText(child.getFirstName());
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_component_child, parent, false);
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        return new MyViewHolder(itemView);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return childList.size();
     }
+    
 }
