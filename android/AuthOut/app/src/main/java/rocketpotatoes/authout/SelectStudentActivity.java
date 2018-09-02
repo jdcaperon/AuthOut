@@ -19,9 +19,9 @@ public class SelectStudentActivity extends AppCompatActivity {
         mChildSelectorView.setHasFixedSize(true);
         mChildSelectorView.setLayoutManager(layoutManager);
 
+        Object dummyObject = new Object();
 
-
-        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter();
+        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter(dummyObject);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
 
         setContentView(R.layout.activity_select_student);
