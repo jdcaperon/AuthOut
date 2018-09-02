@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages {
+        stage('Sync') {
+            steps {
+                sh '''
+                git push --all centeral
+                '''
+            }
+        }
+    }
+}

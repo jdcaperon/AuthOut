@@ -2,6 +2,7 @@ package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Environment;
@@ -21,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.camerakit.CameraKitView;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.*;
 import com.camerakit.CameraKitView;
@@ -81,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //create dialog to show if necessary
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
-        cameraKitView = findViewById(R.id.cameraKitView);
+        cameraKitView = findViewById(R.id.camera);
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
                 .setProminentFaceOnly(true)
