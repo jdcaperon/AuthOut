@@ -3,7 +3,6 @@ package rocketpotatoes.authout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import rocketpotatoes.authout.DynamicButtonOptions;
 
 public class Parent {
     private final String firstName;
@@ -52,24 +51,28 @@ public class Parent {
 
     }
 
-
+    /** Checks if a single option can be fit to a list of children.
+     * 
+     * @param children - a list of child objects to check
+     * @return a {@link DynamicButtonOption} of which button form to take
+     */
     public Enum getOptionByChildren(List<Child> children) {
         String signedInText = "Signed-In";
-        if (children.size() == 0) return DynamicButtonOptions.NOT_COMPATIBLE;
+        if (children.size() == 0) return DynamicButtonOption.NOT_COMPATIBLE;
         if (children.size() == 1) {
             if (children.get(0).getStatus().equals(signedInText)) {
-                return DynamicButtonOptions.SIGN_IN;
+                return DynamicButtonOption.SIGN_IN;
             }
-            return DynamicButtonOptions.SIGN_OUT;
+            return DynamicButtonOption.SIGN_OUT;
         } else {
             for (int i = 0; i < children.size() - 1; i++) {
                 if (!children.get(i).getStatus().equals(children.get(i + 1).getStatus())) {
-                    return DynamicButtonOptions.NOT_COMPATIBLE;
+                    return DynamicButtonOption.NOT_COMPATIBLE;
                 }
             }
         }
         return children.get(0).getStatus().equals(signedInText) ?
-                DynamicButtonOptions.SIGN_IN : DynamicButtonOptions.SIGN_OUT;
+                DynamicButtonOption.SIGN_IN : DynamicButtonOption.SIGN_OUT;
     }
 
 }
