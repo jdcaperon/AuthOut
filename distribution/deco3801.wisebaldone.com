@@ -15,8 +15,12 @@ server {
     root /var/www/deco3801.wisebaldone.com/api;
   }
 
-  location / {
+  location /docs {
     root /var/www/deco3801.wisebaldone.com;
+  }
+
+  location / {
+    root /var/www/deco3801.wisebaldone.com/html;
   }
 }
 

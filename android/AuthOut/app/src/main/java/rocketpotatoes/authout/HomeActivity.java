@@ -1,13 +1,15 @@
 package rocketpotatoes.authout;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -18,14 +20,16 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.camerakit.CameraKitView;
 import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.face.*;
+import com.google.android.gms.vision.face.Face;
+import com.google.android.gms.vision.face.FaceDetector;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
+
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
     private CameraKitView camera;
@@ -36,33 +40,42 @@ public class MainActivity extends AppCompatActivity {
     // Handler for intermittent execution
     private Handler handler = new Handler();
 
-    /** Runnable to be executed every {@link MainActivity#TIME_BETWEEN_PHOTOS} milliseconds */
+    /** Runnable to be executed every {@link HomeActivity#TIME_BETWEEN_PHOTOS} milliseconds */
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
             takePicture();
             Face face = faceProcessing();
             if (face != null) {
-                Log.i("MainActivity", "Face Detected");
-                Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
+                Log.i("HomeActivity", "Face Detected");
+                Toast.makeText(HomeActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
                 requestQueue.add(createRequest());
 
                 //stop the handler from taking photos until the response is received
                 handler.removeCallbacks(this);
             } else {
-                Log.v("MainActivity", "No Face Detected");
-                Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
+                Log.v("HomeActivity", "No Face Detected");
+                Toast.makeText(HomeActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
                 handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
             }
         }
     };
 
+    public void onPressSignIn(View view) {
+        Intent intent = new Intent(this, UserConfirmActivity.class);
+        startActivity(intent);
+    }
+
+    public void onPressSignOut(View view){
+        Intent intent = new Intent(this, UserConfirmActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         camera = findViewById(R.id.camera);
 
@@ -132,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Instructs a picture to be taken and sets {@link MainActivity#currentImage}
+     * Instructs a picture to be taken and sets {@link HomeActivity#currentImage}
      */
     public void takePicture() {
         camera.captureImage(new CameraKitView.ImageCallback() {
@@ -144,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles the currently selected {@link MainActivity#currentImage} and detects any faces
+     * Handles the currently selected {@link HomeActivity#currentImage} and detects any faces
      * @return a {@link Face} of the most prominent face
      */
     public Face faceProcessing() {
@@ -155,5 +168,4 @@ public class MainActivity extends AppCompatActivity {
 
         return sparseArray.valueAt(0);
     }
-
 }
