@@ -13,6 +13,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rocketpotatoes.authout.Helpers.Child;
+import rocketpotatoes.authout.Helpers.ChildSelectorAdapter;
+import rocketpotatoes.authout.Helpers.DynamicButtonOption;
+import rocketpotatoes.authout.Helpers.Parent;
+
 public class SelectStudentActivity extends AppCompatActivity {
     private Button dynamicButton;
     private GradientDrawable dynamicButtonBackground;
@@ -48,7 +53,7 @@ public class SelectStudentActivity extends AppCompatActivity {
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(welcomeMessage);
 
-        dynamicButton = findViewById(R.id.button3);
+        dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
 
         changeButtonSettings(getOptionByChildren(dummyChildren));

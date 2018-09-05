@@ -1,4 +1,4 @@
-package rocketpotatoes.authout;
+package rocketpotatoes.authout.Helpers;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.MyViewHolder> {
+import rocketpotatoes.authout.R;
+
+public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.MyViewHolder> {
 
     private List<Child> childList;
 

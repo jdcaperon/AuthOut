@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".SelectStudentActivity" />
         <activity android:name=".ConfirmationActivity" />
-        <activity android:name=".NotRecognizedActivity"></activity>
+        <activity android:name=".NotRecognizedActivity" />
+        <activity android:name=".EnterCodeActivity"></activity>
     </application>
 
 </manifest>

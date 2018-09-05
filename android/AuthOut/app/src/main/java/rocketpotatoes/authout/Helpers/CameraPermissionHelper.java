@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package rocketpotatoes.authout;
+package rocketpotatoes.authout.Helpers;
 
 import android.Manifest;
 import android.app.Activity;

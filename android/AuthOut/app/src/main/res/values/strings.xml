@@ -10,6 +10,7 @@
     <string name="not_recognized">I didn\'t recognise you</string>
     <string name="not_recognized_welcome">Welcome!</string>
     <string name="code_sign_in">I have a code</string>
+    <string name="retry">Retry</string>
 
     <string name="cancel">Cancel</string>
 </resources>

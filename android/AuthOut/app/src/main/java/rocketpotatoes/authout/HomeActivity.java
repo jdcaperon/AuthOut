@@ -3,8 +3,10 @@ package rocketpotatoes.authout;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +15,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,8 +32,10 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
-public class HomeActivity extends AppCompatActivity {
+import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
 
+public class HomeActivity extends AppCompatActivity {
+    private static final int INITIAL_DELAY = 2000;
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
@@ -66,11 +68,10 @@ public class HomeActivity extends AppCompatActivity {
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
-                    onPressSignIn(findViewById(android.R.id.content)); //todo temp go to next activity
-                    //requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
-
-                    //stop the handler from taking photos until the response is received
+                    //onPressSignIn(findViewById(android.R.id.content)); //todo temp go to next activity
+                    requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
                     handler.removeCallbacks(this);
+
                 } else {
                     if (!moveCloserDialog.isShowing()) {
                         moveCloserDialog.show();
@@ -86,12 +87,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     };
-
-    public void onPressSignIn(View view) {
-        Intent intent = new Intent(this, SelectStudentActivity.class);
-        startActivity(intent);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
+        handler.postDelayed(runnable, INITIAL_DELAY);
         camera.onResume();
     }
 
@@ -189,7 +184,13 @@ public class HomeActivity extends AppCompatActivity {
                         //TODO if the response is null/not matched we move to a different activity
 
                         //TODO Remove this once implementation is finished above.
-                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
+                        NotRecognizedDialog dialog = new NotRecognizedDialog(
+                                HomeActivity.this, handler, runnable, INITIAL_DELAY);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.show();
+
+                        //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        //startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override

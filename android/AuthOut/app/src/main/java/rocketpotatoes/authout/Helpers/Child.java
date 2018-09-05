@@ -1,4 +1,4 @@
-package rocketpotatoes.authout;
+package rocketpotatoes.authout.Helpers;
 
 
 public class Child {

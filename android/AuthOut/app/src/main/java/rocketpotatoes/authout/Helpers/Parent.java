@@ -1,8 +1,10 @@
-package rocketpotatoes.authout;
+package rocketpotatoes.authout.Helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import rocketpotatoes.authout.Helpers.Child;
 
 public class Parent {
     private final String firstName;
