@@ -31,6 +31,13 @@ public class Parent {
         }
     }
 
+    //Todo this is for testing and is not required for actual implementation.Remove this.
+    public Parent(String firstName, String surname, List<Child> children) {
+        this.children = children;
+        this.firstName = firstName;
+        this.surname = surname;
+    }
+
     public String getFirstName() {
         return firstName;
     }

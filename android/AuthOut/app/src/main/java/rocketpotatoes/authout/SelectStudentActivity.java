@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +36,17 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         mChildSelectorView.setLayoutManager(layoutManager);
 
+        // ----------- Creating Dummy Parent -----------------------
         List<Child> dummyChildren = new ArrayList<>();
+        dummyChildren.add(new Child("Jim", "Bloggs", "Signed-Out"));
+        dummyChildren.add(new Child("Jess", "Bloggs", "Signed-Out"));
+        dummyChildren.add(new Child("Jill", "Bloggs", "Signed-Out"));
+        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren);
+        // ---------------------------------------------------------
 
-        dummyChildren.add(new Child("Joe", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Joe2", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Joe3", "Bloggs", "Signed-Out"));
+        String welcomeMessage = "Welcome " + dummyParent.getFirstName();
+        TextView welcomeText = findViewById(R.id.welcomeText);
+        welcomeText.setText(welcomeMessage);
 
         dynamicButton = findViewById(R.id.button3);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();

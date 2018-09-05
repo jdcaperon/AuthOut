@@ -3,12 +3,16 @@ package rocketpotatoes.authout;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Display;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,45 +35,63 @@ import java.io.ByteArrayOutputStream;
 public class HomeActivity extends AppCompatActivity {
 
     private static final int TIME_BETWEEN_PHOTOS = 500;
+    private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
     private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
     private RequestQueue requestQueue;
+    private AlertDialog moveCloserDialog;
+
+    private Point screenSize = new Point();
 
     // Handler for intermittent execution
     private Handler handler = new Handler();
 
-    /** Runnable to be executed every {@link HomeActivity#TIME_BETWEEN_PHOTOS} milliseconds */
+    private Runnable dialogDismiss = new Runnable() {
+        @Override
+        public void run() {
+            moveCloserDialog.dismiss();
+        }
+    };
+
+    /** Runnable to be executed every {@link MainActivity#TIME_BETWEEN_PHOTOS} milliseconds */
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
             takePicture();
             Face face = faceProcessing();
+            // Ensure face is appropriate size to move forwards
             if (face != null) {
-                Log.i("HomeActivity", "Face Detected");
-                Toast.makeText(HomeActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
-                requestQueue.add(createRequest());
+                if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
+                    moveCloserDialog.dismiss();
+                    Log.i("MainActivity", "Face Detected");
+                    onPressSignIn(findViewById(android.R.id.content)); //todo temp go to next activity
+                    //requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
 
-                //stop the handler from taking photos until the response is received
-                handler.removeCallbacks(this);
+                    //stop the handler from taking photos until the response is received
+                    handler.removeCallbacks(this);
+                } else {
+                    if (!moveCloserDialog.isShowing()) {
+                        moveCloserDialog.show();
+                        handler.postDelayed(dialogDismiss, TIME_BETWEEN_PHOTOS * 4);
+                    }
+
+                    handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
+                }
             } else {
-                Log.v("HomeActivity", "No Face Detected");
-                Toast.makeText(HomeActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
+                moveCloserDialog.dismiss();
+                Log.v("MainActivity", "No Face Detected");
                 handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
             }
         }
     };
 
     public void onPressSignIn(View view) {
-        Intent intent = new Intent(this, UserConfirmActivity.class);
+        Intent intent = new Intent(this, SelectStudentActivity.class);
         startActivity(intent);
     }
 
-    public void onPressSignOut(View view){
-        Intent intent = new Intent(this, UserConfirmActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +99,18 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
 
+        //create dialog to show if necessary
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, R.style.CustomAlertDialog);
+        builder.setTitle("Move closer");
+        builder.setMessage("Please move closer to the camera.");
+        moveCloserDialog = builder.create();
+
+        //get screen size in order to get face size in relation to total screen size
+        Display display = getWindowManager().getDefaultDisplay();
+        display.getSize(screenSize);
+
         camera = findViewById(R.id.camera);
-
         camera.setAdjustViewBounds(true);
-
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
                 .setProminentFaceOnly(true)
@@ -88,6 +118,8 @@ public class HomeActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
     }
+
+
 
     @Override
     protected void onResume() {
@@ -104,17 +136,41 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a {@link JsonObjectRequest} with a listener in order to handle response
-     * @return a {@link JsonObjectRequest}
+     * Crops the current image to the prominent face and converts to {@link Base64} string
+     * @param faceWidth    - the width of the face in pixels
+     * @param faceHeight   - the height of the face in pixels
+     * @param facePosition - a {@link Point} of the top left of the image
+     * @return Base64 String of the Face data
      */
-    private JsonObjectRequest createRequest() {
-        JSONObject json = new JSONObject();
+    public String currentFaceToBase64(float faceWidth, float faceHeight, PointF facePosition) {
+        int FACE_CROP_OFFSET = 10; //pixels
+
+        int bottomRightXPos = Math.max(0, Math.round(facePosition.x) - FACE_CROP_OFFSET);
+        int bottomRightYPos = Math.max(0, Math.round(facePosition.y) - FACE_CROP_OFFSET);
+
+        int totalCropWidth = Math.min(currentImage.getWidth() - bottomRightXPos,
+                Math.round(faceWidth) + (FACE_CROP_OFFSET * 2));
+        int totalCropHeight = Math.min(currentImage.getHeight() - bottomRightYPos,
+                Math.round(faceHeight) + (FACE_CROP_OFFSET * 2));
+
+        Bitmap bitmapToSend = Bitmap.createBitmap(
+                currentImage, bottomRightXPos, bottomRightYPos, totalCropWidth, totalCropHeight);
 
         //bitmap to base64 string
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        currentImage.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        bitmapToSend.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String userPhoto = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+
+    /**
+     * Creates a {@link JsonObjectRequest} with a listener in order to handle response
+     * @return a {@link JsonObjectRequest}
+     */
+    private JsonObjectRequest createRequest(String userPhoto) {
+        JSONObject json = new JSONObject();
 
         //Adding contents to request
         try {
@@ -127,11 +183,12 @@ public class HomeActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_SERVER_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", response.toString().substring(0, 100));
-                        //TODO if face is matched onResponse should move to the next activity with
-                        //TODO user ID specified in order to progress.
+                        //TODO Create and set parent object here
+                        Log.i("Response", response.toString());
+                        //TODO if face is matched onResponse should move to the next activity
+                        //TODO if the response is null/not matched we move to a different activity
 
-                        //TODO if the user ID isn't found, then restart the picture handler
+                        //TODO Remove this once implementation is finished above.
                         handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                     }
                 }, new Response.ErrorListener() {
