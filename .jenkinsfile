@@ -45,7 +45,7 @@ pipeline {
       steps {
         script {
           echo "Building Server"
-          sh "cd server && ./gradlew build"
+          sh "cd server && echo doing nothing"
         }
       }
     }
