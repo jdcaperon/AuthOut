@@ -26,10 +26,7 @@ pipeline {
     stage('Build Web application') {
       steps {
         script {
-          echo "Building Web application"
-          sh "mkdir -p build/web"
-          sh "cd web && yarn && yarn test && yarn build"
-          sh "cp -r web/build/* build/web"
+          echo "Building Web application ( Doing Nothing )"
         }
       }
     }
