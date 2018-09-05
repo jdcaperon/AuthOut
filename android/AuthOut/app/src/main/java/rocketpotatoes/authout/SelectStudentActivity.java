@@ -38,9 +38,9 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         // ----------- Creating Dummy Parent -----------------------
         List<Child> dummyChildren = new ArrayList<>();
-        dummyChildren.add(new Child("Jim", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Jess", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Jill", "Bloggs", "Signed-Out"));
+        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
+        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
+        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
         Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren);
         // ---------------------------------------------------------
 
