@@ -18,6 +18,14 @@ Installing requirements:
 
 ### Database
 
+Installing database:
+
+`initdb -D database/data`
+
+Starting the database:
+
+`postgres -D database/data`
+
 Migrating the database:
 
   1. `python manage.py db init`

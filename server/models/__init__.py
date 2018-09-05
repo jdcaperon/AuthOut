@@ -1,1 +1,1 @@
-from . import Result
+from . import HeartbeatModel
