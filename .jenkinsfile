@@ -18,7 +18,7 @@ pipeline {
         script {
           echo "Building Product Website"
           sh "mkdir -p build/product"
-          sh "cd product && yarn test && yarn build"
+          sh "cd product && yarn && yarn test && yarn build"
           sh "cp -r product/build/* build/product"
         }
       }
@@ -26,7 +26,7 @@ pipeline {
     stage('Build Web application') {
       steps {
         script {
-          echo "Building Web application"
+          echo "Building Web application ( Doing Nothing )"
         }
       }
     }
@@ -42,7 +42,7 @@ pipeline {
       steps {
         script {
           echo "Building Server"
-          sh "cd server && ./gradlew build"
+          sh "cd server && echo doing nothing"
         }
       }
     }
@@ -52,7 +52,6 @@ pipeline {
       }
       steps {
         echo "Publishing to master"
-        slackSend color: 'good', message: 'Publishing to master'
       }
     }
     stage('Publish to develop') {
@@ -67,6 +66,8 @@ pipeline {
 
             sshpass -e scp -o stricthostkeychecking=no -r build/product/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/html
 
+            sshpass -e scp -o stricthostkeychecking=no -r build/web/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/app
+
             sshpass -e scp -o stricthostkeychecking=no -r distribution/* rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo systemctl restart nginx'
@@ -74,6 +75,17 @@ pipeline {
         // Reboot nginx
         }
       }
+    }
+  }
+  post {
+    success {
+      slackSend color: 'good', message: "${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) succedded"
+    }
+    failure {
+      slackSend color: 'danger', message: "${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) failed"
+    }
+    unstable {
+      slackSend color: 'warning', message: "${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) is unstable"
     }
   }
 }

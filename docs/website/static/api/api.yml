@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: AuthOut API
+  description: AuthOut REST Api for mobile and webapp applications.
+  version: 0.1.0
+
+servers:
+  - url: https://deco3801.wisebaldone.com/api
+    description: Beta enviroment server endpoint.
+  - url: https://deco3801-rocketpotatoes.uqcloud.net/api
+    description: Production enviroment server endpoint.
+    
+paths:
+  /heartbeat:
+    get:
+      summary: Heartbeat message
+      responses:
+        '200':
+          description: Gives a json payload with a cowsay message and the unix time of the server.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  time:
+                    type: integer
+                    example: 1536066558
+                  message:
+                    type: string

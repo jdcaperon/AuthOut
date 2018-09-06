@@ -1,0 +1,1 @@
+This website is  be for childcare workers, to be used in conjunction with the Authout app. The website facilitates administrative processes such as setting up/maintaining parent accounts, viewing the real-time count of children signed in and generating comprehensive statistical reports regarding long-term attendance.
