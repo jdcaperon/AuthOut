@@ -11,17 +11,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".HomeActivity" >
+        android:theme="@style/AppTheme.Launcher">
+        <activity android:name=".HomeActivity" android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserConfirmActivity" />
-        <activity android:name=".SelectStudentActivity" />
-        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".SelectStudentActivity"  android:theme="@style/AppTheme"/>
+        <activity android:name=".ConfirmationActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".EnterCodeActivity" android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

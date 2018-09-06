@@ -1,9 +1,10 @@
-package rocketpotatoes.authout;
+package rocketpotatoes.authout.Helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import rocketpotatoes.authout.DynamicButtonOptions;
+
+import rocketpotatoes.authout.Helpers.Child;
 
 public class Parent {
     private final String firstName;
@@ -32,6 +33,13 @@ public class Parent {
         }
     }
 
+    //Todo this is for testing and is not required for actual implementation.Remove this.
+    public Parent(String firstName, String surname, List<Child> children) {
+        this.children = children;
+        this.firstName = firstName;
+        this.surname = surname;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -43,33 +51,4 @@ public class Parent {
     public List<Child> getChildren() {
         return children;
     }
-
-    public void updateButtonOptions(Parent parent) {
-        parent = null; //todo actual parent implementation or initiation
-
-        List<Child> children = parent.getChildren();
-        getOptionByChildren(children);
-
-    }
-
-
-    public Enum getOptionByChildren(List<Child> children) {
-        String signedInText = "Signed-In";
-        if (children.size() == 0) return DynamicButtonOptions.NOT_COMPATIBLE;
-        if (children.size() == 1) {
-            if (children.get(0).getStatus().equals(signedInText)) {
-                return DynamicButtonOptions.SIGN_IN;
-            }
-            return DynamicButtonOptions.SIGN_OUT;
-        } else {
-            for (int i = 0; i < children.size() - 1; i++) {
-                if (!children.get(i).getStatus().equals(children.get(i + 1).getStatus())) {
-                    return DynamicButtonOptions.NOT_COMPATIBLE;
-                }
-            }
-        }
-        return children.get(0).getStatus().equals(signedInText) ?
-                DynamicButtonOptions.SIGN_IN : DynamicButtonOptions.SIGN_OUT;
-    }
-
 }
