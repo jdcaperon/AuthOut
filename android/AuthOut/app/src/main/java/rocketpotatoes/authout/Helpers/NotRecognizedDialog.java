@@ -16,8 +16,8 @@ import rocketpotatoes.authout.SelectStudentActivity;
 public class NotRecognizedDialog extends Dialog {
     private Handler handler;
     private Runnable runnable;
-    private int delay;
     private Activity activity;
+    private int delay;
 
     public NotRecognizedDialog(Activity a, Handler handler, Runnable runnable, int delay) {
         super(a);

@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
-    /** Runnable to be executed every {@link MainActivity#TIME_BETWEEN_PHOTOS} milliseconds */
+    /** Runnable to be executed every {@link HomeActivity#TIME_BETWEEN_PHOTOS} milliseconds */
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -179,7 +179,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
-                        Log.i("Response", response.toString());
+                        Log.i("Response", response.toString().substring(0, 100));
                         //TODO if face is matched onResponse should move to the next activity
                         //TODO if the response is null/not matched we move to a different activity
 
