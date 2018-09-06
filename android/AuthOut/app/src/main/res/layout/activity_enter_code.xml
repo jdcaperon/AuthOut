@@ -23,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLength="4"
+        android:textSize="30sp"
         android:layout_marginTop="20dp"
         android:focusable="false"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/enterCodeTitle"/>
@@ -169,8 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/layoutThree"
-            android:layout_centerHorizontal="true">
+            android:layout_below="@id/layoutThree">
 
             <Button
                 android:id="@+id/button0"
@@ -180,6 +180,18 @@
                 android:onClick="onClick"
                 android:fontFamily="@font/montserrat_bold"
                 android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/popup_background" />
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:text="DEL"
+                android:onClick="backspace"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_alignParentEnd="true"
+                android:textSize="17sp"
                 android:background="@drawable/popup_background" />
 
         </RelativeLayout>
@@ -190,11 +202,11 @@
         android:id="@+id/submitCode"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:background="@drawable/authout_button"
         android:textSize="16sp"
         android:layout_margin="10dp"
         android:text="@string/submit"
         android:textColor="@color/textColour"
+        android:background="@drawable/authout_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cancel"/>
@@ -205,7 +217,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_margin="30dp"
-        android:background="@drawable/authout_button"
+        android:background="@drawable/authout_button_background"
         android:backgroundTint="@color/errorButtonColor"
         android:onClick="cancel"
         android:text="@string/cancel"

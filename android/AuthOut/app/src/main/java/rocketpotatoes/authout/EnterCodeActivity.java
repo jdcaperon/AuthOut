@@ -12,43 +12,27 @@ import java.util.List;
 
 public class EnterCodeActivity extends AppCompatActivity implements View.OnClickListener{
 
-    StringBuilder codeInputBuilder;
-    EditText codeInput;
+    private StringBuilder codeInputBuilder;
+    private EditText codeInput;
+    private Button submitButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_code);
+        submitButton = findViewById(R.id.submitCode);
+        submitButton.setEnabled(false);
         codeInputBuilder = new StringBuilder();
         codeInput = findViewById(R.id.editText);
-        /*Button zero  = findViewById(R.id.button0);
-        zero.setOnClickListener(this);
-        Button one   = findViewById(R.id.button1);
-        one.setOnClickListener(this);
-        Button two   = findViewById(R.id.button2);
-        two.setOnClickListener(this);
-        Button three = findViewById(R.id.button3);
-        three.setOnClickListener(this);
-        Button four  = findViewById(R.id.button4);
-        four.setOnClickListener(this);
-        Button five  = findViewById(R.id.button5);
-        five.setOnClickListener(this);
-        Button six   = findViewById(R.id.button6);
-        six.setOnClickListener(this);
-        Button seven = findViewById(R.id.button7);
-        seven.setOnClickListener(this);
-        Button eight = findViewById(R.id.button8);
-        eight.setOnClickListener(this);
-        Button nine  = findViewById(R.id.button9);
-        nine.setOnClickListener(this);*/
-
     }
 
     @Override
     public void onClick(View v) {
+        if (codeInputBuilder.length() == 4) return;
         Button button = findViewById(v.getId());
         codeInputBuilder.append(button.getText());
         codeInput.setText(codeInputBuilder.toString());
-
+        if (codeInputBuilder.length() == 4) submitButton.setEnabled(true);
     }
 
     public void submitCode(View v) {
@@ -58,5 +42,12 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+    }
+
+    public void backspace(View v) {
+        if (codeInputBuilder.length() <= 0) return;
+        codeInputBuilder.deleteCharAt(codeInputBuilder.length() - 1);
+        codeInput.setText(codeInputBuilder.toString());
+        submitButton.setEnabled(false);
     }
 }
