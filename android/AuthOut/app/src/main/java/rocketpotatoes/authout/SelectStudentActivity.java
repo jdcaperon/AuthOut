@@ -36,7 +36,7 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        RecyclerView mChildSelectorView = (RecyclerView) findViewById(R.id.child_selector);
+        RecyclerView mChildSelectorView = findViewById(R.id.child_selector);
         assert (mChildSelectorView != null);
 
         mChildSelectorView.setLayoutManager(layoutManager);

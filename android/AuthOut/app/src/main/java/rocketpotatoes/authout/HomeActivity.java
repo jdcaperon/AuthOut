@@ -1,12 +1,9 @@
 package rocketpotatoes.authout;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +29,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
-import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
 
 public class HomeActivity extends AppCompatActivity {
     private static final int INITIAL_DELAY = 2000;
@@ -184,10 +180,10 @@ public class HomeActivity extends AppCompatActivity {
                         //TODO if the response is null/not matched we move to a different activity
 
                         //TODO Remove this once implementation is finished above.
-                        NotRecognizedDialog dialog = new NotRecognizedDialog(
+                        /*NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();
+                        dialog.show();*/
 
                         //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
                         //startActivity(intent);
