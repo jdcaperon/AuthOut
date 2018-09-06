@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_home);
 
         //create dialog to show if necessary
