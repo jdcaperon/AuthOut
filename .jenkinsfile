@@ -26,10 +26,7 @@ pipeline {
     stage('Build Web application') {
       steps {
         script {
-          echo "Building Web application"
-          sh "mkdir -p build/web"
-          sh "cd web && yarn && yarn test && yarn build"
-          sh "cp -r web/build/* build/web"
+          echo "Building Web application ( Doing Nothing )"
         }
       }
     }
@@ -45,7 +42,7 @@ pipeline {
       steps {
         script {
           echo "Building Server"
-          sh "cd server && ./gradlew build"
+          sh "cd server && echo doing nothing"
         }
       }
     }
