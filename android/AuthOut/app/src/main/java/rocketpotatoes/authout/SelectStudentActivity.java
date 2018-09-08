@@ -45,9 +45,9 @@ public class SelectStudentActivity extends AppCompatActivity {
         // ----------- Creating Dummy Parent -----------------------
         List<Child> dummyChildren = new ArrayList<>();
         dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-In"));
+        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
         dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
-        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren);
+        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
         // ---------------------------------------------------------
 
         String welcomeMessage = "Welcome " + dummyParent.getFirstName();
@@ -57,6 +57,11 @@ public class SelectStudentActivity extends AppCompatActivity {
         dynamicText = findViewById(R.id.dynamicText);
         dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
+
+        Button signInOthers = findViewById(R.id.signInOthers);
+        if (dummyParent.getTrustedChildren().size() == 0) {
+            signInOthers.setVisibility(View.GONE);
+        }
 
         changeButtonSettings(getOptionByChildren(dummyChildren));
 
