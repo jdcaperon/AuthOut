@@ -7,4 +7,5 @@
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#03BABD</color>
     <color name="colorBackground">#ffffff</color>
+    <color name="childSelected">#66ff66</color>
 </resources>

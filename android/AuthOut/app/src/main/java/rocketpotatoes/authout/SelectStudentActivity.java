@@ -20,8 +20,9 @@ import rocketpotatoes.authout.Helpers.Parent;
 
 public class SelectStudentActivity extends AppCompatActivity {
     private Button dynamicButton;
+    private TextView dynamicText;
     private GradientDrawable dynamicButtonBackground;
-
+    private ChildSelectorAdapter mChildSelectorAdapter;
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,22 +54,65 @@ public class SelectStudentActivity extends AppCompatActivity {
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(welcomeMessage);
 
+        dynamicText = findViewById(R.id.dynamicText);
         dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
 
         changeButtonSettings(getOptionByChildren(dummyChildren));
 
-        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren, this);
+        mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren, this);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
     }
 
     public void onMadeSelection(View view) {
         Intent intent = new Intent(this, ConfirmationActivity.class);
+        //todo send off post request
+        mChildSelectorAdapter.getSelectedItems();
         startActivity(intent);
     }
 
+    public String createDynamicString(List<Child> children) {
+        if (children.size() == 0) return getString(R.string.no_children_selected);
+        if (children.size() == 1) return children.get(0).getFirstName();
+        if (children.size() == 2) return children.get(0).getFirstName() + " and " +
+                                         children.get(1).getFirstName();
 
-    public void changeButtonSettings(DynamicButtonOption option) {
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < children.size() - 1; i++) {
+            sb.append(children.get(i).getFirstName());
+            sb.append(", ");
+        }
+        sb.append("and ");
+        sb.append(children.get(children.size() - 1).getFirstName());
+        return sb.toString();
+    }
+
+    public void changeTextAndButton(DynamicButtonOption option, List<Child> children) {
+        changeText(option, children);
+        changeButtonSettings(option);
+    }
+
+
+    private void changeText(DynamicButtonOption option, List<Child> children) {
+        StringBuilder text = new StringBuilder(createDynamicString(children));
+        if (!text.toString().equals(getString(R.string.no_children_selected))) {
+            switch (option) {
+                case SIGN_IN:
+                    text.append(" will be signed in.");
+                    break;
+                case SIGN_OUT:
+                    text.append(" will be signed out.");
+                    break;
+                case NOT_COMPATIBLE:
+                    text.append(" have some conflicting status");
+                    break;
+            }
+        }
+        dynamicText.setText(text);
+    }
+
+    private void changeButtonSettings(DynamicButtonOption option) {
         switch(option) {
             case SIGN_IN:
                 dynamicButton.setText(R.string.sign_in);

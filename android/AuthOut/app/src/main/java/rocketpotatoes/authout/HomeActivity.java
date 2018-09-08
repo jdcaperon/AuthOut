@@ -193,6 +193,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
+                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                         Log.i("ResponseError", error.toString());
                     }
 

@@ -1,6 +1,7 @@
 package rocketpotatoes.authout.Helpers;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,13 +37,13 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                     Child selectedItem = childList.get(selectedPosition);
                     if (selectedItems.contains(selectedItem)) {
                         selectedItems.remove(selectedItem);
-                        view.setBackgroundColor(0x00000000);
+                        view.setBackgroundColor(Color.WHITE);
                     } else {
                         selectedItems.add(selectedItem);
-                        view.setBackgroundColor(0xcc03BABD);
+                        view.setBackground(activity.getResources().getDrawable(R.drawable.child_selected_background));
                     }
 
-                    activity.changeButtonSettings(activity.getOptionByChildren(new ArrayList<Child>(selectedItems   )));
+                    activity.changeTextAndButton(activity.getOptionByChildren(new ArrayList<Child>(selectedItems)), new ArrayList<Child>(selectedItems));
                 }
             });
             name = (TextView) view.findViewById(R.id.childlist_name);
@@ -58,7 +59,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
         this.activity = (SelectStudentActivity) context;
         this.childList = ChildList;
         selectedItems = new HashSet<>(ChildList);
-        activity.changeButtonSettings(activity.getOptionByChildren(childList));
+        activity.changeTextAndButton(activity.getOptionByChildren(new ArrayList<Child>(selectedItems)), new ArrayList<Child>(selectedItems));
     }
 
     @Override
@@ -81,4 +82,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
         return childList.size();
     }
 
+    public HashSet<Child> getSelectedItems() {
+        return selectedItems;
+    }
 }
