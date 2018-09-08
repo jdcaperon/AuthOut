@@ -12,24 +12,25 @@ import java.util.List;
 
 import rocketpotatoes.authout.R;
 
-public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.MyViewHolder> {
+public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.ChildViewHolder> {
 
     HashSet<Child> selectedItems;
     private List<Child> childList;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    /** View holder class that sets up layout of each child in list **/
+    public class ChildViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
 
-        public MyViewHolder(View view) {
+        /** Constructor **/
+        public ChildViewHolder(View view) {
             super(view);
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int selectedPosition = getAdapterPosition();
                     Child selectedItem = childList.get(selectedPosition);
-                    if(selectedItems.contains(selectedItem)){
+                    if (selectedItems.contains(selectedItem)) {
                         selectedItems.remove(selectedItem);
                         view.setBackgroundColor(0x00000000);
                     } else {
@@ -43,6 +44,10 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
 
     }
 
+    /** Constructor
+     * 
+     * @param ChildList A list of Child objects that are inserted into the list on creation.
+     */
     public ChildSelectorAdapter(List<Child> ChildList) {
         selectedItems = new HashSet<>();
         selectedItems.addAll(ChildList);
@@ -50,23 +55,23 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(ChildViewHolder holder, int position) {
         Child child = childList.get(position);
         holder.name.setText(child.getFirstName());
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_component_child, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new ChildViewHolder(itemView);
     }
 
     @Override
     public int getItemCount() {
         return childList.size();
     }
-    
+
 }
