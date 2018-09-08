@@ -1,5 +1,6 @@
 package rocketpotatoes.authout.Helpers;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,13 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 import rocketpotatoes.authout.R;
+import rocketpotatoes.authout.SelectStudentActivity;
 
 public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.ChildViewHolder> {
 
+    SelectStudentActivity activity;
     HashSet<Child> selectedItems;
     private List<Child> childList;
 
@@ -37,6 +41,8 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                         selectedItems.add(selectedItem);
                         view.setBackgroundColor(0xcc03BABD);
                     }
+
+                    activity.changeButtonSettings(activity.getOptionByChildren(new ArrayList<Child>(selectedItems   )));
                 }
             });
             name = (TextView) view.findViewById(R.id.childlist_name);
@@ -48,10 +54,11 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
      * 
      * @param ChildList A list of Child objects that are inserted into the list on creation.
      */
-    public ChildSelectorAdapter(List<Child> ChildList) {
-        selectedItems = new HashSet<>();
-        selectedItems.addAll(ChildList);
+    public ChildSelectorAdapter(List<Child> ChildList, Context context) {
+        this.activity = (SelectStudentActivity) context;
         this.childList = ChildList;
+        selectedItems = new HashSet<>(ChildList);
+        activity.changeButtonSettings(activity.getOptionByChildren(childList));
     }
 
     @Override

@@ -44,7 +44,7 @@ public class SelectStudentActivity extends AppCompatActivity {
         // ----------- Creating Dummy Parent -----------------------
         List<Child> dummyChildren = new ArrayList<>();
         dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
+        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-In"));
         dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
         Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren);
         // ---------------------------------------------------------
@@ -58,7 +58,7 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         changeButtonSettings(getOptionByChildren(dummyChildren));
 
-        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren);
+        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren, this);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
     }
 
@@ -68,7 +68,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     }
 
 
-    private void changeButtonSettings(DynamicButtonOption option) {
+    public void changeButtonSettings(DynamicButtonOption option) {
         switch(option) {
             case SIGN_IN:
                 dynamicButton.setText(R.string.sign_in);
