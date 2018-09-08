@@ -15,6 +15,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -196,7 +197,7 @@ public class HomeActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        Toast.makeText(HomeActivity.this, "Error. Retrying...", Toast.LENGTH_SHORT).show();
                         handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                         Log.i("ResponseError", error.toString());
                     }

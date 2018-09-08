@@ -6,12 +6,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.ChildSelectorAdapter;
@@ -19,10 +31,13 @@ import rocketpotatoes.authout.Helpers.DynamicButtonOption;
 import rocketpotatoes.authout.Helpers.Parent;
 
 public class SelectStudentActivity extends AppCompatActivity {
+    private static final String AUTHOUT_SIGNINOUT_URL = "http://httpbin.org/post";
     private Button dynamicButton;
     private TextView dynamicText;
     private GradientDrawable dynamicButtonBackground;
     private ChildSelectorAdapter mChildSelectorAdapter;
+    private RequestQueue requestQueue;
+
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -36,7 +51,6 @@ public class SelectStudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_student);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
         RecyclerView mChildSelectorView = findViewById(R.id.child_selector);
         assert (mChildSelectorView != null);
 
@@ -50,6 +64,14 @@ public class SelectStudentActivity extends AppCompatActivity {
         Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
         // ---------------------------------------------------------
 
+        setUpLayout(dummyParent);
+
+        mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren, this);
+        mChildSelectorView.setAdapter(mChildSelectorAdapter);
+        requestQueue = Volley.newRequestQueue(this);
+    }
+
+    private void setUpLayout(Parent dummyParent) {
         String welcomeMessage = "Welcome " + dummyParent.getFirstName();
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(welcomeMessage);
@@ -63,17 +85,14 @@ public class SelectStudentActivity extends AppCompatActivity {
             signInOthers.setVisibility(View.GONE);
         }
 
-        changeButtonSettings(getOptionByChildren(dummyChildren));
-
-        mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren, this);
-        mChildSelectorView.setAdapter(mChildSelectorAdapter);
+        changeButtonSettings(getOptionByChildren(dummyParent.getChildren()));
     }
 
     public void onMadeSelection(View view) {
-        Intent intent = new Intent(this, ConfirmationActivity.class);
-        //todo send off post request
-        mChildSelectorAdapter.getSelectedItems();
-        startActivity(intent);
+        dynamicButton.setEnabled(false);
+        Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
+        //TODO send proper request to the server
+        requestQueue.add(createRequest(selectedChildren.toString()));
     }
 
     public String createDynamicString(List<Child> children) {
@@ -81,7 +100,6 @@ public class SelectStudentActivity extends AppCompatActivity {
         if (children.size() == 1) return children.get(0).getFirstName();
         if (children.size() == 2) return children.get(0).getFirstName() + " and " +
                                          children.get(1).getFirstName();
-
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < children.size() - 1; i++) {
@@ -159,5 +177,38 @@ public class SelectStudentActivity extends AppCompatActivity {
         }
         return children.get(0).getStatus().equals(signedInText) ?
                 DynamicButtonOption.SIGN_OUT : DynamicButtonOption.SIGN_IN;
+    }
+
+    /**
+     * Creates a {@link JsonObjectRequest} with a listener in order to handle response
+     * @return a {@link JsonObjectRequest}
+     */
+    private JsonObjectRequest createRequest(String code) {
+        JSONObject json = new JSONObject();
+
+        //Adding contents to request
+        try {
+            json.put("Code", code);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return new JsonObjectRequest
+                (Request.Method.POST, AUTHOUT_SIGNINOUT_URL, json , new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //TODO ensure there's no error, otherwise just move to final activity.
+                        Log.i("Response", response.toString().substring(0, 100));
+                        Intent intent = new Intent(SelectStudentActivity.this, ConfirmationActivity.class);
+                        startActivity(intent);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: If this errors we retry the request.
+                        Log.i("ResponseError", error.toString());
+                    }
+
+                });
     }
 }

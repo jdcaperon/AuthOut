@@ -79,12 +79,9 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                 (Request.Method.POST, AUTHOUT_CODE_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO Create and set parent object here
                         Log.i("Response", response.toString().substring(0, 100));
-                        //TODO if face is matched onResponse should move to the next activity
-                        //TODO if the response is null/not matched we move to a different activity
-
-                        //TODO Remove this once implementation is finished above.
+                        //TODO if the code is matched move to the next activity with parent
+                        //TODO if the code is not match put up a toast/handle it
 
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);
                         startActivity(intent);
