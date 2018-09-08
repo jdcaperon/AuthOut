@@ -3,8 +3,10 @@ package rocketpotatoes.authout;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,12 +32,14 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
+import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
+
 
 public class HomeActivity extends AppCompatActivity {
     private static final int INITIAL_DELAY = 2000;
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
-    private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
+    private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
     private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
@@ -65,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
-                    //onPressSignIn(findViewById(android.R.id.content)); //todo temp go to next activity
+
                     requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
                     handler.removeCallbacks(this);
 
@@ -172,7 +176,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return new JsonObjectRequest
-                (Request.Method.POST, AUTHOUT_SERVER_URL, json , new Response.Listener<JSONObject>() {
+                (Request.Method.POST, AUTHOUT_IMAGE_CHECK, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
@@ -181,13 +185,13 @@ public class HomeActivity extends AppCompatActivity {
                         //TODO if the response is null/not matched we move to a different activity
 
                         //TODO Remove this once implementation is finished above.
-                        /*NotRecognizedDialog dialog = new NotRecognizedDialog(
+                        NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();*/
+                        dialog.show();
 
-                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                        startActivity(intent);
+                        //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        //startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
