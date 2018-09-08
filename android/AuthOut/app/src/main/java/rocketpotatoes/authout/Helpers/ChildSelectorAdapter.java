@@ -3,6 +3,7 @@ package rocketpotatoes.authout.Helpers;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -104,18 +105,17 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
             case SIGN_IN:
                 dynamicButton.setText(R.string.sign_in);
                 dynamicButton.setEnabled(true);
-                dynamicButton.setBackgroundColor(context.getColor(R.color.colorAccent));
-                ((ColorDrawable) dynamicButton.getBackground()).setColor(context.getColor(R.color.colorAccent));
+                ((GradientDrawable) dynamicButton.getBackground()).setColor(context.getColor(R.color.colorAccent));
                 break;
             case SIGN_OUT:
                 dynamicButton.setText(R.string.sign_out);
                 dynamicButton.setEnabled(true);
-                ((ColorDrawable) dynamicButton.getBackground()).setColor(context.getColor(R.color.colorAccent));
+                ((GradientDrawable) dynamicButton.getBackground()).setColor(context.getColor(R.color.colorAccent));
                 break;
             case NOT_COMPATIBLE: ;
                 dynamicButton.setText(R.string.not_compatible);
                 dynamicButton.setEnabled(false);
-                ((ColorDrawable) dynamicButton.getBackground()).setColor(context.getColor(R.color.errorButtonColor));
+                ((GradientDrawable) dynamicButton.getBackground()).setColor(context.getColor(R.color.errorButtonColor));
                 break;
         }
     }
