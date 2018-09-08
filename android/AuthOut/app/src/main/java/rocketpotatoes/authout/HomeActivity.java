@@ -1,5 +1,6 @@
 package rocketpotatoes.authout;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -185,8 +186,8 @@ public class HomeActivity extends AppCompatActivity {
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         dialog.show();*/
 
-                        //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                        //startActivity(intent);
+                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override

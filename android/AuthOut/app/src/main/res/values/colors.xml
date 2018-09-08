@@ -6,4 +6,5 @@
     <color name="errorButtonColor">#FF0000</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#03BABD</color>
+    <color name="colorBackground">#ffffff</color>
 </resources>

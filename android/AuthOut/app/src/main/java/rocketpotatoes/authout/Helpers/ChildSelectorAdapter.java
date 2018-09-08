@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.List;
 
 import rocketpotatoes.authout.R;
 
 public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.MyViewHolder> {
 
+    HashSet<Child> selectedItems;
     private List<Child> childList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -20,11 +22,30 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
 
         public MyViewHolder(View view) {
             super(view);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int selectedPosition = getAdapterPosition();
+                    Child selectedItem = childList.get(selectedPosition);
+                    if(selectedItems.contains(selectedItem)){
+                        selectedItems.remove(selectedItem);
+                        view.setBackgroundColor(0x00000000);
+                    } else {
+                        selectedItems.add(selectedItem);
+                        view.setBackgroundColor(0xcc03BABD);
+                    }
+                }
+            });
             name = (TextView) view.findViewById(R.id.childlist_name);
         }
+
     }
 
     public ChildSelectorAdapter(List<Child> ChildList) {
+        selectedItems = new HashSet<>();
+        selectedItems.addAll(ChildList);
         this.childList = ChildList;
     }
 
