@@ -20,8 +20,6 @@ import rocketpotatoes.authout.Helpers.Parent;
 
 public class SelectStudentActivity extends AppCompatActivity {
     private Button dynamicButton;
-    private GradientDrawable dynamicButtonBackground;
-
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -54,11 +52,9 @@ public class SelectStudentActivity extends AppCompatActivity {
         welcomeText.setText(welcomeMessage);
 
         dynamicButton = findViewById(R.id.dynamicButton);
-        dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
+        dynamicButton.setOnClickListener(madeSelectionListener);
 
-        changeButtonSettings(getOptionByChildren(dummyChildren));
-
-        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren);
+        ChildSelectorAdapter mChildSelectorAdapter = new ChildSelectorAdapter(this, dummyChildren, dynamicButton);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
     }
 
@@ -67,33 +63,12 @@ public class SelectStudentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    private void changeButtonSettings(DynamicButtonOption option) {
-        switch(option) {
-            case SIGN_IN:
-                dynamicButton.setText(R.string.sign_in);
-                dynamicButton.setOnClickListener(madeSelectionListener);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.colorAccent));
-                break;
-            case SIGN_OUT:
-                dynamicButton.setText(R.string.sign_out);
-                dynamicButton.setOnClickListener(madeSelectionListener);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.colorAccent));
-                break;
-            case NOT_COMPATIBLE:
-                dynamicButton.setOnClickListener(null);
-                dynamicButton.setText(R.string.not_compatible);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.errorButtonColor));
-                break;
-        }
-    }
-
     /** Checks if a single option can be fit to a list of children.
      *
      * @param children - a list of child objects to check
      * @return a {@link DynamicButtonOption} of which button form to take
      */
-    public DynamicButtonOption getOptionByChildren(List<Child> children) {
+    public static DynamicButtonOption getOptionByChildren(List<Child> children) {
         String signedInText = "Signed-In";
         if (children.size() == 0) return DynamicButtonOption.NOT_COMPATIBLE;
         if (children.size() == 1) {
