@@ -9,8 +9,8 @@
     <ul class="navbar-nav ">
         <li class ="nav-item"><a class="nav-link"href="index.php"><i class="material-icons lighter">home</i>Home</a></li>
         <li class ="nav-item"><a class="nav-link"href="statistics.php"><i class="material-icons lighter">assessment</i>Statistics</a></li>
-        <li class ="nav-item"><a class="nav-link"href="live_monitor.php"><i class="material-icons lighter">assignment</i>Live Monitor</a></li>
-        <li class ="nav-item"><a class="nav-link"href="report_generator.php"><i class="material-icons lighter">wifi_tethering</i>Report Generator</a></li>
+        <li class ="nav-item"><a class="nav-link"href="live_monitor.php"><i class="material-icons lighter">wifi_tethering</i>Live Monitor</a></li>
+        <li class ="nav-item"><a class="nav-link"href="report_generator.php"><i class="material-icons lighter">assignment</i>Report Generator</a></li>
         <li class ="nav-item"><a class="nav-link"href="help.php"><i class="material-icons lighter">help</i>Help</a></li>
         <li class ="nav-item"><a class="nav-link"href="#"><i class="material-icons lighter">exit_to_app</i>Log out</a></li>
     </ul>
