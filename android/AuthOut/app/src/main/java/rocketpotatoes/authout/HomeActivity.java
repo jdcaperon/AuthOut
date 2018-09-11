@@ -4,15 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.os.Environment;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,34 +19,41 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.face.*;
 import com.camerakit.CameraKitView;
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.face.Face;
+import com.google.android.gms.vision.face.FaceDetector;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+
+public class HomeActivity extends AppCompatActivity {
+    private static final int INITIAL_DELAY = 2000;
     private static final int TIME_BETWEEN_PHOTOS = 500;
-    private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.70;
+    private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
-    private CameraKitView cameraKitView;
+    private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
     private RequestQueue requestQueue;
+    private AlertDialog moveCloserDialog;
 
-    private Display display;
     private Point screenSize = new Point();
 
     // Handler for intermittent execution
     private Handler handler = new Handler();
 
-    /** Runnable to be executed every {@link MainActivity#TIME_BETWEEN_PHOTOS} milliseconds */
+    private Runnable dialogDismiss = new Runnable() {
+        @Override
+        public void run() {
+            moveCloserDialog.dismiss();
+        }
+    };
+
+    /** Runnable to be executed every {@link HomeActivity#TIME_BETWEEN_PHOTOS} milliseconds */
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -56,19 +62,23 @@ public class MainActivity extends AppCompatActivity {
             // Ensure face is appropriate size to move forwards
             if (face != null) {
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
+                    moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
-                    Toast.makeText(MainActivity.this, "Face Detected", Toast.LENGTH_SHORT).show();
+                    //onPressSignIn(findViewById(android.R.id.content)); //todo temp go to next activity
                     requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
-
-                    //stop the handler from taking photos until the response is received
                     handler.removeCallbacks(this);
+
                 } else {
-                    Toast.makeText(MainActivity.this, "Please move closer to the camera", Toast.LENGTH_LONG).show();
+                    if (!moveCloserDialog.isShowing()) {
+                        moveCloserDialog.show();
+                        handler.postDelayed(dialogDismiss, TIME_BETWEEN_PHOTOS * 4);
+                    }
+
                     handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
                 }
-            } else {    
+            } else {
+                moveCloserDialog.dismiss();
                 Log.v("MainActivity", "No Face Detected");
-                Toast.makeText(MainActivity.this, "No Face Detected", Toast.LENGTH_SHORT).show();
                 handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
             }
         }
@@ -77,13 +87,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setTheme(R.style.AppTheme);
+        setContentView(R.layout.activity_home);
+
+        //create dialog to show if necessary
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, R.style.CustomAlertDialog);
+        builder.setTitle("Move closer");
+        builder.setMessage("Please move closer to the camera.");
+        moveCloserDialog = builder.create();
 
         //get screen size in order to get face size in relation to total screen size
-        display = getWindowManager().getDefaultDisplay();
+        Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
-        cameraKitView = findViewById(R.id.cameraKitView);
+        camera = findViewById(R.id.camera);
+        camera.setAdjustViewBounds(true);
         faceDetector = new FaceDetector.Builder(this)
                 .setTrackingEnabled(true)
                 .setProminentFaceOnly(true)
@@ -92,16 +110,18 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
-        cameraKitView.onResume();
+        handler.postDelayed(runnable, INITIAL_DELAY);
+        camera.onResume();
     }
 
     @Override
     protected void onPause() {
-        cameraKitView.onPause();
+        camera.onPause();
         handler.removeCallbacks(runnable);
         super.onPause();
     }
@@ -119,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
         int bottomRightXPos = Math.max(0, Math.round(facePosition.x) - FACE_CROP_OFFSET);
         int bottomRightYPos = Math.max(0, Math.round(facePosition.y) - FACE_CROP_OFFSET);
 
-        int totalCropWidth = Math.min(currentImage.getWidth(),
-                Math.round(faceWidth) + (FACE_CROP_OFFSET * 2)); //Offset added to either side
-        int totalCropHeight = Math.min(currentImage.getHeight(),
+        int totalCropWidth = Math.min(currentImage.getWidth() - bottomRightXPos,
+                Math.round(faceWidth) + (FACE_CROP_OFFSET * 2));
+        int totalCropHeight = Math.min(currentImage.getHeight() - bottomRightYPos,
                 Math.round(faceHeight) + (FACE_CROP_OFFSET * 2));
 
         Bitmap bitmapToSend = Bitmap.createBitmap(
@@ -134,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
+
 
     /**
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
@@ -153,12 +174,19 @@ public class MainActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_SERVER_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        //TODO Create and set parent object here
                         Log.i("Response", response.toString().substring(0, 100));
-                        //TODO if face is matched onResponse should move to the next activity with
-                        //TODO user ID specified in order to progress.
+                        //TODO if face is matched onResponse should move to the next activity
+                        //TODO if the response is null/not matched we move to a different activity
 
-                        //TODO if the user ID isn't found, then restart the picture handler
-                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
+                        //TODO Remove this once implementation is finished above.
+                        /*NotRecognizedDialog dialog = new NotRecognizedDialog(
+                                HomeActivity.this, handler, runnable, INITIAL_DELAY);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.show();*/
+
+                        //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        //startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -171,10 +199,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Instructs a picture to be taken and sets {@link MainActivity#currentImage}
+     * Instructs a picture to be taken and sets {@link HomeActivity#currentImage}
      */
     public void takePicture() {
-        cameraKitView.captureImage(new CameraKitView.ImageCallback() {
+        camera.captureImage(new CameraKitView.ImageCallback() {
             @Override
             public void onImage(CameraKitView cameraKitView, byte[] bytes) {
                 currentImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -183,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles the currently selected {@link MainActivity#currentImage} and detects any faces
+     * Handles the currently selected {@link HomeActivity#currentImage} and detects any faces
      * @return a {@link Face} of the most prominent face
      */
     public Face faceProcessing() {
@@ -194,5 +222,4 @@ public class MainActivity extends AppCompatActivity {
 
         return sparseArray.valueAt(0);
     }
-
 }
