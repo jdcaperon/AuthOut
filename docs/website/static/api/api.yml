@@ -9,6 +9,11 @@ servers:
     description: Beta enviroment server endpoint.
   - url: https://deco3801-rocketpotatoes.uqcloud.net/api
     description: Production enviroment server endpoint.
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
     
 paths:
   /heartbeat:
@@ -27,3 +32,253 @@ paths:
                     example: 1536066558
                   message:
                     type: string
+  /kiosk:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Gets the kiosks settings.
+      responses:
+        '200':
+          description: Default
+    post:
+      security: 
+        - basicAuth: []
+      summary: Signin a parent with one of the available methods.
+      responses:
+        '200':
+          description: Default
+  /parent:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get a list of Parent IDs.
+      responses:
+        '200':
+          description: A Json collection as described of the parent information.
+    post:
+      security: 
+        - basicAuth: []
+      summary: Create a parent.
+      responses:
+        '200':
+          description: A Json colletion storing the parent ID.
+  /parent/{id}:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get the parent information by ID.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Parent
+      responses:
+        '200':
+          description: A Json collection as described of the parent information.
+    put:
+      security: 
+        - basicAuth: []
+      summary: Update a parent with the information provided.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Parent
+      responses:
+        '200':
+          description: Successfully created a new parent and returns the ID.
+    delete:
+      security: 
+        - basicAuth: []
+      summary: Delete a parent with the ID provided.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Parent
+      responses:
+        '200':
+          description: Default
+  /parent/{id}/children:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Returns a collection of children that the parent can interact with.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Parent
+      responses:
+        '200':
+          description: Default
+  /child:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get a list of children.
+      responses:
+        '200':
+          description: Default
+    post:
+      security: 
+        - basicAuth: []
+      summary: Creates a child with the given information.
+      responses:
+        '200':
+          description: Default
+  /child/{id}:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get a childs information.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Child
+      responses:
+        '200':
+          description: Default
+    put:
+      security: 
+        - basicAuth: []
+      summary: Update a childs information.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Child
+      responses:
+        '200':
+          description: Default
+    delete:
+      security: 
+        - basicAuth: []
+      summary: Deletes a child with the given ID.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Child
+      responses:
+        '200':
+          description: Default
+  /child/{id}/trusted:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get a list of Parents that this child is trusted too.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Child
+      responses:
+        '200':
+          description: Default
+    put:
+      security: 
+        - basicAuth: []
+      summary: Add a Parent to the childs trusted list.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Child
+      responses:
+        '200':
+          description: Default
+    delete:
+      security: 
+        - basicAuth: []
+      summary: Remove a Parent from the childs trusted list.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Child
+      responses:
+        '200':
+          description: Default
+  
+  /center:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get the list of centers.
+      responses:
+        '200':
+          description: Default
+    post:
+      security: 
+        - basicAuth: []
+      summary: Create a new center.
+      responses:
+        '200':
+          description: Default
+  /center/{id}:
+    get:
+      security: 
+        - basicAuth: []
+      summary: Get the centers details by the given ID.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Center
+      responses:
+        '200':
+          description: Default
+    put:
+      security: 
+        - basicAuth: []
+      summary: Update the centers details by the given ID.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the Center
+      responses:
+        '200':
+          description: Default
+    delete:
+      security: 
+        - basicAuth: []
+      summary: Remove a center with the given ID.
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numerical ID of the center.
+      responses:
+        '200':
+          description: Default
+  
+  
