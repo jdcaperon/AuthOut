@@ -72,7 +72,7 @@ pipeline {
 
             sshpass -e scp -o stricthostkeychecking=no -r build/product/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/html
 
-            sshpass -e scp -o stricthostkeychecking=no -r build/web/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/app
+            sshpass -e scp -o stricthostkeychecking=no -r web/src/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/app
 
             sshpass -e scp -o stricthostkeychecking=no -r distribution/* rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
 
