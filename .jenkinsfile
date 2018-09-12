@@ -62,7 +62,7 @@ pipeline {
         echo "Publishing to develop"
         withCredentials([string(credentialsId: 'betaPass', variable: 'SSHPASS')]) {
           sh '''
-            sshpass -e scp -o stricthostkeychecking=no -r server/* rocket@deco3801.wisebaldone.com:/home/rocket/api
+            sshpass -e scp -o stricthostkeychecking=no -r server/* rocket@deco3801.wisebaldone.com:/home/rocket/api 
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && sudo pip3 install -r requirements.txt'
 
