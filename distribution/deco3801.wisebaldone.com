@@ -10,8 +10,8 @@ server {
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
   
   
-  location /api/ {
-    proxy_pass http://127.0.0.1:8000;
+  location /api {
+    proxy_pass http://127.0.0.1:8000/;
   }
 
   location /docs {
