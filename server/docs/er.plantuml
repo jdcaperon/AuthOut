@@ -1,0 +1,56 @@
+@startuml
+
+entity Child {
+  * id
+  --
+  * status
+  * first_name
+  * last_name
+  * date_of_birth
+  * sex
+}
+
+entity Parent {
+  * id
+  * email
+  --
+  * first_name
+  * last_name
+  * date_of_birth
+  * mobile_number
+  * image_id
+}
+
+entity Institution {
+  * id
+  --
+  * name
+  * street_address
+  * suburb
+  * state 
+  * postcode
+}
+
+entity Entry {
+  * id
+  --
+  * date
+  * time
+  * status
+}
+
+' Child can have 1 or more parents
+' Parent can have multiple children
+Child }|--{ Parent : Owns
+Parent }o--{ Child : Trusted
+Child ||--{ Institution : Goes to / Has
+
+' Parent can share their children with other people
+'Parent }o--o{ Parent : Trusts
+
+' Entry has exactly 1 Parent and 1 Child
+Entry ||-- Institution : contains
+Entry ||-- Parent : contains
+Entry ||-- Child  : contains
+
+@enduml
