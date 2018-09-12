@@ -3,6 +3,38 @@ html, body {
 	width: 100%;
     position: relative;
     font-family: 'Montserrat', sans-serif;
+	background-color: #F2F3F1;
+	min-width: 960px;
+}
+
+.button_wrapper {
+	text-align: center;
+}
+
+.rounded_button {
+	height: 40px;
+	width: 250px;
+	border: none;
+	border-radius: 200px;
+	white-space: nowrap;
+	color: #F2F3F1;
+	font-weight: bold;
+	display: block;
+	margin: 10px auto;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.rounded_button:hover {
+	background-color: #DCA726;
+}
+
+.blue_button {
+	background-color: #03BABD;
+}
+
+.purple_button {
+	background-color: #BC72AF;
 }
 
 .page_content {
