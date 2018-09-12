@@ -21,7 +21,7 @@ server {
   location /app {
     root /var/www/deco3801.wisebaldone.com/app;
     try_files $uri $uri/ %uri.html $uri.php =404;
-    index index.html index.php
+    index index.html index.php;
 
     location ~ \.php$ {
       include snippets/fastcgi-php.conf;
