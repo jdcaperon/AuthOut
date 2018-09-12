@@ -10,9 +10,8 @@ server {
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
   
   
-  location /api {
-    # this will be changed to a proxy
-    root /var/www/deco3801.wisebaldone.com/api;
+  location /api/ {
+    proxy_pass http://127.0.0.1:8000/;
   }
 
   location /docs {
