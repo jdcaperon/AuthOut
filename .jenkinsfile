@@ -64,7 +64,7 @@ pipeline {
           sh '''
             sshpass -e scp -o stricthostkeychecking=no -r server/* rocket@deco3801.wisebaldone.com:/home/rocket/api
 
-            sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~api && sudo pip3 install -r requirements.txt'
+            sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && sudo pip3 install -r requirements.txt'
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo service supervisor restart'
 
