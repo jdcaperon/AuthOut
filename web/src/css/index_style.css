@@ -38,11 +38,12 @@ header h1 {
 }
 
 #login-form  input {
+	float: right;
 	border: 1px solid gray;
 }
 
 #login-form div {
-	width: 60%;
+	width: 70%;
 	margin: 0 auto;
 	margin-bottom: 10px;
 }
@@ -54,7 +55,6 @@ header h1 {
 	box-shadow: 0px 0px 150px #C9CAC9;
 	width: 40%;
 	min-width: 600px;
-	height: 60%;
 	position: absolute;
     top: 50%;
     left: 50%;
@@ -65,6 +65,6 @@ header h1 {
 }
 
 #login-content {
-	
+	padding: 10px 0;
 }
 
