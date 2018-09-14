@@ -26,8 +26,8 @@ header h1 {
 
 #login-form {
 	text-align: right;
-	width: 550px;
 	margin-bottom: 40px;
+	width: 460px;
 }
 
 #login-form  label {
@@ -40,6 +40,7 @@ header h1 {
 #login-form  input {
 	float: right;
 	border: 1px solid gray;
+	width: 180px;
 }
 
 #login-form div {
@@ -54,7 +55,8 @@ header h1 {
 	background-color: #FBFBFB;
 	box-shadow: 0px 0px 150px #C9CAC9;
 	width: 40%;
-	min-width: 600px;
+	min-width: 500px;
+	min-height: 550px;
 	position: absolute;
     top: 50%;
     left: 50%;
