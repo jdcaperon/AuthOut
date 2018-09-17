@@ -19,7 +19,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Alex+Brush|Cookie|Lobster|Playball|Tangerine" rel="stylesheet">
 
 	<!--Main stylesheet-->
-	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
 
 	<!--Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
