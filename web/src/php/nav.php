@@ -19,5 +19,4 @@
 
 <div id ="page-title">
 	<!-- Right now this just acts as a spacer block so that content renders below the nav-->
-    <?php echo $pageName ?>
 </div>
