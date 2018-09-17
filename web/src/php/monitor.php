@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php 
-		$pageName = "Home";
-		//$stylesheets = array("home_style.css");
+		$pageName = "Live Monitor";
+		//$stylesheets = array("monitor_style.css");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
 		include $_SERVER['DOCUMENT_ROOT'].'/php/nav.php';
 		
@@ -13,10 +13,7 @@
 	</body>
 	
 	<?php 
-		//$scripts = array("home_script.js");
+		//$scripts = array("monitor_script.js");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
 	?>
 </html>
-			
-			
-

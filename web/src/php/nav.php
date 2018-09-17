@@ -8,9 +8,9 @@
   <div id="nav-line2">
     <ul class="navbar-nav ">
         <li class ="nav-item"><a class="nav-link"href="/php/home.php"><i class="material-icons lighter">home</i>Home</a></li>
-        <li class ="nav-item"><a class="nav-link"href="/php/statistics.php"><i class="material-icons lighter">assessment</i>Statistics</a></li>
-        <li class ="nav-item"><a class="nav-link"href="/php/live_monitor.php"><i class="material-icons lighter">wifi_tethering</i>Live Monitor</a></li>
-        <li class ="nav-item"><a class="nav-link"href="/php/report_generator.php"><i class="material-icons lighter">assignment</i>Report Generator</a></li>
+        <li class ="nav-item"><a class="nav-link"href="/php/stats.php"><i class="material-icons lighter">assessment</i>Statistics</a></li>
+        <li class ="nav-item"><a class="nav-link"href="/php/monitor.php"><i class="material-icons lighter">wifi_tethering</i>Live Monitor</a></li>
+        <li class ="nav-item"><a class="nav-link"href="/php/report.php"><i class="material-icons lighter">assignment</i>Report Generator</a></li>
         <li class ="nav-item"><a class="nav-link"href="/php/help.php"><i class="material-icons lighter">help</i>Help</a></li>
         <li class ="nav-item"><a class="nav-link"href="/index.php"><i class="material-icons lighter">exit_to_app</i>Log out</a></li>
     </ul>
@@ -18,5 +18,6 @@
 </nav>
 
 <div id ="page-title">
+	<!-- Right now this just acts as a spacer block so that content renders below the nav-->
     <?php echo $pageName ?>
 </div>

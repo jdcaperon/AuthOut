@@ -1,14 +1,4 @@
-<?php
-    session_start();
-	
-    $pageName="Wrong page name!";
-    if( strpos($_SERVER["PHP_SELF"], "index.php")){
-        $pageName = "Home";
-    }elseif ( strpos($_SERVER["PHP_SELF"], "signin.php")) {
-        $pageName = "Log In ";
-    }
-	
-?>
+<?php session_start() ?>
 <head>
 
 	<title>AuthOut</title>
