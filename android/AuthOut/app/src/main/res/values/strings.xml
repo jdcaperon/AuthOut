@@ -13,7 +13,7 @@
     <string name="retry">Retry</string>
     <string name="note">Contact admin for continuous issues</string>
     <string name="cancel">Cancel</string>
-    <string name="enter_code">Enter Code</string>
+    <string name="enter_code">Enter Four (4) Digit Code</string>
     <string name="submit">Submit</string>
     <string name="no_children_selected">You have no children selected</string>
 </resources>
