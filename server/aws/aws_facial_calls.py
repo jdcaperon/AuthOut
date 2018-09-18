@@ -32,11 +32,11 @@ def add_new_face_to_system(photo, first_name, surname, bucket=BUCKET):
     :param bucket: s3 bucket to add them to
     :return: the face added to the photo
     """
-    photo_name = add_face_to_s3_bucket(photo, first_name, surname, bucket)
+    photo_name = add_photo_to_s3_bucket(photo, first_name, surname, bucket)
     return add_face_to_collection(COLLECTION, BUCKET, photo_name, REGION)
 
 
-def add_face_to_s3_bucket(photo, first_name, surname, bucket):
+def add_photo_to_s3_bucket(photo, first_name, surname, bucket):
     photo = open(TEST_PHOTO, 'rb')  # todo replace with actual image from base64
 
     photo_name = first_name + "_" + surname + '.jpg'
@@ -44,6 +44,20 @@ def add_face_to_s3_bucket(photo, first_name, surname, bucket):
     s3 = boto3.resource('s3')
     s3.Bucket(bucket).put_object(Key=photo_name, Body=photo)
     return photo_name
+
+
+def delete_photo_from_s3_bucket(keys, bucket):
+    keys_to_delete = []
+    for key in keys:
+        keys_to_delete.append({'Key': key})
+
+    s3 = boto3.resource('s3')
+    s3.Bucket(bucket).delete_objects(
+        Bucket=bucket,
+        Delete={'Objects': keys_to_delete}
+    )
+    print(keys_to_delete)
+
 
 
 def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80, region=REGION):
@@ -116,4 +130,6 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
 
 
 if __name__ == "__main__":
-    print(get_name_by_image(None))
+    delete_photo_from_s3_bucket(["hi_yo.jpg", "hello"], BUCKET)
+
+
