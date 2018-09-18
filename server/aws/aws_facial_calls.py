@@ -37,6 +37,13 @@ def add_new_face_to_system(photo, first_name, surname, bucket=BUCKET):
 
 
 def add_photo_to_s3_bucket(photo, first_name, surname, bucket):
+    """
+    :param photo: base64 encoded image
+    :param first_name: first_name of person to be added
+    :param surname: surname of person to be added
+    :param bucket: s3 bucket to add them to
+    :return: the name of the image saved
+    """
     photo = open(TEST_PHOTO, 'rb')  # todo replace with actual image from base64
 
     photo_name = first_name + "_" + surname + '.jpg'
@@ -47,6 +54,11 @@ def add_photo_to_s3_bucket(photo, first_name, surname, bucket):
 
 
 def delete_photo_from_s3_bucket(keys, bucket):
+    """
+    :param keys: list of image names to delete
+    :param bucket: s3 bucket to remove them from
+    :return: None
+    """
     keys_to_delete = []
     for key in keys:
         keys_to_delete.append({'Key': key})
@@ -56,8 +68,6 @@ def delete_photo_from_s3_bucket(keys, bucket):
         Bucket=bucket,
         Delete={'Objects': keys_to_delete}
     )
-    print(keys_to_delete)
-
 
 
 def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80, region=REGION):
@@ -130,6 +140,6 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
 
 
 if __name__ == "__main__":
-    delete_photo_from_s3_bucket(["hi_yo.jpg", "hello"], BUCKET)
+    search_faces_by_image(None)
 
 
