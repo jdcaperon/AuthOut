@@ -1,5 +1,5 @@
 import functools
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from models.HeartbeatModel import HeartbeatModel
 
 bp = Blueprint('heartbeat', __name__, url_prefix="/kiosk")
@@ -7,7 +7,7 @@ bp = Blueprint('heartbeat', __name__, url_prefix="/kiosk")
 
 @bp.route('/', methods=['GET', 'POST'])
 def model_endpoint():
-  if request.method == 'POST'
+  if request.method == 'POST':
     # Build a new Kiosk login
     data: object = {}
     data["Name"] = "Fred"

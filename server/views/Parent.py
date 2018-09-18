@@ -1,16 +1,36 @@
-import functools
-from flask import Blueprint, jsonify
-from models.HeartbeatModel import HeartbeatModel
+from flask import Blueprint, jsonify, request, Response
+from db import db
+from models.ParentModel import ParentModel
 
-bp = Blueprint('heartbeat', __name__, url_prefix="/parent")
+bp = Blueprint('parent', __name__, url_prefix="/parent")
 
 
 @bp.route('/', methods=['GET', 'POST'])
 def core():
-  if request.method == 'POST':
-    # read the data given and create a parent.
-  else:
-    # list all the parents.
-  
-  data: HeartbeatModel = HeartbeatModel()
-  return jsonify(data.__dict__)
+    if request.method == 'POST':
+        # read the data given and create a parent.
+        data = request.get_json(force=True)
+        parent = ParentModel()
+        valid = parent.load(data)
+        if valid:
+            db.session.add(parent)
+            db.session.commit()
+            return Response('', 200, {})
+        return Response('', 400, {})
+    else:
+        # list all the parents.
+        container = []
+        parents = db.session.query(ParentModel).order_by(ParentModel.id)
+        for parent in parents:
+            print(parent.email)
+            container.append(parent.as_dict())
+        return jsonify(container)
+
+
+## Temporary
+@bp.route('/fake')
+def create_fake():
+    new = ParentModel(email="example@example.org", first_name="Evan", last_name="Hughes")
+    db.session.add(new)
+    db.session.commit()
+    return "Created"
