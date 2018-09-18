@@ -21,3 +21,4 @@ six==1.11.0
 SQLAlchemy==1.2.11
 Werkzeug==0.14.1
 wrapt==1.10.11
+boto3=1.9.5

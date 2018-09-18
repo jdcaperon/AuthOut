@@ -54,11 +54,11 @@ def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80,
     :param region: which rekognition region to access
     :return: List of faces and their details that are above specified threshhold
     """
-    with open("test.jpg", "rb") as image_file:  # these lines are for testing
-            image_bytes = image_file.read()     # these lines are for testing
+    with open("test.jpg", "rb") as image_file:  # todo remove these lines are for testing
+            image_bytes = image_file.read()     # todo remove these lines are for testing
 
 #                image_bytes = base64.decodestring(b64encodedImagehere)
-#                the above line is how we will read the base64 encoded image for actual implementation
+#                todo uncomment the above line is how we will read the base64 encoded image for actual implementation
 
             rekognition = boto3.client("rekognition", region)
             response = rekognition.search_faces_by_image(
@@ -115,4 +115,4 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
 
 
 if __name__ == "__main__":
-    add_new_face_to_system(None, "Evan")
+    add_new_face_to_system(None, "Evan", "Hughes")
