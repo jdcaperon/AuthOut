@@ -1,16 +1,15 @@
-import time
 import json
+from app import db
 
-from cowpy import cow
-
-class HeartbeatModel():
-
-  time: int
-  message: str
-
-  def __init__(self):
-    self.time = int(time.time())
-    self.message = cow.Moose().milk("Server is up!")
+class ParentModel(db.Model):
+  __tablename__ = 'parents'
+  id = db.Column(db.Integer, primary_key=True)
+  email = db.Column(db.String)
+  first_name = db.Column(db.String)
+  last_name = db.Column(db.String)
+  date_of_birth = db.Column(Date)
+  mobile_number = db.Column(db.String)
+  image_id = db.Column(db.Integer)
 
   def __repr__(self):
     return json.dumps(self.__dict__)
