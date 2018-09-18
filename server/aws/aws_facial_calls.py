@@ -7,6 +7,7 @@ REGION = "ap-southeast-2"
 
 # Must be in the 3cs-face-recognition bucket to be referenced
 EXAMPLE_PHOTO_ID = 'rp_ryan_kurz.jpg'
+TEST_PHOTO = 'test.jpg'
 
 
 def get_name_by_image(encoded_image):
@@ -36,7 +37,7 @@ def add_new_face_to_system(photo, first_name, surname, bucket=BUCKET):
 
 
 def add_face_to_s3_bucket(photo, first_name, surname, bucket):
-    photo = open('test.jpg', 'rb')  # todo replace with actual image from base64
+    photo = open(TEST_PHOTO, 'rb')  # todo replace with actual image from base64
 
     photo_name = first_name + "_" + surname + '.jpg'
 
@@ -54,8 +55,8 @@ def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80,
     :param region: which rekognition region to access
     :return: List of faces and their details that are above specified threshhold
     """
-    with open("test.jpg", "rb") as image_file:  # todo remove these lines are for testing
-            image_bytes = image_file.read()     # todo remove these lines are for testing
+    with open(TEST_PHOTO, "rb") as image_file:  # todo remove, these lines are for testing
+            image_bytes = image_file.read()     # todo remove, these lines are for testing
 
 #                image_bytes = base64.decodestring(b64encodedImagehere)
 #                todo uncomment the above line is how we will read the base64 encoded image for actual implementation
@@ -115,4 +116,4 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
 
 
 if __name__ == "__main__":
-    add_new_face_to_system(None, "Evan", "Hughes")
+    print(get_name_by_image(None))
