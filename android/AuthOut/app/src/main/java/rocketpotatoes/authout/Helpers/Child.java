@@ -1,7 +1,9 @@
 package rocketpotatoes.authout.Helpers;
 
 
-public class Child {
+import java.io.Serializable;
+
+public class Child implements Serializable {
     private final String firstName;
     private final String surname;
     private final String status;

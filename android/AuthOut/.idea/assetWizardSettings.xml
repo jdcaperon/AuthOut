@@ -13,17 +13,43 @@
                       <PersistentState>
                         <option name="children">
                           <map>
+                            <entry key="actionbar">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/app/src/main/res/drawable/white_tick.svg.png" />
+                                      <entry key="outputName" value="white_tick" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="fcfffa" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
                             <entry key="launcher">
                               <value>
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="foregroundClipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="foregroundImage">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="109" />
+                                                <entry key="scalingPercent" value="94" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -34,7 +60,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="C:\Users\I349687\Desktop\kindybookicon.png" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="3b3e3a" />
+                                      <entry key="backgroundLayerName" value="authout_grey" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Desktop/authout_logo.png" />
+                                      <entry key="foregroundLayerName" value="authout_logo" />
+                                      <entry key="outputName" value="authout_launcher" />
                                     </map>
                                   </option>
                                 </PersistentState>
