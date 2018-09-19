@@ -2,7 +2,7 @@ POST http://localhost:5000/child/ HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "Jordan",
+    "first_name": "Katie",
     "last_name": "Holder",
     "date_of_birth": "01/02/1996",
     "sex": "-1"

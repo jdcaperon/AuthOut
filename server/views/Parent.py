@@ -24,5 +24,33 @@ def core():
         parents = db.session.query(ParentModel).order_by(ParentModel.id)
         for parent in parents:
             print(parent.email)
+            print(parent.children)
             container.append(parent.as_dict())
         return jsonify(container)
+
+
+@bp.route('/<int:parent_id>', methods=['GET', 'PUT', 'DELETE'])
+def specified(parent_id):
+    parent = db.session.query(ParentModel).filter_by(id=parent_id)
+    if parent.count() != 1:
+        return Response('', 400)
+    parent = parent.first()
+    # Gets the information of a specific parent.
+    if request.method == 'GET':
+        return jsonify(parent.as_dict())
+    # Updates a specific parent
+    elif request.method == 'PUT':
+        data = request.get_json(force=True)
+        parent.load(data, check=False)
+        db.session.add(parent)
+        db.session.commit()
+        return Response('', 200)
+    # Deletes a particular parent
+    elif request.method == 'DELETE':
+        db.session.delete(parent)
+        db.session.commit()
+        return Response('', 200)
+    # Default case.
+    else:
+        return Response('', 404)
+

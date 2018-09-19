@@ -1,6 +1,7 @@
-from datetime import datetime
-import json
 from db import db
+from datetime import datetime
+
+import json
 
 
 class ChildModel(db.Model):
@@ -9,9 +10,8 @@ class ChildModel(db.Model):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     date_of_birth = db.Column(db.Date)
-    sex = db.Column(db.Integer)  # Explained in an enum
 
-    required_keys = ["first_name", "last_name", "date_of_birth", "sex"]
+    required_keys = ["first_name", "last_name", "date_of_birth"]
 
     def __repr__(self):
         return json.dumps(self.as_dict())
@@ -21,8 +21,7 @@ class ChildModel(db.Model):
             "id": self.id,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y'),
-            "sex": self.sex
+            "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y')
         }
 
     def required(self, data: dict):
