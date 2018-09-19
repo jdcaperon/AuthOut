@@ -32,6 +32,7 @@ import rocketpotatoes.authout.Helpers.Parent;
 
 public class SelectStudentActivity extends AppCompatActivity {
     private static final String AUTHOUT_SIGNINOUT_URL = "http://httpbin.org/post";
+    private Parent currentUser;
     private Button dynamicButton;
     private TextView dynamicText;
     private GradientDrawable dynamicButtonBackground;
@@ -56,23 +57,17 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         mChildSelectorView.setLayoutManager(layoutManager);
 
-        // ----------- Creating Dummy Parent -----------------------
-        List<Child> dummyChildren = new ArrayList<>();
-        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
-        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
-        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
-        // ---------------------------------------------------------
+        currentUser = getIntent().getExtras().getParcelable("PARENT");
 
-        setUpLayout(dummyParent);
+        setUpLayout(currentUser);
 
-        mChildSelectorAdapter = new ChildSelectorAdapter(dummyChildren, this);
+        mChildSelectorAdapter = new ChildSelectorAdapter(currentUser.getChildren(), this);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
         requestQueue = Volley.newRequestQueue(this);
     }
 
     private void setUpLayout(Parent dummyParent) {
-        String welcomeMessage = "Welcome " + dummyParent.getFirstName();
+        String welcomeMessage = "Hey there " + dummyParent.getFirstName();
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(welcomeMessage);
 

@@ -32,8 +32,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
+import rocketpotatoes.authout.Helpers.Parent;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -185,6 +189,16 @@ public class HomeActivity extends AppCompatActivity {
                         //TODO if face is matched onResponse should move to the next activity
                         //TODO if the response is null/not matched we move to a different activity
 
+                        // ----------- Creating Dummy Parent -----------------------
+                        List<Child> dummyChildren = new ArrayList<>();
+                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
+
+                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
+                        // ---------------------------------------------------------
+
+
                         //TODO Remove this once implementation is finished above.
                         /*NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
@@ -192,6 +206,7 @@ public class HomeActivity extends AppCompatActivity {
                         dialog.show();*/
 
                         Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        intent.putExtra("PARENT", dummyParent);
                         startActivity(intent);
                     }
                 }, new Response.ErrorListener() {

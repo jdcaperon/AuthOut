@@ -1,12 +1,15 @@
 package rocketpotatoes.authout.Helpers;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import rocketpotatoes.authout.Helpers.Child;
 
-public class Parent {
+public class Parent implements Parcelable{
     private final String firstName;
     private final String surname;
     private final List<Child> children;
@@ -68,5 +71,38 @@ public class Parent {
 
     public List<Child> getTrustedChildren() {
         return trustedChildren;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(firstName);
+        out.writeString(surname);
+        out.writeList(children);
+        out.writeList(trustedChildren);
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Parent> CREATOR = new Parcelable.Creator<Parent>() {
+        public Parent createFromParcel(Parcel in) {
+            return new Parent(in);
+        }
+
+        public Parent[] newArray(int size) {
+            return new Parent[size];
+        }
+    };
+
+    private Parent(Parcel in) {
+        this.children = new ArrayList<Child>();
+        this.trustedChildren = new ArrayList<Child>();
+        this.firstName = in.readString();
+        this.surname = in.readString();
+        in.readList(children, null);
+        in.readList(trustedChildren, null);
     }
 }

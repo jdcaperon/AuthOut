@@ -39,7 +39,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                         selectedItems.remove(selectedItem);
                         CheckBox checkBox = (CheckBox) view.findViewById(R.id.childlist_checkbox);
                         checkBox.setChecked(false);
-                        view.setBackgroundColor(Color.WHITE);
+                        view.setBackgroundColor(Color.parseColor("#FAFAFA"));
                     } else {
                         selectedItems.add(selectedItem);
                         CheckBox checkBox = (CheckBox) view.findViewById(R.id.childlist_checkbox);
