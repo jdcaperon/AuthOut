@@ -33,3 +33,6 @@ Migrating the database:
   3. `python manage.py db upgrade`
 
 
+## Resources
+
+- https://www.codementor.io/sheena/understanding-sqlalchemy-cheat-sheet-du107lawl

@@ -1,0 +1,12 @@
+
+
+POST http://localhost:5000/parent/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "hello@example.com",
+    "first_name": "Steve",
+    "last_name": "Roggers",
+    "date_of_birth": "29/04/1996",
+    "mobile_number": "0411862174"
+}

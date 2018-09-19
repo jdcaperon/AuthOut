@@ -1,9 +1,9 @@
 import os
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from models import ParentModel
+from models import *
 
-from app import app, db
+from db import app, db
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 

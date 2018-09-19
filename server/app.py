@@ -1,13 +1,10 @@
-from flask import Flask
-from db import db, app
+from db import app
 import views
 
-
-
-## Register sub views.
-#   /heartbeat
+# Register sub views.
 app.register_blueprint(views.Heartbeat.bp)
 app.register_blueprint(views.Parent.bp)
+app.register_blueprint(views.Child.bp)
 
 if __name__ == '__main__':
-  app.run()
+    app.run()

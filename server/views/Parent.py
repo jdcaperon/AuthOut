@@ -15,7 +15,8 @@ def core():
         if valid:
             db.session.add(parent)
             db.session.commit()
-            return Response('', 200, {})
+            response = {"id": parent.id}
+            return jsonify(response)
         return Response('', 400, {})
     else:
         # list all the parents.
@@ -25,12 +26,3 @@ def core():
             print(parent.email)
             container.append(parent.as_dict())
         return jsonify(container)
-
-
-## Temporary
-@bp.route('/fake')
-def create_fake():
-    new = ParentModel(email="example@example.org", first_name="Evan", last_name="Hughes")
-    db.session.add(new)
-    db.session.commit()
-    return "Created"

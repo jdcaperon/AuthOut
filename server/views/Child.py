@@ -1,11 +1,27 @@
-import functools
-from flask import Blueprint, jsonify
-from models.HeartbeatModel import HeartbeatModel
+from flask import Blueprint, jsonify, request, Response
+from db import db
+from models.ChildModel import ChildModel
 
-bp = Blueprint('heartbeat', __name__, url_prefix="/child")
+bp = Blueprint('child', __name__, url_prefix="/child")
 
 
-@bp.route('/')
-def heartbeat():
-  data: HeartbeatModel = HeartbeatModel()
-  return jsonify(data.__dict__)
+@bp.route('/', methods=['GET', 'POST'])
+def core():
+    if request.method == 'POST':
+        # read the data given and create a parent.
+        data = request.get_json(force=True)
+        child = ChildModel()
+        valid = child.load(data)
+        if valid:
+            db.session.add(child)
+            db.session.commit()
+            response = {"id": child.id}
+            return jsonify(response)
+        return Response('', 400, {})
+    else:
+        # list all the parents.
+        container = []
+        children = db.session.query(ChildModel).order_by(ChildModel.id)
+        for child in children:
+            container.append(child.as_dict())
+        return jsonify(container)
