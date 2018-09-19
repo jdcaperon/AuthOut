@@ -116,6 +116,10 @@ public class SelectStudentActivity extends AppCompatActivity {
         changeButtonSettings(option);
     }
 
+    public void cancel(View v) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 
     private void changeText(DynamicButtonOption option, List<Child> children) {
         StringBuilder text = new StringBuilder(createDynamicString(children));

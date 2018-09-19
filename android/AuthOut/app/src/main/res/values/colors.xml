@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3b3e3a00</color>
     <color name="buttonDisabled">#BBBBBB</color>
     <color name="textColour">#FFFFFF</color>
+    <color name="buttonPressedColor">#DAA537</color>
     <color name="errorButtonColor">#BA74AE</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#03BABD</color>

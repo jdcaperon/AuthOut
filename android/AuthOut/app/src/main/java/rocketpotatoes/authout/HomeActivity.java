@@ -186,13 +186,13 @@ public class HomeActivity extends AppCompatActivity {
                         //TODO if the response is null/not matched we move to a different activity
 
                         //TODO Remove this once implementation is finished above.
-                        NotRecognizedDialog dialog = new NotRecognizedDialog(
+                        /*NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();
+                        dialog.show();*/
 
-                        //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                        //startActivity(intent);
+                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
