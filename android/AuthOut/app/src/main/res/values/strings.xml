@@ -3,7 +3,8 @@
     <string name="sign_in">Sign-In</string>
     <string name="sign_out">Sign-Out</string>
     <string name="not_compatible">Not Compatible</string>
-    <string name="how_to_help">Please choose an option:</string>
+    <string name="choose_option">Please choose an option:</string>
+    <string name="select_children">Tap to select children.</string>
     <string name="not_me">This is not me.</string>
     <string name="sign_in_others">Sign-In Others</string>
     <string name="not_recognized">You weren\'t recognised.</string>

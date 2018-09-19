@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:textSize="19sp"
-        android:text="@string/how_to_help"
+        android:text="@string/choose_option"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notRecognised" />
