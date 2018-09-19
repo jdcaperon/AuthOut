@@ -37,9 +37,15 @@ class ParentModel(db.Model):
             "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y'),
             "mobile_number": self.mobile_number,
             "image_id": self.image_id,
-            "children": self.children,
-            "trusted_children": self.trusted_children
+            "children": self.convert_children(self.children),
+            "trusted_children": self.convert_children(self.trusted_children)
         }
+
+    def convert_children(self, children):
+        collection = []
+        for child in children:
+            collection.append(child.as_dict())
+        return collection
 
     def required(self, data: dict):
         for i in self.required_keys:
