@@ -1,17 +1,10 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy 
+from db import app
 import views
-import os
 
-app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-## Register sub views.
-#   /heartbeat
+# Register sub views.
 app.register_blueprint(views.Heartbeat.bp)
-
-db = SQLAlchemy(app)
+app.register_blueprint(views.Parent.bp)
+app.register_blueprint(views.Child.bp)
 
 if __name__ == '__main__':
-  app.run()
+    app.run()

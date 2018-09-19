@@ -1,16 +1,42 @@
-import time
+from db import db
+from datetime import datetime
+
 import json
 
-from cowpy import cow
 
-class HeartbeatModel():
+class ChildModel(db.Model):
+    __tablename__ = 'children'
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
+    date_of_birth = db.Column(db.Date)
 
-  time: int
-  message: str
+    required_keys = ["first_name", "last_name", "date_of_birth"]
 
-  def __init__(self):
-    self.time = int(time.time())
-    self.message = cow.Moose().milk("Server is up!")
+    def __repr__(self):
+        return json.dumps(self.as_dict())
 
-  def __repr__(self):
-    return json.dumps(self.__dict__)
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y')
+        }
+
+    def required(self, data: dict):
+        for i in self.required_keys:
+            if i not in data:
+                return False
+        return True
+
+    def load(self, data: dict):
+        if not self.required(data):
+            return False
+        for i in self.required_keys:
+            if i == "date_of_birth":
+                setattr(self, i, datetime.strptime(data[i], '%d/%m/%Y'))
+            else:
+                setattr(self, i, data[i])
+        print(self)
+        return True
