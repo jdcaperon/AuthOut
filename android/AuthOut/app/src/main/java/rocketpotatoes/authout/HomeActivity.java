@@ -68,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
+
     private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
