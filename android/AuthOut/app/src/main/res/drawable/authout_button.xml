@@ -5,8 +5,7 @@
         android:drawable="@drawable/authout_button_disabled" />
     <item
         android:state_pressed="true"
-        android:state_enabled="true"
-        android:drawable="@drawable/authout_button_background" />
+        android:drawable="@drawable/authout_button_pressed" />
     <item
         android:state_focused="true"
         android:state_enabled="true"

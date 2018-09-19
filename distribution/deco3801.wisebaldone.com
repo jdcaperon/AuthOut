@@ -10,9 +10,8 @@ server {
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
   
   
-  location /api {
-    # this will be changed to a proxy
-    root /var/www/deco3801.wisebaldone.com/api;
+  location /api/ {
+    proxy_pass http://127.0.0.1:8000/;
   }
 
   location /docs {
@@ -21,10 +20,12 @@ server {
 
   location /app {
     root /var/www/deco3801.wisebaldone.com;
-  }
+    index index.html index.php;
 
-  location / {
-    root /var/www/deco3801.wisebaldone.com/html;
+    location ~ \.php$ {
+      include snippets/fastcgi-php.conf;
+      fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
   }
 }
 

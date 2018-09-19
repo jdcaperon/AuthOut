@@ -1,9 +1,12 @@
 package rocketpotatoes.authout;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,13 +32,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import rocketpotatoes.authout.Helpers.Child;
+import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
+import rocketpotatoes.authout.Helpers.Parent;
 
 
 public class HomeActivity extends AppCompatActivity {
     private static final int INITIAL_DELAY = 2000;
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
-    private static final String AUTHOUT_SERVER_URL = "http://httpbin.org/post";
+    private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
     private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
@@ -64,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
-                    //onPressSignIn(findViewById(android.R.id.content)); //todo temp go to next activity
+
                     requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
                     handler.removeCallbacks(this);
 
@@ -171,7 +181,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return new JsonObjectRequest
-                (Request.Method.POST, AUTHOUT_SERVER_URL, json , new Response.Listener<JSONObject>() {
+                (Request.Method.POST, AUTHOUT_IMAGE_CHECK, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
@@ -179,19 +189,31 @@ public class HomeActivity extends AppCompatActivity {
                         //TODO if face is matched onResponse should move to the next activity
                         //TODO if the response is null/not matched we move to a different activity
 
+                        // ----------- Creating Dummy Parent -----------------------
+                        List<Child> dummyChildren = new ArrayList<>();
+                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
+
+                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
+                        // ---------------------------------------------------------
+
+
                         //TODO Remove this once implementation is finished above.
                         /*NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         dialog.show();*/
 
-                        //Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                        //startActivity(intent);
+                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        intent.putExtra("PARENT", dummyParent);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        Toast.makeText(HomeActivity.this, "Error. Retrying...", Toast.LENGTH_SHORT).show();
+                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                         Log.i("ResponseError", error.toString());
                     }
 
