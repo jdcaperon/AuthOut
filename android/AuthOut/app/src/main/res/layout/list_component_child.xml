@@ -29,13 +29,14 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
     <CheckBox
         android:id="@+id/childlist_checkbox"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:checked="true"
+        android:enabled="false"
         android:background="@drawable/tick"
         android:button="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
