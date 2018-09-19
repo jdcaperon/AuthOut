@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ import rocketpotatoes.authout.SelectStudentActivity;
 
 public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdapter.ChildViewHolder> {
 
-    SelectStudentActivity activity;
-    HashSet<Child> selectedItems;
+    private SelectStudentActivity activity;
+    private HashSet<Child> selectedItems;
     private List<Child> childList;
 
     /** View holder class that sets up layout of each child in list **/
@@ -29,7 +30,6 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
         /** Constructor **/
         public ChildViewHolder(View view) {
             super(view);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -37,12 +37,17 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                     Child selectedItem = childList.get(selectedPosition);
                     if (selectedItems.contains(selectedItem)) {
                         selectedItems.remove(selectedItem);
+                        CheckBox checkBox = (CheckBox) view.findViewById(R.id.childlist_checkbox);
+                        checkBox.setChecked(false);
                         view.setBackgroundColor(Color.WHITE);
                     } else {
                         selectedItems.add(selectedItem);
+                        CheckBox checkBox = (CheckBox) view.findViewById(R.id.childlist_checkbox);
+                        checkBox.setChecked(true);
                         view.setBackground(activity.getResources().getDrawable(R.drawable.child_selected_background));
-                    }
 
+
+                    }
                     activity.changeTextAndButton(activity.getOptionByChildren(new ArrayList<Child>(selectedItems)), new ArrayList<Child>(selectedItems));
                 }
             });
@@ -59,6 +64,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
         this.activity = (SelectStudentActivity) context;
         this.childList = ChildList;
         selectedItems = new HashSet<>(ChildList);
+
         activity.changeTextAndButton(activity.getOptionByChildren(new ArrayList<Child>(selectedItems)), new ArrayList<Child>(selectedItems));
     }
 

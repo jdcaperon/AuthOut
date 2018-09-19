@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -25,11 +25,23 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/montserrat"
-        android:padding="10dp"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <CheckBox
+        android:id="@+id/childlist_checkbox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:checked="true"
+        android:background="@drawable/tick"
+        android:button="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/childlist_name"
+        />
+
 
 </android.support.constraint.ConstraintLayout>
