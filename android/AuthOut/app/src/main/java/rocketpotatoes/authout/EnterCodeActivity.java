@@ -1,7 +1,6 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,13 +38,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (codeInputBuilder.length() == 4) {
-            codeInput.setBackgroundColor(Color.RED);
-            return;
-        } else {
-            codeInput.setBackgroundColor(Color.BLACK);
-        }
-
+        if (codeInputBuilder.length() == 4) return;
         Button button = findViewById(v.getId());
         codeInputBuilder.append(button.getText());
         codeInput.setText(codeInputBuilder.toString());
