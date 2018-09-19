@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout.Helpers;
 
 import android.os.Parcel;
@@ -86,7 +109,8 @@ public class Parent implements Parcelable{
         out.writeList(trustedChildren);
     }
 
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    // this is used to regenerate your object.
+    // All Parcelables must have a CREATOR that implements these two methods
     public static final Parcelable.Creator<Parent> CREATOR = new Parcelable.Creator<Parent>() {
         public Parent createFromParcel(Parcel in) {
             return new Parent(in);
@@ -97,6 +121,10 @@ public class Parent implements Parcelable{
         }
     };
 
+    /** Constructor for a parent built from a {@link Parcel}
+     *
+     * @param in - {@link Parcel} to build the parent from
+     */
     private Parent(Parcel in) {
         this.children = new ArrayList<Child>();
         this.trustedChildren = new ArrayList<Child>();
