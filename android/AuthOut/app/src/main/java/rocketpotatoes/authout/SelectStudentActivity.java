@@ -122,9 +122,11 @@ public class SelectStudentActivity extends AppCompatActivity {
      * @return a string that represents the action that will take place
      */
     public String createDynamicString(List<Child> children) {
-        if (children.size() == 0) {return getString(R.string.no_children_selected);}
-        if (children.size() == 1) {return children.get(0).getFirstName();}
-        if (children.size() == 2) {
+        if (children.size() == 0) {
+            return getString(R.string.no_children_selected);
+        } else if (children.size() == 1) {
+            return children.get(0).getFirstName();
+        } else if (children.size() == 2) {
             return children.get(0).getFirstName() + " and " +
                     children.get(1).getFirstName();
         }

@@ -257,10 +257,15 @@ public class HomeActivity extends AppCompatActivity {
      * @return a {@link Face} of the most prominent face
      */
     public Face faceProcessing() {
-        if (currentImage == null) {return null;}
+        if (currentImage == null) {
+            return null;
+        }
         Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
         SparseArray<Face> sparseArray = faceDetector.detect(outputFrame);
-        if (sparseArray.size() == 0) {return null;}
+
+        if (sparseArray.size() == 0) {
+            return null;
+        }
 
         return sparseArray.valueAt(0);
     }

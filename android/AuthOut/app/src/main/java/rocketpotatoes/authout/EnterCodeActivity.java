@@ -61,11 +61,17 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (codeInputBuilder.length() == 4) {return;}
+        if (codeInputBuilder.length() == 4) {
+            return;
+        }
+
         Button button = findViewById(v.getId());
         codeInputBuilder.append(button.getText());
         codeInput.setText(codeInputBuilder.toString());
-        if (codeInputBuilder.length() == 4) {submitButton.setEnabled(true);}
+
+        if (codeInputBuilder.length() == 4) {
+            submitButton.setEnabled(true);
+        }
     }
 
     /** Adds a request to the {@link RequestQueue}
@@ -90,7 +96,9 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
      * @param v - current View
      */
     public void backspace(View v) {
-        if (codeInputBuilder.length() <= 0) {return;}
+        if (codeInputBuilder.length() <= 0) {
+            return;
+        }
         codeInputBuilder.deleteCharAt(codeInputBuilder.length() - 1);
         codeInput.setText(codeInputBuilder.toString());
         submitButton.setEnabled(false);
