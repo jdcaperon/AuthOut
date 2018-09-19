@@ -3,11 +3,10 @@
     <string name="sign_in">Sign-In</string>
     <string name="sign_out">Sign-Out</string>
     <string name="not_compatible">Not Compatible</string>
-    <string name="title_activity_not_recognized">NotRecognizedActivity</string>
-    <string name="how_to_help">How can I help you today?</string>
+    <string name="how_to_help">Please choose an option:</string>
     <string name="not_me">This is not me.</string>
     <string name="sign_in_others">Sign-In Others</string>
-    <string name="not_recognized">I didn\'t recognise you</string>
+    <string name="not_recognized">You weren\'t recognised.</string>
     <string name="not_recognized_welcome">Welcome!</string>
     <string name="code_sign_in">I have a code</string>
     <string name="retry">Retry</string>
@@ -15,5 +14,5 @@
     <string name="cancel">Cancel</string>
     <string name="enter_code">Enter Four (4) Digit Code</string>
     <string name="submit">Submit</string>
-    <string name="no_children_selected">You have no children selected</string>
+    <string name="no_children_selected">Please select a child</string>
 </resources>
