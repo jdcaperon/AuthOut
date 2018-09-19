@@ -4,12 +4,12 @@
 		$pageName = "Help";
 		//$stylesheets = array("help_style.css");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
-		include $_SERVER['DOCUMENT_ROOT'].'/php/nav.php';
+		include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html';
 		
 	?>
 	
 	<body>
-		<p><?php echo $pageName ?> contnet here!</p>
+		<p style="padding-top: 120px"><?php echo $pageName ?> contnet here!</p>
 	</body>
 	
 	<?php 

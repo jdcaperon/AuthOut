@@ -1,16 +1,15 @@
-html, body {
+/* Login Styling */
+
+#login header h1 {
+	color: #DCA726;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 4em;
 }
 
 #login-logo {
 	height: 150px;
 	margin: 10px;
-}
-
-header h1 {
-	color: #DCA726;
-	display: inline-block;
-	vertical-align: top;
-	font-size: 4em;
 }
 
 /* Login Icon */
@@ -69,4 +68,3 @@ header h1 {
 #login-content {
 	padding: 10px 0;
 }
-

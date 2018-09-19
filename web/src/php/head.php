@@ -1,6 +1,4 @@
-<?php session_start() ?>
 <head>
-
 	<title>AuthOut</title>
 	<meta charset="utf-8" name="description" content="A web-application to facilitate the signing in/out process in child care centres ."/>
 
@@ -28,5 +26,4 @@
 
 	<!--Favicon-->
 	<link rel="shortcut icon" type="image/png" href="img/favicon.png">
-
 </head>
