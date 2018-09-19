@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.content.Intent;
@@ -38,24 +61,44 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (codeInputBuilder.length() == 4) return;
+        if (codeInputBuilder.length() == 4) {
+            return;
+        }
+
         Button button = findViewById(v.getId());
         codeInputBuilder.append(button.getText());
         codeInput.setText(codeInputBuilder.toString());
-        if (codeInputBuilder.length() == 4) submitButton.setEnabled(true);
+
+        if (codeInputBuilder.length() == 4) {
+            submitButton.setEnabled(true);
+        }
     }
 
+    /** Adds a request to the {@link RequestQueue}
+     *
+     * @param v - current View
+     */
     public void submitCode(View v) {
         requestQueue.add(createRequest(codeInputBuilder.toString()));
     }
 
+    /** Returns to the home activity
+     *
+     * @param v - current View
+     */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
+    /** Removes a number from the currently entered code
+     *
+     * @param v - current View
+     */
     public void backspace(View v) {
-        if (codeInputBuilder.length() <= 0) return;
+        if (codeInputBuilder.length() <= 0) {
+            return;
+        }
         codeInputBuilder.deleteCharAt(codeInputBuilder.length() - 1);
         codeInput.setText(codeInputBuilder.toString());
         submitButton.setEnabled(false);
