@@ -31,15 +31,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rocketpotatoes.authout.Helpers.Child;
+import rocketpotatoes.authout.Helpers.Parent;
 
 public class EnterCodeActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String AUTHOUT_CODE_URL = "http://httpbin.org/post";
@@ -79,7 +87,13 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
      * @param v - current View
      */
     public void submitCode(View v) {
-        requestQueue.add(createRequest(codeInputBuilder.toString()));
+        Request request = createRequest(codeInputBuilder.toString());
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                        3000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue.add(request);
     }
 
     /** Returns to the home activity
@@ -126,8 +140,21 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         //TODO if the code is matched move to the next activity with parent
                         //TODO if the code is not match put up a toast/handle it
 
+                        // ----------- Creating Dummy Parent -----------------------
+                        List<Child> dummyChildren = new ArrayList<>();
+                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Jordan", "Bloggs", "Signed-In"));
+
+
+                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
+                        // ---------------------------------------------------------
+
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);
+                        intent.putExtra("PARENT", dummyParent);
                         startActivity(intent);
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override

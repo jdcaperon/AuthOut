@@ -49,6 +49,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
     /* View holder class that sets up layout of each child in list */
     public class ChildViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
+        public TextView status;
 
         /* Constructor */
         public ChildViewHolder(View view) {
@@ -68,13 +69,12 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                         CheckBox checkBox = (CheckBox) view.findViewById(R.id.childlist_checkbox);
                         checkBox.setChecked(true);
                         view.setBackground(activity.getResources().getDrawable(R.drawable.child_selected_background));
-
-
                     }
                     activity.changeTextAndButton(activity.getOptionByChildren(new ArrayList<Child>(selectedItems)), new ArrayList<Child>(selectedItems));
                 }
             });
             name = (TextView) view.findViewById(R.id.childlist_name);
+            status = (TextView) view.findViewById(R.id.child_status);
         }
 
     }
@@ -95,6 +95,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
     public void onBindViewHolder(ChildViewHolder holder, int position) {
         Child child = childList.get(position);
         holder.name.setText(child.getFirstName());
+        holder.status.setText(child.getStatus());
     }
 
     @NonNull
