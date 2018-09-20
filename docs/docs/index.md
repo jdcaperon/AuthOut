@@ -1,7 +1,7 @@
 ---
 id: index
 title: Latin-ish
-sidebar_label: Example Page
+sidebar_label: Overview
 ---
 
-My mommies very proud of me
+Explain what's where
