@@ -7,13 +7,12 @@ entity Child {
   * first_name
   * last_name
   * date_of_birth
-  * sex
 }
 
 entity Parent {
   * id
-  * email
   --
+  * email
   * first_name
   * last_name
   * date_of_birth
@@ -39,10 +38,18 @@ entity Entry {
   * status
 }
 
+entity Account {
+  * id
+  * username
+  --
+  * password ( Hash )
+  * access_level
+}
+
 ' Child can have 1 or more parents
 ' Parent can have multiple children
-Child }|--{ Parent : Owns
-Parent }o--{ Child : Trusted
+Child }|--{ Parent : Guardian
+Parent }o--{ Child : Trusted Guardian
 Child ||--{ Institution : Goes to / Has
 
 ' Parent can share their children with other people
