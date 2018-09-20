@@ -49,6 +49,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
     /* View holder class that sets up layout of each child in list */
     public class ChildViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
+        public TextView status;
 
         /* Constructor */
         public ChildViewHolder(View view) {
@@ -73,6 +74,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                 }
             });
             name = (TextView) view.findViewById(R.id.childlist_name);
+            status = (TextView) view.findViewById(R.id.child_status);
         }
 
     }
@@ -93,6 +95,7 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
     public void onBindViewHolder(ChildViewHolder holder, int position) {
         Child child = childList.get(position);
         holder.name.setText(child.getFirstName());
+        holder.status.setText(child.getStatus());
     }
 
     @NonNull
