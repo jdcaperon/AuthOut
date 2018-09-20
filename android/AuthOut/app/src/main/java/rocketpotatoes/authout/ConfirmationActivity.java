@@ -39,5 +39,6 @@ public class ConfirmationActivity extends AppCompatActivity {
     public void onPressConfirm(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        finish();
     }
 }

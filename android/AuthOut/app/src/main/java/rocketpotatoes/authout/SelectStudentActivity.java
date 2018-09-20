@@ -158,6 +158,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -253,6 +254,7 @@ public class SelectStudentActivity extends AppCompatActivity {
                         Log.i("Response", response.toString().substring(0, 100));
                         Intent intent = new Intent(SelectStudentActivity.this, ConfirmationActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override

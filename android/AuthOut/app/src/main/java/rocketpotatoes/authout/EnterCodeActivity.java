@@ -143,8 +143,8 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         // ----------- Creating Dummy Parent -----------------------
                         List<Child> dummyChildren = new ArrayList<>();
                         dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
+                        //dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        //dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
 
                         Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
                         // ---------------------------------------------------------
@@ -152,6 +152,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);
                         intent.putExtra("PARENT", dummyParent);
                         startActivity(intent);
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override
