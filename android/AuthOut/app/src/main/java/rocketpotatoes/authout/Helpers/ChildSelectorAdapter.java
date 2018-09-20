@@ -68,8 +68,6 @@ public class ChildSelectorAdapter extends RecyclerView.Adapter<ChildSelectorAdap
                         CheckBox checkBox = (CheckBox) view.findViewById(R.id.childlist_checkbox);
                         checkBox.setChecked(true);
                         view.setBackground(activity.getResources().getDrawable(R.drawable.child_selected_background));
-
-
                     }
                     activity.changeTextAndButton(activity.getOptionByChildren(new ArrayList<Child>(selectedItems)), new ArrayList<Child>(selectedItems));
                 }

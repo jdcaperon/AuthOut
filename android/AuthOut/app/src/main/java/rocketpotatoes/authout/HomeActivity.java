@@ -40,6 +40,7 @@ import android.util.SparseArray;
 import android.view.Display;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -99,7 +100,12 @@ public class HomeActivity extends AppCompatActivity {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
 
-                    requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
+                    Request request = createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition()));
+                    request.setRetryPolicy(new DefaultRetryPolicy(
+                            3000,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                    requestQueue.add(request);
                     handler.removeCallbacks(this);
 
                 } else {
@@ -221,20 +227,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         //TODO Remove this once implementation is finished above.
-                        /*NotRecognizedDialog dialog = new NotRecognizedDialog(
+                        NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();*/
+                        dialog.show();
 
-                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
                         intent.putExtra("PARENT", dummyParent);
-                        startActivity(intent);
+                        startActivity(intent);*/
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(HomeActivity.this, "Error. Retrying...", Toast.LENGTH_SHORT).show();
-                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                         Log.i("ResponseError", error.toString());
                     }
 
