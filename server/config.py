@@ -6,7 +6,7 @@ class Config(object):
   TESTING = False
   DEVELOPMENT = False
   CSRF_ENABLED = True
-  SQLALCHEMY_DATABASE_URI = "postgresql://localhost/authout"
+  SQLALCHEMY_DATABASE_URI = "postgresql:///authout"
 
 class ProductionConfig(Config):
   DEBUG = False
