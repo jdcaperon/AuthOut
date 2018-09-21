@@ -107,7 +107,6 @@ public class HomeActivity extends AppCompatActivity {
                             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     requestQueue.add(request);
                     handler.removeCallbacks(this);
-
                 } else {
                     if (!moveCloserDialog.isShowing()) {
                         moveCloserDialog.show();
@@ -234,7 +233,8 @@ public class HomeActivity extends AppCompatActivity {
 
                         /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
                         intent.putExtra("PARENT", dummyParent);
-                        startActivity(intent);*/
+                        startActivity(intent);
+                        finish()*/
                     }
                 }, new Response.ErrorListener() {
                     @Override
