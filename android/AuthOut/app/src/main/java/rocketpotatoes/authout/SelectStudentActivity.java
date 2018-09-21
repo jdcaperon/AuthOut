@@ -108,6 +108,7 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         if (shouldDisplayTrustedChildren) {
             displayedChildren = currentUser.getTrustedChildren();
+            findViewById(R.id.welcomeText).setVisibility(View.GONE);
         } else {
             displayedChildren = currentUser.getChildren();
         }
