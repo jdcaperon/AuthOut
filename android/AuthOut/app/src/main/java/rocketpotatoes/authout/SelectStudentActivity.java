@@ -109,7 +109,9 @@ public class SelectStudentActivity extends AppCompatActivity {
         if (shouldDisplayTrustedChildren) {
             displayedChildren = currentUser.getTrustedChildren();
             findViewById(R.id.welcomeText).setVisibility(View.GONE);
+            findViewById(R.id.thisIsNotMe).setVisibility(View.GONE);
         } else {
+            findViewById(R.id.back).setVisibility(View.GONE);
             displayedChildren = currentUser.getChildren();
         }
 
@@ -178,6 +180,10 @@ public class SelectStudentActivity extends AppCompatActivity {
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    public void finish(View v) {
         finish();
     }
 
