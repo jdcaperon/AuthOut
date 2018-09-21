@@ -8,6 +8,12 @@ bp = Blueprint('parent', __name__, url_prefix="/parent")
 
 @bp.route('/', methods=['GET', 'POST'])
 def core():
+    """
+    Core endpoint for children:
+
+    GET => returns a list of children.
+    POST => allows creation of a child.
+    """
     if request.method == 'POST':
         # read the data given and create a parent.
         data = request.get_json(force=True)
@@ -32,6 +38,9 @@ def core():
 
 @bp.route('/<int:parent_id>', methods=['GET', 'PUT', 'DELETE'])
 def specified(parent_id):
+    """
+    Endpoint for creating, updating and deleting parents.
+    """
     parent = db.session.query(ParentModel).filter_by(id=parent_id)
     if parent.count() != 1:
         return Response('', 400)
@@ -58,6 +67,10 @@ def specified(parent_id):
 
 @bp.route('/<int:parent_id>/children', methods=['GET', 'POST', 'DELETE'])
 def children(parent_id):
+    """
+    Sub endpoint to get children of the parents. Endpoint includes getting the children,
+    Adding children through POST and deleting children.
+    """
     parent = db.session.query(ParentModel).filter_by(id=parent_id)
     if parent.count() != 1:
         return Response('', 400)

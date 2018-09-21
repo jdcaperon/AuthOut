@@ -1,8 +1,8 @@
-POST http://localhost:5000/child/ HTTP/1.1
+POST https://deco3801.wisebaldone.com/api/child/ HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "Blake",
+    "first_name": "Jordan",
     "last_name": "Holder",
-    "date_of_birth": "01/02/1996"
+    "date_of_birth": "24/05/1996"
 }

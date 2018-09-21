@@ -15,9 +15,16 @@ class EntryModel(db.Model):
     required_keys = ["parent_id", "child_id", "status"]
 
     def __repr__(self):
+        """
+        Representation of the model.
+        :return: json version of the model.
+        """
         return json.dumps(self.as_dict())
 
     def as_dict(self):
+        """
+        Representation of the model as a standard dictionary.
+        """
         return {
             "id": self.id,
             "parent_id": self.parent_id,
@@ -27,12 +34,18 @@ class EntryModel(db.Model):
         }
 
     def required(self, data: dict):
+        """
+        Checks the dictionary has all required keys.
+        """
         for i in self.required_keys:
             if i not in data:
                 return False
         return True
 
     def load(self, data: dict):
+        """
+        Loads a dictionaries values into the model.
+        """
         if not self.required(data):
             return False
         for i in self.required_keys:

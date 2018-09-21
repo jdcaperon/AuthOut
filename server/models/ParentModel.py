@@ -5,6 +5,9 @@ import json
 
 
 class ParentModel(db.Model):
+    """
+    Parent Entity from ER model.
+    """
     __tablename__ = 'parents'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String)
@@ -26,9 +29,16 @@ class ParentModel(db.Model):
     extra_keys = ["children", "trusted_children"]
 
     def __repr__(self):
+        """
+        Representation of the model.
+        :return: json version of the model.
+        """
         return json.dumps(self.as_dict())
 
     def as_dict(self):
+        """
+        Representation of the model as a standard dictionary.
+        """
         return {
             "id": self.id,
             "email": self.email,
@@ -42,18 +52,29 @@ class ParentModel(db.Model):
         }
 
     def convert_children(self, children):
+        """
+        Converts children to a collection of children.
+        :param children: Children models to convert.
+        :return: a collection of children as dictionaries.
+        """
         collection = []
         for child in children:
             collection.append(child.as_dict())
         return collection
 
     def required(self, data: dict):
+        """
+        Checks the dictionary has all required keys.
+        """
         for i in self.required_keys:
             if i not in data:
                 return False
         return True
 
     def load(self, data: dict, check=True):
+        """
+        Loads a dictionaries values into the model.
+        """
         if check and not self.required(data):
             return False
         for i in data:

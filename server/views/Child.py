@@ -7,6 +7,12 @@ bp = Blueprint('child', __name__, url_prefix="/child")
 
 @bp.route('/', methods=['GET', 'POST'])
 def core():
+    """
+    Core endpoint for children:
+
+    GET => returns a list of children.
+    POST => allows creation of a child.
+    """
     if request.method == 'POST':
         # read the data given and create a parent.
         data = request.get_json(force=True)

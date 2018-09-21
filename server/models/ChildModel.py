@@ -15,9 +15,16 @@ class ChildModel(db.Model):
     required_keys = ["first_name", "last_name", "date_of_birth"]
 
     def __repr__(self):
+        """
+        Representation of the model.
+        :return: json version of the model.
+        """
         return json.dumps(self.as_dict())
 
     def as_dict(self):
+        """
+        Representation of the model as a standard dictionary.
+        """
         return {
             "id": self.id,
             "first_name": self.first_name,
@@ -27,12 +34,18 @@ class ChildModel(db.Model):
         }
 
     def required(self, data: dict):
+        """
+        Checks the dictionary has all required keys.
+        """
         for i in self.required_keys:
             if i not in data:
                 return False
         return True
 
     def load(self, data: dict):
+        """
+        Loads a dictionaries values into the model.
+        """
         if not self.required(data):
             return False
         for i in self.required_keys:

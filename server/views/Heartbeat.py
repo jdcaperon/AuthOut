@@ -8,15 +8,27 @@ bp = Blueprint('heartbeat', __name__, url_prefix="/heartbeat")
 
 @bp.route('/')
 def heartbeat():
-  data: HeartbeatModel = HeartbeatModel()
-  return jsonify(data.__dict__)
+    """
+    Default endpoint generated.
+    """
+    data: HeartbeatModel = HeartbeatModel()
+    return jsonify(data.__dict__)
+
 
 @bp.route("/auth")
 @requires_auth
 def auth_test():
-  return "hello"
+    """
+    Test's the endpoint authenticiation works.
+    :return:
+    """
+    return "hello"
+
 
 @bp.route("/permission/kiosk")
 @requires_access_level("kiosk")
 def permission_kiosk():
-  return "Youve got kiosk permissions"
+    """
+    Checks for a required access level.
+    """
+    return "Youve got kiosk permissions"
