@@ -24,6 +24,7 @@ package rocketpotatoes.authout;
 
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +61,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     private GradientDrawable dynamicButtonBackground;
     private ChildSelectorAdapter mChildSelectorAdapter;
     private RequestQueue requestQueue;
+    private List<Child> displayedChildren;
 
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
@@ -83,7 +85,7 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         setUpLayout(currentUser);
 
-        mChildSelectorAdapter = new ChildSelectorAdapter(currentUser.getChildren(), this);
+        mChildSelectorAdapter = new ChildSelectorAdapter(displayedChildren, this);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
         requestQueue = Volley.newRequestQueue(this);
     }
@@ -101,13 +103,30 @@ public class SelectStudentActivity extends AppCompatActivity {
         dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
 
+        boolean shouldDisplayTrustedChildren =
+                getIntent().getExtras().getBoolean("DISPLAY_TRUSTED_CHILDREN");
+
+        if (shouldDisplayTrustedChildren) {
+            displayedChildren = currentUser.getTrustedChildren();
+        } else {
+            displayedChildren = currentUser.getChildren();
+        }
+
         Button signInOthers = findViewById(R.id.signInOthers);
-        if (parent.getTrustedChildren().size() == 0) {
+        if (shouldDisplayTrustedChildren || parent.getTrustedChildren().size() == 0) {
             signInOthers.setVisibility(View.GONE);
         }
 
-        changeButtonSettings(getOptionByChildren(parent.getChildren()));
+        changeButtonSettings(getOptionByChildren(displayedChildren));
     }
+
+    public void signInOthers(View view) {
+        Intent intent = new Intent(SelectStudentActivity.this, SelectStudentActivity.class);
+        intent.putExtra("PARENT", currentUser);
+        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", true);
+        startActivity(intent);
+    }
+
 
     public void onMadeSelection(View view) {
         dynamicButton.setEnabled(false);
@@ -193,17 +212,17 @@ public class SelectStudentActivity extends AppCompatActivity {
             case SIGN_IN:
                 dynamicButton.setText(R.string.sign_in);
                 dynamicButton.setOnClickListener(madeSelectionListener);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.colorAccent));
+                dynamicButton.setBackground(ContextCompat.getDrawable(this, R.drawable.authout_button));
                 break;
             case SIGN_OUT:
                 dynamicButton.setText(R.string.sign_out);
                 dynamicButton.setOnClickListener(madeSelectionListener);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.colorAccent));
+                dynamicButton.setBackground(ContextCompat.getDrawable(this, R.drawable.authout_button));
                 break;
             case NOT_COMPATIBLE:
                 dynamicButton.setOnClickListener(null);
                 dynamicButton.setText(R.string.not_compatible);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.errorButtonColor));
+                dynamicButton.setBackground(ContextCompat.getDrawable(this, R.drawable.authout_button_disabled));
                 break;
         }
     }
