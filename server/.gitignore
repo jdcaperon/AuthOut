@@ -1,5 +1,6 @@
 .sonarlint
 env/
+venv/
 __pycache__
-migrations
 database
+.idea

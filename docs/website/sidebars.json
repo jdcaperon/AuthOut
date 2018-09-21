@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Intro": ["index"],
+    "Intro": ["index", "mvp"],
     "Installation": ["installation/install"],
     "Quickstart": ["running/running"],
     "Web Application": [],

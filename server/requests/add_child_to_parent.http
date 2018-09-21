@@ -1,0 +1,6 @@
+POST https://deco3801.wisebaldone.com/api/parent/2/children HTTP/1.1
+content-type: application/json
+
+{
+    "children": [1]
+}

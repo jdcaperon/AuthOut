@@ -1,18 +1,18 @@
 from db import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 import json
 
 
-class ChildModel(db.Model):
-    __tablename__ = 'children'
+class EntryModel(db.Model):
+    __tablename__ = 'entry'
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
-    date_of_birth = db.Column(db.Date)
-    status = db.Column(db.Boolean, default=False)
+    parent_id = db.Column(db.Integer, db.ForiegnKey('parents.id'), primary_key=True)
+    child_id = db.Column(db.Integer, db.ForiegnKey('children.id'), primary_key=True)
+    time = db.Column(db.DateTime, default=datetime.utcnow, primary_key=True)
+    status = db.Column(db.Boolean)
 
-    required_keys = ["first_name", "last_name", "date_of_birth"]
+    required_keys = ["parent_id", "child_id", "status"]
 
     def __repr__(self):
         """
@@ -27,9 +27,9 @@ class ChildModel(db.Model):
         """
         return {
             "id": self.id,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y'),
+            "parent_id": self.parent_id,
+            "child_id": self.child_id,
+            "time": self.time.replace(tzinfo=timezone.utc).timestamp(),
             "status": self.status
         }
 
@@ -49,9 +49,6 @@ class ChildModel(db.Model):
         if not self.required(data):
             return False
         for i in self.required_keys:
-            if i == "date_of_birth":
-                setattr(self, i, datetime.strptime(data[i], '%d/%m/%Y'))
-            else:
-                setattr(self, i, data[i])
+            setattr(self, i, data[i])
         print(self)
         return True
