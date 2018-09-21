@@ -1,7 +1,30 @@
+/* MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +61,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     private GradientDrawable dynamicButtonBackground;
     private ChildSelectorAdapter mChildSelectorAdapter;
     private RequestQueue requestQueue;
+    private List<Child> displayedChildren;
 
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
@@ -61,13 +85,17 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         setUpLayout(currentUser);
 
-        mChildSelectorAdapter = new ChildSelectorAdapter(currentUser.getChildren(), this);
+        mChildSelectorAdapter = new ChildSelectorAdapter(displayedChildren, this);
         mChildSelectorView.setAdapter(mChildSelectorAdapter);
         requestQueue = Volley.newRequestQueue(this);
     }
 
-    private void setUpLayout(Parent dummyParent) {
-        String welcomeMessage = "Hey there " + dummyParent.getFirstName();
+    /** Sets up UI based on parental information
+     *
+     * @param parent - current signed in user
+     */
+    private void setUpLayout(Parent parent) {
+        String welcomeMessage = "Hey there " + parent.getFirstName();
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(welcomeMessage);
 
@@ -75,13 +103,33 @@ public class SelectStudentActivity extends AppCompatActivity {
         dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
 
+        boolean shouldDisplayTrustedChildren =
+                getIntent().getExtras().getBoolean("DISPLAY_TRUSTED_CHILDREN");
+
+        if (shouldDisplayTrustedChildren) {
+            displayedChildren = currentUser.getTrustedChildren();
+            findViewById(R.id.welcomeText).setVisibility(View.GONE);
+            findViewById(R.id.thisIsNotMe).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.back).setVisibility(View.GONE);
+            displayedChildren = currentUser.getChildren();
+        }
+
         Button signInOthers = findViewById(R.id.signInOthers);
-        if (dummyParent.getTrustedChildren().size() == 0) {
+        if (shouldDisplayTrustedChildren || parent.getTrustedChildren().size() == 0) {
             signInOthers.setVisibility(View.GONE);
         }
 
-        changeButtonSettings(getOptionByChildren(dummyParent.getChildren()));
+        changeButtonSettings(getOptionByChildren(displayedChildren));
     }
+
+    public void signInOthers(View view) {
+        Intent intent = new Intent(SelectStudentActivity.this, SelectStudentActivity.class);
+        intent.putExtra("PARENT", currentUser);
+        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", true);
+        startActivity(intent);
+    }
+
 
     public void onMadeSelection(View view) {
         dynamicButton.setEnabled(false);
@@ -90,11 +138,20 @@ public class SelectStudentActivity extends AppCompatActivity {
         requestQueue.add(createRequest(selectedChildren.toString()));
     }
 
+    /** Returns informational string based on children selected
+     *
+     * @param children - list of children selected
+     * @return a string that represents the action that will take place
+     */
     public String createDynamicString(List<Child> children) {
-        if (children.size() == 0) return getString(R.string.no_children_selected);
-        if (children.size() == 1) return children.get(0).getFirstName();
-        if (children.size() == 2) return children.get(0).getFirstName() + " and " +
-                                         children.get(1).getFirstName();
+        if (children.size() == 0) {
+            return getString(R.string.no_children_selected);
+        } else if (children.size() == 1) {
+            return children.get(0).getFirstName();
+        } else if (children.size() == 2) {
+            return children.get(0).getFirstName() + " and " +
+                    children.get(1).getFirstName();
+        }
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < children.size() - 1; i++) {
@@ -106,16 +163,35 @@ public class SelectStudentActivity extends AppCompatActivity {
         return sb.toString();
     }
 
+    /** Single function to alter dynamic text as well as dynamic button
+     *
+     * @param option - a {@link DynamicButtonOption} of what to adapt the dynamic button to
+     * @param children - list of children selected
+     */
     public void changeTextAndButton(DynamicButtonOption option, List<Child> children) {
         changeText(option, children);
         changeButtonSettings(option);
     }
 
+    /** Returns to the home activity
+     *
+     * @param v - current View
+     */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        finish();
     }
 
+    public void finish(View v) {
+        finish();
+    }
+
+    /**
+     *
+     * @param option
+     * @param children
+     */
     private void changeText(DynamicButtonOption option, List<Child> children) {
         StringBuilder text = new StringBuilder(createDynamicString(children));
         if (!text.toString().equals(getString(R.string.no_children_selected))) {
@@ -134,22 +210,26 @@ public class SelectStudentActivity extends AppCompatActivity {
         dynamicText.setText(text);
     }
 
+    /** Alters button look and onClick listener based on {@link DynamicButtonOption}
+     *
+     * @param option - a {@link DynamicButtonOption}
+     * */
     private void changeButtonSettings(DynamicButtonOption option) {
         switch(option) {
             case SIGN_IN:
                 dynamicButton.setText(R.string.sign_in);
                 dynamicButton.setOnClickListener(madeSelectionListener);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.colorAccent));
+                dynamicButton.setBackground(ContextCompat.getDrawable(this, R.drawable.authout_button));
                 break;
             case SIGN_OUT:
                 dynamicButton.setText(R.string.sign_out);
                 dynamicButton.setOnClickListener(madeSelectionListener);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.colorAccent));
+                dynamicButton.setBackground(ContextCompat.getDrawable(this, R.drawable.authout_button));
                 break;
             case NOT_COMPATIBLE:
                 dynamicButton.setOnClickListener(null);
                 dynamicButton.setText(R.string.not_compatible);
-                dynamicButtonBackground.setColor(getResources().getColor(R.color.errorButtonColor));
+                dynamicButton.setBackground(ContextCompat.getDrawable(this, R.drawable.authout_button_disabled));
                 break;
         }
     }
@@ -161,7 +241,7 @@ public class SelectStudentActivity extends AppCompatActivity {
      */
     public DynamicButtonOption getOptionByChildren(List<Child> children) {
         String signedInText = "Signed-In";
-        if (children.size() == 0) return DynamicButtonOption.NOT_COMPATIBLE;
+        if (children.size() == 0) { return DynamicButtonOption.NOT_COMPATIBLE;}
         if (children.size() == 1) {
             if (children.get(0).getStatus().equals(signedInText)) {
                 return DynamicButtonOption.SIGN_OUT;
@@ -200,6 +280,7 @@ public class SelectStudentActivity extends AppCompatActivity {
                         Log.i("Response", response.toString().substring(0, 100));
                         Intent intent = new Intent(SelectStudentActivity.this, ConfirmationActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override

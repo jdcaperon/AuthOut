@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.content.Intent;
@@ -17,6 +40,7 @@ import android.util.SparseArray;
 import android.view.Display;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
+
     private CameraKitView camera;
     private FaceDetector faceDetector;
     private Bitmap currentImage;
@@ -75,9 +100,13 @@ public class HomeActivity extends AppCompatActivity {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
 
-                    requestQueue.add(createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition())));
+                    Request request = createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition()));
+                    request.setRetryPolicy(new DefaultRetryPolicy(
+                            3000,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                    requestQueue.add(request);
                     handler.removeCallbacks(this);
-
                 } else {
                     if (!moveCloserDialog.isShowing()) {
                         moveCloserDialog.show();
@@ -119,8 +148,6 @@ public class HomeActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
     }
-
-
 
     @Override
     protected void onResume() {
@@ -165,7 +192,6 @@ public class HomeActivity extends AppCompatActivity {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
-
     /**
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
      * @return a {@link JsonObjectRequest}
@@ -191,29 +217,32 @@ public class HomeActivity extends AppCompatActivity {
 
                         // ----------- Creating Dummy Parent -----------------------
                         List<Child> dummyChildren = new ArrayList<>();
+                        List<Child> dummyTrusted = new ArrayList<>();
                         dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
                         dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
                         dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
+                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out"));
 
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, new ArrayList<Child>());
+
+                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);
                         // ---------------------------------------------------------
 
 
                         //TODO Remove this once implementation is finished above.
-                        /*NotRecognizedDialog dialog = new NotRecognizedDialog(
+                        NotRecognizedDialog dialog = new NotRecognizedDialog(
                                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();*/
+                        dialog.show();
 
-                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
                         intent.putExtra("PARENT", dummyParent);
+                        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
                         startActivity(intent);
+                        finish()*/
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(HomeActivity.this, "Error. Retrying...", Toast.LENGTH_SHORT).show();
-                        handler.postDelayed(runnable, TIME_BETWEEN_PHOTOS);
                         Log.i("ResponseError", error.toString());
                     }
 
@@ -237,10 +266,15 @@ public class HomeActivity extends AppCompatActivity {
      * @return a {@link Face} of the most prominent face
      */
     public Face faceProcessing() {
-        if (currentImage == null) return null;
+        if (currentImage == null) {
+            return null;
+        }
         Frame outputFrame = new Frame.Builder().setBitmap(currentImage).build();
         SparseArray<Face> sparseArray = faceDetector.detect(outputFrame);
-        if (sparseArray.size() == 0) return null;
+
+        if (sparseArray.size() == 0) {
+            return null;
+        }
 
         return sparseArray.valueAt(0);
     }
