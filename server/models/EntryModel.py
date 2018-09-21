@@ -10,8 +10,9 @@ class EntryModel(db.Model):
     parent_id = db.Column(db.Integer, db.ForiegnKey('parents.id'), primary_key=True)
     child_id = db.Column(db.Integer, db.ForiegnKey('children.id'), primary_key=True)
     time = db.Column(db.DateTime, default=datetime.utcnow, primary_key=True)
+    status = db.Column(db.Boolean)
 
-    required_keys = ["parent_id", "child_id"]
+    required_keys = ["parent_id", "child_id", "status"]
 
     def __repr__(self):
         return json.dumps(self.as_dict())
@@ -21,7 +22,8 @@ class EntryModel(db.Model):
             "id": self.id,
             "parent_id": self.parent_id,
             "child_id": self.child_id,
-            "time": self.time.replace(tzinfo=timezone.utc).timestamp()
+            "time": self.time.replace(tzinfo=timezone.utc).timestamp(),
+            "status": self.status
         }
 
     def required(self, data: dict):

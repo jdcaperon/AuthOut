@@ -76,7 +76,7 @@ pipeline {
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && sudo pip3 install -r requirements.txt'
 
-            sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && python3 manage.py db upgrade'
+            sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && export APP_SETTINGS="config.DevelopmentConfig" && python3 manage.py db upgrade'
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo service supervisor restart'
           '''

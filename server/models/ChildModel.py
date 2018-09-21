@@ -10,6 +10,7 @@ class ChildModel(db.Model):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     date_of_birth = db.Column(db.Date)
+    status = db.Column(db.Boolean, default=False)
 
     required_keys = ["first_name", "last_name", "date_of_birth"]
 
@@ -21,7 +22,8 @@ class ChildModel(db.Model):
             "id": self.id,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y')
+            "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y'),
+            "status": self.status
         }
 
     def required(self, data: dict):
