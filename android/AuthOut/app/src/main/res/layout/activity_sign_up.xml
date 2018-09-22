@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_name"
+        android:fontFamily="@font/montserrat"
+        android:textSize="20sp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/firstName"
+        app:layout_constraintBottom_toBottomOf="@id/firstName"
+        app:layout_constraintTop_toTopOf="@id/firstName"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstName"
+        android:ems="10"
+        android:hint="First Name"
+        android:layout_marginEnd="20dp"
+        android:textAlignment="center"
+        android:background="@drawable/signup_input_background"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/surname"
+        android:textSize="20sp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toStartOf="@id/surname"
+        app:layout_constraintBottom_toBottomOf="@id/surname"
+        app:layout_constraintTop_toTopOf="@id/surname"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/surname"
+        android:background="@drawable/signup_input_background"
+        android:hint="Surname"
+        android:textAlignment="center"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@id/firstName"
+        app:layout_constraintStart_toStartOf="@id/firstName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DOB"
+        android:textSize="20sp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toStartOf="@id/dob"
+        app:layout_constraintBottom_toBottomOf="@id/dob"
+        app:layout_constraintTop_toTopOf="@id/dob"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dob"
+        android:textAlignment="center"
+        android:ems="10"
+        android:hint="Date of Birth"
+        android:background="@drawable/signup_input_background"
+        android:fontFamily="@font/montserrat"
+        android:focusable="false"
+        app:layout_constraintTop_toBottomOf="@id/surname"
+        app:layout_constraintStart_toStartOf="@id/surname"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile"
+        android:textSize="20sp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toStartOf="@id/mobile"
+        app:layout_constraintBottom_toBottomOf="@id/mobile"
+        app:layout_constraintTop_toTopOf="@id/mobile"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mobile"
+        android:background="@drawable/signup_input_background"
+        android:textAlignment="center"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Phone Number"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@id/dob"
+        app:layout_constraintStart_toStartOf="@id/dob"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textSize="20sp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toStartOf="@id/email"
+        app:layout_constraintBottom_toBottomOf="@id/email"
+        app:layout_constraintTop_toTopOf="@id/email"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:hint="Email"
+        android:textAlignment="center"
+        android:ems="10"
+        android:background="@drawable/signup_input_background"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@id/mobile"
+        app:layout_constraintStart_toStartOf="@id/mobile"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

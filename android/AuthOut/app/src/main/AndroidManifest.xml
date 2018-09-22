@@ -12,19 +12,21 @@
         android:roundIcon="@mipmap/authout_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
-        <activity android:name=".HomeActivity" android:theme="@style/AppTheme.Launcher">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme.Launcher">
         </activity>
-        <activity android:name=".SelectStudentActivity"  android:theme="@style/AppTheme">
-
-        </activity>
+        <activity android:name=".SelectStudentActivity" android:theme="@style/AppTheme" />
         <activity android:name=".ConfirmationActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".EnterCodeActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".EnterCodeActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".AdminActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".SignUpActivity" android:theme="@style/AppTheme">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>

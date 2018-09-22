@@ -17,4 +17,12 @@
     <string name="submit">Submit</string>
     <string name="no_children_selected">Please select a child</string>
     <string name="back">Back</string>
+    <string name="admin_action">Please select an action below</string>
+    <string name="new_user">Register new user</string>
+    <string name="first_name">First Name:</string>
+    <string name="surname"> Surname:</string>
+    <string name="DOB"> Date of Birth:</string>
+    <string name="email">Email:</string>
+    <string name="mobile">Phone:</string>
+
 </resources>
