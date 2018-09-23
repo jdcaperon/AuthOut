@@ -105,9 +105,7 @@ public class HomeActivity extends AppCompatActivity {
                     Log.i("MainActivity", "Face Detected");
 
                     Request request = createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition()));
-                    request.setRetryPolicy(new DefaultRetryPolicy(
-                            3000,
-                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    request.setRetryPolicy(new DefaultRetryPolicy( 50000, 5,
                             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     requestQueue.add(request);
                     Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);

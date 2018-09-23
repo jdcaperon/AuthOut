@@ -91,10 +91,8 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
      */
     public void submitCode(View v) {
         Request request = createRequest(codeInputBuilder.toString());
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                        3000,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy( 50000, 5,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
         Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
     }
@@ -105,6 +103,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
      */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

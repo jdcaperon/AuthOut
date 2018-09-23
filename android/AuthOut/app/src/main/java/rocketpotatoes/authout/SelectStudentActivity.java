@@ -135,7 +135,6 @@ public class SelectStudentActivity extends AppCompatActivity {
 
 
     public void onMadeSelection(View view) {
-        dynamicButton.setEnabled(false);
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
         //TODO send proper request to the server
         requestQueue.add(createRequest(selectedChildren.toString()));
@@ -183,8 +182,8 @@ public class SelectStudentActivity extends AppCompatActivity {
      */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
     }
 
     public void finish(View v) {

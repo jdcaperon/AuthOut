@@ -23,10 +23,16 @@
  */
 package rocketpotatoes.authout;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+
+import rocketpotatoes.authout.Helpers.Util;
 
 public class ConfirmationActivity extends AppCompatActivity {
 
@@ -38,7 +44,19 @@ public class ConfirmationActivity extends AppCompatActivity {
 
     public void onPressConfirm(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
     }
+
+    public void anotherAction(View v) {
+        //Todo Post to request parent again.
+        //Todo create new select student activity with updated details
+    }
+
+    private void clearBackStack() {
+        while (getSupportFragmentManager().getBackStackEntryCount() > 0){
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+    }
+
 }

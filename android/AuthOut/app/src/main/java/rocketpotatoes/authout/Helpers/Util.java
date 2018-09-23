@@ -2,6 +2,7 @@ package rocketpotatoes.authout.Helpers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import android.view.View;
