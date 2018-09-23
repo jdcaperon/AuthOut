@@ -97,9 +97,8 @@ public class SelectStudentActivity extends AppCompatActivity {
      * @param parent - current signed in user
      */
     private void setUpLayout(Parent parent) {
-        String welcomeMessage = "Hey there " + parent.getFirstName();
         TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText(welcomeMessage);
+        welcomeText.setText(getString(R.string.welcome_message));
 
         progressOverlay = findViewById(R.id.progress_overlay);
         dynamicText = findViewById(R.id.dynamicText);
@@ -152,8 +151,8 @@ public class SelectStudentActivity extends AppCompatActivity {
         } else if (children.size() == 1) {
             return children.get(0).getFirstName();
         } else if (children.size() == 2) {
-            return children.get(0).getFirstName() + " and " +
-                    children.get(1).getFirstName();
+            return getString(R.string.two_children_string, children.get(0).getFirstName(),
+                    children.get(1).getFirstName());
         }
 
         StringBuilder sb = new StringBuilder();

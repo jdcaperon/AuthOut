@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Processing Request..."
+        android:text="@string/loading_text"
         android:layout_gravity="center"
         android:textSize="20sp"
         android:textColor="@android:color/white"/>

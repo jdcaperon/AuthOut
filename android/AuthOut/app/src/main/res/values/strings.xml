@@ -1,32 +1,79 @@
 <resources>
     <string name="app_name">AuthOut</string>
+
+    <!-- Button Texts-->
     <string name="sign_in">Sign-In</string>
     <string name="sign_out">Sign-Out</string>
     <string name="not_compatible">Not Compatible</string>
-    <string name="choose_option">Please choose an option:</string>
-    <string name="select_children">Tap to select children.</string>
     <string name="not_me">This is not me.</string>
     <string name="sign_in_others">Sign-In Others</string>
-    <string name="not_recognized">You weren\'t recognised.</string>
-    <string name="not_recognized_welcome">Welcome!</string>
     <string name="code_sign_in">I have a code</string>
     <string name="retry">Retry</string>
-    <string name="note">Contact admin for continuous issues</string>
     <string name="cancel">Cancel</string>
-    <string name="enter_code">Enter Four (4) Digit Code</string>
     <string name="submit">Submit</string>
-    <string name="no_children_selected">Please select a child</string>
     <string name="back">Back</string>
-    <string name="admin_action">Please select an action below</string>
+    <string name="finish">Finish</string>
+    <string name="something_else">do something else</string>
+    <string name="confirm">Confirm</string>
+    <string name="next">Next</string>
+
+    <!-- Title Texts-->
+    <string name="enter_code">Enter Four (4) Digit Code</string>
+    <string name="welcome_message">Hey there %1$s</string>
     <string name="new_user">Register new user</string>
-    <string name="first_name">First Name:</string>
-    <string name="surname"> Surname:</string>
-    <string name="DOB"> Date of Birth:</string>
-    <string name="email">Email:</string>
-    <string name="mobile">Phone:</string>
+    <string name="all_done">All Done!</string>
+    <string name="confirm_registration">Confirm Registration</string>
+
+    <!-- Prompt Texts -->
+    <string name="choose_option">Please choose an option:</string>
+    <string name="select_children">Tap to select children.</string>
+    <string name="not_recognized">You weren\'t recognised.</string>
+    <string name="not_recognized_welcome">Welcome!</string>
     <string name="signup">User Registration</string>
-    <string name="fillAllFields">Please fill in all fields below</string>
-    <string name="photo">Photo:</string>
+
+    <!-- Note Texts -->
+    <string name="note">Contact admin for continuous issues</string>
+    <string name="fill_all_fields">Please fill in all fields below</string>
+    <string name="admin_action">Please select an action below</string>
+    <string name="enjoy_day">Enjoy the rest of your day!</string>
+    <string name="please_review">Please review all fields below</string>
+    <string name="confirm_registration_note">Confirm user registration</string>
+    <string name="user_registration_photo">Photo for user Registration</string>
+    <string name="child_photo_stub">Small photo depicting a person</string>
+    <string name="can_review">All details will be able to be reviewed</string>
+
+    <!-- Registration Texts -->
+    <string name="first_name">First Name</string>
+    <string name="surname"> Surname</string>
+    <string name="DOB"> Date of Birth</string>
+    <string name="email">Email</string>
+    <string name="mobile">Phone</string>
+    <string name="photo">Photo</string>
+    <string name="name">Name</string>
     <string name="full_name">%1$s %2$s</string>
+    <string name="take_photo">Take a Photo</string>
+
+    <!-- Dynamic String Texts -->
+    <string name="two_children_string">%1$s and %2$s</string>
+    <string name="no_children_selected">Please select a child</string>
+
+    <!-- Code Entering Texts-->
+    <string name="code_hint">XXXX</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="delete">DEL</string>
+
+    <!-- -->
+    <string name="loading_text">Processing Request...</string>
+
+
 
 </resources>
