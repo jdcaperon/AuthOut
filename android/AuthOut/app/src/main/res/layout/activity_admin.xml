@@ -43,6 +43,7 @@
         android:background="@drawable/authout_button"
         android:text="@string/new_user"
         android:textColor="@android:color/white"
+        android:onClick="signUpClicked"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/selectItem"/>

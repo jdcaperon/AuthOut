@@ -4,29 +4,54 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/white_tick"
+        android:icon="@drawable/authout_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/authout_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.Launcher">
-        </activity>
-        <activity android:name=".SelectStudentActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".ConfirmationActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".EnterCodeActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".AdminActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".SignUpActivity" android:theme="@style/AppTheme">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/AppTheme.Launcher"/>
+        <activity
+            android:name=".SelectStudentActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ConfirmationActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EnterCodeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AdminActivity"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".SignUpReviewActivity" android:theme="@style/AppTheme"/>
     </application>
+
+
 
 </manifest>

@@ -13,7 +13,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
     }
 
-    /** Returns to the home activity
+    /**
      *
      * @param v - current View
      */
@@ -21,4 +21,6 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
+
+
 }
