@@ -52,6 +52,7 @@ import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.ChildSelectorAdapter;
 import rocketpotatoes.authout.Helpers.DynamicButtonOption;
 import rocketpotatoes.authout.Helpers.Parent;
+import rocketpotatoes.authout.Helpers.Util;
 
 public class SelectStudentActivity extends AppCompatActivity {
     private static final String AUTHOUT_SIGNINOUT_URL = "http://httpbin.org/post";
@@ -62,6 +63,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     private ChildSelectorAdapter mChildSelectorAdapter;
     private RequestQueue requestQueue;
     private List<Child> displayedChildren;
+    private View progressOverlay;
 
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
@@ -99,6 +101,7 @@ public class SelectStudentActivity extends AppCompatActivity {
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(welcomeMessage);
 
+        progressOverlay = findViewById(R.id.progress_overlay);
         dynamicText = findViewById(R.id.dynamicText);
         dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
@@ -136,6 +139,7 @@ public class SelectStudentActivity extends AppCompatActivity {
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
         //TODO send proper request to the server
         requestQueue.add(createRequest(selectedChildren.toString()));
+        Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
     }
 
     /** Returns informational string based on children selected
@@ -277,6 +281,7 @@ public class SelectStudentActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO ensure there's no error, otherwise just move to final activity.
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Log.i("Response", response.toString().substring(0, 100));
                         Intent intent = new Intent(SelectStudentActivity.this, ConfirmationActivity.class);
                         startActivity(intent);

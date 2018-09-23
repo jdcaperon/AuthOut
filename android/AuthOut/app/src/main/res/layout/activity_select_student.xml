@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".SelectStudentActivity">
 
+    <include layout="@layout/include_progress_overlay"/>
+
     <TextView
         android:id="@+id/selectStudent"
         android:layout_width="wrap_content"
