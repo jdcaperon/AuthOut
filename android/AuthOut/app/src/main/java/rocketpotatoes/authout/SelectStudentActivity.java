@@ -98,7 +98,7 @@ public class SelectStudentActivity extends AppCompatActivity {
      */
     private void setUpLayout(Parent parent) {
         TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText(getString(R.string.welcome_message));
+        welcomeText.setText(getString(R.string.welcome_message, parent.getFirstName()));
 
         progressOverlay = findViewById(R.id.progress_overlay);
         dynamicText = findViewById(R.id.dynamicText);
