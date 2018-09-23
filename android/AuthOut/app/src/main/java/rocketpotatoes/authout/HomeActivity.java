@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int INITIAL_DELAY = 2000;
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
+    private static final double MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.35;
     private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
 
     private CameraKitView camera;
@@ -111,12 +112,14 @@ public class HomeActivity extends AppCompatActivity {
                     requestQueue.add(request);
                     Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
                     handler.removeCallbacks(this);
-                } else {
+                } else if (face.getWidth() > screenSize.x * MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN){
                     if (!moveCloserDialog.isShowing()) {
                         moveCloserDialog.show();
                         handler.postDelayed(dialogDismiss, TIME_BETWEEN_PHOTOS * 4);
                     }
 
+                    handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
+                } else {
                     handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
                 }
             } else {
