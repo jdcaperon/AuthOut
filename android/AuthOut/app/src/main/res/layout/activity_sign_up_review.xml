@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".SignUpReviewActivity">
 
+    <include layout="@layout/include_progress_overlay"/>
+
     <TextView
         android:id="@+id/allDone"
         android:layout_width="wrap_content"
@@ -157,6 +159,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/authout_button"
         android:text="Confirm"
+        android:onClick="confirmUserSubmission"
         android:textSize="16sp"
         android:textColor="@color/textColour"
         app:layout_constraintBottom_toTopOf="@id/back"
@@ -176,7 +179,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </android.support.constraint.ConstraintLayout>

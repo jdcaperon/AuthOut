@@ -38,6 +38,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -62,6 +63,7 @@ import java.util.List;
 import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
 import rocketpotatoes.authout.Helpers.Parent;
+import rocketpotatoes.authout.Helpers.Util;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -75,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
     private Bitmap currentImage;
     private RequestQueue requestQueue;
     private AlertDialog moveCloserDialog;
+    private View progressOverlay;
 
     private Point screenSize = new Point();
 
@@ -106,6 +109,7 @@ public class HomeActivity extends AppCompatActivity {
                             DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     requestQueue.add(request);
+                    Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
                     handler.removeCallbacks(this);
                 } else {
                     if (!moveCloserDialog.isShowing()) {
@@ -139,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
+        progressOverlay = findViewById(R.id.progress_overlay);
         camera = findViewById(R.id.camera);
         camera.setAdjustViewBounds(true);
         faceDetector = new FaceDetector.Builder(this)
@@ -184,12 +189,7 @@ public class HomeActivity extends AppCompatActivity {
         Bitmap bitmapToSend = Bitmap.createBitmap(
                 currentImage, bottomRightXPos, bottomRightYPos, totalCropWidth, totalCropHeight);
 
-        //bitmap to base64 string
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmapToSend.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return Util.bitmapToBase64(bitmapToSend, 50);
     }
 
     /**
@@ -212,6 +212,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
                         Log.i("Response", response.toString().substring(0, 100));
+                        Util.animateView(progressOverlay, View.GONE, 0, 200);
                         //TODO if face is matched onResponse should move to the next activity
                         //TODO if the response is null/not matched we move to a different activity
 
@@ -238,7 +239,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.putExtra("PARENT", dummyParent);
                         intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
                         startActivity(intent);
-                        finish()*/
+                        finish();*/
                     }
                 }, new Response.ErrorListener() {
                     @Override

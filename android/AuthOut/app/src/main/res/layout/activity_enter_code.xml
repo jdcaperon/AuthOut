@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EnterCodeActivity">
+
+    <include layout="@layout/include_progress_overlay"/>
+
     <TextView
         android:id="@+id/enterCodeTitle"
         android:layout_width="wrap_content"
