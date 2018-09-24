@@ -44,7 +44,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -281,7 +280,7 @@ public class SelectStudentActivity extends AppCompatActivity {
                         //TODO ensure there's no error, otherwise just move to final activity.
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Log.i("Response", response.toString().substring(0, 100));
-                        Intent intent = new Intent(SelectStudentActivity.this, ConfirmationActivity.class);
+                        Intent intent = new Intent(SelectStudentActivity.this, ConfirmFinishActivity.class);
                         startActivity(intent);
                         finish();
                     }

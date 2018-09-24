@@ -31,7 +31,7 @@
             android:name=".SelectStudentActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ConfirmationActivity"
+            android:name=".ConfirmFinishActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".EnterCodeActivity"
@@ -51,7 +51,7 @@
         <activity
             android:name=".SignUpReviewActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RegisterChildrenActivity" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".SignUpChildActivity" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustNothing"/>
     </application>
 
 </manifest>

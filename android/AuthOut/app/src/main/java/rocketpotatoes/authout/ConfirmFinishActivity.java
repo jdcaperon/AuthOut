@@ -34,7 +34,7 @@ import com.android.volley.Request;
 
 import rocketpotatoes.authout.Helpers.Util;
 
-public class ConfirmationActivity extends AppCompatActivity {
+public class ConfirmFinishActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,30 +1,37 @@
 package rocketpotatoes.authout;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
+import java.util.Map;
 
-public class RegisterChildrenActivity extends AppCompatActivity {
+public class SignUpChildActivity extends AppCompatActivity {
 
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
-    private EditText firstName;
-    private EditText surname;
-    private EditText dateOfBirth;
+    public EditText firstName;
+    public EditText surname;
+    public EditText dateOfBirth;
     private ListView listview;
-    private List<List<String>> children;
+    private ArrayList<ArrayList<String>> children;
+    private ChildSignupListAdapter childSignupListAdapter;
+    private RecyclerView childSignupSelectorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +44,36 @@ public class RegisterChildrenActivity extends AppCompatActivity {
         children = new ArrayList<>();
         setUpCalendarPicker();
 
-        listview = (ListView) findViewById(R.id.listview);
-        listview.setAdapter(new ChildSignupListAdapter(this, children));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        childSignupSelectorView = findViewById(R.id.child_selector);
+        assert (childSignupSelectorView != null);
+
+        childSignupSelectorView.setLayoutManager(layoutManager);
+        childSignupListAdapter = new ChildSignupListAdapter(children, this);
+        childSignupSelectorView.setAdapter(childSignupListAdapter);
+
 
     }
 
+    public void backClicked(View v) {
+        finish();
+    }
+
+    public void nextClicked(View v) {
+        Intent intent = new Intent(this, SignUpReviewActivity.class);
+        intent.putExtra("PARENT_DETAILS", getIntent().getSerializableExtra("PARENT_DETAILS"));
+        intent.putExtra("PHOTO", getIntent().getSerializableExtra("PHOTO"));
+        intent.putExtra("CHILDREN", children);
+        startActivity(intent);
+
+    }
 
     public void addChild(View v) {
         if (validateInputs()) {
             children.add(new ArrayList<String>(Arrays.asList(firstName.getText().toString(),
                     surname.getText().toString(), dateOfBirth.getText().toString())));
 
-            listview.setAdapter(new ChildSignupListAdapter(this, children));
+            childSignupListAdapter.notifyDataSetChanged();
             clearTexts();
         }
     }
@@ -59,6 +84,9 @@ public class RegisterChildrenActivity extends AppCompatActivity {
         dateOfBirth.setText("");
     }
 
+    public void removeChild() {
+
+    }
 
     private boolean validateInputs() {
         boolean isValid = true;
@@ -85,6 +113,7 @@ public class RegisterChildrenActivity extends AppCompatActivity {
 
         return isValid;
     }
+
     private void setUpCalendarPicker() {
 
         myCalendar = Calendar.getInstance();
@@ -103,7 +132,7 @@ public class RegisterChildrenActivity extends AppCompatActivity {
         dateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(RegisterChildrenActivity.this, date, myCalendar
+                new DatePickerDialog(SignUpChildActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }

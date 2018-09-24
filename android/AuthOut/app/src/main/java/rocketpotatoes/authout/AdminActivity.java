@@ -18,7 +18,7 @@ public class AdminActivity extends AppCompatActivity {
      * @param v - current View
      */
     public void signUpClicked(View v) {
-        Intent intent = new Intent(this, RegisterChildrenActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 
