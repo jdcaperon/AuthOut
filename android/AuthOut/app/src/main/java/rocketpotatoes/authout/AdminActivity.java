@@ -13,12 +13,12 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
     }
 
-    /**
+    /** onClick to navigate to user registration
      *
      * @param v - current View
      */
     public void signUpClicked(View v) {
-        Intent intent = new Intent(this, RegisterChildrenActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterChildrenActivity">
+    tools:context=".SignUpChildActivity">
 
     <TextView
         android:id="@+id/allDone"
@@ -120,7 +120,8 @@
         android:layout_height="35dp"
         android:layout_margin="10dp"
         android:background="@drawable/authout_button"
-        android:text="new child"
+        android:text="register child"
+        android:onClick="addChild"
         android:textSize="14sp"
         android:textColor="@color/textColour"
         app:layout_constraintTop_toBottomOf="@id/textInputs"
@@ -128,12 +129,14 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
+        android:id="@+id/registeredChildren"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/registeredChildren"
         android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/addChild"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -141,6 +144,15 @@
     <!-- add the view here that lists children with edit button
     E.g        Ryan Kurz - 18/07/1998  (EDIT)
            Olivia Jessop - 19/07/1997  (EDIT) -->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/child_selector"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@id/review"
+        app:layout_constraintTop_toBottomOf="@id/registeredChildren"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/review"
@@ -160,6 +172,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/authout_button"
         android:text="@string/next"
+        android:onClick="nextClicked"
         android:textSize="16sp"
         android:textColor="@color/textColour"
         app:layout_constraintBottom_toTopOf="@id/back"
@@ -173,6 +186,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/authout_button_secondary"
         android:text="@string/back"
+        android:onClick="backClicked"
         android:textSize="16sp"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"

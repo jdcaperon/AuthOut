@@ -34,7 +34,7 @@ import com.android.volley.Request;
 
 import rocketpotatoes.authout.Helpers.Util;
 
-public class ConfirmationActivity extends AppCompatActivity {
+public class ConfirmFinishActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,10 @@ public class ConfirmationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirmation);
     }
 
+    /** Clears all current activities on the back stack and stars the home activity
+     *
+     * @param view - current View
+     */
     public void onPressConfirm(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -52,11 +56,4 @@ public class ConfirmationActivity extends AppCompatActivity {
         //Todo Post to request parent again.
         //Todo create new select student activity with updated details
     }
-
-    private void clearBackStack() {
-        while (getSupportFragmentManager().getBackStackEntryCount() > 0){
-            getSupportFragmentManager().popBackStackImmediate();
-        }
-    }
-
 }

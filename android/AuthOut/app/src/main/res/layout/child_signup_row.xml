@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/childInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/editButton"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toTopOf="@id/editButton"
+        app:layout_constraintBottom_toBottomOf="@id/editButton"/>
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/authout_button"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@android:color/white"
+        android:text="EDIT"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/deleteButton"/>
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/authout_button"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@android:color/white"
+        android:text="DEL"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

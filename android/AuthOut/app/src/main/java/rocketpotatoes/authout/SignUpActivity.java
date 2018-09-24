@@ -121,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void reviewContent(View v) {
         if (isValidContent()) {
-            Intent intent = new Intent(this, SignUpReviewActivity.class);
+            Intent intent = new Intent(this, SignUpChildActivity.class);
             HashMap<String, String> signUpInfo = new HashMap<>();
             signUpInfo.put("FIRST_NAME", firstName.getText().toString());
             signUpInfo.put("SURNAME", surname.getText().toString());
