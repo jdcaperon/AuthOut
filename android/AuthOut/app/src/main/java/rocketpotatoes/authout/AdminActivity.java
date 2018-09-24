@@ -13,7 +13,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
     }
 
-    /**
+    /** onClick to navigate to user registration
      *
      * @param v - current View
      */
