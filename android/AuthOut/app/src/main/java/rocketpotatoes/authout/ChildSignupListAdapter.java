@@ -40,7 +40,8 @@ public class ChildSignupListAdapter extends RecyclerView.Adapter<ChildSignupList
     private static final int FIRST_NAME = 0;
     private static final int SURNAME = 1;
     private static final int DATE_OF_BIRTH = 2;
-    private SignUpChildActivity activity;
+    private SignUpChildActivity activityForSignUpChild;
+    private SignUpReviewActivity activityForReview;
     private ArrayList<ArrayList<String>> childList;
 
     /* View holder class that sets up layout of each child in list */
@@ -61,7 +62,11 @@ public class ChildSignupListAdapter extends RecyclerView.Adapter<ChildSignupList
     }
 
     public ChildSignupListAdapter(ArrayList<ArrayList<String>> childList, Context context) {
-        this.activity = (SignUpChildActivity) context;
+        if (context instanceof  SignUpChildActivity) {
+            this.activityForSignUpChild =  (SignUpChildActivity) context;
+        } else {
+            this.activityForReview = (SignUpReviewActivity) context;
+        }
         this.childList = childList;
     }
 
@@ -71,29 +76,37 @@ public class ChildSignupListAdapter extends RecyclerView.Adapter<ChildSignupList
             holder.info.setText(generateRowString(childList.get(position)));
         }
 
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                childList.remove(holder.getAdapterPosition());
-                notifyDataSetChanged();
-            }
-        });
+        if (this.activityForReview != null) {
+            holder.delete.setVisibility(View.GONE);
+            holder.edit.setVisibility(View.GONE);
+        } else {
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    childList.remove(holder.getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
 
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                activity.firstName.setText(childList.get(position).get(FIRST_NAME));
-                activity.surname.setText(childList.get(position).get(SURNAME));
-                activity.dateOfBirth.setText(childList.get(position).get(DATE_OF_BIRTH));
-                childList.remove(position);
-                notifyDataSetChanged();
-
-            }
-        });
+            holder.edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition();
+                    activityForSignUpChild.firstName.setText(childList.get(position).get(FIRST_NAME));
+                    activityForSignUpChild.surname.setText(childList.get(position).get(SURNAME));
+                    activityForSignUpChild.dateOfBirth.setText(childList.get(position).get(DATE_OF_BIRTH));
+                    childList.remove(position);
+                    notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     private String generateRowString(List<String> firstLastDOB) {
+        //If we are reviewing, we must should FULL NAME.  No abbreviations
+        if (this.activityForReview != null) {
+            return firstLastDOB.get(FIRST_NAME) + " " + firstLastDOB.get(SURNAME) + " - " + firstLastDOB.get(DATE_OF_BIRTH);
+        }
         if (firstLastDOB.get(FIRST_NAME).length() + firstLastDOB.get(SURNAME).length() > 13) {
             if (firstLastDOB.get(FIRST_NAME).length() >= firstLastDOB.get(SURNAME).length()) {
                 return firstLastDOB.get(FIRST_NAME).toUpperCase().charAt(0) + ". " +

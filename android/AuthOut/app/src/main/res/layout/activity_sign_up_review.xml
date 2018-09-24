@@ -33,7 +33,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/textInputs"
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,33 +125,43 @@
             android:fontFamily="@font/montserrat"
             android:textAlignment="center"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/childrenText"
             app:layout_constraintStart_toStartOf="@id/mobile"
             app:layout_constraintTop_toBottomOf="@+id/mobile" />
 
+        <TextView
+            android:id="@+id/childrenText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="20sp"
+            android:text="Children"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
     </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/child_selector"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputs" />
 
     <ImageView
         android:id="@+id/userImage"
         android:layout_width="200dp"
-        android:layout_height="250dp"
+        android:layout_height="225dp"
+        android:layout_marginBottom="10dp"
         android:contentDescription="@string/user_registration_photo"
-        app:layout_constraintTop_toBottomOf="@id/textInputs"
-        app:layout_constraintBottom_toTopOf="@id/review"
+        app:layout_constraintBottom_toTopOf="@id/finish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    
 
-    <TextView
-        android:id="@+id/review"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/confirm_registration_note"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/finish" />
 
     <Button
         android:id="@+id/finish"

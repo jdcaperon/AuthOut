@@ -9,6 +9,8 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +29,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rocketpotatoes.authout.Helpers.Util;
@@ -48,6 +52,10 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private String dateOfBirthData;
     private File takePhotoData;
     private Bitmap userBitmap;
+    private ArrayList<ArrayList<String>> children;
+    private RecyclerView childSignupSelectorView;
+    private ChildSignupListAdapter childSignupListAdapter;
+
     private RequestQueue requestQueue;
 
     private View progressOverlay;
@@ -59,6 +67,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_review);
         setUpVariables();
         setUpLayout();
+        setUpChildList();
         requestQueue = Volley.newRequestQueue(this);
     }
 
@@ -66,6 +75,16 @@ public class SignUpReviewActivity extends AppCompatActivity {
         finish();
     }
 
+
+    private void setUpChildList() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RecyclerView childSignupSelectorView = findViewById(R.id.child_selector);
+        assert (childSignupSelectorView != null);
+
+        childSignupSelectorView.setLayoutManager(layoutManager);
+        childSignupListAdapter = new ChildSignupListAdapter(children, this);
+        childSignupSelectorView.setAdapter(childSignupListAdapter);
+    }
 
     private void setUpVariables() {
         progressOverlay = findViewById(R.id.progress_overlay);
@@ -75,14 +94,15 @@ public class SignUpReviewActivity extends AppCompatActivity {
         dateOfBirth= findViewById(R.id.dob);
         userImage = findViewById(R.id.userImage);
 
-        Map<String, String> parentDetails = (HashMap) getIntent().getSerializableExtra("PARENT_DETAILS");
+        takePhotoData = (File) getIntent().getSerializableExtra("PHOTO");
+        children = (ArrayList<ArrayList<String>>) getIntent().getSerializableExtra("CHILDREN");
+
+        HashMap<String, String> parentDetails = (HashMap<String, String>) getIntent().getSerializableExtra("PARENT_DETAILS");
         firstNameData = parentDetails.get("FIRST_NAME");
         surnameData = parentDetails.get("SURNAME");
         mobileData = parentDetails.get("PHONE");
         dateOfBirthData = parentDetails.get("DOB");
         emailData = parentDetails.get("EMAIL");
-
-        takePhotoData = (File) getIntent().getSerializableExtra("PHOTO");
     }
 
     private void setUpLayout() {

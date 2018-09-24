@@ -140,11 +140,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    <!-- add the view here that lists children with edit button
-    E.g        Ryan Kurz - 18/07/1998  (EDIT)
-           Olivia Jessop - 19/07/1997  (EDIT) -->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/child_selector"
         android:layout_width="match_parent"

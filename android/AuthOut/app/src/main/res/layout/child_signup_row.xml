@@ -8,9 +8,9 @@
         android:id="@+id/childInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/editButton"
         android:layout_margin="10dp"
         android:textSize="20sp"
+        android:gravity="center"
         android:fontFamily="@font/montserrat"
         app:layout_constraintTop_toTopOf="@id/editButton"
         app:layout_constraintBottom_toBottomOf="@id/editButton"/>
@@ -22,7 +22,7 @@
         android:background="@drawable/authout_button"
         android:fontFamily="@font/montserrat"
         android:textColor="@android:color/white"
-        android:text="EDIT"
+        android:text="@string/edit"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@id/deleteButton"/>
 
@@ -33,7 +33,7 @@
         android:background="@drawable/authout_button"
         android:fontFamily="@font/montserrat"
         android:textColor="@android:color/white"
-        android:text="DEL"
+        android:text="@string/delete"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"/>
 

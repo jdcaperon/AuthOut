@@ -16,6 +16,7 @@
     <string name="something_else">do something else</string>
     <string name="confirm">Confirm</string>
     <string name="next">Next</string>
+    <string name="edit">Edit</string>
 
     <!-- Title Texts-->
     <string name="enter_code">Enter Four (4) Digit Code</string>
