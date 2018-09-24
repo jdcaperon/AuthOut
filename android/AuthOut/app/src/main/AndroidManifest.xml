@@ -51,8 +51,7 @@
         <activity
             android:name=".SignUpReviewActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RegisterChildrenActivity" android:theme="@style/AppTheme"
-             android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".RegisterChildrenActivity" android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

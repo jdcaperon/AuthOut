@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,7 +16,6 @@ public class RegisterChildrenActivity extends AppCompatActivity {
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
     private EditText dateOfBirth;
-    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +23,8 @@ public class RegisterChildrenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_children);
 
         dateOfBirth= findViewById(R.id.dob);
-        setUpCalendarPicker();
 
-        listView = (ListView) findViewById(R.id.listview);
-        listView.setAdapter(new ChildListAdapter(this, new String[] { "Ryan Kurz - 18/07/1998",
-                "Olivia Jessop - 18/07/1998" }));
+        setUpCalendarPicker();
     }
 
     private void setUpCalendarPicker() {
