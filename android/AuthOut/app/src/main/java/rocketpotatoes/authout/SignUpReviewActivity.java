@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import rocketpotatoes.authout.Helpers.Util;
 
@@ -73,11 +75,13 @@ public class SignUpReviewActivity extends AppCompatActivity {
         dateOfBirth= findViewById(R.id.dob);
         userImage = findViewById(R.id.userImage);
 
-        firstNameData = getIntent().getExtras().getString("FIRST_NAME");
-        surnameData = getIntent().getExtras().getString("SURNAME");
-        mobileData = getIntent().getExtras().getString("PHONE");
-        dateOfBirthData = getIntent().getExtras().getString("DOB");
-        emailData = getIntent().getExtras().getString("EMAIL");
+        Map<String, String> parentDetails = (HashMap) getIntent().getSerializableExtra("PARENT_DETAILS");
+        firstNameData = parentDetails.get("FIRST_NAME");
+        surnameData = parentDetails.get("SURNAME");
+        mobileData = parentDetails.get("PHONE");
+        dateOfBirthData = parentDetails.get("DOB");
+        emailData = parentDetails.get("EMAIL");
+
         takePhotoData = (File) getIntent().getSerializableExtra("PHOTO");
     }
 

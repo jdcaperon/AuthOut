@@ -30,6 +30,7 @@
     <string name="not_recognized">You weren\'t recognised.</string>
     <string name="not_recognized_welcome">Welcome!</string>
     <string name="signup">User Registration</string>
+    <string name="childsignup">Child Registration</string>
 
     <!-- Note Texts -->
     <string name="note">Contact admin for continuous issues</string>
@@ -52,6 +53,7 @@
     <string name="name">Name</string>
     <string name="full_name">%1$s %2$s</string>
     <string name="take_photo">Take a Photo</string>
+    <string name="registeredChildren">Registered Children:</string>
 
     <!-- Dynamic String Texts -->
     <string name="two_children_string">%1$s and %2$s</string>
@@ -73,7 +75,6 @@
 
     <!-- -->
     <string name="loading_text">Processing Request...</string>
-
 
 
 </resources>

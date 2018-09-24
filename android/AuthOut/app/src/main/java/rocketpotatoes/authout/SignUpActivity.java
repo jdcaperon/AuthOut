@@ -20,7 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
@@ -120,12 +122,15 @@ public class SignUpActivity extends AppCompatActivity {
     public void reviewContent(View v) {
         if (isValidContent()) {
             Intent intent = new Intent(this, SignUpReviewActivity.class);
-            intent.putExtra("FIRST_NAME", firstName.getText().toString());
-            intent.putExtra("SURNAME", surname.getText().toString());
-            intent.putExtra("EMAIL", email.getText().toString());
-            intent.putExtra("PHONE", mobile.getText().toString());
+            HashMap<String, String> signUpInfo = new HashMap<>();
+            signUpInfo.put("FIRST_NAME", firstName.getText().toString());
+            signUpInfo.put("SURNAME", surname.getText().toString());
+            signUpInfo.put("EMAIL", email.getText().toString());
+            signUpInfo.put("PHONE", mobile.getText().toString());
+            signUpInfo.put("DOB", dateOfBirth.getText().toString());
+
+            intent.putExtra("PARENT_DETAILS", signUpInfo);
             intent.putExtra("PHOTO", userImage);
-            intent.putExtra("DOB", dateOfBirth.getText().toString());
             startActivity(intent);
         }
     }
