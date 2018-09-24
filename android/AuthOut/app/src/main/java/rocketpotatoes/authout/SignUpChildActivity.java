@@ -79,36 +79,21 @@ public class SignUpChildActivity extends AppCompatActivity {
     }
 
     private void clearTexts() {
-        firstName.setText("");
-        surname.setText("");
-        dateOfBirth.setText("");
-    }
-
-    public void removeChild() {
-
+        firstName.getText().clear();
+        surname.getText().clear();
+        dateOfBirth.getText().clear();
     }
 
     private boolean validateInputs() {
         boolean isValid = true;
-        if (firstName.length() == 0) {
-            firstName.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            firstName.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (surname.length() == 0) {
-            surname.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            surname.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (dateOfBirth.length() == 0) {
-            dateOfBirth.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            dateOfBirth.setBackground(getDrawable(R.drawable.signup_input_background));
+        List<EditText> inputs = new ArrayList<>(Arrays.asList(firstName, surname, dateOfBirth));
+        for (EditText input : inputs) {
+            if (input.length() == 0) {
+                input.setBackground(getDrawable(R.drawable.signup_input_error));
+                isValid = false;
+            } else {
+                input.setBackground(getDrawable(R.drawable.signup_input_background));
+            }
         }
 
         return isValid;

@@ -54,6 +54,7 @@
     <string name="full_name">%1$s %2$s</string>
     <string name="take_photo">Take a Photo</string>
     <string name="registeredChildren">Registered Children:</string>
+    <string name="photoCaptured">Photo Captured!</string>
 
     <!-- Dynamic String Texts -->
     <string name="two_children_string">%1$s and %2$s</string>

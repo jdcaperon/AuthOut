@@ -1,32 +1,29 @@
 package rocketpotatoes.authout;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
-    private static final int CAMERA_REQUEST = 1888;
-    private static final String REGEX = ".+\\@.+\\..+";
+    private static final String REGEX = ".+@.+\\..+";
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
     private EditText firstName;
@@ -75,45 +72,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean isValidContent() {
         boolean isValid = true;
-
-        if (firstName.length() == 0) {
-            firstName.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            firstName.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (surname.length() == 0) {
-            surname.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            surname.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (mobile.length() == 0) {
-            mobile.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            mobile.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (email.length() == 0 || !email.getText().toString().matches(REGEX)) {
-            email.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            email.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (dateOfBirth.length() == 0) {
-            dateOfBirth.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
-        } else {
-            dateOfBirth.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-
-        if (takePhoto.length() == 0) {
-            takePhoto.setBackground(getDrawable(R.drawable.signup_input_error));
-            isValid = false;
+        List<EditText> inputs = new ArrayList<>(Arrays.asList(firstName, surname, mobile, email, dateOfBirth, takePhoto));
+        for (EditText input : inputs) {
+            if (input.length() == 0 || input.equals(email) &&
+                    !input.getText().toString().matches(REGEX)) {
+                input.setBackground(getDrawable(R.drawable.signup_input_error));
+                isValid = false;
+            } else {
+                input.setBackground(getDrawable(R.drawable.signup_input_background));
+            }
         }
 
         return isValid;
@@ -181,7 +148,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            takePhoto.setText("Image Captured!");
+            takePhoto.setText(getString(R.string.photoCaptured));
             takePhoto.setBackground(getDrawable(R.drawable.signup_input_background));
         }
     }
