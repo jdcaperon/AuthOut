@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ryan Kurz - 18/07/1998"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/edit"
+        app:layout_constraintBottom_toBottomOf="@id/edit"
+        app:layout_constraintEnd_toStartOf="@id/edit"/>
+
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/authout_button"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat"
+        android:text="Edit"
+        app:layout_constraintEnd_toStartOf="@id/delete"/>
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/authout_button"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat"
+        android:text="Del"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

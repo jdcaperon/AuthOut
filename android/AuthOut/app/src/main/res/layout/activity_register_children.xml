@@ -120,7 +120,7 @@
         android:layout_height="35dp"
         android:layout_margin="10dp"
         android:background="@drawable/authout_button"
-        android:text="new child"
+        android:text="Add"
         android:textSize="14sp"
         android:textColor="@color/textColour"
         app:layout_constraintTop_toBottomOf="@id/textInputs"
@@ -128,12 +128,13 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
+        android:id="@+id/currentChildren"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/registeredChildren"
         android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/addChild"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -141,6 +142,16 @@
     <!-- add the view here that lists children with edit button
     E.g        Ryan Kurz - 18/07/1998  (EDIT)
            Olivia Jessop - 19/07/1997  (EDIT) -->
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="400dp"
+        android:layout_height="160dp"
+        app:layout_constraintTop_toBottomOf="@id/currentChildren"
+        app:layout_constraintBottom_toTopOf="@id/review"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </ListView>
 
     <TextView
         android:id="@+id/review"
