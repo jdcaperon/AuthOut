@@ -12,6 +12,8 @@
         android:textSize="20sp"
         android:gravity="center"
         android:fontFamily="@font/montserrat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/editButton"
         app:layout_constraintTop_toTopOf="@id/editButton"
         app:layout_constraintBottom_toBottomOf="@id/editButton"/>
 

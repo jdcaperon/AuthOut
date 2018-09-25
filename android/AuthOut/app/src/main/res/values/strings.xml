@@ -53,13 +53,17 @@
     <string name="photo">Photo</string>
     <string name="name">Name</string>
     <string name="full_name">%1$s %2$s</string>
-    <string name="take_photo">Take a Photo</string>
+    <string name="take_photo">Tap Here</string>
     <string name="registeredChildren">Registered Children:</string>
     <string name="photoCaptured">Photo Captured!</string>
 
     <!-- Dynamic String Texts -->
     <string name="two_children_string">%1$s and %2$s</string>
     <string name="no_children_selected">Please select a child</string>
+
+    <!-- Toast Texts -->
+    <string name="must_have_one_child">You must register at least one child</string>
+    <string name="fix_input">Error in specified Inputs</string>
 
     <!-- Code Entering Texts-->
     <string name="code_hint">XXXX</string>

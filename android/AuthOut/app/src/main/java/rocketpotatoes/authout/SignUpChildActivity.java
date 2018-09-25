@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -60,12 +61,15 @@ public class SignUpChildActivity extends AppCompatActivity {
     }
 
     public void nextClicked(View v) {
-        Intent intent = new Intent(this, SignUpReviewActivity.class);
-        intent.putExtra("PARENT_DETAILS", getIntent().getSerializableExtra("PARENT_DETAILS"));
-        intent.putExtra("PHOTO", getIntent().getSerializableExtra("PHOTO"));
-        intent.putExtra("CHILDREN", children);
-        startActivity(intent);
-
+        if (children.size() > 0) {
+            Intent intent = new Intent(this, SignUpReviewActivity.class);
+            intent.putExtra("PARENT_DETAILS", getIntent().getSerializableExtra("PARENT_DETAILS"));
+            intent.putExtra("PHOTO", getIntent().getSerializableExtra("PHOTO"));
+            intent.putExtra("CHILDREN", children);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, R.string.must_have_one_child, Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addChild(View v) {
@@ -75,6 +79,8 @@ public class SignUpChildActivity extends AppCompatActivity {
 
             childSignupListAdapter.notifyDataSetChanged();
             clearTexts();
+        } else {
+            Toast.makeText(this, R.string.fix_input, Toast.LENGTH_LONG).show();
         }
     }
 

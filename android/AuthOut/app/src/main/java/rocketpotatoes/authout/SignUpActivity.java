@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,6 +100,8 @@ public class SignUpActivity extends AppCompatActivity {
             intent.putExtra("PARENT_DETAILS", signUpInfo);
             intent.putExtra("PHOTO", userImage);
             startActivity(intent);
+        } else {
+            Toast.makeText(this, R.string.fix_input, Toast.LENGTH_LONG).show();
         }
     }
 
