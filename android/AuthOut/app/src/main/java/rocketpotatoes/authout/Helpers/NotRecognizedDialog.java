@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import rocketpotatoes.authout.AdminActivity;
 import rocketpotatoes.authout.EnterCodeActivity;
 import rocketpotatoes.authout.R;
 import rocketpotatoes.authout.SelectStudentActivity;
@@ -79,7 +80,7 @@ public class NotRecognizedDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
-                Intent intent = new Intent(activity, EnterCodeActivity.class);
+                Intent intent = new Intent(activity, AdminActivity.class);
                 activity.startActivity(intent);
                 activity.finish();
             }
