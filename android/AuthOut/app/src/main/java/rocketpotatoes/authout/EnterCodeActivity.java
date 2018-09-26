@@ -48,6 +48,7 @@ import java.util.List;
 
 import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.Parent;
+import rocketpotatoes.authout.Helpers.Util;
 
 public class EnterCodeActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String AUTHOUT_CODE_URL = "http://httpbin.org/post";
@@ -55,6 +56,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
     private EditText codeInput;
     private Button submitButton;
     private RequestQueue requestQueue;
+    private View progressOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
         submitButton = findViewById(R.id.submitCode);
         submitButton.setEnabled(false);
         codeInputBuilder = new StringBuilder();
+        progressOverlay = findViewById(R.id.progress_overlay);
         codeInput = findViewById(R.id.editText);
         requestQueue = Volley.newRequestQueue(this);
     }
@@ -88,12 +91,10 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
      */
     public void submitCode(View v) {
         Request request = createRequest(codeInputBuilder.toString());
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                        3000,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
+        request.setRetryPolicy(new DefaultRetryPolicy( 50000, 5,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
+        Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
     }
 
     /** Returns to the home activity
@@ -102,6 +103,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
      */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -139,6 +141,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         Log.i("Response", response.toString().substring(0, 100));
                         //TODO if the code is matched move to the next activity with parent
                         //TODO if the code is not match put up a toast/handle it
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
 
                         // ----------- Creating Dummy Parent -----------------------
                         List<Child> dummyChildren = new ArrayList<>();
