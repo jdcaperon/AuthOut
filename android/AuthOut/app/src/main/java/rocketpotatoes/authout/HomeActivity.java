@@ -60,9 +60,11 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import rocketpotatoes.authout.Helpers.CameraPermissionHelper;
 import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
 import rocketpotatoes.authout.Helpers.Parent;
+import rocketpotatoes.authout.Helpers.StoragePermissionHelper;
 import rocketpotatoes.authout.Helpers.Util;
 
 
@@ -156,10 +158,24 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-        handler.postDelayed(runnable, INITIAL_DELAY);
+
+
+        if (!StoragePermissionHelper.hasStoragePermission(this)) {
+            StoragePermissionHelper.requestStoragePermission(this);
+            return;
+        }
+
+        if (!CameraPermissionHelper.hasCameraPermission(this)) {
+            CameraPermissionHelper.requestCameraPermission(this);
+            return;
+        }
+
         camera.onResume();
+        handler.postDelayed(runnable, INITIAL_DELAY);
+
     }
 
     @Override
@@ -279,5 +295,34 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return sparseArray.valueAt(0);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+        Log.i("RequestCode", Integer.toString(requestCode));
+        if (requestCode == 0) {
+            if (!StoragePermissionHelper.hasStoragePermission(this)) {
+                Log.i("RequestCodePerm", "Storage");
+                Toast.makeText(this, getString(R.string.storage_perms), Toast.LENGTH_LONG)
+                        .show();
+                if (!StoragePermissionHelper.shouldShowRequestPermissionRationale(this)) {
+                    // Permission denied with checking "Do not ask again".
+                    StoragePermissionHelper.launchPermissionSettings(this);
+                }
+                finish();
+            }
+        } else {
+            if (!CameraPermissionHelper.hasCameraPermission(this)) {
+                Log.i("RequestCodePerm", "Camera");
+
+                Toast.makeText(this, getString(R.string.camera_perms), Toast.LENGTH_LONG)
+                        .show();
+                if (!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)) {
+                    // Permission denied with checking "Do not ask again".
+                    CameraPermissionHelper.launchPermissionSettings(this);
+                }
+                finish();
+            }
+        }
     }
 }

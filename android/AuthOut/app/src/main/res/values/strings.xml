@@ -64,6 +64,8 @@
     <!-- Toast Texts -->
     <string name="must_have_one_child">You must register at least one child</string>
     <string name="fix_input">Error in specified Inputs</string>
+    <string name="camera_perms">Camera permission is needed to run this application</string>
+    <string name="storage_perms">Storage permission is needed to run this application</string>
 
     <!-- Code Entering Texts-->
     <string name="code_hint">XXXX</string>
