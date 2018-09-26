@@ -299,10 +299,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
-        Log.i("RequestCode", Integer.toString(requestCode));
         if (requestCode == 0) {
             if (!StoragePermissionHelper.hasStoragePermission(this)) {
-                Log.i("RequestCodePerm", "Storage");
                 Toast.makeText(this, getString(R.string.storage_perms), Toast.LENGTH_LONG)
                         .show();
                 if (!StoragePermissionHelper.shouldShowRequestPermissionRationale(this)) {
@@ -313,8 +311,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         } else {
             if (!CameraPermissionHelper.hasCameraPermission(this)) {
-                Log.i("RequestCodePerm", "Camera");
-
                 Toast.makeText(this, getString(R.string.camera_perms), Toast.LENGTH_LONG)
                         .show();
                 if (!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)) {
