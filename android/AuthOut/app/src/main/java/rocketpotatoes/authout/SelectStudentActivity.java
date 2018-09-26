@@ -44,7 +44,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,6 +51,7 @@ import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.ChildSelectorAdapter;
 import rocketpotatoes.authout.Helpers.DynamicButtonOption;
 import rocketpotatoes.authout.Helpers.Parent;
+import rocketpotatoes.authout.Helpers.Util;
 
 public class SelectStudentActivity extends AppCompatActivity {
     private static final String AUTHOUT_SIGNINOUT_URL = "http://httpbin.org/post";
@@ -62,6 +62,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     private ChildSelectorAdapter mChildSelectorAdapter;
     private RequestQueue requestQueue;
     private List<Child> displayedChildren;
+    private View progressOverlay;
 
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
@@ -95,10 +96,10 @@ public class SelectStudentActivity extends AppCompatActivity {
      * @param parent - current signed in user
      */
     private void setUpLayout(Parent parent) {
-        String welcomeMessage = "Hey there " + parent.getFirstName();
         TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText(welcomeMessage);
+        welcomeText.setText(getString(R.string.welcome_message, parent.getFirstName()));
 
+        progressOverlay = findViewById(R.id.progress_overlay);
         dynamicText = findViewById(R.id.dynamicText);
         dynamicButton = findViewById(R.id.dynamicButton);
         dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
@@ -132,10 +133,10 @@ public class SelectStudentActivity extends AppCompatActivity {
 
 
     public void onMadeSelection(View view) {
-        dynamicButton.setEnabled(false);
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
         //TODO send proper request to the server
         requestQueue.add(createRequest(selectedChildren.toString()));
+        Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
     }
 
     /** Returns informational string based on children selected
@@ -149,8 +150,8 @@ public class SelectStudentActivity extends AppCompatActivity {
         } else if (children.size() == 1) {
             return children.get(0).getFirstName();
         } else if (children.size() == 2) {
-            return children.get(0).getFirstName() + " and " +
-                    children.get(1).getFirstName();
+            return getString(R.string.two_children_string, children.get(0).getFirstName(),
+                    children.get(1).getFirstName());
         }
 
         StringBuilder sb = new StringBuilder();
@@ -179,8 +180,8 @@ public class SelectStudentActivity extends AppCompatActivity {
      */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
     }
 
     public void finish(View v) {
@@ -277,8 +278,9 @@ public class SelectStudentActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO ensure there's no error, otherwise just move to final activity.
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Log.i("Response", response.toString().substring(0, 100));
-                        Intent intent = new Intent(SelectStudentActivity.this, ConfirmationActivity.class);
+                        Intent intent = new Intent(SelectStudentActivity.this, ConfirmFinishActivity.class);
                         startActivity(intent);
                         finish();
                     }

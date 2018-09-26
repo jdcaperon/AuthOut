@@ -38,6 +38,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -59,15 +60,19 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import rocketpotatoes.authout.Helpers.CameraPermissionHelper;
 import rocketpotatoes.authout.Helpers.Child;
 import rocketpotatoes.authout.Helpers.NotRecognizedDialog;
 import rocketpotatoes.authout.Helpers.Parent;
+import rocketpotatoes.authout.Helpers.StoragePermissionHelper;
+import rocketpotatoes.authout.Helpers.Util;
 
 
 public class HomeActivity extends AppCompatActivity {
     private static final int INITIAL_DELAY = 2000;
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
+    private static final double MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.35;
     private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
 
     private CameraKitView camera;
@@ -75,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
     private Bitmap currentImage;
     private RequestQueue requestQueue;
     private AlertDialog moveCloserDialog;
+    private View progressOverlay;
 
     private Point screenSize = new Point();
 
@@ -101,18 +107,19 @@ public class HomeActivity extends AppCompatActivity {
                     Log.i("MainActivity", "Face Detected");
 
                     Request request = createRequest(currentFaceToBase64(face.getWidth(), face.getHeight(), face.getPosition()));
-                    request.setRetryPolicy(new DefaultRetryPolicy(
-                            3000,
-                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    request.setRetryPolicy(new DefaultRetryPolicy( 50000, 5,
                             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     requestQueue.add(request);
+                    Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
                     handler.removeCallbacks(this);
-                } else {
+                } else if (face.getWidth() > screenSize.x * MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN){
                     if (!moveCloserDialog.isShowing()) {
                         moveCloserDialog.show();
                         handler.postDelayed(dialogDismiss, TIME_BETWEEN_PHOTOS * 4);
                     }
 
+                    handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
+                } else {
                     handler.postDelayed(this, TIME_BETWEEN_PHOTOS);
                 }
             } else {
@@ -139,6 +146,7 @@ public class HomeActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
 
+        progressOverlay = findViewById(R.id.progress_overlay);
         camera = findViewById(R.id.camera);
         camera.setAdjustViewBounds(true);
         faceDetector = new FaceDetector.Builder(this)
@@ -150,10 +158,24 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-        handler.postDelayed(runnable, INITIAL_DELAY);
+
+
+        if (!StoragePermissionHelper.hasStoragePermission(this)) {
+            StoragePermissionHelper.requestStoragePermission(this);
+            return;
+        }
+
+        if (!CameraPermissionHelper.hasCameraPermission(this)) {
+            CameraPermissionHelper.requestCameraPermission(this);
+            return;
+        }
+
         camera.onResume();
+        handler.postDelayed(runnable, INITIAL_DELAY);
+
     }
 
     @Override
@@ -184,12 +206,7 @@ public class HomeActivity extends AppCompatActivity {
         Bitmap bitmapToSend = Bitmap.createBitmap(
                 currentImage, bottomRightXPos, bottomRightYPos, totalCropWidth, totalCropHeight);
 
-        //bitmap to base64 string
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmapToSend.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return Util.bitmapToBase64(bitmapToSend, 50);
     }
 
     /**
@@ -212,6 +229,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
                         Log.i("Response", response.toString().substring(0, 100));
+                        Util.animateView(progressOverlay, View.GONE, 0, 200);
                         //TODO if face is matched onResponse should move to the next activity
                         //TODO if the response is null/not matched we move to a different activity
 
@@ -238,7 +256,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.putExtra("PARENT", dummyParent);
                         intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
                         startActivity(intent);
-                        finish()*/
+                        finish();*/
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -277,5 +295,30 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return sparseArray.valueAt(0);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+        if (requestCode == 0) {
+            if (!StoragePermissionHelper.hasStoragePermission(this)) {
+                Toast.makeText(this, getString(R.string.storage_perms), Toast.LENGTH_LONG)
+                        .show();
+                if (!StoragePermissionHelper.shouldShowRequestPermissionRationale(this)) {
+                    // Permission denied with checking "Do not ask again".
+                    StoragePermissionHelper.launchPermissionSettings(this);
+                }
+                finish();
+            }
+        } else {
+            if (!CameraPermissionHelper.hasCameraPermission(this)) {
+                Toast.makeText(this, getString(R.string.camera_perms), Toast.LENGTH_LONG)
+                        .show();
+                if (!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)) {
+                    // Permission denied with checking "Do not ask again".
+                    CameraPermissionHelper.launchPermissionSettings(this);
+                }
+                finish();
+            }
+        }
     }
 }
