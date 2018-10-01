@@ -14,7 +14,7 @@
 	</body>
 	
 	<?php 
-		//$scripts = array("report_script.js");
+		$scripts = array("report_script.js");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
 	?>
 </html>

@@ -13,7 +13,7 @@
 	</body>
 	
 	<?php 
-		//$scripts = array("help_script.js");
+		$scripts = array("help_script.js");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
 	?>
 </html>
