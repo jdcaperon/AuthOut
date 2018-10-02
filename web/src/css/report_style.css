@@ -1,0 +1,39 @@
+body {
+	display: flex;
+	flex-flow: column;
+}
+
+.jumbotron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  background-color: transparent;
+}
+
+#report-form input {
+	width: 80%;
+}
+
+#report-form label {
+	color: #03BABD;
+	font-size: 1.5em;
+	margin-top: 20px;
+}
+
+#report-form button {
+	margin-top: 40px;
+}
+
+.calendar {
+	margin: 0 auto;
+}
+
+#report-content {
+	flex: 1;
+	margin: 0;
+}
+
+#report-content > div {
+	padding: 0;
+}

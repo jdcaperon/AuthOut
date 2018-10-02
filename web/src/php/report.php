@@ -3,15 +3,29 @@
 <html lang="en">
 	<?php 
 		$pageName = "Report";
-		//$stylesheets = array("report_style.css");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
-		include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html';
-		
+		$stylesheets = array("report_style.css");
+		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';		
 	?>
 	
 	<body>
-		<p style="padding-top: 120px"><?php echo $pageName ?> contnet here!</p>
-		<div style='float: left; margin-top: 20px; margin-left: 100px;' id='jqxWidget'></div>
+		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		
+		<div id="report-content" class="row">
+			<div id="graph" class="col">
+				<!--Graph here-->
+				<img src="../img/placeholder.png" style="width:100%; height:100%">
+			</div>
+			
+			<div id="options" class="col-4 text-center">
+				<form id="report-form" class="vertical-center jumbotron">
+					<label>Child:</label><br>
+					<input type="text" name="childName"><br>
+					<label>Start Date:</label><div id='start-date-widget' class="calendar"></div>
+					<label>End Date:</label><div id='end-date-widget' class="calendar"></div>
+					<button type="button" id="generate-report-button" class="rounded_button purple_button">Generate Report</button>
+				</form>
+			</div>
+		</div>
 	</body>
 	
 	<?php 

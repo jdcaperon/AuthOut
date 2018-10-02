@@ -3,13 +3,14 @@
 <html lang="en">
 	<?php 
 		$pageName = "Home";
-		//$stylesheets = array("home_style.css");
+		$stylesheets = array("home_style.css");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
-		include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html';
 		
 	?>
 	
 	<body>
+		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		
 		<p style="padding-top: 120px"><?php echo $pageName ?> contnet here!</p>
 	</body>
 	
