@@ -13,33 +13,11 @@ pipeline {
         }
       }
     }
-    stage('Build & Test Product Web') {
-      steps {
-        script {
-          echo "Building Product Website (Doing Nothing)"
-        }
-      }
-    }
-    stage('Build Web application') {
-      steps {
-        script {
-          echo "Building Web application ( Doing Nothing )"
-        }
-      }
-    }
     stage('Build Android application') {
       steps {
         script {
           echo "Building Android application"
           sh "cd android/AuthOut && ./gradlew build"
-        }
-      }
-    }
-    stage('Build Server') {
-      steps {
-        script {
-          echo "Building Server"
-          sh "cd server && echo doing nothing"
         }
       }
     }
@@ -64,6 +42,8 @@ pipeline {
             sshpass -e scp -o stricthostkeychecking=no -r build/product/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/html
 
             sshpass -e scp -o stricthostkeychecking=no -r web/src/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/app
+            
+            sshpass -e scp -o stricthostkeychecking=no -r product/src/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/prod
 
             sshpass -e scp -o stricthostkeychecking=no -r distribution/* rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
 
