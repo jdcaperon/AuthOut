@@ -8,11 +8,6 @@ html, body {
 	overflow: hidden
 }
 
-
-.button_wrapper {
-	text-align: center;
-}
-
 .rounded_button {
 	height: 40px;
 	width: 250px;
@@ -35,19 +30,6 @@ html, body {
 	background-color: #03BABD;
 }
 
-.purple_button {
-	background-color: #BC72AF;
-}
-
-.page_content {
-	height: 90%;
-	width: 100%;
-    display: inline-block;
-}
-
-.page-body{
-    margin: 0 5% 0 5%;
-}
 
 #logo{
     height: 65px;
@@ -151,22 +133,23 @@ iframe{
 }
 
 h3{
-	margin:15px 0 ;
+	padding:30px 0;
 }
 
 #overview > div{
-	margin: 10% 0;
+	margin: 8% 0;
 	text-align: center;
 
 }
+
+
 
 #coloured-page{
 	background-color: #e8e9eb;
 }
 
 #features > ul{
-
-margin:auto;
-width:100%;
-list-style: none;
+	margin:auto;
+	width:100%;
+	list-style: none;
 }

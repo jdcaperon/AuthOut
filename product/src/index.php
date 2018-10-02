@@ -20,19 +20,50 @@
 				<div class = "page" id = "coloured-page">
 					<div id ="features">
 						<h3>Features</h3>
-						<p>We've embraced progressive design techniques and technologies in creating AuthOut. Our product features:</p>
-						<ul>
-							<li>Easy Setup Kiosk</li>
-							<li>Touch Screen</li>
-							<li>High Quality Camera</li>
-							<li>User-friendly Interface</li>
-							<li>Admin Web Portal</li>
-							<li>24-7 support</li>
-						</ul>
-						<p>We understand that parents don't want to line up and sign to collect their children every day.</p>
-						<p>We understand that administrators hate data entry.</p>
-						<p>We understand the importance of secure attendance systems.</p>
-						<p>At AuthOut, we understand you.</p>
+						<div class="container">
+							<div class="row">
+								<div class="col-sm">
+									<br><br><br>
+									<p>We've embraced progressive design techniques and technologies in creating AuthOut. </p><br><br>
+									<p>Our product features:</p>
+									<ul>
+										<li>Easy Setup Kiosk</li>
+										<li>Touch Screen</li>
+										<li>High Quality Camera</li>
+										<li>User-friendly Interface</li>
+										<li>Admin Web Portal</li>
+										<li>24-7 support</li>
+									</ul>
+								</div>
+								<div class="col-sm">
+									<div id="carousel" class="carousel slide" data-ride="carousel">
+										<div class="carousel-inner">
+											<div class="carousel-item active">
+											  <img class="d-block w-100" src="img/ryan.png" alt="Ryan">
+											</div>
+											<div class="carousel-item ">
+											  <img class="d-block w-100" src="img/interface.png" alt="interface">
+											</div>
+											<div class="carousel-item">
+											  <img class="d-block w-100" src="img/done.png" alt="Third slide">
+											</div>
+
+										</div>
+										<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+										</a>
+										<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+										</a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
 					</div>
 				</div>
 				<div class = "page">
@@ -53,7 +84,7 @@
 							      	<option>Product Announcements</option>
 							    </select>
 						  	</div>
-						  	<button type="submit" class="btn btn-primary">Submit</button>
+						  	<button type="submit" class="btn btn-primary rounded_button blue_button">Submit</button>
 						</form>
 					</div>
 				</div>
