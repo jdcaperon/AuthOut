@@ -57,7 +57,12 @@ pipeline {
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo service supervisor restart'
           '''
-        // Reboot nginx
+        }
+        withCredentials([string(credentialsId: 'prodPass', variable: 'SSHPASS')]) {
+          sh '''
+            sshpass -e scp -o stricthostkeychecking=no -r product/src/* s4359540@moss.labs.eait.uq.edu.au:/home/students/s4359540/deco3801dump
+            sshpass -e ssh s4359540@moss.labs.eait.uq.edu.au './movedeco.sh'
+          '''
         }
       }
     }
