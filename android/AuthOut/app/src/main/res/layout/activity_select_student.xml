@@ -6,29 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".SelectStudentActivity">
 
-    <TextView
-        android:id="@+id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
+    <include layout="@layout/include_progress_overlay"/>
 
     <TextView
-        android:id="@+id/notRecognised"
+        android:id="@+id/selectStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/how_to_help"
+        android:textAlignment="center"
+        android:text="@string/select_children"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -42,8 +31,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat"
-        android:textSize="24sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameText">
+        app:layout_constraintTop_toBottomOf="@+id/selectStudent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/child_selector"
@@ -64,11 +53,25 @@
             android:layout_height="150dp"
             android:layout_marginBottom="36dp"
             android:layout_marginEnd="8dp"
+            android:scrollbars="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
+
+    <TextView
+        android:id="@+id/dynamicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
         android:id="@+id/dynamicButton"
@@ -80,17 +83,17 @@
         android:textColor="@color/textColour"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/dynamicText"/>
 
     <Button
         android:id="@+id/signInOthers"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        android:background="@drawable/authout_button_background"
+        android:background="@drawable/authout_button_secondary"
         android:text="@string/sign_in_others"
-        android:textColor="@color/textColour"
+        android:textColor="@color/colorAccent"
+        android:onClick="signInOthers"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dynamicButton"/>
@@ -99,13 +102,26 @@
         android:id="@+id/thisIsNotMe"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_margin="30dp"
-        android:background="@drawable/authout_button_background"
-        android:backgroundTint="@color/errorButtonColor"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/authout_button_secondary"
         android:text="@string/not_me"
-        android:textColor="@color/textColour"
+        android:onClick="cancel"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/signInOthers"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/authout_button_secondary"
+        android:text="@string/back"
+        android:onClick="finish"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/thisIsNotMe"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

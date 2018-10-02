@@ -4,24 +4,54 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/authout_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/authout_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
-        <activity android:name=".HomeActivity" android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme.Launcher" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectStudentActivity"  android:theme="@style/AppTheme"/>
-        <activity android:name=".ConfirmationActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".EnterCodeActivity" android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".SelectStudentActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ConfirmFinishActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EnterCodeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AdminActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SignUpReviewActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".SignUpChildActivity" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustNothing"/>
     </application>
 
 </manifest>

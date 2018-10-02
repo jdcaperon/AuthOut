@@ -20,10 +20,12 @@ server {
 
   location /app {
     root /var/www/deco3801.wisebaldone.com;
-  }
+    index index.html index.php;
 
-  location / {
-    root /var/www/deco3801.wisebaldone.com/html;
+    location ~ \.php$ {
+      include snippets/fastcgi-php.conf;
+      fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
   }
 }
 

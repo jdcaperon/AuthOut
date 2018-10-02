@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpChildActivity">
+
+    <TextView
+        android:id="@+id/allDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/childsignup"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/enjoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/fill_all_fields"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allDone" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/textInputs"
+        android:layout_width="wrap_content"
+        android:layout_height="175dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enjoy">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/first_name"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/firstName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/firstName"
+            app:layout_constraintTop_toTopOf="@id/firstName" />
+
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signup_input_background"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/first_name"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/surname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/surname"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/surname"
+            app:layout_constraintEnd_toStartOf="@id/surname"
+            app:layout_constraintTop_toTopOf="@id/surname" />
+
+        <EditText
+            android:id="@+id/surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signup_input_background"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/surname"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/dob"
+            app:layout_constraintStart_toStartOf="@id/firstName"
+            app:layout_constraintTop_toBottomOf="@+id/firstName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/DOB"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/dob"
+            app:layout_constraintEnd_toStartOf="@id/dob"
+            app:layout_constraintTop_toTopOf="@id/dob" />
+
+        <EditText
+            android:id="@+id/dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:background="@drawable/signup_input_background"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat"
+            android:hint="@string/DOB"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/surname"
+            app:layout_constraintTop_toBottomOf="@+id/surname" />
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/addChild"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/authout_button"
+        android:text="register child"
+        android:onClick="addChild"
+        android:textSize="14sp"
+        android:textColor="@color/textColour"
+        app:layout_constraintTop_toBottomOf="@id/textInputs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/registeredChildren"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/registeredChildren"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/addChild"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/child_selector"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/review"
+        app:layout_constraintTop_toBottomOf="@id/registeredChildren"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/can_review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/finish" />
+
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/authout_button"
+        android:text="@string/next"
+        android:onClick="nextClicked"
+        android:textSize="16sp"
+        android:textColor="@color/textColour"
+        app:layout_constraintBottom_toTopOf="@id/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/authout_button_secondary"
+        android:text="@string/back"
+        android:onClick="backClicked"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</android.support.constraint.ConstraintLayout>
