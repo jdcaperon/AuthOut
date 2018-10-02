@@ -1,0 +1,131 @@
+html, body {
+	height: 100%;
+	width: 100%;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+	background-color: #F2F3F1;
+	min-width: 960px;
+}
+
+.button_wrapper {
+	text-align: center;
+}
+
+.rounded_button {
+	height: 40px;
+	width: 250px;
+	border: none;
+	border-radius: 200px;
+	white-space: nowrap;
+	color: #F2F3F1;
+	font-weight: bold;
+	display: block;
+	margin: 10px auto;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.rounded_button:hover {
+	background-color: #DCA726;
+}
+
+.blue_button {
+	background-color: #03BABD;
+}
+
+.purple_button {
+	background-color: #BC72AF;
+}
+
+.page_content {
+	height: 90%;
+	width: 100%;
+    display: inline-block;
+}
+
+.page-body{
+    margin: 0 5% 0 5%;
+}
+
+#logo{
+    height: 65px;
+	float:right;
+	right:10px;
+}
+
+#nav-line1{
+    position:absolute;
+    top:10px;
+    width:100%;
+}
+
+#account-svg{
+    right:24px;
+    position:absolute;
+    font-size: 50px;
+}
+#page-title{
+    height: 10%;
+    width:100%;
+    display: inline-block;
+    box-shadow: 1px 5px #F2F3F1;
+}
+
+.nav-link{
+    display: inline;
+    line-height: 24px;
+    font-size: 21px;
+	color: rgba(255,255,255,.5) !important;
+}
+
+.nav-link:hover {
+	background-color: #DCA726;
+}
+
+.nav-item{
+    padding: 0 10px 0 10px;
+}
+
+
+.navbar {
+ min-height: 80px;
+}
+
+.navbar-brand {
+ padding: 0 15px;
+ height: 80px;
+ line-height: 80px;
+}
+
+.navbar-toggle {
+ /* (80px - button height 34px) / 2 = 23px */
+ margin-top: 23px;
+ padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+ .navbar-nav > li > a {
+   /* (80px - line-height of 27px) / 2 = 26.5px */
+   padding-top: 26.5px;
+   padding-bottom: 26.5px;
+   line-height: 27px;
+ }
+}
+.material-icons.lighter {
+    color: rgba(255,255,255,.5);
+    font-size: 24px;
+    padding:0px 10px;
+    display: inline-flex;
+    vertical-align: top;
+}
+
+#content{
+	width:60%;
+	position: relative;
+	left: 25%;
+	top: 110px;
+	margin-top:20px;
+}
+#email-form{
+	width:50%;
+}
