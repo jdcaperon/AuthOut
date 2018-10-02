@@ -10,15 +10,3 @@
 
 	</div>
 </nav>
-
-<!-- <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top navbar-default navbar-fixed-top">
-    <div >
-         <img class="navbar-brand navbar-nav ml-auto" src="img/logo.png" alt="AuthOut Logo" id="logo"/>
-		 <ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link"href="#overview">Overview</a></li>
-			<li class="nav-item"><a class="nav-link"href="#features">Features</a></li>
-			<li class="nav-item"><a class="nav-link"href="#mail">Mailing List</a></li>
-		 </ul>
-    </div>
-
-</nav> -->

@@ -5,7 +5,9 @@ html, body {
     font-family: 'Montserrat', sans-serif;
 	background-color: #F2F3F1;
 	min-width: 960px;
+	overflow: hidden
 }
+
 
 .button_wrapper {
 	text-align: center;
@@ -98,14 +100,12 @@ html, body {
 }
 
 .navbar-toggle {
- /* (80px - button height 34px) / 2 = 23px */
  margin-top: 23px;
  padding: 9px 10px !important;
 }
 
 @media (min-width: 768px) {
  .navbar-nav > li > a {
-   /* (80px - line-height of 27px) / 2 = 26.5px */
    padding-top: 26.5px;
    padding-bottom: 26.5px;
    line-height: 27px;
@@ -122,9 +122,14 @@ html, body {
 #content{
 	width:60%;
 	position: relative;
-	left: 25%;
-	top: 110px;
+	left: 20%;
+	top: 80px;
 	margin-top:20px;
+
+}
+#scroll{
+	height:100%;
+	overflow:auto;
 }
 #email-form{
 	width:50%;
