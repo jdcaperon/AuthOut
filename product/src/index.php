@@ -69,23 +69,29 @@
 				<div class = "page">
 					<div id="mail">
 						<h3 >Mailing list</h3>
-						<p>Sign up to our mailing list to receive updates about AuthOut.</p>
-						<form id="email-form">
-							<div class="form-group">
-							    <label for="exampleInputEmail1">Email address</label>
-							    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-							    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						  	</div>
-						  	<div class="form-group">
-							    <label for="email-frequency">Frequency</label>
-							    <select class="form-control" id="email-frequency">
-								    <option>All updates</option>
-								    <option>Monthly newsletter</option>
-							      	<option>Product Announcements</option>
-							    </select>
-						  	</div>
-						  	<button type="submit" class="btn btn-primary rounded_button blue_button">Submit</button>
-						</form>
+						<div id="mail-content">
+							<p>Sign up to our mailing list to receive updates about AuthOut.</p>
+							<form id="email-form">
+								<div class="form-group">
+								    <label >Email address</label>
+								    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+								    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+							  	</div>
+								<div class="form-group">
+									<label >Name</label>
+									<input type="name" class="form-control"  placeholder="Enter first name">
+								</div>
+							  	<div class="form-group">
+								    <label>Frequency</label>
+								    <select class="form-control" >
+									    <option>All updates</option>
+									    <option>Monthly newsletter</option>
+								      	<option>Product Announcements</option>
+								    </select>
+							  	</div>
+							  	<button type="submit" class="btn btn-primary rounded_button blue_button">Submit</button>
+							</form>
+						</div>
 					</div>
 				</div>
 

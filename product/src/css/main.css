@@ -17,13 +17,14 @@ html, body {
 	color: #F2F3F1;
 	font-weight: bold;
 	display: block;
-	margin: 10px auto;
+	margin: 5vh auto;
 	transition: 0.5s;
 	cursor: pointer;
 }
 
 .rounded_button:hover {
 	background-color: #DCA726;
+
 }
 
 .blue_button {
@@ -119,7 +120,7 @@ html, body {
 	position:relative;
 }
 #email-form{
-	width:50%;
+	width:60%;
 }
 .page{
 	height:100%;
@@ -142,8 +143,6 @@ h3{
 
 }
 
-
-
 #coloured-page{
 	background-color: #e8e9eb;
 }
@@ -152,4 +151,27 @@ h3{
 	margin:auto;
 	width:100%;
 	list-style: none;
+}
+
+#mail form{
+	margin: 2vh auto;
+	padding: 2.5vh;
+	background-color: #e8e9eb;
+
+}
+
+#mail select{
+width:70%;
+}
+#mail input{
+width:80%;
+}
+
+#mail p{
+	text-align: center;
+}
+
+#mail-content{
+	margin:auto;
+
 }
