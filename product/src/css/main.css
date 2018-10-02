@@ -120,10 +120,15 @@ html, body {
 }
 
 #content{
-	width:60%;
-	position: relative;
-	left: 20%;
 	height:100%
+
+}
+.page > div{
+	width:60%;
+
+		position: relative;
+		left: 20%;
+		height:100%
 }
 #scroll{
 	overflow:auto;
@@ -136,4 +141,32 @@ html, body {
 }
 .page{
 	height:100%;
+}
+
+iframe{
+	width:420px;
+	height: 315px;
+	margin: 0 auto;
+	display:block ;
+}
+
+h3{
+	margin:15px 0 ;
+}
+
+#overview > div{
+	margin: 10% 0;
+	text-align: center;
+
+}
+
+#coloured-page{
+	background-color: #e8e9eb;
+}
+
+#features > ul{
+
+margin:auto;
+width:100%;
+list-style: none;
 }
