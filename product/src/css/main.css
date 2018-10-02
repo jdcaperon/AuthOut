@@ -17,7 +17,7 @@ html, body {
 	color: #F2F3F1;
 	font-weight: bold;
 	display: block;
-	margin: 5vh auto;
+	margin: 1rem auto;
 	transition: 0.5s;
 	cursor: pointer;
 }

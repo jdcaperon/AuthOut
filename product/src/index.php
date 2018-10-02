@@ -68,9 +68,9 @@
 				</div>
 				<div class = "page">
 					<div id="mail">
-						<h3 >Mailing list</h3>
+						<h3 >Purchase</h3>
 						<div id="mail-content">
-							<p>Sign up to our mailing list to receive updates about AuthOut.</p>
+							<p>Our product is still under development. Sign up to our mailing list to receive AuthOut status updates.</p>
 							<form id="email-form">
 								<div class="form-group">
 								    <label >Email address</label>
@@ -88,6 +88,10 @@
 									    <option>Monthly newsletter</option>
 								      	<option>Product Announcements</option>
 								    </select>
+							  	</div>
+								<div class="form-group form-check">
+									<input class="form-check-input" type="radio" id="offer" value="offer" checked>
+									 <small class="form-check-label" for="offer"> Yes, I would like to register for early-bird offers.</small>
 							  	</div>
 							  	<button type="submit" class="btn btn-primary rounded_button blue_button">Submit</button>
 							</form>

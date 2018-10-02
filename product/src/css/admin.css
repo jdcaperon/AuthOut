@@ -1,0 +1,14 @@
+
+
+#admin-content{
+	top:80px;
+	height:calc(100% - 80px);
+	padding: 0 5vw;
+	position:relative;
+	margin:auto;
+	overflow: auto;
+}
+
+h3{
+	margin-top: auto;
+}

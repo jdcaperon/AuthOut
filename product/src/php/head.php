@@ -1,5 +1,6 @@
 <?php
     session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -13,22 +14,20 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Cookie|Lobster|Playball|Tangerine" rel="stylesheet">
 
-        <!--Main stylesheet-->
+
+		<!-- JS Inclusions -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+		
+        <!--Stylesheets-->
         <link href="css/main.css" rel="stylesheet" type="text/css">
+		<link href="css/admin.css" rel="stylesheet" type="text/css">
+
 
         <!--Font-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <!--Icon-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <!--Extra stylesheets-->
-        <?php
-        if (isset($stylesheets)){
-            for ($i = 0; $i<count($stylesheets);$i++){
-                echo("<link href=".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
-            }
-        }
-        ?>
 
         <!--Favicon-->
         <link rel="shortcut icon" type="image/png" href="img/favicon.png">
