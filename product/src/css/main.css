@@ -123,14 +123,17 @@ html, body {
 	width:60%;
 	position: relative;
 	left: 20%;
-	top: 80px;
-	margin-top:20px;
-
+	height:100%
 }
 #scroll{
-	height:100%;
 	overflow:auto;
+	top:80px;
+	height:calc(100% - 80px);
+	position:relative;
 }
 #email-form{
 	width:50%;
+}
+.page{
+	height:100%;
 }
