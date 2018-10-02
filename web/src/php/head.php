@@ -8,6 +8,9 @@
 
 	<!--Main stylesheet-->
 	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	
+	<!--Widgets style sheet-->
+	<link rel="stylesheet" href="../lib/jqwidgets/styles/jqx.base.css" type="text/css" />
 
 	<!--Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">

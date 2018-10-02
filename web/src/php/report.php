@@ -11,6 +11,7 @@
 	
 	<body>
 		<p style="padding-top: 120px"><?php echo $pageName ?> contnet here!</p>
+		<div style='float: left; margin-top: 20px; margin-left: 100px;' id='jqxWidget'></div>
 	</body>
 	
 	<?php 

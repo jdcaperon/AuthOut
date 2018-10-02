@@ -17,4 +17,11 @@
 		}
 	}
 	?>
+	
+	<!--jq widgest scripts-->
+	<script type="text/javascript" src="../lib/jqwidgets/jqxcore.js"></script>
+	<script type="text/javascript" src="../lib/jqwidgets/jqxdatetimeinput.js"></script>
+	<script type="text/javascript" src="../lib/jqwidgets/jqxcalendar.js"></script>
+	<script type="text/javascript" src="../lib/jqwidgets/jqxtooltip.js"></script>
+	<script type="text/javascript" src="../lib/jqwidgets/globalization/globalize.js"></script>
 </div>
