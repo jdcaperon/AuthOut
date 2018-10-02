@@ -3,7 +3,7 @@
 <html lang="en">
 	<?php 
 		$pageName = "Live Monitor";
-		//$stylesheets = array("monitor_style.css");
+		$stylesheets = array("monitor_style.css");
 		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
 		
 	?>
@@ -11,7 +11,17 @@
 	<body>
 		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
 		
-		<p style="padding-top: 120px"><?php echo $pageName ?> contnet here!</p>
+		<div id="monitor-content" class="row">
+			<div id="graph1" class="col">
+				<!--Graph here-->
+				<img src="../img/placeholder.png" style="width:100%; height:100%; border: 1px solid black">
+			</div>
+			
+			<div id="graph2" class="col">
+				<!--Graph here-->
+				<img src="../img/placeholder.png" style="width:100%; height:100%; border: 1px solid black">
+			</div>
+		</div>
 	</body>
 	
 	<?php 

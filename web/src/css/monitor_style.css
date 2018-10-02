@@ -3,11 +3,11 @@ body {
 	flex-flow: column;
 }
 
-#home-content {
+#monitor-content {
 	flex: 1;
 	margin: 0;
 }
 
-#home-content > div {
+#monitor-content > div {
 	padding: 0;
 }
