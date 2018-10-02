@@ -16,10 +16,7 @@ pipeline {
     stage('Build & Test Product Web') {
       steps {
         script {
-          echo "Building Product Website"
-          sh "mkdir -p build/product"
-          sh "cd product && yarn && yarn test && yarn build"
-          sh "cp -r product/build/* build/product"
+          echo "Building Product Website (Doing Nothing)"
         }
       }
     }
