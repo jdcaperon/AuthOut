@@ -1,4 +1,8 @@
+#chart, #piechart{
+	width:80%;
+	margin: auto;
 
+}
 
 #admin-content{
 	top:80px;
@@ -10,5 +14,5 @@
 }
 
 h3{
-	margin-top: auto;
+	margin: auto;
 }

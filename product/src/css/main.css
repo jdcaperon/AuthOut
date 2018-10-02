@@ -108,10 +108,9 @@ html, body {
 }
 .page > div{
 	width:60%;
-
-		position: relative;
-		left: 20%;
-		height:100%
+	position: relative;
+	left: 20%;
+	height:100%
 }
 #scroll{
 	overflow:auto;
@@ -122,8 +121,10 @@ html, body {
 #email-form{
 	width:60%;
 }
+
 .page{
 	height:100%;
+	overflow: hidden;
 }
 
 iframe{
@@ -173,5 +174,13 @@ width:80%;
 
 #mail-content{
 	margin:auto;
+}
 
+
+.d-block {
+  height: 100%;
+}
+.carousel-inner{
+  height:100%;
+  max-height: 500px !important;
 }
