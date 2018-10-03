@@ -1,0 +1,40 @@
+body {
+	display: flex;
+	flex-flow: column;
+}
+
+.jumbotron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  background-color: transparent;
+}
+
+#stats-form select {
+	width: 80%;
+	height: 35px;
+}
+
+#stats-form label {
+	color: #03BABD;
+	font-size: 1.5em;
+	margin-top: 20px;
+}
+
+#stats-form button {
+	margin-top: 40px;
+}
+
+.calendar {
+	margin: 0 auto;
+}
+
+#stats-content {
+	flex: 1;
+	margin: 0;
+}
+
+#stats-content > div {
+	padding: 0;
+}

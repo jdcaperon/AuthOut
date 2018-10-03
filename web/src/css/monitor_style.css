@@ -1,0 +1,13 @@
+body {
+	display: flex;
+	flex-flow: column;
+}
+
+#monitor-content {
+	flex: 1;
+	margin: 0;
+}
+
+#monitor-content > div {
+	padding: 0;
+}

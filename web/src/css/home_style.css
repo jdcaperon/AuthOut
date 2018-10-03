@@ -1,0 +1,13 @@
+body {
+	display: flex;
+	flex-flow: column;
+}
+
+#home-content {
+	flex: 1;
+	margin: 0;
+}
+
+#home-content > div {
+	padding: 0;
+}
