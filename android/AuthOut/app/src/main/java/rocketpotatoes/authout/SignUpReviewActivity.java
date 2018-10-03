@@ -25,11 +25,8 @@ package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.drawable.ColorDrawable;
 import android.media.ExifInterface;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -54,8 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 import rocketpotatoes.authout.Helpers.Util;
 
@@ -77,7 +73,6 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private Bitmap userBitmap;
     private ArrayList<ArrayList<String>> children;
     private RecyclerView childSignupSelectorView;
-    private ChildSignupListAdapter childSignupListAdapter;
 
     private RequestQueue requestQueue;
 
@@ -106,7 +101,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
         assert (childSignupSelectorView != null);
 
         childSignupSelectorView.setLayoutManager(layoutManager);
-        childSignupListAdapter = new ChildSignupListAdapter(children, this);
+        ChildSignupListAdapter childSignupListAdapter = new ChildSignupListAdapter(children, this);
         childSignupSelectorView.setAdapter(childSignupListAdapter);
     }
 
@@ -157,7 +152,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
         int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_UNDEFINED);
 
-        Bitmap rotatedBitmap = null;
+        Bitmap rotatedBitmap;
         switch(orientation) {
 
             case ExifInterface.ORIENTATION_ROTATE_90:

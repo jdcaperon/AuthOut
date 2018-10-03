@@ -32,20 +32,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.oob.SignUp;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+
 
 public class SignUpChildActivity extends AppCompatActivity {
 
@@ -54,10 +49,8 @@ public class SignUpChildActivity extends AppCompatActivity {
     public EditText firstName;
     public EditText surname;
     public EditText dateOfBirth;
-    private ListView listview;
     private ArrayList<ArrayList<String>> children;
     private ChildSignupListAdapter childSignupListAdapter;
-    private RecyclerView childSignupSelectorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +64,7 @@ public class SignUpChildActivity extends AppCompatActivity {
         setUpCalendarPicker();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        childSignupSelectorView = findViewById(R.id.child_selector);
+        RecyclerView childSignupSelectorView = findViewById(R.id.child_selector);
         assert (childSignupSelectorView != null);
 
         childSignupSelectorView.setLayoutManager(layoutManager);
@@ -112,7 +105,7 @@ public class SignUpChildActivity extends AppCompatActivity {
      */
     public void addChild(View v) {
         if (validateInputs()) {
-            children.add(new ArrayList<String>(Arrays.asList(firstName.getText().toString(),
+            children.add(new ArrayList<>(Arrays.asList(firstName.getText().toString(),
                     surname.getText().toString(), dateOfBirth.getText().toString())));
 
             childSignupListAdapter.notifyDataSetChanged();
