@@ -28,10 +28,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-
-import rocketpotatoes.authout.Helpers.Util;
 
 public class ConfirmFinishActivity extends AppCompatActivity {
 

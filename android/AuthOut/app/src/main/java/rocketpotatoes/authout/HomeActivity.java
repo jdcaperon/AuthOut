@@ -31,6 +31,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -166,18 +167,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-
-
         if (!StoragePermissionHelper.hasStoragePermission(this)) {
             StoragePermissionHelper.requestStoragePermission(this);
             return;
         }
-
         if (!CameraPermissionHelper.hasCameraPermission(this)) {
             CameraPermissionHelper.requestCameraPermission(this);
             return;
         }
-
         camera.onResume();
         handler.postDelayed(runnable, INITIAL_DELAY);
 
@@ -252,7 +249,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         //TODO Remove this once implementation is finished above.
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        if (dialog.getWindow() != null) {
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        }
                         dialog.show();
 
                         /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
@@ -301,7 +300,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] results) {
         if (requestCode == 0) {
             if (!StoragePermissionHelper.hasStoragePermission(this)) {
                 Toast.makeText(this, getString(R.string.storage_perms), Toast.LENGTH_LONG)

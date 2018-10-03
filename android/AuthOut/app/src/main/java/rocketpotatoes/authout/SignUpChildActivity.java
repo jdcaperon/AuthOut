@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.app.DatePickerDialog;
@@ -58,10 +81,19 @@ public class SignUpChildActivity extends AppCompatActivity {
 
     }
 
+    /** User clicked the back button
+     *
+     * @param v - the current view
+     */
     public void backClicked(View v) {
         finish();
     }
 
+
+    /** User clicked the next button
+     *
+     * @param v - the current view
+     */
     public void nextClicked(View v) {
         if (children.size() > 0) {
             Intent intent = new Intent(this, SignUpReviewActivity.class);
@@ -74,6 +106,10 @@ public class SignUpChildActivity extends AppCompatActivity {
         }
     }
 
+    /** 'Register Child' button clicked
+     *
+     * @param v - the current view
+     */
     public void addChild(View v) {
         if (validateInputs()) {
             children.add(new ArrayList<String>(Arrays.asList(firstName.getText().toString(),
@@ -86,12 +122,17 @@ public class SignUpChildActivity extends AppCompatActivity {
         }
     }
 
+    /** Clears the {@link EditText} widgets for child information*/
     private void clearTexts() {
         firstName.getText().clear();
         surname.getText().clear();
         dateOfBirth.getText().clear();
     }
 
+    /** Evaluates the {@link EditText} widgets on screen and checks if they are empty,
+     *
+     * @return boolean value determining if the edit texts are valid
+     */
     private boolean validateInputs() {
         boolean isValid = true;
         List<EditText> inputs = new ArrayList<>(Arrays.asList(firstName, surname, dateOfBirth));
@@ -107,6 +148,7 @@ public class SignUpChildActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /** Function to set up the calendar picker for date of births*/
     private void setUpCalendarPicker() {
 
         myCalendar = Calendar.getInstance();
@@ -134,6 +176,7 @@ public class SignUpChildActivity extends AppCompatActivity {
         });
     }
 
+    /** Updates the date of birth text based on the date selected in the calendar picker */
     private void updateLabel() {
         String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);

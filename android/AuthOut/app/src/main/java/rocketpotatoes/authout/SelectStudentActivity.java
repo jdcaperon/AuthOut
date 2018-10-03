@@ -124,6 +124,10 @@ public class SelectStudentActivity extends AppCompatActivity {
         changeButtonSettings(getOptionByChildren(displayedChildren));
     }
 
+    /** Function called when user clicks 'Sign in Others' button
+     *
+     * @param view - the current view
+     */
     public void signInOthers(View view) {
         Intent intent = new Intent(SelectStudentActivity.this, SelectStudentActivity.class);
         intent.putExtra("PARENT", currentUser);
@@ -131,7 +135,10 @@ public class SelectStudentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    /** Function called when user clicks the dynamic button
+     *
+     * @param view - the current view
+     */
     public void onMadeSelection(View view) {
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
         //TODO send proper request to the server

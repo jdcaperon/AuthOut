@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.graphics.Bitmap;
@@ -76,6 +99,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
     }
 
 
+    /** Sets up the child list and the {@link ChildSignupListAdapter} */
     private void setUpChildList() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         RecyclerView childSignupSelectorView = findViewById(R.id.child_selector);
@@ -86,6 +110,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
         childSignupSelectorView.setAdapter(childSignupListAdapter);
     }
 
+    /** Registers the edit texts and sets variables to be used later*/
     private void setUpVariables() {
         progressOverlay = findViewById(R.id.progress_overlay);
         fullName = findViewById(R.id.fullName);
@@ -105,6 +130,8 @@ public class SignUpReviewActivity extends AppCompatActivity {
         emailData = parentDetails.get("EMAIL");
     }
 
+
+    /** Sets up the {@link TextView} components texts and the user image */
     private void setUpLayout() {
         fullName.setText(getResources().getString(R.string.full_name, firstNameData, surnameData));
         mobile.setText(mobileData);
@@ -124,6 +151,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
         userImage.setImageBitmap(userBitmap);
     }
 
+    /** Rotates the user image taken based on phone type */
     private Bitmap rotateUserImage(Bitmap bitmap) throws IOException {
         ExifInterface ei = new ExifInterface(takePhotoData.getAbsolutePath());
         int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
@@ -151,6 +179,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
         return rotatedBitmap;
     }
 
+    /** Rotates the user image taken based on phone type */
     public static Bitmap rotateImage(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
@@ -158,6 +187,10 @@ public class SignUpReviewActivity extends AppCompatActivity {
                 matrix, true);
     }
 
+    /** Function called when user 'Confirms Registration'
+     *
+     * @param v - the current view
+     */
     public void confirmUserSubmission(View v) {
         Request request = createParentRequest();
         request.setRetryPolicy(new DefaultRetryPolicy( 50000, 5,
