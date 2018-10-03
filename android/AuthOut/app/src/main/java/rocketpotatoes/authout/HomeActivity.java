@@ -141,6 +141,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.setTitle("Move closer");
         builder.setMessage("Please move closer to the camera.");
         moveCloserDialog = builder.create();
+        moveCloserDialog.setCanceledOnTouchOutside(false);
 
         //get screen size in order to get face size in relation to total screen size
         Display display = getWindowManager().getDefaultDisplay();
@@ -148,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
 
         dialog = new NotRecognizedDialog(
                 HomeActivity.this, handler, runnable, INITIAL_DELAY);
+        dialog.setCanceledOnTouchOutside(false);
 
         progressOverlay = findViewById(R.id.progress_overlay);
         camera = findViewById(R.id.camera);
