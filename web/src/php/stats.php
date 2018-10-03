@@ -4,17 +4,17 @@
 	<?php
 		$pageName = "Statistics";
 		$stylesheets = array("stats_style.css");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
+		include_once ('head.php');
 
 	?>
 
 	<body>
-		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		<?php include ('../html/nav.html'); ?>
 
 		<div id="stats-content" class="row">
 			<div id="graph" class="col">
 				<!--Graph here-->
-				<canvas id="Weekly" width="150" height="100"></canvas>
+				<img src="../img/placeholder.png" style="width:100%; height:100%">
 			</div>
 
 			<div id="options" class="col-4 text-center">
@@ -45,7 +45,7 @@
 
 	<?php
 		$scripts = array("stats_script.js");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
+		include_once ('scripts.php');
 	?>
 	<script>
 			var ctx = document.getElementById("Weekly").getContext('2d');

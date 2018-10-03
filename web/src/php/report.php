@@ -4,11 +4,11 @@
 	<?php 
 		$pageName = "Report";
 		$stylesheets = array("report_style.css");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';		
+		include_once ('head.php');		
 	?>
 	
 	<body>
-		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		<?php include ('../html/nav.html'); ?>
 		
 		<div id="report-content" class="row">
 			<div id="graph" class="col">
@@ -30,6 +30,6 @@
 	
 	<?php 
 		$scripts = array("report_script.js");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
+		include_once ('scripts.php');
 	?>
 </html>

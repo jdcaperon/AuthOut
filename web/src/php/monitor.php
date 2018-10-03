@@ -4,12 +4,12 @@
 	<?php 
 		$pageName = "Live Monitor";
 		$stylesheets = array("monitor_style.css");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
+		include_once ('head.php');
 		
 	?>
 	
 	<body>
-		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		<?php include ('../html/nav.html'); ?>
 		
 		<div id="monitor-content" class="row">
 			<div id="graph1" class="col">
@@ -26,6 +26,6 @@
 	
 	<?php 
 		$scripts = array("monitor_script.js");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
+		include_once ('scripts.php');
 	?>
 </html>
