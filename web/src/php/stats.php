@@ -14,7 +14,9 @@
 		<div id="stats-content" class="row">
 			<div id="graph" class="col">
 				<!--Graph here-->
-				<img src="../img/placeholder.png" style="width:100%; height:100%">
+				<div class = "jumbotron" style="height:100%;">
+					<canvas id="Weekly"></canvas>
+				</div>
 			</div>
 
 			<div id="options" class="col-4 text-center">
@@ -66,6 +68,8 @@
 			        }]
 			    },
 			    options: {
+					responsive:true,
+					maintainAspectRatio: false,
 			        scales: {
 			            yAxes: [{
 			                ticks: {
