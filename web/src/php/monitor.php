@@ -13,13 +13,59 @@
 		
 		<div id="monitor-content" class="row">
 			<div id="graph1" class="col">
-				<!--Graph here-->
-				<img src="../img/placeholder.png" style="width:100%; height:100%; border: 1px solid black">
+				<h2 class="graph_title">Sign-in History</h2>
+				<div  class="jumbotron">
+					<table id="sign-in-table" class="live_table" width="100%" height="100%">
+						<tr>
+							<th>Parent</th>
+							<th>Confidence</th>
+							<th>Child</th>
+							<th>Time</th>
+						</tr>
+						
+						<?php
+							for($i = 0; $i < 50; $i++) {
+								echo "
+									<tr>
+										<td>Example</td>
+										<td>100%</td>
+										<td>Exmple</td>
+										<td>00:00</td>
+									</tr>
+								";
+							}
+						
+						?>
+					</table>
+				</div>
 			</div>
 			
 			<div id="graph2" class="col">
-				<!--Graph here-->
-				<img src="../img/placeholder.png" style="width:100%; height:100%; border: 1px solid black">
+				<h2 class="graph_title">Sign-out History</h2>
+				<div  class="jumbotron">
+					<table id="sign-out-table" class="live_table" width="100%" height="100%">
+						<tr>
+							<th>Parent</th>
+							<th>Confidence</th>
+							<th>Child</th>
+							<th>Time</th>
+						</tr>
+						
+						<?php
+							for($i = 0; $i < 50; $i++) {
+								echo "
+									<tr>
+										<td>Example</td>
+										<td>100%</td>
+										<td>Exmple</td>
+										<td>00:00</td>
+									</tr>
+								";
+							}
+						
+						?>
+					</table>
+				</div>
 			</div>
 		</div>
 	</body>

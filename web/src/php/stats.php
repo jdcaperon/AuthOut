@@ -13,7 +13,7 @@
 
 		<div id="stats-content" class="row">
 			<div id="graph" class="col">
-				<!--Graph here-->
+				<h2 class="graph_title">Data Displayed - Timeframe</h2>
 				<div class = "jumbotron" style="height:100%;">
 					<canvas id="Weekly"></canvas>
 				</div>
@@ -49,35 +49,5 @@
 		$scripts = array("stats_script.js");
 		include_once ('scripts.php');
 	?>
-	<script>
-			var ctx = document.getElementById("Weekly").getContext('2d');
-			var myChart = new Chart(ctx, {
-			    type: 'bar',
-			    data: {
-			        labels: ["White", "Orange", "Blue", "Pink"],
-			        datasets: [{
-			            label: 'Clicks Per Week',
-			            data: [12, 19, 3, 5],
-			            backgroundColor: [
-			                '#F2F3F1',
-			                '#DCA726',
-			                '#03BABD',
-			                '#BC72AF'
-			            ],
-			            borderWidth: 1
-			        }]
-			    },
-			    options: {
-					responsive:true,
-					maintainAspectRatio: false,
-			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero:true
-			                }
-			            }]
-			        }
-			    }
-			});
-	</script>
+	
 </html>

@@ -23,6 +23,7 @@
 					<label>Start Date:</label><div id='start-date-widget' class="calendar"></div>
 					<label>End Date:</label><div id='end-date-widget' class="calendar"></div>
 					<button type="button" id="generate-report-button" class="rounded_button purple_button">Generate Report</button>
+					<button type="button" id="save-report-button" class="rounded_button blue_button">Save Report</button>
 				</form>
 			</div>
 		</div>

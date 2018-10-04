@@ -4,11 +4,7 @@ body {
 }
 
 .jumbotron {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  background-color: transparent;
+  padding: 20px;
 }
 
 #report-form input {
@@ -21,7 +17,7 @@ body {
 	margin-top: 20px;
 }
 
-#report-form button {
+#generate-report-button {
 	margin-top: 40px;
 }
 
