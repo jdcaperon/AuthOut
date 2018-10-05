@@ -31,10 +31,11 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/textInputs"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/enjoy">
+        app:layout_constraintTop_toBottomOf="@id/enjoy"
+        app:layout_constraintBottom_toTopOf="@id/review">
 
         <TextView
             android:layout_width="wrap_content"

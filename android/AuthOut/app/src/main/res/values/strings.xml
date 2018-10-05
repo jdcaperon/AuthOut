@@ -52,6 +52,7 @@
     <string name="mobile">Phone</string>
     <string name="photo">Photo</string>
     <string name="name">Name</string>
+    <string name="children">Children</string>
     <string name="full_name">%1$s %2$s</string>
     <string name="take_photo">Tap Here</string>
     <string name="registeredChildren">Registered Children:</string>

@@ -31,6 +31,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,7 +57,6 @@ import com.google.android.gms.vision.face.FaceDetector;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private AlertDialog moveCloserDialog;
     private View progressOverlay;
+    private NotRecognizedDialog dialog;
 
     private Point screenSize = new Point();
 
@@ -100,8 +101,8 @@ public class HomeActivity extends AppCompatActivity {
         public void run() {
             takePicture();
             Face face = faceProcessing();
-            // Ensure face is appropriate size to move forwards
             if (face != null) {
+                // Ensure face is appropriate size to move forwards
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
@@ -141,10 +142,15 @@ public class HomeActivity extends AppCompatActivity {
         builder.setTitle("Move closer");
         builder.setMessage("Please move closer to the camera.");
         moveCloserDialog = builder.create();
+        moveCloserDialog.setCanceledOnTouchOutside(false);
 
         //get screen size in order to get face size in relation to total screen size
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
+
+        dialog = new NotRecognizedDialog(
+                HomeActivity.this, handler, runnable, INITIAL_DELAY);
+        dialog.setCanceledOnTouchOutside(false);
 
         progressOverlay = findViewById(R.id.progress_overlay);
         camera = findViewById(R.id.camera);
@@ -161,18 +167,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-
-
         if (!StoragePermissionHelper.hasStoragePermission(this)) {
             StoragePermissionHelper.requestStoragePermission(this);
             return;
         }
-
         if (!CameraPermissionHelper.hasCameraPermission(this)) {
             CameraPermissionHelper.requestCameraPermission(this);
             return;
         }
-
         camera.onResume();
         handler.postDelayed(runnable, INITIAL_DELAY);
 
@@ -247,9 +249,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         //TODO Remove this once implementation is finished above.
-                        NotRecognizedDialog dialog = new NotRecognizedDialog(
-                                HomeActivity.this, handler, runnable, INITIAL_DELAY);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        if (dialog.getWindow() != null) {
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        }
                         dialog.show();
 
                         /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
@@ -298,7 +300,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] results) {
         if (requestCode == 0) {
             if (!StoragePermissionHelper.hasStoragePermission(this)) {
                 Toast.makeText(this, getString(R.string.storage_perms), Toast.LENGTH_LONG)
