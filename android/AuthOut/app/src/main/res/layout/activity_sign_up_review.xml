@@ -136,7 +136,7 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/montserrat_bold"
             android:textSize="20sp"
-            android:text="Children"
+            android:text="@string/children"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/email"
             app:layout_constraintTop_toBottomOf="@+id/email" />
@@ -147,20 +147,23 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/child_selector"
         android:layout_width="380dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="400dp"
         android:scrollbars="vertical"
         android:background="@drawable/signup_input_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputs" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputs"
+        app:layout_constraintBottom_toTopOf="@id/userImage"/>
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="200dp"
-        android:layout_height="225dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:contentDescription="@string/user_registration_photo"
         app:layout_constraintBottom_toTopOf="@id/finish"
+        app:layout_constraintTop_toBottomOf="@id/child_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
