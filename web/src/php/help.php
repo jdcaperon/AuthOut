@@ -3,12 +3,12 @@
 	<?php 
 		$pageName = "Help";
 		$stylesheets = array("help_style.css");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';
+		include_once ('head.php');
 		
 	?>
 	
 	<body>
-		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		<?php include ('../html/nav.html'); ?>
 		
 		<div id="help-content">
 			<h2>How can we help?</h2>
@@ -20,6 +20,6 @@
 	
 	<?php 
 		$scripts = array("help_script.js");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
+		include_once ('scripts.php');
 	?>
 </html>

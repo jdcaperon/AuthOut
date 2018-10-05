@@ -23,7 +23,6 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,7 +57,6 @@ public class SelectStudentActivity extends AppCompatActivity {
     private Parent currentUser;
     private Button dynamicButton;
     private TextView dynamicText;
-    private GradientDrawable dynamicButtonBackground;
     private ChildSelectorAdapter mChildSelectorAdapter;
     private RequestQueue requestQueue;
     private List<Child> displayedChildren;
@@ -82,7 +80,15 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         mChildSelectorView.setLayoutManager(layoutManager);
 
+        if (getIntent().getExtras() == null) {
+            throw new IllegalStateException("No trusted children boolean packaged with intent");
+        }
+
         currentUser = getIntent().getExtras().getParcelable("PARENT");
+
+        if (currentUser == null) {
+            throw new IllegalStateException("No parent object packaged with intent");
+        }
 
         setUpLayout(currentUser);
 
@@ -95,14 +101,17 @@ public class SelectStudentActivity extends AppCompatActivity {
      *
      * @param parent - current signed in user
      */
-    private void setUpLayout(Parent parent) {
+    private void setUpLayout(Parent parent) throws IllegalStateException {
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(getString(R.string.welcome_message, parent.getFirstName()));
 
         progressOverlay = findViewById(R.id.progress_overlay);
         dynamicText = findViewById(R.id.dynamicText);
         dynamicButton = findViewById(R.id.dynamicButton);
-        dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
+
+        if (getIntent().getExtras() == null) {
+            throw new IllegalStateException("No trusted children boolean packaged with intent");
+        }
 
         boolean shouldDisplayTrustedChildren =
                 getIntent().getExtras().getBoolean("DISPLAY_TRUSTED_CHILDREN");
@@ -124,6 +133,10 @@ public class SelectStudentActivity extends AppCompatActivity {
         changeButtonSettings(getOptionByChildren(displayedChildren));
     }
 
+    /** Function called when user clicks 'Sign in Others' button
+     *
+     * @param view - the current view
+     */
     public void signInOthers(View view) {
         Intent intent = new Intent(SelectStudentActivity.this, SelectStudentActivity.class);
         intent.putExtra("PARENT", currentUser);
@@ -131,7 +144,10 @@ public class SelectStudentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    /** Function called when user clicks the dynamic button
+     *
+     * @param view - the current view
+     */
     public void onMadeSelection(View view) {
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
         //TODO send proper request to the server
@@ -190,8 +206,8 @@ public class SelectStudentActivity extends AppCompatActivity {
 
     /**
      *
-     * @param option
-     * @param children
+     * @param option - {@link DynamicButtonOption} to change text for
+     * @param children - list of currently selected children
      */
     private void changeText(DynamicButtonOption option, List<Child> children) {
         StringBuilder text = new StringBuilder(createDynamicString(children));

@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.app.DatePickerDialog;
@@ -19,7 +42,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -72,6 +94,19 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            takePhoto.setText(getString(R.string.photoCaptured));
+            takePhoto.setBackground(getDrawable(R.drawable.signup_input_background));
+        }
+    }
+
+    /** Evaluates the {@link EditText} widgets on screen and checks if they are empty,
+     *  if it is an email, it uses a simple regex to validate it.
+     *
+     * @return boolean value determining if the edit texts are valid
+     */
     private boolean isValidContent() {
         boolean isValid = true;
         List<EditText> inputs = new ArrayList<>(Arrays.asList(firstName, surname, mobile, email, dateOfBirth, takePhoto));
@@ -88,6 +123,10 @@ public class SignUpActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /** Called if the user wishes to move to register children and review
+     *
+     * @param v - the current view
+     */
     public void reviewContent(View v) {
         if (isValidContent()) {
             Intent intent = new Intent(this, SignUpChildActivity.class);
@@ -107,6 +146,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+    /** Function to set up the calendar picker for date of births*/
     private void setUpCalendarPicker() {
 
         myCalendar = Calendar.getInstance();
@@ -136,12 +176,18 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    /** Updates the date of birth text based on the date selected in the calendar picker */
     private void updateLabel() {
         String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
         dateOfBirth.setText(sdf.format(myCalendar.getTime()));
     }
 
+    /** Creates a temporary image in order to retain quality after the user takes a picture
+     *
+     * @return a file with that image
+     * @throws IOException - due to issues with creating or saving the file/image
+     */
     private File createImageFile() throws IOException {
         long timeStamp = System.currentTimeMillis();
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -153,14 +199,10 @@ public class SignUpActivity extends AppCompatActivity {
         );
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            takePhoto.setText(getString(R.string.photoCaptured));
-            takePhoto.setBackground(getDrawable(R.drawable.signup_input_background));
-        }
-    }
-
+    /** User clicked the back button
+     *
+     * @param v - the current view
+     */
     public void backClicked(View v) {
         finish();
     }

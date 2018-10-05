@@ -11,3 +11,26 @@ body {
 #monitor-content > div {
 	padding: 0;
 }
+
+.live_table, .live_table  td , .live_table  th {
+	border: 1px solid black;
+}
+
+.live_table  td, .live_table  th {
+	padding-left: 5px;
+}
+
+.live_table td {
+	max-height: 60px;
+}
+
+.live_table tr:nth-child(odd) {
+	background-color: #b7b8b7;
+}
+
+#graph1 >.jumbotron, #graph2 >.jumbotron  {
+	 height: 90%;
+	 margin-top: 20px;
+	 padding: 0 20px;
+	 overflow-y: scroll;
+}

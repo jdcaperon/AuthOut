@@ -7,8 +7,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Alex+Brush|Cookie|Lobster|Playball|Tangerine" rel="stylesheet">
 
 	<!--Main stylesheet-->
-	<link href="/css/main.css" rel="stylesheet" type="text/css">
-	
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+
 	<!--Widgets style sheet-->
 	<link rel="stylesheet" href="../lib/jqwidgets/styles/jqx.base.css" type="text/css" />
 
@@ -18,11 +18,15 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
+	<!-- JS Inclusions -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+
 	<!--Extra stylesheets-->
 	<?php
 	if (isset($stylesheets)) {
 		for ($i = 0; $i < count($stylesheets); $i++) {
-			echo("<link href=/css/".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
+			echo("<link href=../css/".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
 		}
 	}
 	?>
