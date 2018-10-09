@@ -10,14 +10,11 @@ class ParentModel(db.Model):
     """
     __tablename__ = 'parents'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
+    email = db.Column(db.String, primary_key=True)
+    first_name = db.Column(db.String, primary_key=True)
+    last_name = db.Column(db.String, primary_key=True)
     date_of_birth = db.Column(db.Date)
     mobile_number = db.Column(db.String)
-
-    # maybe just replace this with the base64 of the image.
-    image_id = db.Column(db.Integer)
 
     # Relationships
     children = db.relationship('ChildModel', secondary='guardian', backref=db.backref('guardians'))
@@ -46,7 +43,6 @@ class ParentModel(db.Model):
             "last_name": self.last_name,
             "date_of_birth": self.date_of_birth.strftime('%d/%m/%Y'),
             "mobile_number": self.mobile_number,
-            "image_id": self.image_id,
             "children": self.convert_children(self.children),
             "trusted_children": self.convert_children(self.trusted_children)
         }
