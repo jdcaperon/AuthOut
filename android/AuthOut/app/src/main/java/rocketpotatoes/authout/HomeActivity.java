@@ -213,7 +213,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
+    /** Builds are returns a list of the generic or trusted children of a parent
+     *
+     * @param response - the response from the server with the parent details
+     * @param getTrustedChildren - Where to get the trusted children or get generic children
+     * @return list of {@link Child} objects specified in {@param getTrustedChildren}
+     */
     private List<Child> buildChildList(JSONObject response, boolean getTrustedChildren) {
         String key = getTrustedChildren ? "trusted_children" : "children";
         List<Child> childList = new ArrayList<>();
@@ -242,7 +247,13 @@ public class HomeActivity extends AppCompatActivity {
         return childList;
     }
 
-
+    /** Builds and returns a parent object
+     *
+     * @param response - the response from the server with the parent details
+     * @param children - a list of child objects
+     * @param trustedChildren - a list of child objects
+     * @return
+     */
     private Parent buildParent(JSONObject response, List<Child> children, List<Child> trustedChildren) {
         try {
             String firstName = response.get("first_name").toString();
@@ -293,12 +304,6 @@ public class HomeActivity extends AppCompatActivity {
                             }
                             dialog.show();
                         }
-
-
-                        //TODO Remove this once implementation is finished above.
-
-
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
