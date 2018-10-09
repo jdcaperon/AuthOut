@@ -128,8 +128,6 @@ html, body {
 }
 
 iframe{
-	width:420px;
-	height: 315px;
 	margin: 0 auto;
 	display:block ;
 }

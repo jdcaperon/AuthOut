@@ -8,11 +8,13 @@
 				<div class = "page">
 					<div id="overview">
 						<h3>Overview</h3>
-						<div id="overview-1">
-						<p>AuthOut uses facial recognition technologies to track attendance in childcare centres</p>
-						</div>
-						<div id="overview-2">
-							<iframe width="560" height="315" src="https://www.youtube.com/embed/phisEhrYKUI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+						<div class="container">
+							<div id="overview-1" class="row">
+							<p>AuthOut uses facial recognition technologies to track attendance in childcare centres</p>
+							</div>
+							<div id="overview-2" class="row">
+								<iframe src="https://www.youtube.com/embed/phisEhrYKUI?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -90,8 +92,11 @@
 								    </select>
 							  	</div>
 								<div class="form-group form-check">
-									<input class="form-check-input" type="radio" id="offer" value="offer" checked>
-									 <small class="form-check-label" for="offer"> Yes, I would like to register for early-bird offers.</small>
+									<div class="custom-control custom-radio">
+									  <input type="radio" class="custom-control-input" id="offer" name="offer" checked>
+									  <label class="custom-control-label" for="offer">Yes, I would like to register for early-bird offers.</label>
+									</div>
+
 							  	</div>
 							  	<button type="submit" class="btn btn-primary rounded_button blue_button">Submit</button>
 							</form>
