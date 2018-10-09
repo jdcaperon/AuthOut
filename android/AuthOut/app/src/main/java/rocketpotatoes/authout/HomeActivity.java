@@ -54,6 +54,7 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final double MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.35;
-    private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
+    private static final String AUTHOUT_IMAGE_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login"; //"http://httpbin.org/post";
 
     private CameraKitView camera;
     private FaceDetector faceDetector;
@@ -220,7 +221,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //Adding contents to request
         try {
-            json.put("UserPhoto", userPhoto);
+            json.put("user_photo", userPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -230,18 +231,37 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
-                        Log.i("Response", response.toString().substring(0, 100));
+                        Log.i("Response", response.toString());
+                        List<Child> dummyChildren = new ArrayList<>();
+
+                        try {
+                            String childrenString = response.get("children").toString();
+                            childrenString = childrenString.substring(1, childrenString.length() - 1);
+                            String[] children = childrenString.split(",\\{");
+                            for (int i = 0; i < children.length; i++) {
+                                String child = children[i];
+                                if (i > 0) {
+                                    child = "{" + child;
+                                }
+
+                                Log.i("Child", child);
+                                JSONObject childObject = new JSONObject(child);
+                                dummyChildren.add(new Child(childObject.get("first_name").toString(),
+                                        childObject.get("last_name").toString(),
+                                        childObject.get("status").toString() == "false" ? "Signed-Out" : "Signed-In",
+                                        Integer.parseInt(
+                                                childObject.get("id").toString())));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
-                        //TODO if face is matched onResponse should move to the next activity
-                        //TODO if the response is null/not matched we move to a different activity
 
                         // ----------- Creating Dummy Parent -----------------------
-                        List<Child> dummyChildren = new ArrayList<>();
                         List<Child> dummyTrusted = new ArrayList<>();
-                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
 
 
                         Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);
@@ -249,16 +269,16 @@ public class HomeActivity extends AppCompatActivity {
 
 
                         //TODO Remove this once implementation is finished above.
-                        if (dialog.getWindow() != null) {
+                        /*if (dialog.getWindow() != null) {
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         }
-                        dialog.show();
+                        dialog.show();*/
 
-                        /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
                         intent.putExtra("PARENT", dummyParent);
                         intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
                         startActivity(intent);
-                        finish();*/
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override

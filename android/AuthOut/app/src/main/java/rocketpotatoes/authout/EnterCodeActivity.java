@@ -145,10 +145,10 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         // ----------- Creating Dummy Parent -----------------------
                         List<Child> dummyChildren = new ArrayList<>();
                         List<Child> dummyTrusted = new ArrayList<>();
-                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out", 1));
+                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out", 2));
+                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out", 3));
+                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
 
 
                         Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);

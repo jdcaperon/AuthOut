@@ -58,7 +58,7 @@ public class Parent implements Parcelable{
             }
             this.trustedChildren.add(new Child(child.get("firstName").toString(),
                     child.get("surname").toString(),
-                    child.get("status").toString()));
+                    child.get("status").toString(), 1));
         }
 
         for (Map<String, Object> child : children) {
@@ -68,7 +68,8 @@ public class Parent implements Parcelable{
             }
             this.children.add(new Child(child.get("firstName").toString(),
                                         child.get("surname").toString(),
-                                        child.get("status").toString()));
+                                        child.get("status").toString(), 1)
+                                        );
         }
     }
 
