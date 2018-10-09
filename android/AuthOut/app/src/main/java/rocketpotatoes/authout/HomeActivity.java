@@ -219,7 +219,7 @@ public class HomeActivity extends AppCompatActivity {
      * @param getTrustedChildren - Where to get the trusted children or get generic children
      * @return list of {@link Child} objects specified in {@param getTrustedChildren}
      */
-    private List<Child> buildChildList(JSONObject response, boolean getTrustedChildren) {
+    private static List<Child> buildChildList(JSONObject response, boolean getTrustedChildren) {
         String key = getTrustedChildren ? "trusted_children" : "children";
         List<Child> childList = new ArrayList<>();
         try {
@@ -229,14 +229,13 @@ public class HomeActivity extends AppCompatActivity {
             for (int i = 0; i < children.length; i++) {
                 String child = children[i];
                 if (i > 0) {
-                    child = "{" + child;
+                    child = "{" + child; //todo this is dodge as fuck clean it up
                 }
 
-                Log.i("Child", child);
                 JSONObject childObject = new JSONObject(child);
                 childList.add(new Child(childObject.get("first_name").toString(),
                         childObject.get("last_name").toString(),
-                        childObject.get("status").toString() == "false" ? "Signed-Out" : "Signed-In",
+                        childObject.get("status").toString().equals("false") ? "Signed-Out" : "Signed-In",
                         Integer.parseInt(
                                 childObject.get("id").toString())));
             }
@@ -254,7 +253,7 @@ public class HomeActivity extends AppCompatActivity {
      * @param trustedChildren - a list of child objects
      * @return
      */
-    private Parent buildParent(JSONObject response, List<Child> children, List<Child> trustedChildren) {
+    private static Parent buildParent(JSONObject response, List<Child> children, List<Child> trustedChildren) {
         try {
             String firstName = response.get("first_name").toString();
             String lastName = response.get("last_name").toString();
