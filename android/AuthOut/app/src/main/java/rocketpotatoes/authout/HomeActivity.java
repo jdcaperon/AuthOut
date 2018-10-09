@@ -212,6 +212,48 @@ public class HomeActivity extends AppCompatActivity {
         return Util.bitmapToBase64(bitmapToSend, 50);
     }
 
+
+
+    private List<Child> buildChildList(JSONObject response, boolean getTrustedChildren) {
+        String key = getTrustedChildren ? "trusted_children" : "children";
+        List<Child> childList = new ArrayList<>();
+        try {
+            String childrenString = response.get("children").toString();
+            childrenString = childrenString.substring(1, childrenString.length() - 1);
+            String[] children = childrenString.split(",\\{");
+            for (int i = 0; i < children.length; i++) {
+                String child = children[i];
+                if (i > 0) {
+                    child = "{" + child;
+                }
+
+                Log.i("Child", child);
+                JSONObject childObject = new JSONObject(child);
+                childList.add(new Child(childObject.get("first_name").toString(),
+                        childObject.get("last_name").toString(),
+                        childObject.get("status").toString() == "false" ? "Signed-Out" : "Signed-In",
+                        Integer.parseInt(
+                                childObject.get("id").toString())));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return childList;
+    }
+
+
+    private Parent buildParent(JSONObject response, List<Child> children, List<Child> trustedChildren) {
+        try {
+            String firstName = response.get("first_name").toString();
+            String lastName = response.get("last_name").toString();
+            return new Parent(firstName, lastName, children, trustedChildren);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        throw new IllegalArgumentException("Issue instantiating parent");
+    }
+
     /**
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
      * @return a {@link JsonObjectRequest}
@@ -231,54 +273,32 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         //TODO Create and set parent object here
-                        Log.i("Response", response.toString());
-                        List<Child> dummyChildren = new ArrayList<>();
-
-                        try {
-                            String childrenString = response.get("children").toString();
-                            childrenString = childrenString.substring(1, childrenString.length() - 1);
-                            String[] children = childrenString.split(",\\{");
-                            for (int i = 0; i < children.length; i++) {
-                                String child = children[i];
-                                if (i > 0) {
-                                    child = "{" + child;
-                                }
-
-                                Log.i("Child", child);
-                                JSONObject childObject = new JSONObject(child);
-                                dummyChildren.add(new Child(childObject.get("first_name").toString(),
-                                        childObject.get("last_name").toString(),
-                                        childObject.get("status").toString() == "false" ? "Signed-Out" : "Signed-In",
-                                        Integer.parseInt(
-                                                childObject.get("id").toString())));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
 
-                        // ----------- Creating Dummy Parent -----------------------
-                        List<Child> dummyTrusted = new ArrayList<>();
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
+                        if (true) {
+                            List<Child> childrenList = buildChildList(response, false);
+                            List<Child> trustedChildrenList = buildChildList(response, true);
 
+                            Parent parent = buildParent(response, childrenList, trustedChildrenList);
 
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);
-                        // ---------------------------------------------------------
+                            Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                            intent.putExtra("PARENT", parent);
+                            intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            if (dialog.getWindow() != null) {
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            }
+                            dialog.show();
+                        }
 
 
                         //TODO Remove this once implementation is finished above.
-                        /*if (dialog.getWindow() != null) {
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        }
-                        dialog.show();*/
 
-                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                        intent.putExtra("PARENT", dummyParent);
-                        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
-                        startActivity(intent);
-                        finish();
+
+
                     }
                 }, new Response.ErrorListener() {
                     @Override

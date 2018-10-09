@@ -73,7 +73,6 @@ public class Parent implements Parcelable{
         }
     }
 
-    //Todo this is for testing and is not required for actual implementation.Remove this.
     public Parent(String firstName, String surname, List<Child> children, List<Child> trustedChildren) {
         this.children = children;
         this.firstName = firstName;
