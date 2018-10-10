@@ -3,13 +3,13 @@
 
 	// Make all dates the same
 	date_default_timezone_set("Australia/Brisbane");
-	
+
     $db = new DatabaseConnection();
-	
+
 	$date = date('Y-m-d H:i:s');
-	
+
 	$db->prepared_query('INSERT INTO `views`(`date`) VALUES (?)', "s", $date);
-	
+
 	$db->disconnect();
 
     include('php/head.php');
@@ -105,9 +105,9 @@
 								    </select>
 							  	</div>
 								<div class="form-group form-check">
-									<div class="custom-control custom-radio">
-									  <input type="radio" class="custom-control-input" id="offer" name="offer" checked>
-									  <label class="custom-control-label" for="offer">Yes, I would like to register for early-bird offers.</label>
+									<div class="custom-control custom-checkbox">
+									  <input type="checkbox" class="custom-control-input" id="customCheck1" checked="checked">
+									  <label class="custom-control-label" for="customCheck1">Yes, I would like to register for early-bird offers.</label>
 									</div>
 
 							  	</div>
