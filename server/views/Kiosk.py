@@ -51,7 +51,7 @@ def register_endpoint():
     if "parent" in data:
         parent_data = data['user_photo']
         parent = ParentModel()
-        valid = parent.load(parent_data)
+        valid_parent = parent.load(parent_data)
 
         children_ids = []
         if "children" in data:
@@ -59,8 +59,8 @@ def register_endpoint():
             children = json.loads(children_list)
             for child_data in children:
                 child = ChildModel()
-                valid = child.load(child_data)
-                if valid:
+                child_valid = child.load(child_data)
+                if child_valid:
                     db.session.add(child)
                     db.session.commit()
                     children_ids += child.id
@@ -70,7 +70,7 @@ def register_endpoint():
                 if child is not None:
                     parent.children.append(child)
 
-            if valid:
+            if valid_parent:
                 db.session.add(parent)
                 db.session.commit()
 
