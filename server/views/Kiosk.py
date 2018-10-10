@@ -54,7 +54,7 @@ def register_endpoint():
         children_ids = []
         if "children" in data:
             children_list = data["children"]
-            children = json.loads(children_list)
+            children = children_list
             for child_data in children:
                 child = ChildModel()
                 child_valid = child.load(child_data)
