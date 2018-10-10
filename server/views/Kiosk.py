@@ -42,17 +42,15 @@ def signin_endpoint():
     return Response('', 400)
 
 
-
 @bp.route('/register', methods=['POST'])
 def register_endpoint():
     data = request.get_json(force=True)
-
+    print(data)
 
     if "parent" in data:
         parent_data = data['parent']
         parent = ParentModel()
         valid_parent = parent.load(parent_data)
-
         children_ids = []
         if "children" in data:
             children_list = data["children"]
@@ -63,7 +61,7 @@ def register_endpoint():
                 if child_valid:
                     db.session.add(child)
                     db.session.commit()
-                    children_ids += child.id
+                    children_ids.append(child.id)
 
             for i in children_ids:
                 child = db.session.query(ChildModel).filter_by(id=i).first()
