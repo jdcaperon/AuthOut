@@ -1,7 +1,10 @@
+import base64
 from flask import Blueprint, jsonify, request, Response
-from models.aws import get_id_by_image
+from models.aws import get_id_by_image, set_parent_photo
 from db import db
 from models.ParentModel import ParentModel
+from models.ChildModel import ChildModel
+import json
 
 bp = Blueprint('kiosk', __name__, url_prefix="/kiosk")
 
@@ -37,3 +40,47 @@ def signin_endpoint():
         if parent.count() == 1:
             return jsonify((parent.first()).as_dict())
     return Response('', 400)
+
+
+
+@bp.route('/register', methods=['POST'])
+def register_endpoint():
+    data = request.get_json(force=True)
+
+
+    if "parent" in data:
+        parent_data = data['user_photo']
+        parent = ParentModel()
+        valid = parent.load(parent_data)
+
+        children_ids = []
+        if "children" in data:
+            children_list = data["children"]
+            children = json.loads(children_list)
+            for child_data in children:
+                child = ChildModel()
+                valid = child.load(child_data)
+                if valid:
+                    db.session.add(child)
+                    db.session.commit()
+                    children_ids += child.id
+
+            for i in children_ids:
+                child = db.session.query(ChildModel).filter_by(id=i).first()
+                if child is not None:
+                    parent.children.append(child)
+
+            if valid:
+                db.session.add(parent)
+                db.session.commit()
+
+        if "user_photo" in data:
+            set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
+            return Response('', 200)
+
+    return Response('', 400)
+
+
+
+
+
