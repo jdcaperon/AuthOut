@@ -52,8 +52,14 @@ def add_photo_to_s3_bucket(photo, object_id, object_type, bucket=BUCKET):
 def get_photo_from_s3_bucket(object_id, object_type, bucket=BUCKET):
     photo_name = calc_photo_name(object_id, object_type)
 
-    s3 = boto3.resource('s3')
-    return s3.Bucket(bucket).get_object(Key=photo_name)
+    s3 = boto3.client('s3')
+    data = b""
+    try:
+        data = base64.b64encode(s3.get_object(Bucket=bucket, Key=photo_name)['Body'].read())
+    except Exception as e:
+        # do nothing
+        data = b""
+    return data
 
 
 def get_parent_photo(parental_id):
