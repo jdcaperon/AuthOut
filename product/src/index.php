@@ -8,14 +8,14 @@
 				<div class = "page">
 					<div id="overview">
 						<h3>Overview</h3>
-						<div class="container">
-							<div id="overview-1" class="row">
-							<p>AuthOut uses facial recognition technologies to track attendance in childcare centres</p>
+
+							<div id="overview-1" >
+							<p>AuthOut uses facial recognition technologies to track attendance in childcare centres.</p>
 							</div>
-							<div id="overview-2" class="row">
+							<div id="overview-2" >
 								<iframe src="https://www.youtube.com/embed/phisEhrYKUI?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 							</div>
-						</div>
+
 					</div>
 				</div>
 
