@@ -71,7 +71,7 @@ public class ChildSignupListAdapter extends RecyclerView.Adapter<ChildSignupList
     }
 
     @Override
-    public void onBindViewHolder(final ChildViewHolder holder, int position) {
+    public void onBindViewHolder(final @NonNull  ChildViewHolder holder, int position) {
         if (childList.size() > 0) {
             holder.info.setText(generateRowString(childList.get(position)));
         }

@@ -7,6 +7,16 @@ html, body {
 	min-width: 960px;
 }
 
+.jumbotron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  background-color: transparent;
+  padding: 60px 20px 20px 20px;
+  margin: 0;
+}
+
 .button_wrapper {
 	text-align: center;
 }
@@ -132,4 +142,10 @@ html, body {
     padding-right: 10px;
     display: inline-flex;
     vertical-align: top;
+}
+
+.graph_title {
+	color: #03BABD;
+	text-align: center;
+	margin-top: 10px;
 }

@@ -1,4 +1,17 @@
 <?php
+	include('php/database_connect.php');
+
+	// Make all dates the same
+	date_default_timezone_set("Australia/Brisbane");
+	
+    $db = new DatabaseConnection();
+	
+	$date = date('Y-m-d H:i:s');
+	
+	$db->prepared_query('INSERT INTO `views`(`date`) VALUES (?)', "s", $date);
+	
+	$db->disconnect();
+
     include('php/head.php');
 	include('php/nav.php');
 ?>
@@ -76,19 +89,19 @@
 							<form id="email-form">
 								<div class="form-group">
 								    <label >Email address</label>
-								    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+								    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
 								    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 							  	</div>
 								<div class="form-group">
 									<label >Name</label>
-									<input type="name" class="form-control"  placeholder="Enter first name">
+									<input type="name" class="form-control"  placeholder="Enter first name" required>
 								</div>
 							  	<div class="form-group">
 								    <label>Frequency</label>
-								    <select class="form-control" >
+								    <select class="form-control" required>
 									    <option>All updates</option>
 									    <option>Monthly newsletter</option>
-								      	<option>Product Announcements</option>
+								      	<option>Product announcements</option>
 								    </select>
 							  	</div>
 								<div class="form-group form-check">
@@ -98,7 +111,7 @@
 									</div>
 
 							  	</div>
-							  	<button type="submit" class="btn btn-primary rounded_button blue_button">Submit</button>
+							  	<button type="submit" class="btn btn-primary rounded_button blue_button" id="submit-button">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -109,7 +122,7 @@
 
         <?php include 'php/footer_scripts.php'?>
 
-		<script src="//code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
     </body>

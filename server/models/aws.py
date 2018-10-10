@@ -4,56 +4,69 @@ import base64
 BUCKET = "3cs-face-recognition"
 COLLECTION = "3cs-face-detection"
 REGION = "ap-southeast-2"
-
-# Must be in the 3cs-face-recognition bucket to be referenced
-EXAMPLE_PHOTO_ID = 'rp_ryan_kurz.jpg'
-TEST_PHOTO = 'test.jpg'
+OBJECT_PARENT = "p"
 
 
-def get_name_by_image(encoded_image):
+def get_id_by_image(encoded_image):
     """ Wrapper to make grabbing a name simple
     :param encoded_image: base64 encoded image to search for
     :return:
     """
     faces = search_faces_by_image(encoded_image)
+    if len(faces) == 0:
+        return None
     highest_match = faces[0]
     facial_detail = highest_match['Face']
     matched_image = facial_detail['ExternalImageId']
     stripped_image_name = matched_image.split('.')[0]
+    object_id = stripped_image_name.split('_')[1]
+    return object_id
 
-    return stripped_image_name
 
-
-def add_new_face_to_system(photo, first_name, surname, bucket=BUCKET):
+def set_parent_photo(parental_id, photo, bucket=BUCKET):
     """
     :param photo: base64 encoded image
-    :param first_name: first_name of person to be added
-    :param surname: surname of person to be added
+    :param parental_id: ID of the parent to which this face is being applied
     :param bucket: s3 bucket to add them to
     :return: the face added to the photo
     """
-    photo_name = add_photo_to_s3_bucket(photo, first_name, surname, bucket)
+    photo_name = add_photo_to_s3_bucket(photo, parental_id, OBJECT_PARENT, bucket)
     return add_face_to_collection(COLLECTION, BUCKET, photo_name, REGION)
 
 
-def add_photo_to_s3_bucket(photo, first_name, surname, bucket):
+def add_photo_to_s3_bucket(photo, object_id, object_type, bucket=BUCKET):
     """
     :param photo: base64 encoded image
-    :param first_name: first_name of person to be added
-    :param surname: surname of person to be added
+    :param object_id: Parental/Child id of person that owns this image
+    :param object_type: String which defines the object type
     :param bucket: s3 bucket to add them to
     :return: the name of the image saved
     """
-    photo = open(TEST_PHOTO, 'rb')  # todo replace with actual image from base64
-
-    photo_name = first_name + "_" + surname + '.jpg'
+    photo_name = calc_photo_name(object_id, object_type)
 
     s3 = boto3.resource('s3')
     s3.Bucket(bucket).put_object(Key=photo_name, Body=photo)
     return photo_name
 
 
-def delete_photo_from_s3_bucket(keys, bucket):
+def get_photo_from_s3_bucket(object_id, object_type, bucket=BUCKET):
+    photo_name = calc_photo_name(object_id, object_type)
+
+    s3 = boto3.client('s3')
+    data = b""
+    try:
+        data = base64.b64encode(s3.get_object(Bucket=bucket, Key=photo_name)['Body'].read())
+    except Exception as e:
+        # do nothing
+        data = b""
+    return data
+
+
+def get_parent_photo(parental_id):
+    return get_photo_from_s3_bucket(parental_id, OBJECT_PARENT)
+
+
+def delete_photo_from_s3_bucket(keys, bucket=BUCKET):
     """
     :param keys: list of image names to delete
     :param bucket: s3 bucket to remove them from
@@ -70,6 +83,12 @@ def delete_photo_from_s3_bucket(keys, bucket):
     )
 
 
+def delete_parent_photo(parental_id):
+    name = calc_photo_name(parental_id, OBJECT_PARENT)
+    key = [name]
+    delete_photo_from_s3_bucket(key)
+
+
 def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80, region=REGION):
     """
 
@@ -79,22 +98,16 @@ def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80,
     :param region: which rekognition region to access
     :return: List of faces and their details that are above specified threshhold
     """
-    with open(TEST_PHOTO, "rb") as image_file:  # todo remove, these lines are for testing
-            image_bytes = image_file.read()     # todo remove, these lines are for testing
-            stuff = base64.b64encode(image_bytes)
-            file = open("log.base64", 'w')
-            file.write(stuff.decode('ASCII'))
-            file.close()
-#                image_bytes = base64.decodestring(b64encodedImagehere)
-#                todo uncomment the above line is how we will read the base64 encoded image for actual implementation
+    print(encoded_image)
+    image_bytes = base64.decodestring(bytes(encoded_image, 'ASCII'))
 
-            rekognition = boto3.client("rekognition", region)
-            response = rekognition.search_faces_by_image(
-                    Image={"Bytes": image_bytes},
-                    CollectionId=collection_id,
-                    FaceMatchThreshold=threshold,
-            )
-            return response['FaceMatches']
+    rekognition = boto3.client("rekognition", region)
+    response = rekognition.search_faces_by_image(
+        Image={"Bytes": image_bytes},
+        CollectionId=collection_id,
+        FaceMatchThreshold=threshold,
+    )
+    return response['FaceMatches']
 
 
 def list_faces_in_collection(collection_id=COLLECTION, region=REGION):
@@ -110,7 +123,7 @@ def list_faces_in_collection(collection_id=COLLECTION, region=REGION):
     return response['Faces']
 
 
-def add_face_to_collection(collection_id=COLLECTION, bucket=BUCKET, photo=EXAMPLE_PHOTO_ID, region=REGION):
+def add_face_to_collection(collection_id=COLLECTION, bucket=BUCKET, photo="__NOT_SET__", region=REGION):
     """
     :param collection_id: collection_id to add faces to
     :param bucket: S3 bucket to reference images from
@@ -118,6 +131,7 @@ def add_face_to_collection(collection_id=COLLECTION, bucket=BUCKET, photo=EXAMPL
     :param region: which rekognition region to access
     :return: list of faces detection in the photo, and added to the collection
     """
+    assert(photo != "__NOT_SET__")
     client = boto3.client('rekognition', region)
     response = client.index_faces(CollectionId=collection_id,
                                   Image={'S3Object': {'Bucket': bucket, 'Name': photo}},
@@ -142,7 +156,5 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
     return response['DeletedFaces']
 
 
-if __name__ == "__main__":
-    print(search_faces_by_image(None))
-
-
+def calc_photo_name(object_id, object_type):
+    return object_type + '_' + str(object_id) + '.jpg'

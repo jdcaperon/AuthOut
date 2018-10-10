@@ -4,11 +4,11 @@
 	<?php 
 		$pageName = "Report";
 		$stylesheets = array("report_style.css");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/head.php';		
+		include_once ('head.php');		
 	?>
 	
 	<body>
-		<?php include $_SERVER['DOCUMENT_ROOT'].'/html/nav.html'; ?>
+		<?php include ('../html/nav.html'); ?>
 		
 		<div id="report-content" class="row">
 			<div id="graph" class="col">
@@ -23,6 +23,7 @@
 					<label>Start Date:</label><div id='start-date-widget' class="calendar"></div>
 					<label>End Date:</label><div id='end-date-widget' class="calendar"></div>
 					<button type="button" id="generate-report-button" class="rounded_button purple_button">Generate Report</button>
+					<button type="button" id="save-report-button" class="rounded_button blue_button">Save Report</button>
 				</form>
 			</div>
 		</div>
@@ -30,6 +31,6 @@
 	
 	<?php 
 		$scripts = array("report_script.js");
-		include_once $_SERVER['DOCUMENT_ROOT'].'/php/scripts.php';
+		include_once ('scripts.php');
 	?>
 </html>

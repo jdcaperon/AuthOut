@@ -3,6 +3,7 @@ import views
 
 # Register sub views.
 app.register_blueprint(views.Heartbeat.bp)
+app.register_blueprint(views.Kiosk.bp)
 app.register_blueprint(views.Parent.bp)
 app.register_blueprint(views.Child.bp)
 
