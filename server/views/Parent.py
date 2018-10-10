@@ -79,7 +79,7 @@ def photo(parent_id):
     parent = parent.first()
     # Gets the information of a specific parent.
     if request.method == 'GET':
-        return jsonify(get_parent_photo(parent_id))
+        return jsonify({'user_image': get_parent_photo(parent_id).decode('ASCII')})
     # Updates a specific parent
     elif request.method == 'PUT':
         data = request.get_json(force=True)
