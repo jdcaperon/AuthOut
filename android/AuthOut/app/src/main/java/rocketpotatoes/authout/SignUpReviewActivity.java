@@ -50,6 +50,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -57,7 +58,7 @@ import rocketpotatoes.authout.Helpers.Util;
 
 
 public class SignUpReviewActivity extends AppCompatActivity {
-    private static final String CREATE_PARENT_URL = "http://httpbin.org/post";
+    private static final String CREATE_PARENT_URL = "https://deco3801.wisebaldone.com/api/kiosk/register";
     private TextView fullName;
     private TextView mobile;
     private TextView email;
@@ -202,14 +203,30 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private JsonObjectRequest createParentRequest() {
         JSONObject json = new JSONObject();
 
+        Log.i("CreatingRequest", "CreatingRequest");
         //Adding contents to request
         try {
-            json.put("firstName", firstNameData);
-            json.put("surname", surnameData);
-            json.put("email", emailData);
-            json.put("mobile", mobileData);
-            json.put("dateOfBirth", dateOfBirthData);
-            json.put("userPhoto", Util.bitmapToBase64(userBitmap, 50));
+            JSONObject temp = new JSONObject();
+            temp.put("email", emailData);
+            temp.put("first_name", firstNameData);
+            temp.put("last_name", surnameData);
+            temp.put("date_of_birth", dateOfBirthData);
+            temp.put("mobile_number", mobileData);
+            json.put("parent", temp);
+
+
+            JSONObject[] childrenObjects = new JSONObject[children.size()];
+            for (int i = 0; i < children.size(); i++) {
+                temp = new JSONObject();
+                temp.put("first_name", children.get(i).get(0));
+                temp.put("last_name", children.get(i).get(1));
+                temp.put("date_of_birth", children.get(i).get(2));
+                childrenObjects[i] = temp;
+            }
+
+            json.put("children", Arrays.toString(childrenObjects));
+            json.put("user_photo", Util.bitmapToBase64(userBitmap, 50));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

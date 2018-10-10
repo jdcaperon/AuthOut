@@ -26,13 +26,7 @@
 
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.Launcher" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.Launcher" />
         <activity
             android:name=".SelectStudentActivity"
             android:theme="@style/AppTheme" />
@@ -47,7 +41,13 @@
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SignUpReviewActivity"
             android:theme="@style/AppTheme" />
