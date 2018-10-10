@@ -18,7 +18,7 @@ $(document).ready(function() {
 				break;
 
 			case "Product announcements":
-				frequency = "announcments";
+				frequency = "announcements";
 				break;
 		}
 

@@ -36,6 +36,31 @@
 	$result = $result->fetch_assoc();
 	$counts[3] = $result['COUNT(*)'];
 	
+	// Count of "all" updates
+	$result = $db->query("SELECT COUNT(*) FROM `mailing_list` WHERE `updates` = 'all'");
+	$result = $result->fetch_assoc();
+	$counts[4] = $result['COUNT(*)'];
+	
+	// Count of "monthly" updates
+	$result = $db->query("SELECT COUNT(*) FROM `mailing_list` WHERE `updates` = 'monthly'");
+	$result = $result->fetch_assoc();
+	$counts[5] = $result['COUNT(*)'];
+	
+	// Count of "announcments" updates
+	$result = $db->query("SELECT COUNT(*) FROM `mailing_list` WHERE `updates` = 'announcements'");
+	$result = $result->fetch_assoc();
+	$counts[6] = $result['COUNT(*)'];
+	
+	// Count of early bird offers
+	$result = $db->query("SELECT COUNT(*) FROM `mailing_list` WHERE `early_bird` = 1");
+	$result = $result->fetch_assoc();
+	$counts[7] = $result['COUNT(*)'];
+	
+	// Count of no early bird offers
+	$result = $db->query("SELECT COUNT(*) FROM `mailing_list` WHERE `early_bird` = 0");
+	$result = $result->fetch_assoc();
+	$counts[8] = $result['COUNT(*)'];
+	
 	echo json_encode($counts);
 	
 	$db->disconnect();
