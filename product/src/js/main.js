@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$("#submit-button").click(function(event){
 		event.preventDefault();
+		
 		fields = document.getElementById("email-form").elements;
 
 		var email = fields[0].value;
