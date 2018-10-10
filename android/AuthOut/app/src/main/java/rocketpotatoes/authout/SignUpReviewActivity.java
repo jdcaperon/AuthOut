@@ -23,6 +23,7 @@
  */
 package rocketpotatoes.authout;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -235,9 +236,10 @@ public class SignUpReviewActivity extends AppCompatActivity {
                 (Request.Method.POST, CREATE_PARENT_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO Create and set parent object here
                         Util.animateView(progressOverlay, View.GONE, 0, 100);
-                        Log.i("Response", response.toString().substring(0, 100));
+                        Intent intent = new Intent(SignUpReviewActivity.this, HomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override

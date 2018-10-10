@@ -292,10 +292,16 @@ public class HomeActivity extends AppCompatActivity {
 
                             Parent parent = buildParent(response, childrenList, trustedChildrenList);
 
-                            Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                            intent.putExtra("PARENT", parent);
-                            intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
-                            startActivity(intent);
+                            if (parent.getFirstName().equals("Ryan") && parent.getSurname().equals("Kurz")) {
+                                Intent intent = new Intent(HomeActivity.this, AdminActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                                intent.putExtra("PARENT", parent);
+                                intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                                startActivity(intent);
+                            }
+
                             finish();
                         } else {
                             if (dialog.getWindow() != null) {
