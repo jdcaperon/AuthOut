@@ -49,7 +49,7 @@ def register_endpoint():
 
 
     if "parent" in data:
-        parent_data = data['user_photo']
+        parent_data = data['parent']
         parent = ParentModel()
         valid_parent = parent.load(parent_data)
 
