@@ -11,14 +11,12 @@
 	margin:auto;
 	width:100%;
 	overflow: auto;
-
 }
 
 #table-wrapper {
-	width: 70vw;
-	height: 450px;
+	width: 60vw;
+	height: 400px;
 	overflow-y: hidden;
-
 	margin: 0 auto 5vh 0;
 }
 
@@ -27,11 +25,10 @@
 }
 
 
-.container{
+#admin-content .container{
 	width:100% !important;
 	margin:0;
 	max-width: none !important;
-	background-color: #e8e9eb;
 	padding:2vh 2vw;
 }
 
@@ -86,6 +83,22 @@ tbody{
 
 .header-fixed > tbody > tr > td,
 .header-fixed > thead > tr > th {
-    width: 25%;
+    width: 35%;
     float: left;
+}
+
+.header-fixed > tbody > tr > .small-col,
+.header-fixed > thead > tr > .small-col {
+    width: 15%;
+    float: left;
+}
+
+#export-link{
+	background-color: #03BABD !important;
+	border: none;
+}
+
+#export-link:hover {
+	background-color: #DCA726 !important;
+
 }

@@ -10,11 +10,7 @@
 			<small>Note that mailing list subscriptions are equivalent to purchases</small>
 		</div>
 
-
-
-
-
-		<div class="container">
+		<div class="container" id ="coloured-page">
 			<div class="row">
 				<div class="col-sm-6">
 					<?php
@@ -45,7 +41,7 @@
 						$result = $result->fetch_assoc();
 						$result = $result['COUNT(*)'];
 
-						echo "<h4>Mailing list subsciptions: $result</h4>";
+						echo "<h4>Total Subscribers: $result</h4>";
 
 						$result = $db->query('SELECT * FROM `mailing_list` WHERE 1');
 
@@ -68,35 +64,44 @@
 			<h3>Raw Data</h3>
 		</div>
 		<h5>Mailing List Subscriptions</h5>
-		<div id="table-wrapper">
-			<table class="table table-bordered table-sm header-fixed ">
-				<thead class="thead-dark">
-					<tr>
-						<th>Email</th>
-						<th>Name</th>
-						<th>Frequency</th>
-						<th>Early Bird</th>
-					</tr>
-				</thead>
 
-				<tbody>
-					<?php
-						$db = new DatabaseConnection();
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<div id="table-wrapper">
+						<table class="table table-bordered table-sm header-fixed " id="datatable">
+							<thead class="thead-dark">
+								<tr>
+									<th>Email</th>
+									<th>Name</th>
+									<th  class = 'small-col'>Frequency</th>
+									<th  class = 'small-col'>Early Bird</th>
+								</tr>
+							</thead>
 
-						$result = $db->query('SELECT * FROM `mailing_list` WHERE 1');
-						while ($row = $result->fetch_assoc()) {
-							echo "<tr>";
-							echo "<td>".$row['email']."</td>";
-							echo "<td>".$row['name']."</td>";
-							echo "<td>".$row['updates']."</td>";
-							echo "<td>".$row['early_bird']."</td>";
-							echo "</tr>";
-						}
-					?>
-				</tbody>
-			</table>
-		</div>
+							<tbody>
+								<?php
+									$db = new DatabaseConnection();
 
+									$result = $db->query('SELECT * FROM `mailing_list` WHERE 1');
+									while ($row = $result->fetch_assoc()) {
+										echo "<tr>";
+										echo "<td>".$row['email']."</td>";
+										echo "<td>".$row['name']."</td>";
+										echo "<td class = 'small-col'>".$row['updates']."</td>";
+										echo "<td class = 'small-col'>".$row['early_bird']."</td>";
+										echo "</tr>";
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<a class = "btn btn-primary" id="export-link" download="MailingList.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV</a>
+				</div>
+			</div>
+</div>
         <?php include 'php/footer_scripts.php'?>
 
 		<script src="js/admin.js" rel="javascript" type="text/javascript"></script>

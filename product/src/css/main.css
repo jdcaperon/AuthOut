@@ -106,6 +106,7 @@ html, body {
 #content{
 	height:100%;
 }
+
 .page > div{
 	width:60%;
 	position: relative;
@@ -125,9 +126,8 @@ html, body {
 }
 
 .page{
-	height:100%;
-	width:100%
-	overflow: hidden;
+	min-height: 100%;
+	width:100%;
 }
 
 iframe{

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 	$.ajax({
 		method: "POST",
 		url: "php/views.php",
