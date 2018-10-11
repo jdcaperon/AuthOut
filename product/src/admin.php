@@ -68,7 +68,7 @@
 			<h3>Raw Data</h3>
 		</div>
 		<div id="table-wrapper">
-			<table class="table table-striped table-sm">
+			<table class="table table-striped table-sm header-fixed ">
 				<thead class="thead-dark">
 					<tr>
 						<th>Emails</th>
