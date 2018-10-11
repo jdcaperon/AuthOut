@@ -168,9 +168,3 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
 
 def calc_photo_name(object_id, object_type):
     return object_type + '_' + str(object_id) + '.jpg'
-
-
-
-if __name__ == "__main__":
-    delete_face_from_collection(['da375a2d-6e9e-4ee2-9119-9f5f7e35aa6d'])
-    print(list_faces_in_collection())

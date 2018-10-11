@@ -77,7 +77,7 @@ def register_endpoint():
                     parent.children.append(child)
 
         if "user_photo" in data:
-            set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
+            set_parent_photo(parent_id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
             return Response('', 200)
 
     return Response('', 400)
