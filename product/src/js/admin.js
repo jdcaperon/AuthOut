@@ -100,8 +100,7 @@ $(document).ready(function() {
 			        }
 			    }
 			});
-
-			console.log(counts[4] + ", " + counts[5] + ", " + counts[6]);
+			
 		}
 
 	});
