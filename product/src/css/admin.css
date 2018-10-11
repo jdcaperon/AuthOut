@@ -1,16 +1,17 @@
-#chart, #piechart{
-	width:80%;
+#chart {
+	width:100%;
 	margin: auto;
 
 }
-
 #admin-content{
 	top:80px;
 	height:calc(100% - 80px);
 	padding: 0 5vw;
 	position:relative;
 	margin:auto;
+	width:100%;
 	overflow: auto;
+
 }
 
 #table-wrapper {
@@ -21,6 +22,33 @@
 	margin-bottom: 30px;
 }
 
+#title{
+	margin: 3vh auto;
+}
+
+
+.container{
+	width:100% !important;
+	margin:0;
+	max-width: none !important;
+	background-color: #e8e9eb;
+	padding:2vh 2vw;
+}
+
+.container h5{
+	margin:2vh auto;
+	font-size: 2vh;
+}
+.row{
+	width:100% !important;
+	max-width: none !important;
+}
+.pie{
+	height:25vh;
+	width:50vh;
+	margin:auto;
+}
+
 h3{
-	margin: auto;
+	padding: 1vh 0;
 }

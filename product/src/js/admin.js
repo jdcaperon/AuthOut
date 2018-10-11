@@ -1,10 +1,10 @@
-$(document).ready(function() {	
+$(document).ready(function() {
 	$.ajax({
 		method: "POST",
 		url: "php/views.php",
 		success: function(data) {
 			var counts = JSON.parse(data);
-			
+
 			var ctx = document.getElementById("Weekly").getContext('2d');
 			var myChart = new Chart(ctx, {
 				type: 'bar',
@@ -14,10 +14,10 @@ $(document).ready(function() {
 						label: 'Views Per Week',
 						data: [counts[0], counts[1], counts[2], counts[3]],
 						backgroundColor: [
-							'#3B3E3A',
 							'#DCA726',
 							'#03BABD',
-							'#BC72AF'
+							'#BC72AF',
+							'#3B3E3A',
 						],
 						borderWidth: 1
 						}]
@@ -32,7 +32,7 @@ $(document).ready(function() {
 					}
 				}
 			});
-			
+
 			var ctx = document.getElementById("frequency-chart").getContext('2d');
 			var myChart = new Chart(ctx, {
 			    type: 'pie',
@@ -50,26 +50,33 @@ $(document).ready(function() {
 			        }]
 			    },
 			    options: {
+					responsive: true,
+    				maintainAspectRatio: false,
 			        scales: {
 			            yAxes: [{
 			                ticks: {
 			                    beginAtZero:true
 			                }
 			            }]
+			        },
+					legend: {
+			            display: true,
+						position: 'right'
+
 			        }
 			    }
 			});
-			
+
 			var ctx = document.getElementById("early-chart").getContext('2d');
 			var myChart = new Chart(ctx, {
 			    type: 'pie',
 			    data: {
-			        labels: ["Early Bird Updates", "No Early Bird Updates"],
+			        labels: ["Early Bird Special", "No Early Bird Special"],
 			        datasets: [{
 			            label: 'Clicks Per Week',
 			            data: [counts[7], counts[8]],
 			            backgroundColor: [
-			                '#DCA726',
+
 			                '#03BABD',
 			                '#BC72AF'
 			            ],
@@ -77,19 +84,26 @@ $(document).ready(function() {
 			        }]
 			    },
 			    options: {
+					responsive: true,
+    				maintainAspectRatio: false,
 			        scales: {
 			            yAxes: [{
 			                ticks: {
 			                    beginAtZero:true
 			                }
 			            }]
+			        },
+					legend: {
+			            display: true,
+						position: 'right'
+
 			        }
 			    }
 			});
-			
+
 			console.log(counts[4] + ", " + counts[5] + ", " + counts[6]);
 		}
-		
+
 	});
-	
+
 });
