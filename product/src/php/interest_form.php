@@ -8,9 +8,19 @@
 	$frequency = $_POST['frequency'];
 	$earlyBird = $_POST['earlyBird'];
 	
-	$result = $db->prepared_query('INSERT INTO `mailing_list`(`email`, `name`, `updates`, `early_bird`) VALUES (?, ?, ?, ?)', "sssi", $email, $name, $frequency, $earlyBird);
+	// Check if they have already submitted
+	$result = $db->prepared_query('SELECT COUNT(*) FROM `mailing_list` WHERE `email` = ? AND `name` = ?', "ss", $email, $name);
+	$result = $result->fetch_assoc()['COUNT(*)'];
 	
-	echo $result;
+	// Already submitted
+	if ($result > 0) {
+		$result = $db->prepared_query('UPDATE `mailing_list` SET `updates`=?,`early_bird`=? WHERE `email`=? AND `name`=?', "siss", $frequency, $earlyBird, $email, $name);
+		echo 1;
+	// Not submitted yet
+	} else {
+		$result = $db->prepared_query('INSERT INTO `mailing_list`(`email`, `name`, `updates`, `early_bird`) VALUES (?, ?, ?, ?)', "sssi", $email, $name, $frequency, $earlyBird);
+		echo 0;
+	}
 	
 	$db->disconnect();
 ?>
