@@ -34,7 +34,16 @@ $(document).ready(function() {
 				earlyBird: earlyBird,
 			},
 			success: function(data) {
-				console.log(data);
+				// Data was added
+				if (data.localeCompare("1") == 0) {
+					$("#modalDescription").html("<p>Your preferences were updated.</p>");
+					$("#validationModal").modal("show");
+				// Data was updated
+				} else {
+					$("#modalDescription").html("<p>Your preferences have been saved.</p>");
+					$("#validationModal").modal("show");
+				}
+				
 			}
 		});
 
