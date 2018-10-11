@@ -101,11 +101,10 @@
 					<a class = "btn btn-primary" id="export-link" download="MailingList.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV</a>
 				</div>
 			</div>
-</div>
+		</div>
         <?php include 'php/footer_scripts.php'?>
 
 		<script src="js/admin.js" rel="javascript" type="text/javascript"></script>
-
 
     </body>
 </html>
