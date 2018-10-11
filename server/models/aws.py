@@ -83,10 +83,20 @@ def delete_photo_from_s3_bucket(keys, bucket=BUCKET):
     )
 
 
+def get_face_id_by_photo_name(photo_name, collection_id=COLLECTION, threshold=80, region=REGION, bucket=BUCKET):
+    faces = list_faces_in_collection(collection_id, region)
+    for face in faces:
+        if face['ExternalImageId'] == photo_name:
+            return face['FaceId']
+
+
 def delete_parent_photo(parental_id):
     name = calc_photo_name(parental_id, OBJECT_PARENT)
     key = [name]
     delete_photo_from_s3_bucket(key)
+
+    face_id = get_face_id_by_photo_name(name)
+    delete_face_from_collection([face_id])
 
 
 def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80, region=REGION):
@@ -158,3 +168,9 @@ def delete_face_from_collection(faces, collection_id=COLLECTION, region=REGION):
 
 def calc_photo_name(object_id, object_type):
     return object_type + '_' + str(object_id) + '.jpg'
+
+
+
+if __name__ == "__main__":
+    delete_face_from_collection(['da375a2d-6e9e-4ee2-9119-9f5f7e35aa6d'])
+    print(list_faces_in_collection())

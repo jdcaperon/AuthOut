@@ -51,6 +51,14 @@ def register_endpoint():
         parent_data = data['parent']
         parent = ParentModel()
         valid_parent = parent.load(parent_data)
+        parent_id = parent.id
+
+        if valid_parent:
+            db.session.add(parent)
+            db.session.commit()
+
+        parent = db.session.query(ParentModel).filter_by(id=parent_id)
+
         children_ids = []
         if "children" in data:
             children_list = data["children"]
@@ -67,10 +75,6 @@ def register_endpoint():
                 child = db.session.query(ChildModel).filter_by(id=i).first()
                 if child is not None:
                     parent.children.append(child)
-
-            if valid_parent:
-                db.session.add(parent)
-                db.session.commit()
 
         if "user_photo" in data:
             set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))

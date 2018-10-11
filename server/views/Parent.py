@@ -62,6 +62,7 @@ def specified(parent_id):
     elif request.method == 'DELETE':
         db.session.delete(parent)
         db.session.commit()
+        delete_parent_photo(parent.id)
         return Response('', 200)
     # Default case.
     else:
