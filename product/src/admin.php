@@ -74,7 +74,7 @@
 								<tr>
 									<th>Email</th>
 									<th>Name</th>
-									<th  class = 'small-col'>Frequency</th>
+									<th  class = 'medium-col'>Frequency</th>
 									<th  class = 'small-col'>Early Bird</th>
 								</tr>
 							</thead>
@@ -88,7 +88,7 @@
 										echo "<tr>";
 										echo "<td>".$row['email']."</td>";
 										echo "<td>".$row['name']."</td>";
-										echo "<td class = 'small-col'>".$row['updates']."</td>";
+										echo "<td class = 'medium-col'>".$row['updates']."</td>";
 										echo "<td class = 'small-col'>".$row['early_bird']."</td>";
 										echo "</tr>";
 									}
