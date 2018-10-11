@@ -57,32 +57,7 @@ tbody{
 	background-color: #e8e9eb !important;
 }
 
-/*
-thead, tbody, tr, td, th {
-	display: block;
-}
 
-tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-thead th {
-    height: 30px;
-}
-
-tbody {
-    height: 100%;
-    overflow-y: auto;
-}
-
-tbody td, thead th {
-    width: 25%;
-    float: left;
-}
-*/
 .header-fixed {
     width: 100%
 }
