@@ -122,7 +122,7 @@
 							  	</div>
 								<div class="form-group">
 									<label >Name</label>
-									<input type="name" class="form-control"  placeholder="Enter first name" required>
+									<input type="name" class="form-control"  placeholder="Enter first name" required />
 								</div>
 							  	<div class="form-group">
 								    <label>Frequency</label>
@@ -134,7 +134,7 @@
 							  	</div>
 								<div class="form-group form-check">
 									<div class="custom-control custom-checkbox">
-									  <input type="checkbox" class="custom-control-input" id="customCheck1" checked="checked" required>
+									  <input type="checkbox" class="custom-control-input" id="customCheck1" checked="checked" />
 									  <label class="custom-control-label" for="customCheck1">Yes, I would like to register for early-bird offers.</label>
 									</div>
 
@@ -147,9 +147,9 @@
 
 			</div>
 	</div>
-
+	
         <?php include 'php/footer_scripts.php'?>
-
+		
 		<!-- www.addthis.com/dashboard Sharing tools -->
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bbd909968418185"></script>
 
