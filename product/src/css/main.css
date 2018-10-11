@@ -121,6 +121,7 @@ html, body {
 }
 #email-form{
 	width:60%;
+	height:100%;
 }
 
 .page{
@@ -197,12 +198,12 @@ width:100%;
 }
 
 .carousel-control-prev {
-    left: 20px;
+    left: 2.5vw;
 }
 
 
 .carousel-control-next {
-    right: 20px;
+    right: 2.5vw;
 }
 #carousel-container{
 	height:100%;
@@ -225,8 +226,17 @@ width:100%;
 
 .form-group p{
 	text-align: left;
+	margin: 2vh !important;
 }
 
+.form-group{
+	margin: 1vh !important;
+}
 nav .active{
 	color:  #DCA726 !important;
+}
+
+
+.paragraph-margin-bottom{
+	margin-top: 10%;
 }

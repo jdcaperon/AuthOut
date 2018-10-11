@@ -69,7 +69,8 @@
 										<li>Admin Web Portal</li>
 										<li>24-7 support</li>
 									</ul>
-									<div class="addthis_inline_share_toolbox paragraph-margin">Share this page!</div>
+									<p class="paragraph-margin-bottom">Know someone who could use these features? Share this page!</p>
+									<div class="addthis_inline_share_toolbox"></div>
 								</div>
 								<div class="col-sm" id ="carousel-container">
 
