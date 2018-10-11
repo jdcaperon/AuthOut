@@ -15,7 +15,10 @@
 
 
 		<!-- JS Inclusions -->
+		
+		<!--CSV exporting, https://github.com/jmaister/excellentexport/releases/tag/v1.4 author Jordi Burgos-->
 		<script src="js/excellentexport.js"></script>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
         <!--Stylesheets-->
