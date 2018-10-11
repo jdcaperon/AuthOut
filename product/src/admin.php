@@ -67,6 +67,7 @@
 		<div id="title">
 			<h3>Raw Data</h3>
 		</div>
+		<h5>Mailing List Subscriptions</h5>
 		<div id="table-wrapper">
 			<table class="table table-bordered table-sm header-fixed ">
 				<thead class="thead-dark">
