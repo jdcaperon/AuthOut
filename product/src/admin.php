@@ -72,8 +72,8 @@
 			<table class="table table-bordered table-sm header-fixed ">
 				<thead class="thead-dark">
 					<tr>
-						<th>Emails</th>
-						<th>Names</th>
+						<th>Email</th>
+						<th>Name</th>
 						<th>Frequency</th>
 						<th>Early Bird</th>
 					</tr>

@@ -17,7 +17,7 @@
 #table-wrapper {
 	width: 70vw;
 	height: 450px;
-	overflow-y: scroll;
+	overflow-y: hidden;
 
 	margin: 0 auto 5vh 0;
 }
