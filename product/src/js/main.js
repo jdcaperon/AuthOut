@@ -3,7 +3,7 @@ $(document).ready(function() {
 		// Only submit if valid
 		if($("#email-form")[0].checkValidity()) {
 			event.preventDefault();
-			
+
 			// Get data from form
 			fields = document.getElementById("email-form").elements;
 			var email = fields[0].value;
@@ -26,7 +26,8 @@ $(document).ready(function() {
 			}
 
 			var earlyBird = fields[3].checked == 1 ? 1 : 0;
-	
+			document.getElementById("email-form").reset();
+
 			// Add to database
 			$.ajax({
 				method: "POST",
@@ -40,19 +41,19 @@ $(document).ready(function() {
 				success: function(data) {
 					// Data was added
 					if (data.localeCompare("1") == 0) {
-						$("#modalDescription").html("<p>Your preferences were updated.</p>");
+						$("#modalDescription").html("<p>Your mailing list details have been saved.</p>");
 						$("#validationModal").modal("show");
 					// Data was updated
 					} else {
-						$("#modalDescription").html("<p>Your preferences have been saved.</p>");
+						$("#modalDescription").html("<p>You've been added to the mailing list.</p>");
 						$("#validationModal").modal("show");
 					}
-					
+
 				}
 			});
-			
+
 		}
-		
+
 	});
 
 });
