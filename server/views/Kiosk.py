@@ -70,10 +70,15 @@ def register_endpoint():
                     parent.children.append(child)
 
             if valid_parent:
+                print('parent valid and committed')
                 db.session.add(parent)
                 db.session.commit()
+            else:
+                print('parent is not valid and wasnt committed')
+                print(parent_data)
 
         if "user_photo" in data:
+            print("The parent id is : {}".format(parent.id))
             set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
             return Response('', 200)
 
