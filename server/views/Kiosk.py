@@ -52,6 +52,9 @@ def register_endpoint():
         parent = ParentModel()
         valid_parent = parent.load(parent_data)
 
+        if not valid_parent:
+            return Response('Parent was not valid ( missing required data )', 400)
+
         children_ids = []
         if "children" in data:
             children_list = data["children"]
@@ -80,9 +83,11 @@ def register_endpoint():
         if "user_photo" in data:
             print("The parent id is : {}".format(parent.id))
             set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
-            return Response('', 200)
+            return jsonify({'id': parent.id})
+        else:
+            return Response('user_photo invalid or not provided', 400)
 
-    return Response('', 400)
+    return Response('Missing parent data', 400)
 
 
 
