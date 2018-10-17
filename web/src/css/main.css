@@ -57,10 +57,6 @@ html, body {
     margin: 0 5% 0 5%;
 }
 
-#logo{
-    height: 65px;
-}
-
 .navbar{
     display: block;
     width: 100%;
@@ -68,16 +64,33 @@ html, body {
 	padding-left: 0;
 }
 
+#nav-line1{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+}
+
+#logo {
+    height: 65px;
+	position: absolute;
+	left: 10px;
+}
+
 #page-heading {
 	display: inline-block;
 	color: #DCA726;
+	font-size: 2.5em;
+	position: absolute;
+	left: 70px;
+	top: 8px;
 }
 
-#nav-line1{
+#account-svg{
     position:absolute;
-    top:10px;
-    width:100%;
-	padding-left: 16px;
+    right: 10px;
+    font-size: 50px;
+	padding: 15px;
 }
 
 #nav-line2{
@@ -85,13 +98,6 @@ html, body {
     position:absolute;
     bottom:0;
     line-height: 24px
-
-}
-
-#account-svg{
-    right:24px;
-    position:absolute;
-    font-size: 50px;
 }
 
 #page-title{
@@ -125,11 +131,13 @@ html, body {
 .nav-item {
     padding: 5px 10px 0 10px;
 	transition: 0.2s;
+	border-radius: 5px 5px 0px 0px;
 }
 
 .nav-item:hover {
     cursor: pointer;
 	background-color: #F2F3F1;
+	border-radius: 5px 5px 0px 0px;
 }
 
 .nav-item:hover .nav-link, .nav-item:hover .material-icons.lighter {
@@ -148,4 +156,25 @@ html, body {
 	color: #03BABD;
 	text-align: center;
 	margin-top: 10px;
+}
+
+@media screen and (max-width: 1050px) {
+	.nav-item {
+	    padding: 5px 10px 0 10px;
+		transition: 0.2s;
+		border-radius: 5px 5px 0px 0px;
+	}
+	
+	.nav-item a {
+		font-size: 0;
+		padding: 0;
+	}
+	
+	.material-icons.lighter {
+	    color: #F2F3F1;
+	    font-size: 24px;
+	    padding-right: 0px;
+	    display: inline-flex;
+	    vertical-align: top;
+	}
 }
