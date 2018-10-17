@@ -45,6 +45,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -207,27 +208,26 @@ public class SignUpReviewActivity extends AppCompatActivity {
         Log.i("CreatingRequest", "CreatingRequest");
         //Adding contents to request
         try {
-            JSONObject temp = new JSONObject();
-            temp.put("email", emailData);
-            temp.put("first_name", firstNameData);
-            temp.put("last_name", surnameData);
-            temp.put("date_of_birth", dateOfBirthData);
-            temp.put("mobile_number", mobileData);
-            json.put("parent", temp);
+            JSONObject parent = new JSONObject();
+            parent.put("email", emailData);
+            parent.put("first_name", firstNameData);
+            parent.put("last_name", surnameData);
+            parent.put("date_of_birth", dateOfBirthData);
+            parent.put("mobile_number", mobileData);
+            json.put("parent", parent);
 
 
-            JSONObject[] childrenObjects = new JSONObject[children.size()];
+            JSONArray childrenObjects = new JSONArray();
             for (int i = 0; i < children.size(); i++) {
-                temp = new JSONObject();
+                JSONObject temp = new JSONObject();
                 temp.put("first_name", children.get(i).get(0));
                 temp.put("last_name", children.get(i).get(1));
                 temp.put("date_of_birth", children.get(i).get(2));
-                childrenObjects[i] = temp;
+                childrenObjects.put(temp);
             }
 
-            json.put("children", Arrays.toString(childrenObjects));
+            json.put("children", childrenObjects);
             json.put("user_photo", Util.bitmapToBase64(userBitmap, 50));
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

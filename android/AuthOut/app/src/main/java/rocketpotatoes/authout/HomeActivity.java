@@ -315,7 +315,6 @@ public class HomeActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Log.i("ResponseError", error.toString());
                     }
-
                 });
     }
 
