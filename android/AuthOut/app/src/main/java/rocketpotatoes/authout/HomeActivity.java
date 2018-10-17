@@ -313,6 +313,11 @@ public class HomeActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Util.animateView(progressOverlay, View.GONE, 0, 200);
+                        if (dialog.getWindow() != null) {
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        }
+                        dialog.show();
                         Log.i("ResponseError", error.toString());
                     }
                 });
