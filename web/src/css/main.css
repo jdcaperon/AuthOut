@@ -173,6 +173,7 @@ html, body {
 	left:18%;
 	display: block;
 	position: absolute;
+	overflow: scroll;
 }
 
 /* ---------- MISC -----------------*/
