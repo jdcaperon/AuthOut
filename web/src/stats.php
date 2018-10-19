@@ -17,7 +17,7 @@
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0; padding-bottom: 0">
 						<div class="box-inner">
-							<div id="calendarWidget"></div>
+							<div id="calendar-widget"></div>
 						</div>
 					</div>
 				</div>

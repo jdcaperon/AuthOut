@@ -10,7 +10,14 @@
 	padding: 0;
 }
 
-/*#Weekly {
+/*-------------- Calendar ----------------*/
+#calendar-widget {
+	
+}
+
+/*
+TODO: delete
+#Weekly {
 	width: 100%;
 	height: 100%;
 }
