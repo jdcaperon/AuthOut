@@ -16,13 +16,16 @@
 						<h1>AuthOut Admin Portal</h1>
 					</div>
 
+					<h3> Please log in </h3>
+
 
 					<form id="login-form" class="container clearfix">
-						<div class="clearfix"><label for="username">Username:</label><input type="text" name="username" id="username"></div>
-						<div class="clearfix"><label for="password">Password:</label><input type="text" name="password" id="password"></div>
+						<div class="clearfix"><input class='form-control' type="text" name="username" id="username" placeholder="Username"></div>
+						<div class="clearfix"><input  class='form-control' type="password" name="password" id="password" placeholder="Password"></div>
 					</form>
 
-					<button type="button" id="login-button" class="rounded_button blue_button">LOGIN</button>
+					<button type="button" id="login-button" class="rounded_button blue_button">LOG IN</button>
+					<!-- TODO: add functionality  -->
 					<button type="button" class="rounded_button purple_button">DON'T HAVE AN ACCOUNT?</button>
 				</div>
 			</div>
