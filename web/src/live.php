@@ -10,8 +10,35 @@
 
 	<body>
 		<?php include ('php_inclusions/nav.php'); ?>
-		<div class="content container">
-			<div class="row">
+		<div class="content">
+			<div class="row row-override">
+				<div class="col-4">
+					<div class="box-outer" style="padding-right: 0">
+						<div class="box-inner">
+						
+						</div>
+					</div>
+				</div>
+				
+				<div class="col">
+					<div class="box-outer">
+						<div class="box-inner">
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+			$scripts = array("live_script.js");
+			include_once ('php_inclusions/scripts.php');
+		?>
+	</body>
+
+	<!--
+	TODO: delete
+	
+				<div class="row">
 				<div class="col">
 					<p> Signed In:</p>
 					<p> Signed Out: </p>
@@ -23,12 +50,5 @@
 					<table></table>
 				</div>
 			</div>
-		</div>
-		<?php
-			$scripts = array("live_script.js");
-			include_once ('php_inclusions/scripts.php');
-		?>
-	</body>
-
-
+	-->
 </html>
