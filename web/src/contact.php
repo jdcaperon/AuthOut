@@ -12,7 +12,6 @@
 		<div class="content container">
 			<div class="row">
 				<div class="col">
-
 					<p>We'd love to hear from you! Use this form to send us your questions and comments</p>
 				</div>
 
@@ -39,14 +38,10 @@
 
 						<div class="form-group">
 							<div class="col-sm-10 col-sm-offset-2">
-								<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+								<input id="submit" name="submit" type="submit" value="Send" class="rounded_button purple_button">
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-10 col-sm-offset-2">
 
-							</div>
-						</div>
 					</form>
 				</div>
 				<div class="col">
