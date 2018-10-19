@@ -11,6 +11,9 @@
 <!-- MDBootstrap Datatables  -->
 <script type="text/javascript" src="lib/MDB/js/addons/datatables.min.js"></script>
 
+<!--Calendar-->
+<script src="lib/dist/js/datepicker.min.js"></script>
+<script src="lib/dist/js/i18n/datepicker.en.js"></script>
 
 <!--jq widgest scripts-->
 <script type="text/javascript" src="lib/jqwidgets/jqxcore.js"></script>

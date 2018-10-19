@@ -5,8 +5,29 @@
 	margin: 0;
 }
 
-.col, .col-4, .col-9 {
+.col, .col-4, .col-8 {
 	padding: 0;
 }
 
+#welcome-message{
+	padding:2vw;
+	text-align: center;
+}
 
+#welcome-message p{
+	margin:0;
+}
+
+#welcome-row{
+	height:25%;
+}
+
+#info-row{
+	height:75%
+}
+
+#rplogo, #threecslogo{
+	width:60%;
+	margin: auto;
+	
+}

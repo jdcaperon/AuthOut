@@ -35,6 +35,9 @@
 	<link href="lib/MDB/css/addons/datatables.min.css" rel="stylesheet">
 	<link href="maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
+	<!--Calendar-->
+	<link href="lib/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+
 
 	<!--Extra stylesheets-->
 	<?php
