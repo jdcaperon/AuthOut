@@ -30,7 +30,7 @@
 
 	<!--Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	
+
 
 
 
@@ -41,7 +41,7 @@
 			echo("<link href=css/".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
 		}
 	}
-	
+
 	if (isset($externalSheets)) {
 		for ($i = 0; $i < count($externalSheets); $i++) {
 			echo("<link href=".$externalSheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );;
