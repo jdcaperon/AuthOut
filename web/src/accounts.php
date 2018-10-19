@@ -9,9 +9,11 @@
 	?>
 
 	<body>
-		
+
 		<?php include ('php_inclusions/nav.php'); ?>
 		<div class="content">
+
+			
 		</div>
 
 

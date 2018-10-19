@@ -28,4 +28,5 @@
 			echo("<script src=js/".$scripts[$i]." rel=\"javascript\" type=\"text/javascript\"></script>");
 		}
 	}
+
 ?>

@@ -59,17 +59,10 @@ html, body {
 .sidebar{
     display: block;
     width: 18%;
-    height: calc(100% - 45px);
-	top:45px;
+    height: calc(100% - 50px);
+	top:50px;
 	padding: 0;
 	position:absolute;
-
-}
-
-#logo {
-    height: 35px;
-	display: block;
-	margin: auto 0.75rem ;
 
 }
 
@@ -118,17 +111,35 @@ html, body {
 }
 
 #prod-website:hover, #prod-website:hover a {
-	background: #2C3137 !important;
-	text-decoration: none;
+	text-decoration: underline;
 }
-
 
 
 /* ------ Navigation TOPBAR -------- */
 #topbar{
-	height: 45px;
+	height: 50px;
 	width:100%;
-	background:blue;
+	background: #343a40 ;
+}
+
+#logo {
+    height: 35px;
+	display: inline-block;
+	margin: 7.5px 0.75rem;
+}
+
+#topbar a{
+	color:rgba(255,255,255,.5);
+	margin: auto;
+}
+
+#topbar a:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#topbar .col-md-11{
+	padding: 0;
 }
 
 
@@ -161,6 +172,7 @@ html, body {
 	left:18%;
 	display: block;
 	position: absolute;
+	overflow: scroll;
 }
 
 .box-outer {
