@@ -15,7 +15,7 @@
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner">
-						
+							<canvas id="attendance-chart"></canvas>
 						</div>
 					</div>
 				</div>

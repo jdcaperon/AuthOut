@@ -25,7 +25,7 @@
 				<div class="col">
 					<div class="box-outer" style="padding-bottom: 0">
 						<div class="box-inner">
-						
+							<canvas id="attendance-graph"></canvas>
 						</div>					
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 				<div class="col">
 					<div class="box-outer">
 						<div class="box-inner">
-						
+							<canvas id="times-graph"></canvas>
 						</div>					
 					</div>
 				</div>
