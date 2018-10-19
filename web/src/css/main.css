@@ -9,8 +9,8 @@ html, body {
 }
 
 .page_content {
-	height: 90%;
-	width: 100%;
+	height: 100%;
+	width: 90%;
     display: inline-block;
 }
 
@@ -18,12 +18,7 @@ html, body {
     margin: 0 5% 0 5%;
 }
 
-.navbar{
-    display: block;
-    width: 100%;
-    height: 70px;
-	padding-left: 0;
-}
+
 
 
 /* -------- Button styling --------- */
@@ -59,76 +54,80 @@ html, body {
 }
 
 
-/* ------ Navigation -------- */
+/* ------ Navigation SIDEBAR -------- */
 
-#nav-line1{
-    position:absolute;
-    top: 0;
-    left: 0;
-    width:100%;
+.sidebar{
+    display: block;
+    width: 18%;
+    height: 100%;
+	padding: 1rem 0;
+
 }
-
 
 #logo {
-    height: 65px;
-	position: absolute;
-	left: 0px;
-	top:2.5px;
+    height: 35px;
+	display: block;
+	margin-left: 0.75rem ;
 }
 
-
-
-#nav-line2{
-    width:100%;
-    position:absolute;
-    bottom:0;
-	left:350px;
-    line-height: 24px
+/* Nav text and icons */
+.sidebar ul{
+	list-style: none;
+	padding: 0;
+	color:rgba(255,255,255,.5);
 }
 
-.current-tab .nav-link, .current-tab .material-icons.lighter {
-	color: #3B3E3A;
+.sidebar ul li a{
+	font-size:16px;
+	color:rgba(255,255,255,.5);
 }
 
-.nav-link {
-    display: inline;
-    line-height: 24px;
-    font-size: 21px;
-	color: rgba(255,255,255,.5);
+.sidebar ul .nav-heading{
+	font-size:12px;
+	padding-top:2rem;
 }
 
+.nav-link{
+	padding-left:0;
+}
 
-.nav-link:hover {
+.sidebar ul li{
+	padding: 0 0.75rem;
+}
+
+.feather {
+  margin-right: 0.75rem;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+
+}
+
+#prod-website{
+	font-size:16px;
+	margin-top: 1rem;
+	padding: 0.75rem;
+}
+
+/* Nav text and icons hover*/
+.nav-item:hover:not(.nav-heading) {
+
+	background: #2C3137 !important;
+}
+
+#prod-website:hover, #prod-website:hover a {
+	background: #2C3137 !important;
 	text-decoration: none;
-	color: #3B3E3A;
 }
 
-.nav-item {
-    padding: 5px 10px 0 10px;
-	transition: 0.2s;
-	border-radius: 5px 5px 0px 0px;
-}
 
-.nav-item:hover {
-    cursor: pointer;
-	background-color: #F2F3F1;
-	border-radius: 5px 5px 0px 0px;
-}
 
-.nav-item:hover .nav-link, .nav-item:hover .material-icons.lighter {
-	color: #3B3E3A;
-}
+/* ------ Navigation TOPBAR -------- */
 
-.material-icons.lighter {
-    color: rgba(255,255,255,.5);
-    font-size: 24px;
-    padding-right: 10px;
-    display: inline-flex;
-    vertical-align: top;
-}
+
 
 /* ---------- Dynamic navbar TODO DELETE -----------------*/
-@media screen and (max-width: 1050px) {
+/* @media screen and (max-width: 1050px) {
 	.nav-item {
 	    padding: 5px 10px 0 10px;
 		transition: 0.2s;
@@ -147,7 +146,7 @@ html, body {
 	    display: inline-flex;
 	    vertical-align: top;
 	}
-}
+} */
 
 
 

@@ -16,6 +16,12 @@
 	<script type="text/javascript" src="lib/jqwidgets/jqxtooltip.js"></script>
 	<script type="text/javascript" src="lib/jqwidgets/globalization/globalize.js"></script>
 
+	<!-- Icons -->
+  	<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  	<script>
+		feather.replace()
+  	</script>
+
 	<!--Extra scripts-->
 	<?php
 	if (isset($scripts)) {

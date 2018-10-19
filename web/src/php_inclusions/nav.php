@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand bg-dark">
-    <div id="nav-line1">
-		<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
-    </div>
+<nav class="sidebar navbar navbar-expand bg-dark">
+	<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
+	  <ul>
+		  <li class ="nav-item nav-heading">Dashboards</li>
+		  <li class ="nav-item"><a class="nav-link"href="live.php"><span data-feather="radio"></span>Live</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="stats.php"><span data-feather="bar-chart-2"></span>Statistics</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="reporting.php"><span data-feather="file-text"></span>Reporting</a></li>
 
-  <div id="nav-line2">
-	  <ul class="navbar-nav ">
-		  <li class ="nav-item">Dashboards</li>
-		  <li class ="nav-item"><a class="nav-link"href="live.php"><i class="material-icons lighter">wifi_tethering</i>Live</a></li>
-		  <li class ="nav-item"><a class="nav-link"href="stats.php"><i class="material-icons lighter">assessment</i>Statistics</a></li>
-		  <li class ="nav-item"><a class="nav-link"href="reporting.php"><i class="material-icons lighter">assignment</i>Reporting</a></li>
+		  <li class ="nav-item nav-heading">Administration</li>
+		  <li class ="nav-item"><a class="nav-link"href="accounts.php"><span data-feather="user"></span>Accounts</a></li>
 
-		  <li class ="nav-item">Administration</li>
-		  <li class ="nav-item"><a class="nav-link"href="accounts.php"><i class="material-icons lighter">wifi_tethering</i>Accounts</a></li>
+		  <li class ="nav-item nav-heading">Help</li>
+		  <li class ="nav-item"><a class="nav-link"href="tutorial.php"><span data-feather="help-circle"></span>Tutorial</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="contact.php"><span data-feather="mail"></span>Contact Us</a></li>
 
-		  <li class ="nav-item">Help</li>
-		  <li class ="nav-item"><a class="nav-link"href="tutorial.php"><i class="material-icons lighter">wifi_tethering</i>Tutorial</a></li>
-		  <li class ="nav-item"><a class="nav-link"href="contact.php"><i class="material-icons lighter">wifi_tethering</i>Contact Us</a></li>
+		  <li id="prod-website"><a target="_blank" href="https://deco3801-rocketpotatoes.uqcloud.net/">Product Website</a></li>
 	  </ul>
-  </div>
+
 </nav>
+
+<nav class="navbar navbar-expand bg-dark">
