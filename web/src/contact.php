@@ -9,14 +9,23 @@
 
 	<body>
 		<?php include ('php_inclusions/nav.php'); ?>
-		<div class="content container">
-			<div class="row">
+		
+		<div class="content">
+			<div class="row row-override" id="contact-greeting">
 				<div class="col">
-					<p>We'd love to hear from you! Use this form to send us your questions and comments</p>
+					<div class="box-outer">
+						<div class="box-inner">
+							<p>We'd love to hear from you! Use this form to send us your questions and comments</p>
+						</div>
+					</div>
 				</div>
-
-				<div class="col">
-					<form class="form-horizontal" role="form" method="post" action="index.php">
+			</div>
+			
+			<div class="row row-override"  id="contact-info">
+				<div class="col-9" class="contact-info">
+					<div class="box-outer" style="padding-top: 0;">
+						<div class="box-inner">
+												<form class="form-horizontal" role="form" method="post" action="index.php">
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label">Name</label>
 							<div class="col-sm-10">
@@ -43,14 +52,20 @@
 						</div>
 
 					</form>
+						</div>
+					</div>
 				</div>
+				
 				<div class="col">
-					<p>AuthOut proudly built by Rocket Potatoes in collaboration with 3CS Software. <p>
+					<div class="box-outer" style="padding-left: 0; padding-top: 0;">
+						<div class="box-inner">
+												<p>AuthOut proudly built by Rocket Potatoes in collaboration with 3CS Software. <p>
 						<img  src="img/rp_logo.png" alt="3CS Logo" id="logo"/>
 						<img  src="img/3cs.png" alt="3CS Logo" id="logo"/>
+						</div>
+					</div>
 				</div>
 			</div>
-
 		</div>
 
 		<?php
