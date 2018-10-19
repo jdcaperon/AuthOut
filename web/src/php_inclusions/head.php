@@ -31,7 +31,8 @@
 	<!--Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-
+	<!-- MDBootstrap Datatables  -->
+	<link href="lib/MDB/css/addons/datatables.min.css" rel="stylesheet">
 
 
 	<!--Extra stylesheets-->

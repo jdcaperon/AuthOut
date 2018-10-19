@@ -1,8 +1,10 @@
 $(document).ready(function() {
 	$("#nav-line2 > ul li:nth-of-type(3)").addClass("current-tab");
-	
+
+	$('#dtBasicExample').DataTable();
+$('.dataTables_length').addClass('bs-select');
 //--------------------------------------------- Attendance Chart ----------------------------------------------------------
-	
+
 	var ctx = document.getElementById("attendance-chart").getContext('2d');
 	var myChart = new Chart(ctx, {
 		type: 'pie',

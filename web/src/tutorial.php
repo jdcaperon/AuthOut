@@ -17,7 +17,7 @@
 					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner">
 							<h3>Welcome!</h3>
-							<p>We've tried to keep things as simple as possible to make your time here easy.
+							<p>We've kept things as simple as possible here to make your life easy.
 							<p>Please visit the <a href="contact.php">Contact Us</a> page if you have any questions, queries or concerns</p>
 						</div>
 					</div>
@@ -28,10 +28,10 @@
 						<div class="box-inner">
 							<h3>Site Overview</h3>
 							<ul>
-								<li><a href="live.php">Live</a> shows real-time information about your centre's attendance activities. You can track how many childern are signed in and view the latest drop offs and pick ups.</li>
-								<li> <a href="stats.php">Statistics</a> displays long-term trends in attendance. Select a date range on the calendar to view daily and hourly attendance statistics.</li>
-								<li> <a href="reporting.php">Reporting</a> allows you to view attendance data for a specific child. You can download this data to share with other people.</li>
-								<li> <a href="accounts.php">Accounts</a> is where you can manage the accounts at your centre.</li>
+								<li><a href="live.php">Live</a> shows real-time information about your centre's attendance activities. View headcount numbers and latest drop offs and pick ups.</li>
+								<li> <a href="stats.php">Statistics</a> displays long-term attendance trends. Select a date range on the calendar to view averaged daily and hourly statistics.</li>
+								<li> <a href="reporting.php">Reporting</a> allows you to view attendance data for a specific child. You can download this data to share it with other people.</li>
+								<li> <a href="accounts.php">Accounts</a> is where you can manage user accounts for your centre.</li>
 							</ul>
 						</div>
 					</div>
