@@ -1,5 +1,5 @@
 <nav class="sidebar navbar navbar-expand bg-dark">
-	<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
+
 	  <ul>
 		  <li class ="nav-item nav-heading">Dashboards</li>
 		  <li class ="nav-item"><a class="nav-link"href="live.php"><span data-feather="radio"></span>Live</a></li>
@@ -18,4 +18,6 @@
 
 </nav>
 
-<nav class="navbar navbar-expand bg-dark">
+<nav id = "topbar">
+	<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
+</nav>

@@ -59,15 +59,18 @@ html, body {
 .sidebar{
     display: block;
     width: 18%;
-    height: 100%;
-	padding: 1rem 0;
+    height: calc(100% - 45px);
+	top:45px;
+	padding: 0;
+	position:absolute;
 
 }
 
 #logo {
     height: 35px;
 	display: block;
-	margin-left: 0.75rem ;
+	margin: auto 0.75rem ;
+
 }
 
 /* Nav text and icons */
@@ -84,7 +87,7 @@ html, body {
 
 .sidebar ul .nav-heading{
 	font-size:12px;
-	padding-top:2rem;
+	padding-top:1.5rem;
 }
 
 .nav-link{
@@ -111,7 +114,6 @@ html, body {
 
 /* Nav text and icons hover*/
 .nav-item:hover:not(.nav-heading) {
-
 	background: #2C3137 !important;
 }
 
@@ -123,7 +125,11 @@ html, body {
 
 
 /* ------ Navigation TOPBAR -------- */
-
+#topbar{
+	height: 45px;
+	width:100%;
+	background:blue;
+}
 
 
 /* ---------- Dynamic navbar TODO DELETE -----------------*/
@@ -148,7 +154,15 @@ html, body {
 	}
 } */
 
-
+/* ----------Content --------- */
+.content{
+	width:82%;
+	height:calc(100% - 45px);
+	background-color: pink;
+	left:18%;
+	display: block;
+	position: absolute;
+}
 
 /* ---------- MISC -----------------*/
 
