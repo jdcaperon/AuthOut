@@ -17,18 +17,42 @@
 				</div>
 
 				<div class="col">
-					<h3>Site Overview</h3>
-					<ul>
-						<li><a href="live.php">Live</a> shows real-time information about your centre's attendance activities. You can track how many childern are signed in and view the latest drop offs and pick ups.</li>
-						<li> <a href="stats.php">Statistics</a> displays long-term trends in attendance. Select a date range on the calendar to view daily and hourly attendance statistics.</li>
-						<li> <a href="reporting.php">Reporting</a> allows you to view attendance data for a specific child. You can download this data to share with other people.</li>
-						<li> <a href="accounts.php">Accounts</a> is where you can manage the accounts at your centre.</li>
-					</ul>
+					<form class="form-horizontal" role="form" method="post" action="index.php">
+						<div class="form-group">
+							<label for="name" class="col-sm-2 control-label">Name</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="name" name="name" placeholder="First & Last Name" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-sm-2 control-label">Email</label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="message" class="col-sm-2 control-label">Message</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="4" name="message"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-10 col-sm-offset-2">
+								<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-10 col-sm-offset-2">
+
+							</div>
+						</div>
+					</form>
 				</div>
 				<div class="col">
 					<p>AuthOut proudly built by Rocket Potatoes in collaboration with 3CS Software. <p>
-						<img  src="img/3cs.png" alt="3CS Logo" id="logo"/>
 						<img  src="img/rp_logo.png" alt="3CS Logo" id="logo"/>
+						<img  src="img/3cs.png" alt="3CS Logo" id="logo"/>
 				</div>
 			</div>
 
