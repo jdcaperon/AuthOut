@@ -172,7 +172,7 @@ html, body {
 	left:18%;
 	display: block;
 	position: absolute;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 .box-outer {

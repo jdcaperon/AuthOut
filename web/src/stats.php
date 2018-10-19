@@ -13,7 +13,7 @@
 		<?php include ('php_inclusions/nav.php'); ?>
 
 		<div class="content">
-			<div class="row">
+			<div class="row row-override">
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0; padding-bottom: 0">
 						<div class="box-inner">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row row-override">
 				<div class="col">
 					<div class="box-outer">
 						<div class="box-inner">
