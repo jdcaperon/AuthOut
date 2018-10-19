@@ -16,16 +16,17 @@
 <script type="text/javascript" src="lib/jqwidgets/globalization/globalize.js"></script>
 
 <!-- Icons -->
-	<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-	<script>
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
 	feather.replace()
-	</script>
+</script>
 
 <!--Extra scripts-->
 <?php
-if (isset($scripts)) {
-	for ($i = 0; $i < count($scripts); $i++) {
-		echo("<script src=js/".$scripts[$i]." rel=\"javascript\" type=\"text/javascript\"></script>");
+	if (isset($scripts)) {
+		for ($i = 0; $i < count($scripts); $i++) {
+			echo("<script src=js/".$scripts[$i]." rel=\"javascript\" type=\"text/javascript\"></script>");
+		}
 	}
-}
+
 ?>

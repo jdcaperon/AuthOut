@@ -1,6 +1,32 @@
 $(document).ready(function() {
 	$("#nav-line2 > ul li:nth-of-type(2)").addClass("current-tab");
 
+	$("#calendarWidget").jqxCalendar({width: "100%", height: "100%", selectionMode: 'range', theme: 'custom', max: new Date()});
+			
+	var count = 0;
+			
+	// Get date range on change
+	$("#calendarWidget").on('change', function (event) {
+        var selection = event.args.range;
+		var fromDate = selection.from.toLocaleDateString();
+		var toDate = selection.to.toLocaleDateString();
+				
+		// Ignore the first two changes that happen when the calendar is made
+		if (count > 1) {
+			console.log(fromDate);
+			console.log(toDate);
+		}
+				
+		count++;
+	});
+            
+	// Set starting range to be the last week
+	var today = new Date();
+	var past = new Date();
+	past.setDate(past.getDate() - 6);
+    $("#calendarWidget").jqxCalendar('setRange', past, today);
+	
+	/*
 	// Calendar widget
 	$(".calendar").jqxDateTimeInput({ animationType: 'slide', width: '80%', height: "40px", dropDownHorizontalAlignment: 'right', formatString: 'D' });
 
@@ -32,5 +58,5 @@ $(document).ready(function() {
 				}]
 			}
 		}
-	});
+	});*/
 });
