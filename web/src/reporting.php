@@ -1,21 +1,22 @@
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
-	<?php 
+	<?php
 		$pageName = "Report";
 		$stylesheets = array("report_style.css");
-		include_once ('head.php');		
+		include_once ('php_inclusions/head.php');
+
 	?>
-	
+
 	<body>
-		<?php include ('../html/nav.html'); ?>
-		
+		<?php include ('php_inclusions/nav.php'); ?>
+
 		<div id="report-content" class="row">
 			<div id="graph" class="col">
 				<!--Graph here-->
-				<img src="../img/placeholder.png" style="width:100%; height:100%">
+				<img src="img/placeholder.png" style="width:100%; height:100%">
 			</div>
-			
+
 			<div id="options" class="col-4 text-center">
 				<form id="report-form" class="vertical-center jumbotron">
 					<label>Child:</label><br>
@@ -27,10 +28,11 @@
 				</form>
 			</div>
 		</div>
+		<?php
+			$scripts = array("report_script.js");
+			include_once ('php_inclusions/scripts.php');
+		?>
 	</body>
-	
-	<?php 
-		$scripts = array("report_script.js");
-		include_once ('scripts.php');
-	?>
+
+
 </html>

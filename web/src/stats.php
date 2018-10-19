@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-		$pageName = "Statistics";
+		$pageName = "Live Monitor";
 		$stylesheets = array("stats_style.css");
-		include_once ('head.php');
+		include_once ('php_inclusions/head.php');
 
 	?>
 
 	<body>
-		<?php include ('../html/nav.html'); ?>
+		<?php include ('php_inclusions/nav.php'); ?>
 
 		<div id="stats-content" class="row">
 			<div id="graph" class="col">
@@ -43,11 +43,11 @@
 				</form>
 			</div>
 		</div>
+		<?php
+			$scripts = array("stats_script.js");
+			include_once ('php_inclusions/scripts.php');
+		?>
 	</body>
 
-	<?php
-		$scripts = array("stats_script.js");
-		include_once ('scripts.php');
-	?>
-	
+
 </html>

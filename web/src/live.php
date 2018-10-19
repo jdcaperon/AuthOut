@@ -1,16 +1,16 @@
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
-	<?php 
+	<?php
 		$pageName = "Live Monitor";
 		$stylesheets = array("monitor_style.css");
-		include_once ('head.php');
-		
+		include_once ('php_inclusions/head.php');
+
 	?>
-	
+
 	<body>
-		<?php include ('../html/nav.html'); ?>
-		
+		<?php include ('php_inclusions/nav.php'); ?>
+
 		<div id="monitor-content" class="row">
 			<div id="graph1" class="col">
 				<h2 class="graph_title">Sign-in History</h2>
@@ -22,7 +22,7 @@
 							<th>Child</th>
 							<th>Time</th>
 						</tr>
-						
+
 						<?php
 							for($i = 0; $i < 50; $i++) {
 								echo "
@@ -34,12 +34,12 @@
 									</tr>
 								";
 							}
-						
+
 						?>
 					</table>
 				</div>
 			</div>
-			
+
 			<div id="graph2" class="col">
 				<h2 class="graph_title">Sign-out History</h2>
 				<div  class="jumbotron">
@@ -50,7 +50,7 @@
 							<th>Child</th>
 							<th>Time</th>
 						</tr>
-						
+
 						<?php
 							for($i = 0; $i < 50; $i++) {
 								echo "
@@ -62,16 +62,17 @@
 									</tr>
 								";
 							}
-						
+
 						?>
 					</table>
 				</div>
 			</div>
 		</div>
+		<?php
+			$scripts = array("monitor_script.js");
+			include_once ('php_inclusions/scripts.php');
+		?>
 	</body>
-	
-	<?php 
-		$scripts = array("monitor_script.js");
-		include_once ('scripts.php');
-	?>
+
+
 </html>

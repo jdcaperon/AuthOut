@@ -1,3 +1,19 @@
+<?php
+    $isIndex = strpos($_SERVER["PHP_SELF"], "index.php"); //True if index
+
+    // Set timezone to GMT+10
+    date_default_timezone_set ("Australia/Brisbane");
+
+    //if not signed in, redirect to index.php
+	//TODO: uncomment when signin done
+    // if(!isset($_SESSION['email'])){
+    //     if (!$isIndex){
+    //         header('Location: index.php');
+    //         exit();
+    //     }
+    // }
+?>
+
 <head>
 	<title>AuthOut</title>
 	<meta charset="utf-8" name="description" content="A web-application to facilitate the signing in/out process in child care centres ."/>
@@ -7,10 +23,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Alex+Brush|Cookie|Lobster|Playball|Tangerine" rel="stylesheet">
 
 	<!--Main stylesheet-->
-	<link href="../css/main.css" rel="stylesheet" type="text/css">
+	<link href="css/main.css" rel="stylesheet" type="text/css">
 
 	<!--Widgets style sheet-->
-	<link rel="stylesheet" href="../lib/jqwidgets/styles/jqx.base.css" type="text/css" />
+	<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.base.css" type="text/css" />
 
 	<!--Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -18,15 +34,13 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-	<!-- JS Inclusions -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
 
 	<!--Extra stylesheets-->
 	<?php
 	if (isset($stylesheets)) {
 		for ($i = 0; $i < count($stylesheets); $i++) {
-			echo("<link href=../css/".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
+			echo("<link href=css/".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
 		}
 	}
 	?>
