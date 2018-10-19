@@ -22,7 +22,7 @@
 					</div>
 				</div>
 				
-				<div class="col">
+				<div class="col-8">
 					<div class="box-outer" style="padding-bottom: 0">
 						<div class="box-inner">
 							<canvas id="attendance-graph"></canvas>
@@ -32,7 +32,7 @@
 			</div>
 			
 			<div class="row row-override">
-				<div class="col">
+				<div class="col-12">
 					<div class="box-outer">
 						<div class="box-inner">
 							<canvas id="times-graph"></canvas>

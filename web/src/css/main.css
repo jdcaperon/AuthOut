@@ -27,7 +27,7 @@ html, body {
 	text-align: center;
 }
 
-.rounded_button {
+.rounded-button {
 	height: 40px;
 	width: 250px;
 	border: none;
@@ -41,15 +41,15 @@ html, body {
 	cursor: pointer;
 }
 
-.rounded_button:hover {
+.rounded-button:hover {
 	background-color: #DCA726;
 }
 
-.blue_button {
+.blue-button {
 	background-color: #03BABD;
 }
 
-.purple_button {
+.purple-button {
 	background-color: #BC72AF;
 }
 
@@ -169,7 +169,7 @@ html, body {
 /* ----------Content --------- */
 .content{
 	width:82%;
-	height:calc(100% - 45px);
+	height:calc(100% - 50px);
 	left:18%;
 	display: block;
 	position: absolute;
@@ -179,6 +179,7 @@ html, body {
 .box-outer {
 	height: 100%;
 	padding: 30px;
+	width: 100%;
 }
 
 .box-inner {
@@ -186,16 +187,4 @@ html, body {
 	height: 100%;
 	width: 100%;
 	padding: 4vw;
-}
-
-/* ---------- MISC -----------------*/
-// TODO: delete
-.jumbotron {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  background-color: transparent;
-  padding: 60px 20px 20px 20px;
-  margin: 0;
 }
