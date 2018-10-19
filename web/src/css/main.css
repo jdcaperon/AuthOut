@@ -158,14 +158,24 @@ html, body {
 .content{
 	width:82%;
 	height:calc(100% - 45px);
-	background-color: pink;
 	left:18%;
 	display: block;
 	position: absolute;
 }
 
-/* ---------- MISC -----------------*/
+.box-outer {
+	height: 100%;
+	padding: 30px;
+}
 
+.box-inner {
+	background-color: white;
+	height: 100%;
+	width: 100%;
+}
+
+/* ---------- MISC -----------------*/
+// TODO: delete
 .jumbotron {
   position: absolute;
   top: 50%;

@@ -41,6 +41,12 @@
 			echo("<link href=css/".$stylesheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );
 		}
 	}
+	
+	if (isset($externalSheets)) {
+		for ($i = 0; $i < count($externalSheets); $i++) {
+			echo("<link href=".$externalSheets[$i]." rel=\"stylesheet\" type=\"text/css\">" );;
+		}
+	}
 	?>
 
 	<!--Favicon-->

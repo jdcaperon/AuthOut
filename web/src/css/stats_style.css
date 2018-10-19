@@ -1,9 +1,16 @@
-body {
-	display: flex;
-	flex-flow: column;
+/* ---------- Bootsrap Changes --------- */
+
+.row {
+	height: 50%;
+	width: 100%;
+	margin: 0;
 }
 
-#Weekly {
+.col, .col-4 {
+	padding: 0;
+}
+
+/*#Weekly {
 	width: 100%;
 	height: 100%;
 }
@@ -38,4 +45,4 @@ body {
 
 #stats-content > div {
 	padding: 0;
-}
+}*/
