@@ -83,7 +83,7 @@ def delete_photo_from_s3_bucket(keys, bucket=BUCKET):
     )
 
 
-def get_face_id_by_photo_name(photo_name, collection_id=COLLECTION, threshold=80, region=REGION, bucket=BUCKET):
+def get_face_id_by_photo_name(photo_name, collection_id=COLLECTION, region=REGION):
     faces = list_faces_in_collection(collection_id, region)
     for face in faces:
         if face['ExternalImageId'] == photo_name:
@@ -99,7 +99,7 @@ def delete_parent_photo(parental_id):
     delete_face_from_collection([face_id])
 
 
-def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=80, region=REGION):
+def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=60, region=REGION):
     """
 
     :param encoded_image: base64 encoded image to search collection for
