@@ -229,56 +229,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    /** Builds are returns a list of the generic or trusted children of a parent
-     *
-     * @param response - the response from the server with the parent details
-     * @param getTrustedChildren - Where to get the trusted children or get generic children
-     * @return list of {@link Child} objects specified in {@param getTrustedChildren}
-     */
-    private static List<Child> buildChildList(JSONObject response, boolean getTrustedChildren) {
-        String key = getTrustedChildren ? "trusted_children" : "children";
-        List<Child> childList = new ArrayList<>();
-        try {
-            String childrenString = response.get("children").toString();
-            childrenString = childrenString.substring(1, childrenString.length() - 1);
-            String[] children = childrenString.split(",\\{");
-            for (int i = 0; i < children.length; i++) {
-                String child = children[i];
-                if (i > 0) {
-                    child = "{" + child; //todo this is dodge as fuck clean it up
-                }
 
-                JSONObject childObject = new JSONObject(child);
-                childList.add(new Child(childObject.get("first_name").toString(),
-                        childObject.get("last_name").toString(),
-                        childObject.get("status").toString().equals("false") ? "Signed-Out" : "Signed-In",
-                        Integer.parseInt(childObject.get("id").toString())));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        return childList;
-    }
 
-    /** Builds and returns a parent object
-     *
-     * @param response - the response from the server with the parent details
-     * @param children - a list of child objects
-     * @param trustedChildren - a list of child objects
-     * @return
-     */
-    private static Parent buildParent(JSONObject response, List<Child> children, List<Child> trustedChildren) {
-        try {
-            String firstName = response.get("first_name").toString();
-            String lastName = response.get("last_name").toString();
-            int id = Integer.parseInt(response.get("id").toString());
-            return new Parent(firstName, lastName, children, trustedChildren, id);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        throw new IllegalArgumentException("Issue instantiating parent");
-    }
 
     /**
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
@@ -298,15 +251,14 @@ public class HomeActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_IMAGE_CHECK, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO Create and set parent object here
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
 
                         if (true) {
-                            List<Child> childrenList = buildChildList(response, false);
-                            List<Child> trustedChildrenList = buildChildList(response, true);
+                            List<Child> childrenList = Util.buildChildList(response, false);
+                            List<Child> trustedChildrenList = Util.buildChildList(response, true);
 
-                            Parent parent = buildParent(response, childrenList, trustedChildrenList);
+                            Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
                             if (parent.getFirstName().equals("Ryan") && parent.getSurname().equals("Kurz")) {
                                 Intent intent = new Intent(HomeActivity.this, AdminActivity.class);

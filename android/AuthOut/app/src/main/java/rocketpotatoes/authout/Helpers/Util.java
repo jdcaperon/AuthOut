@@ -7,7 +7,12 @@ import android.graphics.Bitmap;
 import android.util.Base64;
 import android.view.View;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Util {
     public static String bitmapToBase64(Bitmap bitmap, int quality) {
@@ -42,5 +47,57 @@ public class Util {
                         view.setVisibility(toVisibility);
                     }
                 });
+    }
+
+
+    /** Builds are returns a list of the generic or trusted children of a parent
+     *
+     * @param response - the response from the server with the parent details
+     * @param getTrustedChildren - Where to get the trusted children or get generic children
+     * @return list of {@link Child} objects specified in {@param getTrustedChildren}
+     */
+    public static List<Child> buildChildList(JSONObject response, boolean getTrustedChildren) {
+        String key = getTrustedChildren ? "trusted_children" : "children";
+        List<Child> childList = new ArrayList<>();
+        try {
+            String childrenString = response.get("children").toString();
+            childrenString = childrenString.substring(1, childrenString.length() - 1);
+            String[] children = childrenString.split(",\\{");
+            for (int i = 0; i < children.length; i++) {
+                String child = children[i];
+                if (i > 0) {
+                    child = "{" + child; //todo this is dodge as fuck clean it up
+                }
+
+                JSONObject childObject = new JSONObject(child);
+                childList.add(new Child(childObject.get("first_name").toString(),
+                        childObject.get("last_name").toString(),
+                        childObject.get("status").toString().equals("false") ? "Signed-Out" : "Signed-In",
+                        Integer.parseInt(childObject.get("id").toString())));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return childList;
+    }
+
+    /** Builds and returns a parent object
+     *
+     * @param response - the response from the server with the parent details
+     * @param children - a list of child objects
+     * @param trustedChildren - a list of child objects
+     * @return
+     */
+    public static Parent buildParent(JSONObject response, List<Child> children, List<Child> trustedChildren) {
+        try {
+            String firstName = response.get("first_name").toString();
+            String lastName = response.get("last_name").toString();
+            int id = Integer.parseInt(response.get("id").toString());
+            return new Parent(firstName, lastName, children, trustedChildren, id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        throw new IllegalArgumentException("Issue instantiating parent");
     }
 }

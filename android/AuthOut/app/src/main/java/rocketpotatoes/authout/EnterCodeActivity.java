@@ -138,9 +138,16 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("Response", response.toString().substring(0, 100));
+
                         //TODO if the code is matched move to the next activity with parent
                         //TODO if the code is not match put up a toast/handle it
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
+
+
+                        /*List<Child> childrenList = Util.buildChildList(response, false);
+                        List<Child> trustedChildrenList = Util.buildChildList(response, true);
+
+                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);*/
 
                         // ----------- Creating Dummy Parent -----------------------
                         List<Child> dummyChildren = new ArrayList<>();
