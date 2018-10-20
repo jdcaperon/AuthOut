@@ -11,6 +11,13 @@
 }
 
 /*-------------- Calendar ----------------*/
-#calendar {
-	padding
+
+
+#calendar-row{
+	min-height: 350px;
+}
+
+#jordan-hack{
+	padding-bottom:0;
+	padding-right:0;
 }
