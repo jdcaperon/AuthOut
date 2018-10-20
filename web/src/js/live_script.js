@@ -31,7 +31,7 @@ $(document).ready(function() {
 			}]
 		},
 		options: {
-			responsive:true,
+			responsive: true,
 			maintainAspectRatio: false,
 			legend: {
             display: false,
