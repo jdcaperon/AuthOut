@@ -17,7 +17,10 @@
 
 /* ---------------------- Rigth Column ---------------------- */
 
-#child-select-box, #buttons-box {
+#child-select-box{
+	height: 15%;
+}
+#buttons-box {
 	height: 25%;
 }
 
@@ -31,18 +34,29 @@
 
 /* ----------------------- Calendar ---------------------- */
 #calendar-box {
-	height: 50%;
+	height: 60%;
 }
 
 #calendar-box .box-inner {
 	padding: 1vw;
 	display: flex;
 }
+ p {
+	font-size: 12px;
+	margin-bottom: 0.25rem;
+	text-align: left;
+}
 
 #calendar {
 	flex: 1;
 }
+#calendar-box p{
+	margin-bottom: 0.5rem;
+}
 
+#cal{
+	padding: 2vw 4vw !important;
+}
 /* ----------------------- Child Select -------------------- */
 #child-select-list {
 	width: 100%;
@@ -61,7 +75,7 @@
 
 #child-select-box label {
 	color: #03BABD;
-	font-size: 1.4em;
+	font-size: 1em;
 }
 
 /* ------------------------ Buttons ------------------------ */

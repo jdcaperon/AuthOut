@@ -21,3 +21,10 @@
 	padding-bottom:0;
 	padding-right:0;
 }
+
+div.ui-datepicker{
+ font-size:8px !important;
+}
+#cal{
+	padding:1.5vw 4vw;
+}

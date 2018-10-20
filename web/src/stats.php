@@ -14,18 +14,20 @@
 
 		<div class="content">
 			<div class="row row-override" id="calendar-row">
-				<div class="col-4">
+				<div class="col-5">
 					<div class="box-outer" id="jordan-hack">
-						<div class="box-inner">
+						<div class="box-inner" id="cal">
 							<p>Select a range of dates</p>
+							<div >
 								<div type='text' class="datepicker-here" data-position="right top" data-range="true" data-language="en" id="calendar">
+								</div>
 							</div>
 
 						</div>
 					</div>
 				</div>
 
-				<div class="col-8">
+				<div class="col-7">
 					<div class="box-outer" style="padding-bottom: 0">
 						<div class="box-inner">
 							<canvas id="attendance-graph"></canvas>
