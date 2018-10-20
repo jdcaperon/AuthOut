@@ -1,3 +1,4 @@
+/* -------- Page Structure --------- */
 html, body {
 	height: 100%;
 	width: 100%;
@@ -7,21 +8,26 @@ html, body {
 	min-width: 960px;
 }
 
-.jumbotron {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  background-color: transparent;
-  padding: 60px 20px 20px 20px;
-  margin: 0;
+.page_content {
+	height: 100%;
+	width: 90%;
+    display: inline-block;
 }
+
+.page-body{
+    margin: 0 5% 0 5%;
+}
+
+
+
+
+/* -------- Button styling --------- */
 
 .button_wrapper {
 	text-align: center;
 }
 
-.rounded_button {
+.rounded-button {
 	height: 40px;
 	width: 250px;
 	border: none;
@@ -35,117 +41,152 @@ html, body {
 	cursor: pointer;
 }
 
-.rounded_button:hover {
+.rounded-button:hover {
 	background-color: #DCA726;
 }
 
-.blue_button {
+.blue-button {
 	background-color: #03BABD;
 }
 
-.purple_button {
+.purple-button {
 	background-color: #BC72AF;
 }
 
-.page_content {
-	height: 90%;
-	width: 100%;
-    display: inline-block;
-}
 
-.page-body{
-    margin: 0 5% 0 5%;
-}
+/* ------ Navigation SIDEBAR -------- */
 
-#logo{
-    height: 65px;
-}
-
-.navbar{
+.sidebar{
     display: block;
-    width: 100%;
-    height: 110px;
-	padding-left: 0;
+    width: 18%;
+    height: calc(100% - 50px);
+	top:50px;
+	padding: 0;
+	position:fixed;
+
+
 }
 
-#page-heading {
+/* Nav text and icons */
+.sidebar ul{
+	list-style: none;
+	padding: 0;
+	color:rgba(255,255,255,.5);
+}
+
+.sidebar ul li a{
+	font-size:16px;
+	color:rgba(255,255,255,.5);
+}
+
+.sidebar ul .nav-heading{
+	font-size:12px;
+	padding-top:1.5rem;
+}
+
+.nav-link{
+	padding-left:0;
+}
+
+.sidebar ul li{
+	padding: 0 0.75rem;
+}
+
+.feather {
+  margin-right: 0.75rem;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+
+}
+
+#prod-website{
+	font-size:16px;
+	margin-top: 1rem;
+	padding: 0.75rem;
+}
+
+/* Nav text and icons hover*/
+.nav-item:hover:not(.nav-heading) {
+	background: #2C3137 !important;
+}
+
+#prod-website:hover, #prod-website:hover a {
+	text-decoration: underline;
+}
+
+
+/* ------ Navigation TOPBAR -------- */
+#topbar{
+	height: 50px;
+	width:100%;
+	background: #343a40 ;
+}
+
+#logo {
+    height: 35px;
 	display: inline-block;
-	color: #DCA726;
+	margin: 7.5px 0.75rem;
 }
 
-#nav-line1{
-    position:absolute;
-    top:10px;
-    width:100%;
-	padding-left: 16px;
+#topbar a{
+	color:rgba(255,255,255,.5);
+	margin: auto;
 }
 
-#nav-line2{
-    width:100%;
-    position:absolute;
-    bottom:0;
-    line-height: 24px
-
+#topbar a:hover{
+	text-decoration: underline;
+	cursor: pointer;
 }
 
-#account-svg{
-    right:24px;
-    position:absolute;
-    font-size: 50px;
+#topbar .col-md-11{
+	padding: 0;
 }
 
-#page-title{
-    height: 10%;
-    width:100%;
-    display: inline-block;
-    box-shadow: 1px 5px #F2F3F1;
+
+/* ---------- Dynamic navbar TODO DELETE -----------------*/
+/* @media screen and (max-width: 1050px) {
+	.nav-item {
+	    padding: 5px 10px 0 10px;
+		transition: 0.2s;
+		border-radius: 5px 5px 0px 0px;
+	}
+
+	.nav-item a {
+		font-size: 0;
+		padding: 0;
+	}
+
+	.material-icons.lighter {
+	    color: #F2F3F1;
+	    font-size: 24px;
+	    padding-right: 0px;
+	    display: inline-flex;
+	    vertical-align: top;
+	}
+} */
+
+/* ----------Content --------- */
+.content{
+	width:82%;
+	height:calc(100% - 50px);
+	left:18%;
+	display: block;
+	position: absolute;
+	overflow-y: scroll;
+	min-height: 577px;
+	top:50px;
 }
 
-.current-tab {
-	background-color: #F2F3F1;
-	color: #3B3E3A;
+.box-outer {
+	height: 100%;
+	padding: 30px;
+	width: 100%;
 }
 
-.current-tab .nav-link, .current-tab .material-icons.lighter {
-	color: #3B3E3A;
-}
-
-.nav-link {
-    display: inline;
-    line-height: 24px;
-    font-size: 21px;
-	color: #F2F3F1;
-}
-
-.nav-link:hover {
-	text-decoration: none;
-	color: #3B3E3A;
-}
-
-.nav-item {
-    padding: 5px 10px 0 10px;
-	transition: 0.2s;
-}
-
-.nav-item:hover {
-    cursor: pointer;
-	background-color: #F2F3F1;
-}
-
-.nav-item:hover .nav-link, .nav-item:hover .material-icons.lighter {
-	color: #3B3E3A;
-}
-
-.material-icons.lighter {
-    color: #F2F3F1;
-    font-size: 24px;
-    padding-right: 10px;
-    display: inline-flex;
-    vertical-align: top;
-}
-
-.graph_title {
-	color: #03BABD;
-	text-align: center;
-	margin-top: 10px;
+.box-inner {
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	padding: 4vw;
 }

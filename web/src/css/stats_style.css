@@ -1,41 +1,23 @@
-body {
-	display: flex;
-	flex-flow: column;
-}
+/* ---------- Bootsrap Changes --------- */
 
-#Weekly {
+.row-override {
+	height: 50%;
 	width: 100%;
-	height: 100%;
-}
-
-#stats-form {
-	padding: 20px;
-}
-
-#stats-form select {
-	width: 80%;
-	height: 35px;
-}
-
-#stats-form label {
-	color: #03BABD;
-	font-size: 1.5em;
-	margin-top: 20px;
-}
-
-#stats-form button {
-	margin-top: 40px;
-}
-
-.calendar {
-	margin: 0 auto;
-}
-
-#stats-content {
-	flex: 1;
 	margin: 0;
 }
 
-#stats-content > div {
+.col-8, .col-12, .col-4 {
 	padding: 0;
+}
+
+/*-------------- Calendar ----------------*/
+
+
+#calendar-row{
+	min-height: 350px;
+}
+
+#jordan-hack{
+	padding-bottom:0;
+	padding-right:0;
 }
