@@ -19,11 +19,11 @@
 								<canvas id="attendance-chart"></canvas>
 							</div>
 							<div class="data-div">
-								<h3>12</h3>
+								<h3 id="signed-in-number">??</h3>
 								<p>Signed in</p>
 							</div>
 							<div class="data-div">
-								<h3>19</h3>
+								<h3 id="signed-out-number">??</h3>
 								<p>Signed out</p>
 							</div>
 
@@ -50,90 +50,8 @@
 							      <th class="th-sm">Action
 							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
 							      </th>
-							      </th>
 							    </tr>
 							  </thead>
-							  <tbody>
-							    <tr>
-							      <td>Tiger Nixon</td>
-							      <td>System Architect</td>
-							      <td>Edinburgh</td>
-							      <td>61</td>
-							    </tr>
-							    <tr>
-							      <td>Garrett Winters</td>
-							      <td>Accountant</td>
-							      <td>Tokyo</td>
-							      <td>63</td>
-							    </tr>
-							    <tr>
-							      <td>Ashton Cox</td>
-							      <td>Junior Technical Author</td>
-							      <td>San Francisco</td>
-							      <td>66</td>
-							    </tr>
-							    <tr>
-							      <td>Cedric Kelly</td>
-							      <td>Senior Javascript Developer</td>
-							      <td>Edinburgh</td>
-							      <td>22</td>
-							    </tr>
-							    <tr>
-							      <td>Airi Satou</td>
-							      <td>Accountant</td>
-							      <td>Tokyo</td>
-							      <td>33</td>
-							    </tr>
-								<tr>
-							      <td>Jennifer Chang</td>
-							      <td>Regional Director</td>
-							      <td>Singapore</td>
-							      <td>28</td>
-							    </tr>
-							    <tr>
-							      <td>Brenden Wagner</td>
-							      <td>Software Engineer</td>
-							      <td>San Francisco</td>
-							      <td>28</td>
-							    </tr>
-							    <tr>
-							      <td>Fiona Green</td>
-							      <td>Chief Operating Officer (COO)</td>
-							      <td>San Francisco</td>
-							      <td>48</td>
-							    </tr>
-							    <tr>
-							      <td>Shou Itou</td>
-							      <td>Regional Marketing</td>
-							      <td>Tokyo</td>
-							      <td>20</td>
-							    </tr>
-							    <tr>
-							      <td>Jennifer Chang</td>
-							      <td>Regional Director</td>
-							      <td>Singapore</td>
-							      <td>28</td>
-							    </tr>
-							    <tr>
-							      <td>Brenden Wagner</td>
-							      <td>Software Engineer</td>
-							      <td>San Francisco</td>
-							      <td>28</td>
-							    </tr>
-							    <tr>
-							      <td>Fiona Green</td>
-							      <td>Chief Operating Officer (COO)</td>
-							      <td>San Francisco</td>
-							      <td>48</td>
-							    </tr>
-							    <tr>
-							      <td>Shou Itou</td>
-							      <td>Regional Marketing</td>
-							      <td>Tokyo</td>
-							      <td>20</td>
-							    </tr>
-							  </tbody>
-
 							</table>
 						</div>
 					</div>

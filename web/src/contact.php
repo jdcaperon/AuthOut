@@ -60,7 +60,7 @@
 					</div>
 				</div>
 
-				<div class="col">
+				<div class="col-4">
 					<div class="box-outer" style="padding-left: 0; padding-top: 0;">
 						<div class="box-inner">
 

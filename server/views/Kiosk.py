@@ -67,7 +67,7 @@ def signin_endpoint():
                 return Response('No parent or child matched', 400)
         else:
             return Response('Json Package did not contain required keys', 400)
-    return Response('Changed status successfully', 200)
+    return Response('{}', 200)
 
 
 @bp.route('/register', methods=['POST'])
