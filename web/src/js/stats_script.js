@@ -6,10 +6,23 @@ $(document).ready(function() {
 
 	$('#calendar').datepicker({
 		language: 'en',
-		maxDate: new Date() // Now can select only dates, which goes after today
+		maxDate: new Date(), // Now can select only dates, which goes after today
+		dateFormat: "dd/mm/yyyy",
+		onSelect: function(formattedDate, date, inst) {
+			var dates = formattedDate.split(',');
+			if (dates.length > 1) {
+				// send requests
+			}
+		}
 	});
 
-
+	var datePicker = $('#calendar').datepicker().data('datepicker');
+	
+	var today = new Date();
+ 	var past = new Date();
+	past.setDate(past.getDate() - 6);
+	
+	datePicker.selectDate([past, today]);
 
 //--------------------------------------------- Attendance Graph ----------------------------------------------------------
 
