@@ -19,11 +19,12 @@ $(document).ready(function() {
 		} else {
 			var request = $.ajax
 			({
-				type: "GET",
-				url: "https://deco3801.wisebaldone.com/api/login",
-				dataType: 'json',
-				username: username,
-				password: password,
+				type: "POST",
+				url: "https://deco3801.wisebaldone.com/app/login.php",
+				data: {
+					"username": username, 
+					"password": password
+				},
 				success: function(data, textStatus, xhr) {
 					if (xhr.status == 200) {
 						loginSuccess();
