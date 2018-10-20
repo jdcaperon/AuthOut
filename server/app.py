@@ -6,6 +6,7 @@ app.register_blueprint(views.Heartbeat.bp)
 app.register_blueprint(views.Kiosk.bp)
 app.register_blueprint(views.Parent.bp)
 app.register_blueprint(views.Child.bp)
+app.register_blueprint(views.Entry.bp)
 
 if __name__ == '__main__':
     app.run()

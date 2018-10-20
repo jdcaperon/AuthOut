@@ -1,5 +1,7 @@
 import base64
 from flask import Blueprint, jsonify, request, Response
+
+from models.EntryModel import EntryModel
 from models.aws import get_id_by_image, set_parent_photo
 from db import db
 from models.ParentModel import ParentModel
@@ -24,7 +26,7 @@ def model_endpoint():
 
 
 @bp.route('/login', methods=['POST'])
-def signin_endpoint():
+def login_endpoint():
     """
     Returns a parent object with children attached if the image given matches
     someone that can be logged into this kiosk.
@@ -40,6 +42,33 @@ def signin_endpoint():
         if parent.count() == 1:
             return jsonify((parent.first()).as_dict())
     return Response('', 400)
+
+
+@bp.route('/signin', methods=['POST'])
+def signin_endpoint():
+    data = request.get_json(force=True)
+
+    for i in range(0, len(data['children'])):
+        child_data = data['children'][i]
+        individual = {'parent_id': data['parent_id'],
+                      'child_id': child_data['id'],
+                      'status': child_data['status']}
+        entry = EntryModel()
+        if entry.load(individual):
+            child = db.session.query(ChildModel).filter_by(id=entry.child_id)
+            parent = db.session.query(ParentModel).filter_by(id=entry.parent_id)
+            if child.count() == 1 and parent.count() == 1:
+                child = child.first()
+                child.status = entry.status
+
+                db.session.add(entry)
+                db.session.add(child)
+                db.session.commit()
+            else:
+                return Response('No parent or child matched', 400)
+        else:
+            return Response('Json Package did not contain required keys', 400)
+    return Response('', 200)
 
 
 @bp.route('/register', methods=['POST'])
@@ -88,8 +117,3 @@ def register_endpoint():
             return Response('user_photo invalid or not provided', 400)
 
     return Response('Missing parent data', 400)
-
-
-
-
-
