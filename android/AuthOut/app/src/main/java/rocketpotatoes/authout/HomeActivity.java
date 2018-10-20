@@ -236,8 +236,7 @@ public class HomeActivity extends AppCompatActivity {
                 childList.add(new Child(childObject.get("first_name").toString(),
                         childObject.get("last_name").toString(),
                         childObject.get("status").toString().equals("false") ? "Signed-Out" : "Signed-In",
-                        Integer.parseInt(
-                                childObject.get("id").toString())));
+                        Integer.parseInt(childObject.get("id").toString())));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -257,7 +256,8 @@ public class HomeActivity extends AppCompatActivity {
         try {
             String firstName = response.get("first_name").toString();
             String lastName = response.get("last_name").toString();
-            return new Parent(firstName, lastName, children, trustedChildren);
+            int id = Integer.parseInt(response.get("id").toString());
+            return new Parent(firstName, lastName, children, trustedChildren, id);
         } catch (JSONException e) {
             e.printStackTrace();
         }

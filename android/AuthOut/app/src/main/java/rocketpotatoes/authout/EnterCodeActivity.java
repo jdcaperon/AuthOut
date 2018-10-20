@@ -151,7 +151,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
 
 
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);
+                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted, 1);
                         // ---------------------------------------------------------
 
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);
