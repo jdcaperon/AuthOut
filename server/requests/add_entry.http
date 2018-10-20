@@ -3,6 +3,10 @@ content-type: application/json
 
 {
     "parent_id": 1,
-    "child_id": 1,
-    "status": true
+    "children": [
+        {
+            "id": 1,
+            "status": true
+        } 
+    ]
 }
