@@ -52,18 +52,6 @@
 							      </th>
 							    </tr>
 							  </thead>
-							  <tfoot>
-							    <tr>
-							      <th>Time
-							      </th>
-							      <th>Parent
-							      </th>
-							      <th>Child
-							      </th>
-							      <th>Action
-							      </th>
-							    </tr>
-							  </tfoot>
 							</table>
 						</div>
 					</div>

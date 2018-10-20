@@ -45,6 +45,16 @@ $(document).ready(function() {
 		var reversedData = new Array();
 		
 		$(data).each(function (key) {
+			var date = new Date(0);
+			date.setUTCSeconds(data[key]['time']);
+			var time = date.getHours() + ":" + date.getMinutes() + "." + date.getSeconds();
+			data[key]['time'] = time;
+			if (data[key]['status'] == true) {
+				data[key]['status'] = "Signed in";
+			} else {
+				data[key]['status'] = "Signed out";
+			}
+			
 			reversedData.unshift(data[key]);
 		});
 		
