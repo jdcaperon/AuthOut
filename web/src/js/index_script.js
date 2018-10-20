@@ -5,7 +5,7 @@ $(document).ready(function() {
 		var password = $("#password").val();
 		$.ajax
 		({
-			type: "POST",
+			type: "GET",
 			url: "https://deco3801.wisebaldone.com/api/login",
 			dataType: 'json',
 			async: false,
