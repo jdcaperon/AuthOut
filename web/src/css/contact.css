@@ -18,9 +18,6 @@
 	margin:0;
 }
 
-#welcome-row{
-	height:25%;
-}
 
 #info-row{
 	height:75%
@@ -29,5 +26,5 @@
 #rplogo, #threecslogo{
 	width:60%;
 	margin: auto;
-	
+
 }

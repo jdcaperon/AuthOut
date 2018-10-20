@@ -35,7 +35,7 @@
 
 								<div class="form-group">
 									<div class="col-sm-10 col-sm-offset-2">
-										<input id="submit" name="submit" type="submit" value="Send" class="rounded_button purple_button">
+										<input id="submit" name="submit" type="submit" value="Send" class="rounded-button purple-button">
 									</div>
 								</div>
 							</form>

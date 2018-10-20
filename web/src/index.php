@@ -24,9 +24,9 @@
 						<div class="clearfix"><input  class='form-control' type="password" name="password" id="password" placeholder="Password"></div>
 					</form>
 
-					<button type="button" id="login-button" class="rounded_button blue_button">LOG IN</button>
+					<button type="button" id="login-button" class="rounded-button blue-button">LOG IN</button>
 					<!-- TODO: add functionality  -->
-					<button type="button" class="rounded_button purple_button">DON'T HAVE AN ACCOUNT?</button>
+					<button type="button" class="rounded-button purple-button">DON'T HAVE AN ACCOUNT?</button>
 				</div>
 			</div>
 		</body
