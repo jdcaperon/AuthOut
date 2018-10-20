@@ -1,37 +1,38 @@
 $(document).ready(function() {
-	$("#nav-line2 > ul li:nth-of-type(3)").addClass("current-tab");
+//--------------------------------------------- Data Table ----------------------------------------------------------
 
-	$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
+	$('#dtBasicExample').DataTable({
+		"ordering": false, // false to disable sorting (or any other option),
+		"bLengthChange": false,
+		"bFilter": true,
+    	"bAutoHeight": false,
+		"scrollY":true
+	});
+	$('.dataTables_length').addClass('bs-select');
 //--------------------------------------------- Attendance Chart ----------------------------------------------------------
 
 	var ctx = document.getElementById("attendance-chart").getContext('2d');
 	var myChart = new Chart(ctx, {
 		type: 'pie',
 		data: {
-			labels: ["White", "Orange", "Blue", "Pink"],
+			labels: ["Signed In", "Signed Out"],
 			datasets: [{
-				label: 'Clicks Per Week',
-			    data: [12, 19, 3, 5],
+			    data: [12, 19],
 			    backgroundColor: [
-					'#F2F3F1',
-			        '#DCA726',
 			        '#03BABD',
 			        '#BC72AF'
 				],
-			    borderWidth: 1
+			    borderWidth: 4
 			}]
 		},
 		options: {
 			responsive:true,
 			maintainAspectRatio: false,
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero:true
-					}
-				}]
-			}
+			legend: {
+            display: false,
+
+        }
+
 		}
 	});
 });

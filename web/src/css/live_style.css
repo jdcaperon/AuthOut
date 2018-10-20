@@ -9,3 +9,21 @@
 .col-8, .col-4 {
 	padding: 0;
 }
+
+.data-div{
+	margin:30% 0 ;
+}
+
+
+.data-div p{
+	font-size: 1rem;
+	text-align: center;
+}
+
+.data-div h3{
+	text-align: center;
+}
+
+canvas{
+	width:50vh;
+}
