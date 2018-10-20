@@ -10,10 +10,14 @@
 	padding: 0;
 }
 
-.data-div{
-	margin:30% 0 ;
+#canvas-div{
+	height: 30vh;
+
 }
 
+.data-div:not(#canvas-div){
+	margin:30% 0;
+}
 
 .data-div p{
 	font-size: 1rem;
@@ -24,6 +28,8 @@
 	text-align: center;
 }
 
-canvas{
-	width:50vh;
+
+.dataTables_wrapper {
+    font-size: 12px;
+
 }

@@ -6,7 +6,12 @@ $(document).ready(function() {
 		"bLengthChange": false,
 		"bFilter": true,
     	"bAutoHeight": false,
-		"scrollY":true
+		"scrollY":200,
+		"displayLength":5,
+		language: {
+        searchPlaceholder: "Search records",
+        search: "",
+      }
 	});
 	$('.dataTables_length').addClass('bs-select');
 //--------------------------------------------- Attendance Chart ----------------------------------------------------------
@@ -26,7 +31,7 @@ $(document).ready(function() {
 			}]
 		},
 		options: {
-			responsive:true,
+			responsive: true,
 			maintainAspectRatio: false,
 			legend: {
             display: false,
