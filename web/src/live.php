@@ -15,7 +15,18 @@
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner">
-							<canvas id="attendance-chart"></canvas>
+							<div class="data-div">
+								<canvas id="attendance-chart"></canvas>
+							</div>
+							<div class="data-div">
+								<h3>12</h3>
+								<p>Signed in</p>
+							</div>
+							<div class="data-div">
+								<h3>19</h3>
+								<p>Signed out</p>
+							</div>
+
 						</div>
 					</div>
 				</div>
