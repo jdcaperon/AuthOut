@@ -9,3 +9,20 @@
 .col, .col-4 {
 	padding: 0;
 }
+
+
+a{
+	color: #03BABD;
+}
+
+a:hover{
+	color: #03BABD;
+}
+
+li{
+	list-style : none;
+
+}
+ul{
+	padding: 0;
+}

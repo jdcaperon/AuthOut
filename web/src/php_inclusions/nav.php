@@ -1,5 +1,5 @@
-<nav class="sidebar navbar navbar-expand bg-dark">
-
+<nav class="sidebar navbar navbar-expand bg-dark  sidebar ">
+	<div class="sidebar-sticky">
 	  <ul>
 		  <li class ="nav-item nav-heading">Dashboards</li>
 		  <li class ="nav-item"><a class="nav-link"href="live.php"><span data-feather="radio"></span>Live</a></li>
@@ -15,10 +15,10 @@
 
 		  <li id="prod-website"><a target="_blank" href="https://deco3801-rocketpotatoes.uqcloud.net/">Product Website</a></li>
 	  </ul>
-
+  </div>
 </nav>
 
-<nav id = "topbar">
+<nav id = "topbar" class="fixed-top  navbar-fixed-top">
 	<div class="container-fluid">
       <div class="row">
         <div class="col-md-11" >
