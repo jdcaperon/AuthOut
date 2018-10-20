@@ -23,20 +23,21 @@ $(document).ready(function() {
 				url: "https://deco3801.wisebaldone.com/api/login",
 				dataType: 'json',
 				username: username,
-				password: password
-			});
-
-			request.success(function() {
-				loginSuccess();
-			});
-
-			request.error(function(httpObj, textStatus) {       
-					if(httpObj.status==200) {
+				password: password,
+				success: function(data, textStatus, xhr) {
+					if (xhr.status == 200) {
 						loginSuccess();
-					}
-					else {
+					} else {
 						loginFail();
 					}
+				},
+				complete: function(xhr, textStatus) {
+					if (xhr.status == 200) {
+						loginSuccess();
+					} else {
+						loginFail();
+					}
+				}
 			});
 		}
 	});
