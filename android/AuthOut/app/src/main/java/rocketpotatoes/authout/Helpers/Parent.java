@@ -85,6 +85,7 @@ public class Parent implements Parcelable{
         out.writeString(surname);
         out.writeList(children);
         out.writeList(trustedChildren);
+        out.writeInt(id);
     }
 
     // this is used to regenerate your object.
@@ -110,5 +111,6 @@ public class Parent implements Parcelable{
         this.surname = in.readString();
         in.readList(children, null);
         in.readList(trustedChildren, null);
+        this.id = in.readInt();
     }
 }

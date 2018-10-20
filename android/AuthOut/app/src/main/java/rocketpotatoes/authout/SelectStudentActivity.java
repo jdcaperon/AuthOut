@@ -40,6 +40,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +54,7 @@ import rocketpotatoes.authout.Helpers.Parent;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class SelectStudentActivity extends AppCompatActivity {
-    private static final String AUTHOUT_SIGNINOUT_URL = "http://httpbin.org/post";
+    private static final String AUTHOUT_SIGNINOUT_URL = "https://deco3801.wisebaldone.com/api/kiosk/signin";
     private Parent currentUser;
     private Button dynamicButton;
     private TextView dynamicText;
@@ -150,8 +151,8 @@ public class SelectStudentActivity extends AppCompatActivity {
      */
     public void onMadeSelection(View view) {
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
-        //TODO send proper request to the server
-        requestQueue.add(createRequest(selectedChildren.toString()));
+
+        requestQueue.add(createRequest(selectedChildren));
         Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
     }
 
@@ -279,12 +280,23 @@ public class SelectStudentActivity extends AppCompatActivity {
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
      * @return a {@link JsonObjectRequest}
      */
-    private JsonObjectRequest createRequest(String code) {
+    private JsonObjectRequest createRequest(final Set<Child> children) {
         JSONObject json = new JSONObject();
 
         //Adding contents to request
+        JSONArray childrenJSON = new JSONArray();
+
         try {
-            json.put("Code", code);
+            json.put("parent_id", currentUser.getId());
+            for (Child child : children) {
+                JSONObject temp = new JSONObject();
+                temp.put("id", child.getId());
+                boolean status = !child.getStatus().equals("Signed-In");
+                temp.put("status", status);
+                childrenJSON.put(temp);
+            }
+            json.put("children", childrenJSON);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -293,9 +305,8 @@ public class SelectStudentActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_SIGNINOUT_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO ensure there's no error, otherwise just move to final activity.
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
-                        Log.i("Response", response.toString().substring(0, 100));
+
                         Intent intent = new Intent(SelectStudentActivity.this, ConfirmFinishActivity.class);
                         startActivity(intent);
                         finish();
@@ -303,7 +314,7 @@ public class SelectStudentActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: If this errors we retry the request.
+                        requestQueue.add(createRequest(children));
                         Log.i("ResponseError", error.toString());
                     }
 
