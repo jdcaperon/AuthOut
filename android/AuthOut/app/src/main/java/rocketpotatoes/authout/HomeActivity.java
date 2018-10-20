@@ -346,4 +346,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void openAdmin(View v) {
+        Intent intent = new Intent(this, AdminLoginActivity.class);
+        startActivity(intent);
+    }
 }

@@ -26,7 +26,7 @@
 
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.Launcher" >
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,23 +35,33 @@
         </activity>
         <activity
             android:name=".SelectStudentActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".ConfirmFinishActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".EnterCodeActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".AdminActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SignUpReviewActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".SignUpChildActivity" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustNothing"/>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".SignUpChildActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".AdminLoginActivity" android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
