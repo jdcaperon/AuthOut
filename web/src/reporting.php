@@ -24,10 +24,13 @@
 					<div id="child-select-box" class="row">
 						<div class="box-outer" style="padding-bottom: 0">
 							<div class="box-inner">
-								<select name="children" id="child-select-list">
-									<option value="test1">Test</option>
-									<option value="test2">Test 2</option>
-								</select>
+								<div class="center-group">
+									<label>Child:</label><br>
+									<select name="children" id="child-select-list">
+										<option value="test1">Test</option>
+										<option value="test2">Test 2</option>
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -35,7 +38,7 @@
 					<div id="calendar-box" class="row">
 						<div class="box-outer">
 							<div class="box-inner">
-							
+								<div type='text' class="datepicker-here" data-position="right top" data-range="true" data-language="en" id="calendar"></div>
 							</div>
 						</div>
 					</div>
@@ -43,7 +46,7 @@
 					<div id="buttons-box" class="row">
 						<div class="box-outer" style="padding-top: 0">
 							<div class="box-inner">
-								<div id="button-group">
+								<div class="center-group">
 									<button type="button" id="generate-report-button" class="rounded-button purple-button">Generate Report</button>
 									<button type="button" id="save-report-button" class="rounded-button blue-button">Save Report</button>
 								</div>

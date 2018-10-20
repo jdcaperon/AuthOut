@@ -18,7 +18,7 @@
 					<div class="box-outer" id="jordan-hack">
 						<div class="box-inner">
 							<p>Select a range of dates</p>
-							<div type='text' class="datepicker-here" data-position="right top" data-range="true" data-language="en" id="calendar">
+								<div type='text' class="datepicker-here" data-position="right top" data-range="true" data-language="en" id="calendar">
 							</div>
 
 						</div>

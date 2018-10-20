@@ -7,7 +7,7 @@ $(document).ready(function() {
 	$('#calendar').datepicker({
 		language: 'en',
 		maxDate: new Date() // Now can select only dates, which goes after today
-	})
+	});
 
 
 

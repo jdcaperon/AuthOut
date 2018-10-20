@@ -21,28 +21,54 @@
 	height: 25%;
 }
 
+.center-group {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* TODO: make this work for all screen sizes */
+}
+
+/* ----------------------- Calendar ---------------------- */
 #calendar-box {
 	height: 50%;
+}
+
+#calendar-box .box-inner {
+	padding: 1vw;
+	display: flex;
+}
+
+#calendar {
+	flex: 1;
 }
 
 /* ----------------------- Child Select -------------------- */
 #child-select-list {
 	width: 100%;
+	vertical-align: middle;
+}
+
+#child-select-box .center-group {
+	width: 90%;
+}
+
+#child-select-box .box-inner {
+	position: relative;
+	text-align: center;
+	padding: 1vw;
+}
+
+#child-select-box label {
+	color: #03BABD;
+	font-size: 1.4em;
 }
 
 /* ------------------------ Buttons ------------------------ */
 
 
 #generate-report-button {
-	margin-bottom: 1vw;
-}
-
-#button-group {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/* TODO: make this work for all screen sizes */
+	margin-bottom: 1vh;
 }
 
 #buttons-box .box-inner {

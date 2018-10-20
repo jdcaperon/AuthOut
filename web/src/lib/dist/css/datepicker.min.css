@@ -21,7 +21,7 @@
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
-    height: 32px;
+    height: 4vh;
     z-index: 1
 }
 
@@ -103,13 +103,14 @@
 }
 
 .datepicker--days-names {
+	height: 2vh;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin: 8px 0 3px
+    margin: 1vh 0 1vh
 }
 
 .datepicker--day-name {
@@ -138,7 +139,7 @@
 }
 
 .datepicker--cell-day {
-    width: 14.28571%
+    width: 14.28571%;
 }
 
 .datepicker--cells-months {
@@ -232,7 +233,7 @@
 
 .datepicker--content {
     box-sizing: content-box;
-    padding: 4px
+    padding: 1vh 1vw;
 }
 
 .datepicker--pointer {
@@ -325,7 +326,7 @@
     justify-content: space-between;
     border-bottom: 1px solid #efefef;
     min-height: 32px;
-    padding: 4px
+    height: 7vh;
 }
 
 .-only-timepicker- .datepicker--nav {
