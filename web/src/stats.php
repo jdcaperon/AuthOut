@@ -14,7 +14,7 @@
 
 		<div class="content">
 			<div class="row row-override" id="calendar-row">
-				<div class="col-5">
+				<div class="col-4">
 					<div class="box-outer" id="jordan-hack">
 						<div class="box-inner" id="cal">
 							<p>Select a range of dates</p>
@@ -27,7 +27,7 @@
 					</div>
 				</div>
 
-				<div class="col-7">
+				<div class="col-8">
 					<div class="box-outer" style="padding-bottom: 0">
 						<div class="box-inner">
 							<canvas id="attendance-graph"></canvas>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 
-			<div class="row row-override">
+			<div class="row">
 				<div class="col-12">
 					<div class="box-outer">
 						<div class="box-inner">
