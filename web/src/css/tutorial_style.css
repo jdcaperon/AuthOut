@@ -1,11 +1,28 @@
 /* ---------- Bootsrap Changes --------- */
 
 .row-override {
-	height: 100%;
+	height: 100% !important;
 	width: 100%;
 	margin: 0;
 }
 
 .col, .col-4 {
+	padding: 0;
+}
+
+
+a{
+	color: #03BABD;
+}
+
+a:hover{
+	color: #03BABD;
+}
+
+li{
+	list-style : none;
+
+}
+ul{
 	padding: 0;
 }

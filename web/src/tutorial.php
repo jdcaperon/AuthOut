@@ -3,7 +3,7 @@
 <html lang="en">
 	<?php
 		$pageName = "Tutorial";
-		$stylesheets = array("tutoial_style.css");
+		$stylesheets = array("tutorial_style.css");
 		include_once ('php_inclusions/head.php');
 
 	?>

@@ -23,8 +23,59 @@
 	height:75%
 }
 
-#rplogo, #threecslogo{
-	width:60%;
-	margin: auto;
+#welcome-row{
+	height:25%
+}
 
+#rplogo, #threecslogo{
+	width:15vh;
+	margin: 12% auto;
+	display: block;
+	min-width: 95px;
+
+}
+
+#rplogo{
+	margin-top: 0;
+}
+
+.col-sm-10{
+	margin:auto;
+}
+
+#submit{
+	margin: auto;
+}
+
+.form{
+	width: 100%;
+}
+
+textarea{
+	height: 10vh;
+	width:90%;
+	margin:4% 0;
+}
+h4{
+	   height: min-content;
+}
+h3{
+	height:55%
+
+}
+
+#contact-details .row.not(.row-little){
+	height: 50%;
+}
+#contact-details .row-little{
+	height: 35%;
+}
+#contact-details .row-littlest{
+	height: 15%;
+}
+#contact-details{
+	height: 100%;
+}
+.little-row{
+	heigt
 }
