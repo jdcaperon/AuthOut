@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final double MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.35;
-    private static final String AUTHOUT_IMAGE_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login"; //"http://httpbin.org/post";
+    private static final String AUTHOUT_IMAGE_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login";
 
     private CameraKitView camera;
     private FaceDetector faceDetector;
@@ -237,7 +237,7 @@ public class HomeActivity extends AppCompatActivity {
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
      * @return a {@link JsonObjectRequest}
      */
-    private JsonObjectRequest createRequest(String userPhoto) {
+    private JsonObjectRequest createRequest(final String userPhoto) {
         JSONObject json = new JSONObject();
 
         //Adding contents to request
@@ -267,6 +267,7 @@ public class HomeActivity extends AppCompatActivity {
                                 Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
                                 intent.putExtra("PARENT", parent);
                                 intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                                intent.putExtra("PHOTO", userPhoto);
                                 startActivity(intent);
                             }
 

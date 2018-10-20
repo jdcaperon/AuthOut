@@ -62,6 +62,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private List<Child> displayedChildren;
     private View progressOverlay;
+    private String photo;
 
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
@@ -86,6 +87,7 @@ public class SelectStudentActivity extends AppCompatActivity {
         }
 
         currentUser = getIntent().getExtras().getParcelable("PARENT");
+        photo = getIntent().getExtras().getString("PHOTO");
 
         if (currentUser == null) {
             throw new IllegalStateException("No parent object packaged with intent");
@@ -308,6 +310,7 @@ public class SelectStudentActivity extends AppCompatActivity {
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
 
                         Intent intent = new Intent(SelectStudentActivity.this, ConfirmFinishActivity.class);
+                        intent.putExtra("PHOTO", photo);
                         startActivity(intent);
                         finish();
                     }
