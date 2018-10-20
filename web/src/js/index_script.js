@@ -1,3 +1,12 @@
+function loginSuccess() {
+	console.log("SuccessLogin, Jordan change me");
+	window.location.href = "live.php"
+}
+
+function loginFail() {
+	console.log("FailedLogin, Jordan change me");
+}
+
 $(document).ready(function() {
 	$("#login-button").click(function(event){
 		event.preventDefault();
@@ -8,22 +17,26 @@ $(document).ready(function() {
 			// notify user somehow
 			console.log("Need a username");
 		} else {
-			$.ajax
+			var request = $.ajax
 			({
 				type: "GET",
 				url: "https://deco3801.wisebaldone.com/api/login",
 				dataType: 'json',
-				async: false,
 				username: username,
-				password: password,
-				data: '{ "comment" }',
-				success: function (){
-					console.log("Success");
-					window.location.href = "live.php"; 
-				},
-				error: function() {
-					console.log("Failed");
-				}
+				password: password
+			});
+
+			request.success(function() {
+				loginSuccess();
+			});
+
+			request.error(function(httpObj, textStatus) {       
+					if(httpObj.status==200) {
+						loginSuccess();
+					}
+					else {
+						loginFail();
+					}
 			});
 		}
 	});
