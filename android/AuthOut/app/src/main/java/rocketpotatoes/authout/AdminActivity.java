@@ -42,6 +42,13 @@ public class AdminActivity extends AppCompatActivity {
      */
     public void signUpClicked(View v) {
         Intent intent = new Intent(this, SignUpActivity.class);
+        intent.putExtra("ADMIN_SIGNUP", false);
+        startActivity(intent);
+    }
+
+    public void signUpAdminClicked(View v) {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        intent.putExtra("ADMIN_SIGNUP", true);
         startActivity(intent);
     }
 

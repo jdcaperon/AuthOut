@@ -76,7 +76,7 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private Bitmap userBitmap;
     private ArrayList<ArrayList<String>> children;
     private RecyclerView childSignupSelectorView;
-
+    private boolean isAdminSignup;
     private RequestQueue requestQueue;
 
     private View progressOverlay;
@@ -88,7 +88,13 @@ public class SignUpReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_review);
         setUpVariables();
         setUpLayout();
-        setUpChildList();
+
+        if (isAdminSignup) {
+            findViewById(R.id.child_selector).setVisibility(View.GONE);
+            findViewById(R.id.childrenText).setVisibility(View.GONE);
+            setUpChildList();
+        }
+
         requestQueue = Volley.newRequestQueue(this);
     }
 
@@ -118,7 +124,10 @@ public class SignUpReviewActivity extends AppCompatActivity {
         userImage = findViewById(R.id.userImage);
 
         takePhotoData = (File) getIntent().getSerializableExtra("PHOTO");
-        children = (ArrayList<ArrayList<String>>) getIntent().getSerializableExtra("CHILDREN");
+        isAdminSignup = getIntent().getExtras().getBoolean("ADMIN_SIGNUP");
+        if (!isAdminSignup) {
+            children = (ArrayList<ArrayList<String>>) getIntent().getSerializableExtra("CHILDREN");
+        }
 
         HashMap<String, String> parentDetails = (HashMap<String, String>) getIntent().getSerializableExtra("PARENT_DETAILS");
         firstNameData = parentDetails.get("FIRST_NAME");
