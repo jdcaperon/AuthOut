@@ -19,11 +19,11 @@
 								<canvas id="attendance-chart"></canvas>
 							</div>
 							<div class="data-div">
-								<h3>12</h3>
+								<h3 id="signed-in-number">??</h3>
 								<p>Signed in</p>
 							</div>
 							<div class="data-div">
-								<h3>19</h3>
+								<h3 id="signed-out-number">??</h3>
 								<p>Signed out</p>
 							</div>
 
