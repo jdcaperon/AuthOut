@@ -1,7 +1,7 @@
 /* ---------- Bootsrap Changes --------- */
 
 .row-override {
-	height: 100%;
+	height: 100% !important;
 	width: 100%;
 	margin: 0;
 }
