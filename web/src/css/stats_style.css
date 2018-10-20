@@ -1,23 +1,26 @@
 /* ---------- Bootsrap Changes --------- */
 
 .row-override {
-	height: 50%;
+	height: 50% !important;
 	width: 100%;
 	margin: 0;
 }
 
-.col-8, .col-12, .col-4 {
+.col-5, .col-12, .col-7{
 	padding: 0;
 }
 
 /*-------------- Calendar ----------------*/
 
 
-#calendar-row{
-	min-height: 350px;
-}
-
 #jordan-hack{
 	padding-bottom:0;
 	padding-right:0;
+}
+
+div.ui-datepicker{
+ font-size:8px !important;
+}
+#cal{
+	padding:1.5vw 4vw;
 }

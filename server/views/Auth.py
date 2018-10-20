@@ -1,12 +1,17 @@
 import functools
 from flask import request, Response
+from db import db
+from models.AdminModel import AdminModel
 
 
 def check_auth(username, password):
     """This function is called to check if a username /
     password combination is valid.
     """
-    return username == 'admin' and password == 'secret'
+    admin = db.session.query(AdminModel).filter_by(email=username).first()
+    if admin is not None:
+        return admin.check_password(password)
+    return False
 
 
 def authenticate():

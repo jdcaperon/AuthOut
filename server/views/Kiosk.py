@@ -6,7 +6,6 @@ from models.aws import get_id_by_image, set_parent_photo
 from db import db
 from models.ParentModel import ParentModel
 from models.ChildModel import ChildModel
-import json
 
 bp = Blueprint('kiosk', __name__, url_prefix="/kiosk")
 
@@ -68,7 +67,7 @@ def signin_endpoint():
                 return Response('No parent or child matched', 400)
         else:
             return Response('Json Package did not contain required keys', 400)
-    return Response('', 200)
+    return Response('Changed status successfully', 200)
 
 
 @bp.route('/register', methods=['POST'])

@@ -15,15 +15,26 @@
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner">
-							<canvas id="attendance-chart"></canvas>
+							<div class="data-div" id="canvas-div">
+								<canvas id="attendance-chart"></canvas>
+							</div>
+							<div class="data-div">
+								<h3>12</h3>
+								<p>Signed in</p>
+							</div>
+							<div class="data-div">
+								<h3>19</h3>
+								<p>Signed out</p>
+							</div>
+
 						</div>
 					</div>
 				</div>
 
 				<div class="col-8">
 					<div class="box-outer">
-						<div class="box-inner">
-						Today's Actvity
+						<div class="box-inner" id="table-box">
+						<h3>Today's Actvity</h3>
 						<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 							  <thead>
 							    <tr>
