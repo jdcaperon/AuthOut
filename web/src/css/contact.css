@@ -28,9 +28,10 @@
 }
 
 #rplogo, #threecslogo{
-	width:60%;
+	width:15vh;
 	margin: 12% auto;
 	display: block;
+	min-width: 95px;
 
 }
 
