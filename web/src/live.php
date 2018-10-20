@@ -20,7 +20,7 @@
 					</div>
 				</div>
 
-				<div class="col">
+				<div class="col-8">
 					<div class="box-outer">
 						<div class="box-inner">
 						Today's Actvity
