@@ -25,11 +25,16 @@
 	height: 50%;
 }
 
+/* ----------------------- Child Select -------------------- */
+#child-select-list {
+	width: 100%;
+}
+
 /* ------------------------ Buttons ------------------------ */
 
 
-#buttons-box {
-	position: relative;
+#generate-report-button {
+	margin-bottom: 1vw;
 }
 
 #button-group {
@@ -37,8 +42,10 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	/* TODO: make this work for all screen sizes */
 }
 
 #buttons-box .box-inner {
+	position: relative;
 	padding: 1vw;
 }
