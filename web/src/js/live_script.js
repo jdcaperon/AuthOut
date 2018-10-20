@@ -6,8 +6,8 @@ $(document).ready(function() {
 		"bLengthChange": false,
 		"bFilter": true,
     	"bAutoHeight": false,
-		"scrollY":200,
-		"displayLength":5,
+		"scrollY":260,
+		"displayLength":10,
 		language: {
         searchPlaceholder: "Search records",
         search: "",
