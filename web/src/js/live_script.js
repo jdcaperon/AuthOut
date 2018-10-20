@@ -1,19 +1,56 @@
 $(document).ready(function() {
 //--------------------------------------------- Data Table ----------------------------------------------------------
 
-	$('#dtBasicExample').DataTable({
-		"ordering": false, // false to disable sorting (or any other option),
-		"bLengthChange": false,
-		"bFilter": true,
-    	"bAutoHeight": false,
-		"scrollY":200,
-		"displayLength":5,
-		language: {
-        searchPlaceholder: "Search records",
-        search: "",
-      }
+	var entries;
+
+	$.ajax({
+		method: "GET",
+		url: "https://deco3801.wisebaldone.com/api/entry/",
+		success: function(data) {
+			console.log(data);
+			entries = data['entries'];
+			console.log(entries);
+			entries = reverse(entries);
+			console.log(entries);
+			
+			$('#dtBasicExample').DataTable({
+				"ordering": false, // false to disable sorting (or any other option),
+				"bLengthChange": false,
+				"bFilter": true,
+				"bAutoHeight": false,
+				"scrollY":260,
+				"displayLength":10,
+				language: {
+				searchPlaceholder: "Search records",
+				search: "",
+				},
+				"data": entries,
+				"columns": [
+					{"data": "time"},
+					{"data": "parent_name"},
+					{"data": "child_name"},
+					{"data": "status"}
+				]
+			});
+			
+			var table = $('#dtBasicExample').DataTable();
+	
+			table.order([1, 'desc']).draw();
+	
+			$('.dataTables_length').addClass('bs-select');
+		}
 	});
-	$('.dataTables_length').addClass('bs-select');
+	
+	function reverse(data) {
+		var reversedData = new Array();
+		
+		$(data).each(function (key) {
+			reversedData.unshift(data[key]);
+		});
+		
+		return reversedData;
+    }
+
 //--------------------------------------------- Attendance Chart ----------------------------------------------------------
 
 	var ctx = document.getElementById("attendance-chart").getContext('2d');

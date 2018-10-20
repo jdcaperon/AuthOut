@@ -1,7 +1,7 @@
 /* ---------- Bootsrap Changes --------- */
 
 .row-override {
-	height: 50%;
+	height: 50% !important;
 	width: 100%;
 	margin: 0;
 }
@@ -12,10 +12,6 @@
 
 /*-------------- Calendar ----------------*/
 
-
-#calendar-row{
-	min-height: 350px;
-}
 
 #jordan-hack{
 	padding-bottom:0;

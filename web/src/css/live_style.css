@@ -30,6 +30,21 @@
 
 
 .dataTables_wrapper {
-    font-size: 12px;
+    font-size: 10px;
 
+}
+.page-item.active .page-link{
+	background-color: #03BABD;
+	border: 1px solid #dee2e6;
+}
+.page-link {
+	color:#03BABD;
+}
+
+.page-link:hover{
+	color: black;
+}
+
+th{
+	cursor:default;
 }
