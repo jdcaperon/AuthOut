@@ -14,7 +14,6 @@
 	margin:30% 0 ;
 }
 
-
 .data-div p{
 	font-size: 1rem;
 	text-align: center;
@@ -26,4 +25,11 @@
 
 canvas{
 	width:50vh;
+}
+
+
+.dataTables_wrapper {
+
+    font-size: 14px;
+
 }
