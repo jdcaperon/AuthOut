@@ -7,6 +7,7 @@ from db import db
 from models.ParentModel import ParentModel
 from models.ChildModel import ChildModel
 from twilio.twiml.messaging_response import MessagingResponse
+from random import randint
 
 bp = Blueprint('kiosk', __name__, url_prefix="/kiosk")
 
@@ -54,9 +55,21 @@ def code_endpoint():
     parent = db.session.query(ParentModel).filter_by(mobile_number=stored_number)
 
     if parent.count() == 1:
-        resp.message(str(jsonify((parent.first()).as_dict())))
+        # here we generate a code for them and add it to the Db
+        code = randint(1000, 9999)
+        code_parent = db.session.query(ParentModel).filter_by(code=code)
+
+        # find a new code if it's not unique
+        while code_parent.count() is not 0:
+            code = randint(1000, 9999)
+            code_parent = db.session.query(ParentModel).filter_by(code=code)
+
+        # todo add code to parent here.
+
+        resp.message("Your AuthOut code is " + str(code) + ".")
     else:
-        resp.message("You are not in the AuthOut System.")
+        resp.message("You've messaged the Admin verification system for AuthOut, if this was intended "
+                     "please contact an admin to register yourself in the system.")
 
     return str(resp)
 
