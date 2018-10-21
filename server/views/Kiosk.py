@@ -6,6 +6,7 @@ from models.aws import get_id_by_image, set_parent_photo
 from db import db
 from models.ParentModel import ParentModel
 from models.ChildModel import ChildModel
+from twilio.twiml.messaging_response import MessagingResponse
 
 bp = Blueprint('kiosk', __name__, url_prefix="/kiosk")
 
@@ -41,6 +42,23 @@ def login_endpoint():
         if parent.count() == 1:
             return jsonify((parent.first()).as_dict())
     return Response('', 400)
+
+
+@bp.route('/code', methods=['POST'])
+def code_endpoint():
+    """Respond to incoming calls with a simple text message."""
+    resp = MessagingResponse()
+
+    body = request.values.get('From', None)
+    stored_number = "0" + body[3:]
+    parent = db.session.query(ParentModel).filter_by(mobile_number=stored_number)
+
+    if parent.count() == 1:
+        resp.message(str(jsonify((parent.first()).as_dict())))
+    else:
+        resp.message("You are not in the AuthOut System.")
+
+    return str(resp)
 
 
 @bp.route('/signin', methods=['POST'])

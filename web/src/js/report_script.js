@@ -7,13 +7,7 @@ $(document).ready(function() {
 	$('#calendar').datepicker({
 		language: 'en',
 		maxDate: new Date(), // Now can select only dates, which goes after today
-		dateFormat: "dd/mm/yyyy",
-		onSelect: function(formattedDate, date, inst) {
-			var dates = formattedDate.split(',');
-			if (dates.length > 1) {
-				// send requests
-			}
-		}
+		dateFormat: "dd/mm/yyyy"
 	});
 
 // --------------------------- Dropdown list -------------------------------------
@@ -55,12 +49,46 @@ $(document).ready(function() {
 		}
 		
 	}
-	
-});
 
-// --------------------------------- Buttons --------------------------------------
-$("#generate-report-button").click(function(){
-	var datePicker = $('#calendar').datepicker().data('datepicker');
+	// --------------------------------- Buttons --------------------------------------
+	$("#generate-report-button").click(function(){
+		var datePicker = $('#calendar').datepicker().data('datepicker');
+		var selectedDates = datePicker.selectedDates;
+		
+		if (selectedDates.length > 1) {
+			// Get variables
+			var childID = parseInt($("#child-select-list").val(), 10);
+			var startDate = formatDate(datePicker.selectedDates[0]);
+			var endDate = formatDate(datePicker.selectedDates[1]);
+			
+			var toSend = {
+				"lower": startDate,
+				"upper": endDate,
+				"id": childID,
+			}
+			
+			$.ajax({
+				method: "GET",
+				url: "https://deco3801.wisebaldone.com/api/entry/query",
+				data: JSON.stringify(toSend),
+				success: function(data) {
+					console.log(data);					
+				}
+			
+			});
+		} else {
+			// TODO: prompt to select more dates
+		}
+		
+	});
 	
-	console.log(datePicker.selectedDates);
+	// Formate date to a usable format
+	function formatDate(date) {
+		var day = date.getDate();
+		var month = date.getMonth() + 1; // months start at 0
+		var year = date.getFullYear();
+		
+		return day + "/" + month + "/" + year;
+	}
+	
 });
