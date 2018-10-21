@@ -31,7 +31,7 @@ def live():
     return jsonify(data)
 
 
-@bp.route('/query')
+@bp.route('/query', methods=['GET', 'POST'])
 def query():
     data = request.get_json(force=True)
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
