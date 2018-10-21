@@ -13,8 +13,31 @@
 		<?php include ('php_inclusions/nav.php'); ?>
 		<div class="content">
 			<div class="row row-override">
-				<div class="col-4">
+
+
+				<div class="col-8">
 					<div class="box-outer" style="padding-right: 0">
+						<div class="box-inner" id="table-box">
+						<h3>All Users</h3>
+						<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+							  <thead>
+							    <tr>
+							      <th class="th-sm">Name
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							      <th class="th-sm">Email
+							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+							      </th>
+							    </tr>
+							  </thead>
+							</table>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-4">
+					<div class="box-outer" >
 						<div class="box-inner">
 
 							<h4>Add A User</h4>
@@ -40,26 +63,6 @@
 
 								<button id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">Submit</button>
 							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-8">
-					<div class="box-outer">
-						<div class="box-inner" id="table-box">
-						<h3>All Users</h3>
-						<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-							  <thead>
-							    <tr>
-							      <th class="th-sm">Name
-							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-							      </th>
-							      <th class="th-sm">Email
-							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-							      </th>
-							    </tr>
-							  </thead>
-							</table>
 						</div>
 					</div>
 				</div>
