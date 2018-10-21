@@ -1,19 +1,50 @@
 <?php session_start() ?>
 <?php 
 
-	$username = $_POST['username']
-	$password = $_POST['password']
-	$remote_url = 'https://deco3801.wisebaldone.com/api/login'
-
-	$opts = array(
-		'http'=>array(
-			'method'=>'GET',
-			'header'=>"Authorization: Basic" . base64_encode("$username:$password")
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$remote_url = 'https://deco3801.wisebaldone.com/api/login';
+	
+	// Determine authentication
+	$auth = base64_encode("$username:$password");
+	
+	// Setup request
+	$curl = curl_init();	
+	curl_setopt_array($curl, array(
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_POST => false,
+		CURLOPT_URL => $remote_url,
+		CURLOPT_USERAGENT => 'User Agent X',
+		CURLOPT_HTTPHEADER => array(
+            "Authorization: Basic $auth",
 		)
-	)
+	));
+	
+	// Execute request
+	$response = curl_exec($curl);
+	// Get HTTP status
+	$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+	
+	// User is authorised
+	if ($status == 200) {
+		echo $response;
+		
+		// Ger variables from response
+		$arrayResponse = json_decode($response, true);
+		$name = $arrayResponse['name'];
+		$email = $arrayResponse['email'];
 
-	// do a get request, if we get a 200 status then this was valid and we should 
-	// store the name that comes back at us from the json object { "name": "Tom Richardson" }. We should also store the base64_encode(....) in the session variables for rerouting the entry requests through php.
+		// Save session varibles
+		$_SESSION['name'] = $name;
+		$_SESSION['email'] = $email;
+		$_SESSION['auth'] = $auth;
+	// Not authorised
+	} else {
+		// Return empty JSON object
+		echo json_encode(json_decode("{}"));
+	}
+	
+	curl_close($curl);
 
 	// other stuff todo, make a entry.php and have it when it gets a get to do the get request jordans done client side and pass the data back to the caller. will need to set the header argument on that get request though.
 

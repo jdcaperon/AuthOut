@@ -5,13 +5,12 @@
     date_default_timezone_set ("Australia/Brisbane");
 
     //if not signed in, redirect to index.php
-	//TODO: uncomment when signin done
-    // if(!isset($_SESSION['email'])){
-    //     if (!$isIndex){
-    //         header('Location: index.php');
-    //         exit();
-    //     }
-    // }
+    if(!isset($_SESSION['email'])){
+         if (!$isIndex){
+             header('Location: index.php');
+             exit();
+         }
+    }
 ?>
 
 <head>
