@@ -34,25 +34,27 @@
 				<div class="col-8">
 					<div class="box-outer">
 						<div class="box-inner" id="table-box">
-						<h3>Today's Actvity</h3>
-						<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-							  <thead>
-							    <tr>
-							      <th class="th-sm">Time
-							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-							      </th>
-							      <th class="th-sm">Parent
-							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-							      </th>
-							      <th class="th-sm">Child
-							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-							      </th>
-							      <th class="th-sm">Action
-							        <i class="fa fa-sort float-right" aria-hidden="true"></i>
-							      </th>
-							    </tr>
-							  </thead>
-							</table>
+							<div >
+								<h3>Today's Actvity</h3>
+								<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+									  <thead>
+									    <tr>
+									      <th class="th-sm">Time
+									        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+									      </th>
+									      <th class="th-sm">Parent
+									        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+									      </th>
+									      <th class="th-sm">Child
+									        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+									      </th>
+									      <th class="th-sm">Action
+									        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+									      </th>
+									    </tr>
+									  </thead>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>

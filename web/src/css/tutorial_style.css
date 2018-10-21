@@ -28,14 +28,18 @@ ul{
 }
 
 #tute-image{
-width:100%;
-
+	width: 100%;
 	max-height: 100%;
+	max-width: 600px;
+	display: block;
+	margin: auto;
+
 }
+
 
 p{
 	margin:40% 0;
-	font-size: 3vh;
+	font-size:calc(14px + 1vh);
 }
 
 .no-margin{
@@ -52,7 +56,7 @@ b{
 	color: #DCA726;
 	font-family: 'roboto', sans-serif;
 	margin:2.5vh 0;
-	font-size: 4vh;
+	font-size:calc(14px + 1.5vh);
 	display: block;
 
 }

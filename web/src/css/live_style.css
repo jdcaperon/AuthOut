@@ -48,3 +48,15 @@
 th{
 	cursor:default;
 }
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+
+	width:inherit;
+}

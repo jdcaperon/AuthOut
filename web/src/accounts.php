@@ -16,21 +16,29 @@
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner">
-							<h3>Add A User</h3>
-							<form id="add-user-form">
-								<label for="name">Name</label>
-								<input type="text" name="name" required>
-								<br>
-								<label for="email">Email</label>
-								<input type="email" name="email" id="email-input" required>
-								<br>
-								<label for="password">Password</label>
-								<input type="password" name="password" required>
-								<br>
-								<label for="onfirmPassword">Confirm Password</label>
-								<input type="password" name="confirmPassword" id="confirm-password" required>
-								
-								<input id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">
+
+							<h4>Add A User</h4>
+							<span data-feather="user" id="user"></span>
+							<form class="form-group" id="add-user-form">
+								<div class="form-group">
+									<label  class="form-check-label" for="name">Name</label>
+									<input class="form-control" type="text" name="name" id="name" required>
+								</div>
+								<div class="form-group">
+									<label  class="form-check-label" for="email">Email</label>
+									<input class="form-control" type="email" name="email" id="email-input" required>
+
+								</div>
+								<div class="form-group">
+									<label  class="form-check-label" for="password">Password</label>
+									<input class="form-control" type="password" name="password" required>
+								</div>
+									<div class="form-group">
+									<label  class="form-check-label" for="onfirmPassword">Confirm Password</label>
+									<input class="form-control" type="password" name="confirmPassword" id="confirm-password" required>
+								</div>
+
+								<button id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -56,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 
 

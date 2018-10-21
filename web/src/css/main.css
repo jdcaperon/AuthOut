@@ -169,6 +169,8 @@ html, body {
 @media screen and (min-width: 1220px) {
   .content {
     width: calc(100% - 220px);
+	min-height: 577px;
+	min-width: 1000px;
 	left:220px;
   }
 
@@ -179,6 +181,8 @@ html, body {
   .content {
     width: calc(100% - 165px);
 	left:165px;
+	min-height: 577px;
+	min-width: 1000px;
   }
 
 }
