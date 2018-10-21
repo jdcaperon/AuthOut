@@ -18,20 +18,17 @@
 						<div class="box-inner">
 							<h3>Add A User</h3>
 							<form id="add-user-form">
-								<label for="firstname">First Name</label>
-								<input type="text" name="firstname">
-								<br>
-								<label for="lastname">Last Name</label>
-								<input type="text" name="lastname">
+								<label for="name">Name</label>
+								<input type="text" name="name" required>
 								<br>
 								<label for="email">Email</label>
-								<input type="text" name="email">
+								<input type="email" name="email" id="email-input" required>
 								<br>
 								<label for="password">Password</label>
-								<input type="text" name="password">
+								<input type="password" name="password" required>
 								<br>
 								<label for="onfirmPassword">Confirm Password</label>
-								<input type="text" name="confirmPassword">
+								<input type="password" name="confirmPassword" id="confirm-password" required>
 								
 								<input id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">
 							</form>
