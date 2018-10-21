@@ -27,8 +27,8 @@
 
 				<div class="col">
 					<div class="box-outer">
-						<div class="box-inner">
-							<p class="no-margin">Site Overview</p>
+						<div class="box-inner" id="table-box">
+							<h3 class="no-margin">Site Overview</h3>
 							<img  src="img/tutorial.png" alt="Website tutorial" id="tute-image"/>
 						</div>
 					</div>

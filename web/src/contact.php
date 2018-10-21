@@ -45,7 +45,7 @@
 								<div class="row">
 
 									<form class="form" enctype="text/plain" role="form" action="mailto:UQrocketpotatoes@gmail.com?subject=Authout Admin Enquiry" method="GET">
-										<h4>We also do emails</h4>
+										<h4>Don't worry, we also do emails</h4>
 										<div >
 											<div class="form-group">
 												<textarea class="form-control" name="body" placeholder="Write your message here"></textarea>

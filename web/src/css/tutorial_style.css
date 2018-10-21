@@ -33,7 +33,6 @@ ul{
 	max-width: 600px;
 	display: block;
 	margin: auto;
-
 }
 
 
@@ -73,4 +72,19 @@ b{
 }
 .black:hover {
 	text-decoration: none;
+}
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+	width:inherit;
+}
+h3 {
+	text-align: left;
+	width: 100%;
 }
