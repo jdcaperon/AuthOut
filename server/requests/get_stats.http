@@ -1,0 +1,7 @@
+POST http://localhost:5000/entry/stats HTTP/1.1
+content-type: application/json
+
+{
+    "lower": "3/3/2018",
+    "upper": "21/10/2018"
+}

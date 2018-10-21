@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+from dateutil.rrule import rrule, DAILY
 from flask import Blueprint, jsonify, request
 from sqlalchemy import cast, Date, func
 
@@ -49,7 +50,26 @@ def query():
         output.append(entry.as_dict())
     return jsonify({'entries': output})
 
-# @bp.route('/stats')
-# def stats():
-#     data = request.get_json(force=True)
-#
+@bp.route('/stats', methods=['GET', 'POST'])
+def stats():
+    data = request.get_json(force=True)
+    lower = datetime.strptime(data['lower'], '%d/%m/%Y')
+    upper = datetime.strptime(data['upper'], '%d/%m/%Y')
+
+    data = {'days': []}
+    for dt in rrule(DAILY, dtstart=lower, until=upper):
+        day = {'date': dt.strftime("%d/%m/%Y"), 'signins': 0, 'entries': []}
+        # attendance count
+        signed_in = db.session.query(func.Count(EntryModel.child_id))\
+            .filter(cast(EntryModel.time, Date) == dt)\
+            .filter_by(status=True)\
+            .group_by(EntryModel.child_id).count()
+        day['signins'] = signed_in
+
+        entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == dt)
+        for entry in entries:
+            day['entries'].append(entry.as_dict())
+
+        data['days'].append(day)
+
+    return jsonify(data)

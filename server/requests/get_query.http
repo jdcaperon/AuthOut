@@ -1,8 +1,8 @@
-GET http://localhost:5000/entry/query HTTP/1.1
+POST https://deco3801.wisebaldone.com/api/entry/query HTTP/1.1
 content-type: application/json
 
 {
-    "lower": "19/10/2018",
+    "lower": "3/3/2018",
     "upper": "21/10/2018",
     "id": 1
 }
