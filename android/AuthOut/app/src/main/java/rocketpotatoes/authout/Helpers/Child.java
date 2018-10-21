@@ -30,6 +30,7 @@ public class Child implements Serializable {
     private final String firstName;
     private final String surname;
     private final String status;
+    private final int id;
 
     /** Constructor for child object
      *
@@ -37,10 +38,11 @@ public class Child implements Serializable {
      * @param surname   - child's surname
      * @param status    - signed-in/signed-out status of the child
      */
-    public Child(String firstName, String surname, String status) {
+    public Child(String firstName, String surname, String status, int id) {
         this.firstName = firstName;
         this.surname = surname;
         this.status = status;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -53,5 +55,9 @@ public class Child implements Serializable {
 
     public String getStatus() {
         return status;
+    }
+
+    public int getId() {
+        return id;
     }
 }

@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
     <Button
-        android:id="@+id/signInOthers"
+        android:id="@+id/signUpUser"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
@@ -48,4 +48,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/selectItem"/>
 
+
+    <Button
+        android:id="@+id/anotherAction"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/authout_button_secondary"
+        android:text="@string/back"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent"
+        android:onClick="back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpUser"  />
 </android.support.constraint.ConstraintLayout>

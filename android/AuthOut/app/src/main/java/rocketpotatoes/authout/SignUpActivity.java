@@ -34,7 +34,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -178,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     /** Updates the date of birth text based on the date selected in the calendar picker */
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
         dateOfBirth.setText(sdf.format(myCalendar.getTime()));
     }
