@@ -27,7 +27,11 @@
         <activity
             android:name=".HomeActivity"
             android:theme="@style/AppTheme.Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SelectStudentActivity"
@@ -44,18 +48,11 @@
         <activity
             android:name=".AdminActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustNothing" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SignUpReviewActivity"
             android:theme="@style/AppTheme"

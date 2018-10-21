@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,21 +29,34 @@ import rocketpotatoes.authout.Helpers.Util;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
-    private static final String AUTHOUT_ADMIN_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login";
+    private static final String AUTHOUT_ADMIN_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login"; //todo fix this
     private View progressOverlay;
     private RequestQueue requestQueue;
+    private EditText username;
+    private EditText password;
+    private TextView hintText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
         progressOverlay = findViewById(R.id.progress_overlay);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        hintText = findViewById(R.id.pleaseLogin);
         requestQueue = Volley.newRequestQueue(this);
     }
 
 
     public void login(View v) {
-        requestQueue.add(createRequest());
+        if (username.getText().toString().equals("Ryan")) {
+            Intent intent = new Intent(this, AdminActivity.class);
+            startActivity(intent);
+        } else {
+            hintText.setText("Incorrect username or password");
+            hintText.setTextColor(Color.RED);
+        }
+        //todo add back requestQueue.add(createRequest());
     }
 
     public void cancel(View v) {
@@ -58,8 +74,8 @@ public class AdminLoginActivity extends AppCompatActivity {
 
         //Adding contents to request
         try {
-            json.put("email", "email");
-            json.put("password", "password");
+            json.put("email", username.getText().toString());
+            json.put("password", password.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -75,8 +91,8 @@ public class AdminLoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Util.animateView(progressOverlay, View.GONE, 0, 200);
-
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
+                        Toast.makeText(AdminLoginActivity.this, "Oops, something went wrong. Try again.", Toast.LENGTH_SHORT).show();
                         Log.i("ResponseError", error.toString());
                     }
                 });

@@ -60,7 +60,7 @@ public class Util {
         String key = getTrustedChildren ? "trusted_children" : "children";
         List<Child> childList = new ArrayList<>();
         try {
-            String childrenString = response.get("children").toString();
+            String childrenString = response.get(key).toString();
             childrenString = childrenString.substring(1, childrenString.length() - 1);
             String[] children = childrenString.split(",\\{");
             for (int i = 0; i < children.length; i++) {
