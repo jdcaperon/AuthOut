@@ -48,18 +48,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/selectItem"/>
 
-    <Button
-        android:id="@+id/signUpAdmin"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/authout_button"
-        android:text="@string/new_admin"
-        android:textColor="@android:color/white"
-        android:onClick="signUpAdminClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpUser" />
 
     <Button
         android:id="@+id/anotherAction"
@@ -73,5 +61,5 @@
         android:onClick="back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpAdmin"  />
+        app:layout_constraintTop_toBottomOf="@+id/signUpUser"  />
 </android.support.constraint.ConstraintLayout>

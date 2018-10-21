@@ -32,6 +32,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -317,8 +318,9 @@ public class SelectStudentActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        requestQueue.add(createRequest(children));
                         Log.i("ResponseError", error.toString());
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
+                        Toast.makeText(SelectStudentActivity.this, "Oops, something went wrong. Try again.", Toast.LENGTH_SHORT).show();
                     }
 
                 });
