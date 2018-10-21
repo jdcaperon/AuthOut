@@ -53,22 +53,25 @@
 
 				<div class="col-7">
 					<div class="box-outer" >
-						<div class="box-inner">
-
+						<div class="box-inner" id="table-box">
+							<h3>Attendance Report</h3>
+							<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th class="th-sm">Day
+											<i class="fa fa-sort float-right" aria-hidden="true"></i>
+										</th>
+										<th class="th-sm">Attendance
+											<i class="fa fa-sort float-right" aria-hidden="true"></i>
+										</th>
+									</tr>
+								</thead>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!--
-							<form id="report-form" class="vertical-center jumbotron">
-						<label>Child:</label><br>
-						<input type="text" name="childName"><br>
-						<label>Start Date:</label><div id='start-date-widget' class="calendar"></div>
-						<label>End Date:</label><div id='end-date-widget' class="calendar"></div>
-					</form>
-		-->
 
 		<?php
 			$scripts = array("report_script.js");

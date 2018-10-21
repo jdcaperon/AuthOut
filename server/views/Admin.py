@@ -21,10 +21,13 @@ def core():
         admin = AdminModel()
         valid = admin.load(data)
         if valid:
-            db.session.add(admin)
-            db.session.commit()
-            return Response('Created Admin', 200)
-        return Response('', 400, {})
+            try:
+                db.session.add(admin)
+                db.session.commit()
+                return Response('Created Admin', 200)
+            except Exception:
+                return Response('Unable to create account', 200)
+        return Response('Invalid data sent to server', 400, {})
     else:
         # list all the parents.
         container = []
