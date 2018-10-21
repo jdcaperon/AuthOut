@@ -27,7 +27,7 @@
 					</div>
 
 					<div id="calendar-box" class="row">
-							<div class="box-outer" style="padding-right: 0;">
+							<div class="box-outer"  id="jordan-hack" style="padding-right: 0;">
 								<div class="box-inner" id="cal">
 									<div >
 										<p>Please select a date range</p>
