@@ -28,7 +28,9 @@ ul{
 }
 
 #tute-image{
-	width:100%;
+width:100%;
+
+	max-height: 100%;
 }
 
 p{
@@ -45,6 +47,7 @@ p{
 	width:10vh;
 	float:left
 }
+
 b{
 	color: #DCA726;
 	font-family: 'roboto', sans-serif;

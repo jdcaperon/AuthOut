@@ -170,8 +170,8 @@ html, body {
 /* ----------Content --------- */
 .content{
 	width: calc(100% - 220px);
-	height:calc(100% - 50px);
-	right:0;
+	height: calc(100% - 50px);
+	left: 220px;
 	display: block;
 	position: absolute;
 	overflow-y: scroll;
@@ -183,9 +183,13 @@ html, body {
 
 
 @media screen and (max-width: 1220px) {
-  .yourselector {
+  .content {
     max-width: 82%;
+	left:12%;
   }
+
+
+
 }
 
 .box-outer {
