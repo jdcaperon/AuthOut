@@ -26,3 +26,22 @@ li{
 ul{
 	padding: 0;
 }
+
+#tute-image{
+	width:100%;
+}
+
+p{
+	margin:40% 0;
+	font-size: 3vh;
+}
+
+.no-margin{
+	margin: 0 0  1rem 0 ;
+}
+
+#help{
+	height:10vh;
+	width:10vh;
+	float:left
+}

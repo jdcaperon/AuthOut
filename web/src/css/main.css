@@ -63,7 +63,8 @@ html, body {
 	top:50px;
 	padding: 0;
 	position:fixed;
-
+	min-width: 165px;
+	max-width: 220px;
 
 }
 
@@ -168,14 +169,23 @@ html, body {
 
 /* ----------Content --------- */
 .content{
-	width:82%;
+	width: calc(100% - 220px);
 	height:calc(100% - 50px);
-	left:18%;
+	right:0;
 	display: block;
 	position: absolute;
 	overflow-y: scroll;
+	overflow-x: scroll;
 	min-height: 577px;
+	min-width: 1000px;
 	top:50px;
+}
+
+
+@media screen and (max-width: 1220px) {
+  .yourselector {
+    max-width: 82%;
+  }
 }
 
 .box-outer {
