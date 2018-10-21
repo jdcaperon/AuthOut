@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from flask import Blueprint, jsonify, request
 from sqlalchemy import cast, Date, func
@@ -34,10 +34,11 @@ def live():
 @bp.route('/query')
 def query():
     data = request.get_json(force=True)
-
+    lower = datetime.strptime(data['lower'], '%d/%m/%Y')
+    upper = datetime.strptime(data['upper'], '%d/%m/%Y')
     entries = db.session.query(EntryModel)\
-        .filter(cast(EntryModel.time, Date) >= data['lower'])\
-        .filter(cast(EntryModel.time, Date) <= data['upper'])\
+        .filter(cast(EntryModel.time, Date) >= lower)\
+        .filter(cast(EntryModel.time, Date) <= upper)\
         .filter_by(child_id=data['id'])\
         .filter_by(status=True)\
         .order_by(EntryModel.time)
@@ -47,3 +48,8 @@ def query():
     for entry in entries.all():
         output.append(entry.as_dict())
     return jsonify({'entries': output})
+
+# @bp.route('/stats')
+# def stats():
+#     data = request.get_json(force=True)
+#
