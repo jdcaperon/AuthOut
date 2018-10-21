@@ -41,9 +41,10 @@
 	padding: 1vw;
 	display: flex;
 }
- p {
-	font-size: 12px;
-	margin-bottom: 0.25rem;
+
+p{
+	margin-bottom:0 ;
+	font-size: 2vh;
 	text-align: left;
 }
 
@@ -51,7 +52,7 @@
 	flex: 1;
 }
 #calendar-box p{
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.5vh;
 }
 
 #cal{
@@ -64,18 +65,12 @@
 }
 
 #child-select-box .center-group {
-	width: 90%;
+	width: 77%;
 }
 
 #child-select-box .box-inner {
 	position: relative;
-	text-align: center;
-	padding: 1vw;
-}
-
-#child-select-box label {
-	color: #03BABD;
-	font-size: 1em;
+	padding:0 4vw;
 }
 
 /* ------------------------ Buttons ------------------------ */

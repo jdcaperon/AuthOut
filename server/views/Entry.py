@@ -1,6 +1,6 @@
 from datetime import date
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from sqlalchemy import cast, Date
 
 from db import db
@@ -29,3 +29,22 @@ def live():
             'signed_out': db.session.query(ChildModel).filter_by(status=False).count(),
             'entries': entries_json}
     return jsonify(data)
+
+
+@bp.route('/query')
+def query():
+    data = request.get_json(force=True)
+
+    entries = db.session.query(EntryModel)\
+        .filter(cast(EntryModel.time, Date) >= data['lower'])\
+        .filter(cast(EntryModel.time, Date) <= data['upper'])\
+        .filter_by(child_id=data['id'])\
+        .filter_by(status=True)\
+        .order_by(EntryModel.time)
+
+    print(entries)
+    output = []
+    entry = entries.first()
+    if entry is not None:
+        output.append(entry.as_dict())
+    return jsonify({'entries': output})

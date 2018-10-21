@@ -17,7 +17,7 @@
 						<div class="box-outer" style="padding-bottom: 0; padding-right: 0;">
 							<div class="box-inner">
 								<div class="center-group">
-									<p>Please select a child</p>
+									<p>Select a child</p>
 									<select name="children" id="child-select-list">
 										<!-- Filled with names from the database -->
 									</select>
@@ -27,10 +27,10 @@
 					</div>
 
 					<div id="calendar-box" class="row">
-							<div class="box-outer" style="padding-right: 0;">
+							<div class="box-outer"  id="jordan-hack" style="padding-right: 0;">
 								<div class="box-inner" id="cal">
 									<div >
-										<p>Please select a date range</p>
+										<p>Select a range of dates</p>
 										<div type='text' class="datepicker-here" data-position="right top" data-range="true" data-language="en" id="calendar">
 										</div>
 									</div>

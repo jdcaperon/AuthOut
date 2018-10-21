@@ -10,7 +10,7 @@
 }
 
 #welcome-message{
-	padding:2vw;
+	padding:4vh;
 	text-align: center;
 }
 
@@ -45,6 +45,7 @@
 
 #submit{
 	margin: auto;
+	height:5vh;
 }
 
 .form{
@@ -52,30 +53,42 @@
 }
 
 textarea{
-	height: 10vh;
+	height: 18vh;
 	width:90%;
-	margin:4% 0;
+	margin:3vh 0;
 }
 h4{
-	   height: min-content;
+	font-size: 3vh;
+	margin-top: 0;
+	color:#03BABD;
 }
-h3{
-	height:55%
+h6{
+	font-size: 2vh;
+	margin-top: 1.2vh;
+}
+p{
+	font-size: 2.5vh;
+}
 
+address{
+	margin-bottom: 5vh;
+	margin-top:2vh;
+	font-size: 2vh;
 }
 
-#contact-details .row.not(.row-little){
-	height: 50%;
+#letter{
+	font-family: 'Indie Flower', cursive;
+	font-size: 3vh;
+	margin-left: 1vh;
+	color:black;
 }
-#contact-details .row-little{
-	height: 35%;
-}
-#contact-details .row-littlest{
-	height: 15%;
-}
-#contact-details{
-	height: 100%;
-}
-.little-row{
-	heigt
+
+#mail{
+	margin-bottom: 5vh;
+	margin-top:2vh;
+	margin-left: auto;
+	text-align: center;
+	width:10vh;
+	height:10vh;
+	display: block;
 }

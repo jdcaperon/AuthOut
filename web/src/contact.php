@@ -15,7 +15,7 @@
 				<div class="col">
 					<div class="box-outer">
 						<div class="box-inner" id="welcome-message">
-							<h3>We'd love to hear from you! </h3><h6>Get in touch with your questions and comments</h6>
+							<h4>We'd love to hear from you! </span></h4><h6>Get in touch with your questions and comments</h6>
 						</div>
 					</div>
 				</div>
@@ -28,19 +28,24 @@
 						<div class="box-inner">
 							<div class="container" id="contact-details">
 								<div class="row row-littlest">
-									<h4>Old School? Send us a letter</h4><br>
+									<h4>Old School?<span id="letter"> Send us a letter</span></h4><br>
 								</div>
 								<div class="row row-little">
-									<address>
-									  	General Purpose South Building (Building 78)<br>
-									  	University of Queensland<br>
-										QLD 4072<br>
-									</address>
+									<div class="col-2">
+										<span data-feather="mail" id="mail"></span>
+									</div>
+									<div class="col-10">
+										<address>
+										  	General Purpose South Building (78)<br>
+										  	University of Queensland<br>
+											QLD 4072<br>
+										</address>
+									</div>
 								</div>
 								<div class="row">
 
 									<form class="form" enctype="text/plain" role="form" action="mailto:UQrocketpotatoes@gmail.com?subject=Authout Admin Enquiry" method="GET">
-										<h4>Alternatively, send us an email</h4>
+										<h4>We also do emails</h4>
 										<div >
 											<div class="form-group">
 												<textarea class="form-control" name="body" placeholder="Write your message here"></textarea>
