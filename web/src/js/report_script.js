@@ -57,3 +57,10 @@ $(document).ready(function() {
 	}
 	
 });
+
+// --------------------------------- Buttons --------------------------------------
+$("#generate-report-button").click(function(){
+	var datePicker = $('#calendar').datepicker().data('datepicker');
+	
+	console.log(datePicker.selectedDates);
+});
