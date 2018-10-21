@@ -55,14 +55,14 @@ def code_endpoint():
     parent = db.session.query(ParentModel).filter_by(mobile_number=stored_number)
 
     if parent.count() == 1:
-        # here we generate a code for them and add it to the Db
+    #    # here we generate a code for them and add it to the Db
         code = randint(1000, 9999)
-        code_parent = db.session.query(ParentModel).filter_by(code=code)
+    #    code_parent = db.session.query(ParentModel).filter_by(code=code)
 
-        # find a new code if it's not unique
-        while code_parent.count() is not 0:
-            code = randint(1000, 9999)
-            code_parent = db.session.query(ParentModel).filter_by(code=code)
+    #    # find a new code if it's not unique
+    #    while code_parent.count() is not 0:
+    #        code = randint(1000, 9999)
+    #        code_parent = db.session.query(ParentModel).filter_by(code=code)
 
         # todo add code to parent here.
 
