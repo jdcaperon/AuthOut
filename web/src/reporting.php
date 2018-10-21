@@ -44,7 +44,7 @@
 							<div class="box-inner">
 								<div class="center-group">
 									<button type="button" id="generate-report-button" class="rounded-button purple-button">Generate Report</button>
-									<a id="export-link" class="btn  rounded-button blue-button" download="MailingList.csv" href="#" onclick="return ExcellentExport.csv(this, 'user-table');">Save Report</a>
+									<a id="export-link" class="btn  rounded-button blue-button" download="attendance_report.csv" href="#" onclick="return ExcellentExport.csv(this, 'user-table');">Save Report</a>
 
 
 
