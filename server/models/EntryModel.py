@@ -6,10 +6,10 @@ import json
 
 class EntryModel(db.Model):
     __tablename__ = 'entry'
-    id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(db.Integer, db.ForiegnKey('parents.id'), primary_key=True)
-    child_id = db.Column(db.Integer, db.ForiegnKey('children.id'), primary_key=True)
-    time = db.Column(db.DateTime, default=datetime.utcnow, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    parent_id = db.Column(db.Integer, db.ForeignKey('parents.id'))
+    child_id = db.Column(db.Integer, db.ForeignKey('children.id'))
+    time = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.Boolean)
 
     required_keys = ["parent_id", "child_id", "status"]
@@ -48,6 +48,7 @@ class EntryModel(db.Model):
         """
         if not self.required(data):
             return False
+        self.time = datetime.utcnow()
         for i in self.required_keys:
             setattr(self, i, data[i])
         print(self)

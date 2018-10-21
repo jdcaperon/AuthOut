@@ -1,9 +1,8 @@
 <?php
     session_start();
-
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
     <head>
 
@@ -16,8 +15,13 @@
 
 
 		<!-- JS Inclusions -->
+
+		<!--CSV exporting, https://github.com/jmaister/excellentexport/releases/tag/v1.4 author: Jordi Burgos-->
+		<script src="js/excellentexport.js"></script>
+
+		<!--Chart.js, http://www.chartjs.org/ authors: https://github.com/chartjs/Chart.js/graphs/contributors -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-		
+
         <!--Stylesheets-->
         <link href="css/main.css" rel="stylesheet" type="text/css">
 		<link href="css/admin.css" rel="stylesheet" type="text/css">

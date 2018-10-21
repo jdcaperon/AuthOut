@@ -1,7 +1,10 @@
+import base64
+
 from flask import Blueprint, jsonify, request, Response
 from db import db
 from models.ParentModel import ParentModel
 from models.ChildModel import ChildModel
+from models.aws import get_parent_photo, set_parent_photo, delete_parent_photo
 
 bp = Blueprint('parent', __name__, url_prefix="/parent")
 
@@ -59,10 +62,40 @@ def specified(parent_id):
     elif request.method == 'DELETE':
         db.session.delete(parent)
         db.session.commit()
+        delete_parent_photo(parent.id)
         return Response('', 200)
     # Default case.
     else:
         return Response('', 404)
+
+
+@bp.route('/<int:parent_id>/photo', methods=['GET', 'PUT', 'DELETE'])
+def photo(parent_id):
+    """
+    Endpoint for creating, updating and deleting parent photos.
+    """
+    parent = db.session.query(ParentModel).filter_by(id=parent_id)
+    if parent.count() != 1:
+        return Response('No Parent Matching that ID', 400)
+    parent = parent.first()
+    # Gets the information of a specific parent.
+    if request.method == 'GET':
+        return jsonify({'user_image': get_parent_photo(parent_id).decode('ASCII')})
+    # Updates a specific parent
+    elif request.method == 'PUT':
+        data = request.get_json(force=True)
+        print(data)
+        if 'user_photo' in data:
+            set_parent_photo(parent_id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
+            return Response('', 200)
+    # Deletes a particular parent
+    elif request.method == 'DELETE':
+        delete_parent_photo(parent_id)
+        return Response('', 200)
+    # Default case.
+    else:
+        return Response('', 404)
+    return Response('', 400)
 
 
 @bp.route('/<int:parent_id>/children', methods=['GET', 'POST', 'DELETE'])

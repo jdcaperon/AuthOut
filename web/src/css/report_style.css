@@ -1,35 +1,119 @@
-body {
-	display: flex;
-	flex-flow: column;
-}
+/* ---------- Bootstrap Changes --------- */
 
-.jumbotron {
-  padding: 20px;
-}
-
-#report-form input {
-	width: 80%;
-}
-
-#report-form label {
-	color: #03BABD;
-	font-size: 1.5em;
-	margin-top: 20px;
-}
-
-#generate-report-button {
-	margin-top: 40px;
-}
-
-.calendar {
-	margin: 0 auto;
-}
-
-#report-content {
-	flex: 1;
+.row-override, #child-select-box, #buttons-box, #calendar-box {
+	height: 100%;
+	width: 100%;
 	margin: 0;
 }
 
-#report-content > div {
+.col-7, .col-5 {
 	padding: 0;
+}
+
+/* -------------------- Main Style Changes -------------------- */
+.rounded-button {
+	margin: 0;
+}
+
+.center-group {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* TODO: make this work for all screen sizes */
+}
+
+/* ---------------------- Table ---------------------- */
+
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+
+	width:inherit;
+}
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box h3{
+text-align: left;
+width:100%;
+}
+
+/* ----------------------- Calendar ---------------------- */
+#calendar-box {
+	height: 60%;
+}
+
+#calendar-box .box-inner {
+	padding: 1vw;
+	display: flex;
+}
+
+p{
+	margin-bottom:0 ;
+	font-size: 2vh;
+	text-align: left;
+}
+
+#calendar {
+	flex: 1;
+}
+#calendar-box p{
+	margin-bottom: 0.5vh;
+}
+
+#cal{
+	padding: 2vw 4vw !important;
+}
+/* ----------------------- Child Select -------------------- */
+
+#child-select-box{
+	height: 15%;
+}
+#child-select-list {
+	width: 100%;
+	vertical-align: middle;
+}
+
+#child-select-box .center-group {
+	width: 77%;
+}
+
+#child-select-box .box-inner {
+	position: relative;
+	padding:0 4vw;
+}
+
+/* ------------------------ Buttons ------------------------ */
+
+
+#generate-report-button {
+	margin-bottom: 1vh;
+}
+
+#buttons-box .box-inner {
+	position: relative;
+	padding: 1vw;
+}
+#export-link{
+	line-height: 30px;
+}
+
+#export-link:hover{
+	color:white;
+
+}
+
+#buttons-box {
+	height: 25%;
 }

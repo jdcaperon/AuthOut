@@ -1,4 +1,4 @@
-POST https://deco3801.wisebaldone.com/api/child/ HTTP/1.1
+POST http://localhost:5000/child/ HTTP/1.1
 content-type: application/json
 
 {

@@ -2132,7 +2132,7 @@ button.jqx-button, input[type=button].jqx-button,  input[type=submit].jqx-button
 .jqx-calendar-cell-today
 {
     color: #898989;
-    background-color: #ffffdb;
+    /*background-color: #ffffdb;*/
     border: 1px solid #fdc066;
     margin: 0 0 0 0;
     cursor: pointer;

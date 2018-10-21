@@ -1,0 +1,62 @@
+/* ---------- Bootstrap Changes --------- */
+
+.row-override {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.col-8, .col-4 {
+	padding: 0;
+}
+
+#canvas-div{
+	height: 30vh;
+
+}
+
+.data-div:not(#canvas-div){
+	margin:30% 0;
+}
+
+.data-div p{
+	font-size: 1rem;
+	text-align: center;
+}
+
+.data-div h3{
+	text-align: center;
+}
+
+
+.dataTables_wrapper {
+    font-size: 10px;
+
+}
+.page-item.active .page-link{
+	background-color: #03BABD;
+	border: 1px solid #dee2e6;
+}
+.page-link {
+	color:#03BABD;
+}
+
+.page-link:hover{
+	color: black;
+}
+
+th{
+	cursor:default;
+}
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+
+	width:inherit;
+}

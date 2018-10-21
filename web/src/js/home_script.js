@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#nav-line2 > ul li:nth-of-type(1)").addClass("current-tab");
-	
+
 	var ctx = document.getElementById("Weekly").getContext('2d');
 	var myChart = new Chart(ctx, {
 		type: 'bar',
@@ -30,7 +30,7 @@ $(document).ready(function() {
 			}
 		}
 	});
-			
+
 	var ctx2 = document.getElementById("Daily").getContext('2d');
 	var myChart2 = new Chart(ctx2, {
 		type: 'bar',

@@ -1,0 +1,94 @@
+/* ---------- Bootstrap Changes --------- */
+
+.row-override {
+	width: 100%;
+	margin: 0;
+}
+
+.col, .col-4, .col-8 {
+	padding: 0;
+}
+
+#welcome-message{
+	padding:4vh;
+	text-align: center;
+}
+
+#welcome-message p{
+	margin:0;
+}
+
+
+#info-row{
+	height:75%
+}
+
+#welcome-row{
+	height:25%
+}
+
+#rplogo, #threecslogo{
+	width:15vh;
+	margin: 12% auto;
+	display: block;
+	min-width: 95px;
+
+}
+
+#rplogo{
+	margin-top: 0;
+}
+
+.col-sm-10{
+	margin:auto;
+}
+
+#submit{
+	margin: auto;
+	height:5vh;
+}
+
+.form{
+	width: 100%;
+}
+
+textarea{
+	height: 18vh;
+	width:90%;
+	margin:3vh 0;
+}
+h4{
+	font-size: 3vh;
+	margin-top: 0;
+	color:#03BABD;
+}
+h6{
+	font-size: 2vh;
+	margin-top: 1.2vh;
+}
+p{
+	font-size: 2.5vh;
+}
+
+address{
+	margin-bottom: 5vh;
+	margin-top:2vh;
+	font-size: 2vh;
+}
+
+#letter{
+	font-family: 'Indie Flower', cursive;
+	font-size: 3vh;
+	margin-left: 1vh;
+	color:black;
+}
+
+#mail{
+	margin-bottom: 5vh;
+	margin-top:2vh;
+	margin-left: auto;
+	text-align: center;
+	width:10vh;
+	height:10vh;
+	display: block;
+}

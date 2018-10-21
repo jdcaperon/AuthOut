@@ -29,6 +29,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -70,7 +71,6 @@ public class SignUpChildActivity extends AppCompatActivity {
         childSignupSelectorView.setLayoutManager(layoutManager);
         childSignupListAdapter = new ChildSignupListAdapter(children, this);
         childSignupSelectorView.setAdapter(childSignupListAdapter);
-
 
     }
 
@@ -171,7 +171,7 @@ public class SignUpChildActivity extends AppCompatActivity {
 
     /** Updates the date of birth text based on the date selected in the calendar picker */
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
         dateOfBirth.setText(sdf.format(myCalendar.getTime()));
         dateOfBirth.setBackground(getDrawable(R.drawable.signup_input_background));

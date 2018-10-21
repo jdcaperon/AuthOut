@@ -1,12 +1,13 @@
 html, body {
-	height: 100%;
-	width: 100%;
+	height: 100vh;
+	width:100vw;
     position: relative;
     font-family: 'Montserrat', sans-serif;
 	background-color: #F2F3F1;
 	min-width: 960px;
 	overflow: hidden
 }
+
 
 .rounded_button {
 	height: 40px;
@@ -64,7 +65,7 @@ html, body {
 }
 
 .nav-link:hover {
-	background-color: #DCA726;
+	text-decoration: underline;
 }
 
 .nav-item{
@@ -76,11 +77,7 @@ html, body {
  min-height: 80px;
 }
 
-.navbar-brand {
- padding: 0 15px;
- height: 80px;
- line-height: 80px;
-}
+
 
 .navbar-toggle {
  margin-top: 23px;
@@ -97,15 +94,15 @@ html, body {
 .material-icons.lighter {
     color: rgba(255,255,255,.5);
     font-size: 24px;
-    padding:0px 10px;
+    padding: 0px 10px;
     display: inline-flex;
     vertical-align: top;
 }
 
 #content{
-	height:100%
-
+	height:100%;
 }
+
 .page > div{
 	width:60%;
 	position: relative;
@@ -117,29 +114,32 @@ html, body {
 	top:80px;
 	height:calc(100% - 80px);
 	position:relative;
+	width:100vw;
 }
 #email-form{
 	width:60%;
+	height:100%;
 }
 
 .page{
-	height:100%;
-	overflow: hidden;
+	min-height: 100%;
+	width:100%;
 }
 
 iframe{
-	width:420px;
-	height: 315px;
+	height:53.5vh;
+	width:95vh;
 	margin: 0 auto;
-	display:block ;
+
 }
 
 h3{
-	padding:30px 0;
+	padding:4% 0 0 0;
+	margin: 0 auto;
 }
 
 #overview > div{
-	margin: 8% 0;
+	margin: 7% 0;
 	text-align: center;
 
 }
@@ -162,25 +162,77 @@ h3{
 }
 
 #mail select{
-width:70%;
+width:55%;
 }
 #mail input{
-width:80%;
+width:100%;
 }
 
-#mail p{
+#mail-content > p{
 	text-align: center;
+	font-size: 20px;
 }
 
 #mail-content{
-	margin:auto;
+	margin:4%  auto;
+}
+
+ .d-block {
+  height: 70vh;
+  width: auto !important;
+  margin:auto;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#03BABD' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#03BABD' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+
+}
+
+.carousel-control-prev {
+    left: 2.5vw;
 }
 
 
-.d-block {
-  height: 100%;
+.carousel-control-next {
+    right: 2.5vw;
 }
-.carousel-inner{
-  height:100%;
-  max-height: 500px !important;
+#carousel-container{
+	height:100%;
+}
+#carousel-container #carousel{
+	height:100%;
+}
+
+.paragraph-margin{
+	margin:10% 0;
+}
+
+#features .container{
+	height:91%;
+	padding:0;
+}
+#features .container .row{
+	height:100%;
+}
+
+.form-group p{
+	text-align: left;
+	margin: 2vh !important;
+}
+
+.form-group{
+	margin: 1vh !important;
+}
+nav .active{
+	color:  #DCA726 !important;
+}
+
+
+.paragraph-margin-bottom{
+	margin-top: 10%;
 }
