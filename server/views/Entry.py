@@ -1,7 +1,7 @@
 from datetime import date
 
 from flask import Blueprint, jsonify, request
-from sqlalchemy import cast, Date
+from sqlalchemy import cast, Date, func
 
 from db import db
 from models.ParentModel import ParentModel
@@ -44,7 +44,6 @@ def query():
 
     print(entries)
     output = []
-    entry = entries.first()
-    if entry is not None:
+    for entry in entries.all():
         output.append(entry.as_dict())
     return jsonify({'entries': output})
