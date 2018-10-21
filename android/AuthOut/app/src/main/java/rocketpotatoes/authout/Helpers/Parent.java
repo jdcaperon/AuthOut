@@ -37,47 +37,21 @@ public class Parent implements Parcelable{
     private final String surname;
     private final List<Child> children;
     private final List<Child> trustedChildren;
+    private int id;
 
     /** A parent object in order to
      *
      * @param firstName - first name of the parent
      * @param surname   - surname of the parent
-     * @param children - Array of Maps of child objects with keys
-     *                   'firstName', 'surname', and 'status'
+     * @param children - list of child objects
+     * @param trustedChildren - list of child objects
      */
-    public Parent(String firstName, String surname, Map<String, Object>[] children, Map<String, Object>[] trustedChildren) {
-        this.children = new ArrayList<>();
-        this.trustedChildren = new ArrayList<>();
-        this.firstName = firstName;
-        this.surname = surname;
-
-        for (Map<String, Object> child : trustedChildren) {
-            if (!child.containsKey("firstName") ||
-                    !child.containsKey("surname") || !child.containsKey("status")) {
-                throw new IllegalArgumentException("First name, surname and status required.");
-            }
-            this.trustedChildren.add(new Child(child.get("firstName").toString(),
-                    child.get("surname").toString(),
-                    child.get("status").toString()));
-        }
-
-        for (Map<String, Object> child : children) {
-            if (!child.containsKey("firstName") ||
-                    !child.containsKey("surname") || !child.containsKey("status")) {
-                throw new IllegalArgumentException("First name, surname and status required.");
-            }
-            this.children.add(new Child(child.get("firstName").toString(),
-                                        child.get("surname").toString(),
-                                        child.get("status").toString()));
-        }
-    }
-
-    //Todo this is for testing and is not required for actual implementation.Remove this.
-    public Parent(String firstName, String surname, List<Child> children, List<Child> trustedChildren) {
+    public Parent(String firstName, String surname, List<Child> children, List<Child> trustedChildren, int id) {
         this.children = children;
         this.firstName = firstName;
         this.surname = surname;
         this.trustedChildren = trustedChildren;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -96,6 +70,10 @@ public class Parent implements Parcelable{
         return trustedChildren;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -107,6 +85,7 @@ public class Parent implements Parcelable{
         out.writeString(surname);
         out.writeList(children);
         out.writeList(trustedChildren);
+        out.writeInt(id);
     }
 
     // this is used to regenerate your object.
@@ -132,5 +111,6 @@ public class Parent implements Parcelable{
         this.surname = in.readString();
         in.readList(children, null);
         in.readList(trustedChildren, null);
+        this.id = in.readInt();
     }
 }

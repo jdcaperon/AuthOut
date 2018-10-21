@@ -23,6 +23,7 @@
  */
 package rocketpotatoes.authout;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -44,12 +45,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -57,7 +60,7 @@ import rocketpotatoes.authout.Helpers.Util;
 
 
 public class SignUpReviewActivity extends AppCompatActivity {
-    private static final String CREATE_PARENT_URL = "http://httpbin.org/post";
+    private static final String CREATE_PARENT_URL = "https://deco3801.wisebaldone.com/api/kiosk/register";
     private TextView fullName;
     private TextView mobile;
     private TextView email;
@@ -73,7 +76,6 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private Bitmap userBitmap;
     private ArrayList<ArrayList<String>> children;
     private RecyclerView childSignupSelectorView;
-
     private RequestQueue requestQueue;
 
     private View progressOverlay;
@@ -202,14 +204,29 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private JsonObjectRequest createParentRequest() {
         JSONObject json = new JSONObject();
 
+        Log.i("CreatingRequest", "CreatingRequest");
         //Adding contents to request
         try {
-            json.put("firstName", firstNameData);
-            json.put("surname", surnameData);
-            json.put("email", emailData);
-            json.put("mobile", mobileData);
-            json.put("dateOfBirth", dateOfBirthData);
-            json.put("userPhoto", Util.bitmapToBase64(userBitmap, 50));
+            JSONObject parent = new JSONObject();
+            parent.put("email", emailData);
+            parent.put("first_name", firstNameData);
+            parent.put("last_name", surnameData);
+            parent.put("date_of_birth", dateOfBirthData);
+            parent.put("mobile_number", mobileData);
+            json.put("parent", parent);
+
+
+            JSONArray childrenObjects = new JSONArray();
+            for (int i = 0; i < children.size(); i++) {
+                JSONObject temp = new JSONObject();
+                temp.put("first_name", children.get(i).get(0));
+                temp.put("last_name", children.get(i).get(1));
+                temp.put("date_of_birth", children.get(i).get(2));
+                childrenObjects.put(temp);
+            }
+
+            json.put("children", childrenObjects);
+            json.put("user_photo", Util.bitmapToBase64(userBitmap, 50));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -218,9 +235,10 @@ public class SignUpReviewActivity extends AppCompatActivity {
                 (Request.Method.POST, CREATE_PARENT_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO Create and set parent object here
                         Util.animateView(progressOverlay, View.GONE, 0, 100);
-                        Log.i("Response", response.toString().substring(0, 100));
+                        Intent intent = new Intent(SignUpReviewActivity.this, HomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
