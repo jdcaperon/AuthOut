@@ -21,10 +21,14 @@
 <nav id = "topbar" class="fixed-top  navbar-fixed-top">
 	<div class="container-fluid">
       <div class="row">
-        <div class="col-md-11" >
+        <div class="col-md-12" >
 			<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
-		</div>
+
 			<a id="signout" class="col-md-1 text-nowrap">Log Out</a>
+
+		</div>
+	</div>
+</div>
 
 
 </nav>
