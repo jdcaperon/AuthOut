@@ -16,10 +16,11 @@
 				<div class="col-4">
 					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner">
-							<p class="no-margin">Welcome!</p>
-							<p>We've kept things as simple as possible here to make your life easy.</p>
-							<span data-feather="help-circle" id=help></span>
-							<p><a href="contact.php">Contact Us</a> if you have  questions.</p>
+
+								<p class="no-bottom-margin">We've kept things as </p><b>simple as possible</b><p  class="no-top-margin"> to make your life easy.</p>
+								<a href="contact.php"><span data-feather="help-circle" id=help></span>
+								<p>Contact Us </a> with any questions.</p>
+
 						</div>
 					</div>
 				</div>

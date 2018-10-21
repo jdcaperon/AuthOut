@@ -45,3 +45,25 @@ p{
 	width:10vh;
 	float:left
 }
+b{
+	color: #DCA726;
+	font-family: 'roboto', sans-serif;
+	margin:2.5vh 0;
+	font-size: 4vh;
+	display: block;
+
+}
+.no-bottom-margin{
+	margin-bottom: 0;
+
+}
+
+.no-top-margin{
+	margin-top: 0;
+}
+.black{
+	color:black;
+}
+.black:hover {
+	text-decoration: none;
+}

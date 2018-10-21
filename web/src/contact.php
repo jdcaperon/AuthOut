@@ -15,7 +15,7 @@
 				<div class="col">
 					<div class="box-outer">
 						<div class="box-inner" id="welcome-message">
-							<h3>We'd love to hear from you! </h3><h6>Get in touch with your questions and comments</h6>
+							<h4>We'd love to hear from you! </h4><h6>Get in touch with your questions and comments</h6>
 						</div>
 					</div>
 				</div>
