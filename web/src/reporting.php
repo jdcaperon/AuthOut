@@ -12,8 +12,6 @@
 		<?php include ('php_inclusions/nav.php'); ?>
 		<div class="content">
 			<div class="row row-override">
-
-
 				<div class="col-5">
 					<div id="child-select-box" class="row" >
 						<div class="box-outer" style="padding-bottom: 0; padding-right: 0;">
@@ -21,8 +19,7 @@
 								<div class="center-group">
 									<p>Please select a child</p>
 									<select name="children" id="child-select-list">
-										<option value="test1">Test</option>
-										<option value="test2">Test 2</option>
+										<!-- Filled with names from the database -->
 									</select>
 								</div>
 							</div>

@@ -58,6 +58,7 @@ $(document).ready(function() {
 				searchPlaceholder: "Search records",
 				search: "",
 				},
+				"order": [1, 'asc'],
 				"data": entries,
 				"columns": [
 					{"data": "time"},
@@ -68,10 +69,11 @@ $(document).ready(function() {
 			});
 			
 			table = $('#dtBasicExample').DataTable();
-			table.order([1, 'desc']).draw(); // Order by time
+			//table.order([1, 'desc']).draw(); // Order by time
 			$('.dataTables_length').addClass('bs-select');
 			
-			window.setInterval(periodicUpdate, 2000);
+			// Set up periodic check
+			window.setInterval(periodicUpdate, 2000); // TODO: change to use web sockets
 		}
 	});
 	
@@ -87,16 +89,14 @@ $(document).ready(function() {
 					// Update the attendance numbers
 					updateAttendance(data["signed_in"], data["signed_out"]);
 					
-					// Check how many new entries there are
-					var toAdd = entries.length - currentActions;
-					
-					//entries = entries.slice(-toAdd);
+					// Format the entries
 					entries = reverse(entries);
 					
 					// Add new entries to the table
-					table.rows.add(entries.slice(-toAdd)).draw(false);
+					table.clear(); // TODO: change so that the table doesn't have to be cleared
+					table.rows.add(entries).draw(); 
 					
-					currentActions += toAdd;
+					currentActions = entries.length;
 				}
 				
 			}
@@ -134,7 +134,12 @@ $(document).ready(function() {
 			// Format the time
 			var date = new Date(0);
 			date.setUTCSeconds(data[key]['time']);
-			var time = date.getHours() + ":" + date.getMinutes() + "." + date.getSeconds();
+			
+			var hours = formatTime(date.getHours().toString());			
+			var minutes = formatTime(date.getMinutes().toString());
+			var seconds = formatTime(date.getSeconds().toString());
+			
+			var time = hours + ":" + minutes + "." + seconds;
 			data[key]['time'] = time;
 			
 			// Format the status
@@ -149,6 +154,15 @@ $(document).ready(function() {
 		
 		return reversedData;
     }
+	
+	// Adds a 0 to the time if needed
+	function formatTime(time) {
+		if (time.length == 1) {
+			return "0" + time;
+		} else {
+			return time;
+		}
+	}
 
 
 });
