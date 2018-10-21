@@ -104,7 +104,6 @@ $(document).ready(function() {
 				success: function(data) {
 					var dateArray = getDateArray(datePicker.selectedDates[0], datePicker.selectedDates[1]);
 					entries = formatEntries(data['entries'], dateArray);
-					console.log(entries);
 					
 					table.clear();
 					table.rows.add(entries).draw();

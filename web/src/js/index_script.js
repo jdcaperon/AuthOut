@@ -16,7 +16,6 @@ $(document).ready(function() {
 			var request = $.ajax
 			({
 				type: "POST",
-				//url: "https://deco3801.wisebaldone.com/app/login.php",
 				url: "login.php",
 				data: {
 					"username": username,
