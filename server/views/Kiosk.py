@@ -47,12 +47,16 @@ def login_endpoint():
 @bp.route('/code', methods=['POST'])
 def code_endpoint():
     """Respond to incoming calls with a simple text message."""
-    # Start our TwiML response
-    body = request.values.get('From', None)
     resp = MessagingResponse()
 
-    # Add a message
-    resp.message(str(body))
+    body = request.values.get('From', None)
+    stored_number = "0" + body[3:]
+    parent = db.session.query(ParentModel).filter_by(mobile_number=stored_number)
+
+    if parent.count() == 1:
+        resp.message(str(jsonify((parent.first()).as_dict())))
+    else:
+        resp.message("You are not in the AuthOut System.")
 
     return str(resp)
 
