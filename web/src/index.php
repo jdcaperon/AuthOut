@@ -20,16 +20,47 @@
 
 
 					<form id="login-form" class="container clearfix">
-						<div class="clearfix"><input class='form-control' type="text" name="username" id="username" placeholder="Username"></div>
-						<div class="clearfix"><input  class='form-control' type="password" name="password" id="password" placeholder="Password"></div>
+						<div class=" form-group clearfix">
+
+							<input  required type="text" class="form-control" name="username" id="username" placeholder="Username">
+						</div>
+						<div class="form-group clearfix">
+							<input  required title="password" class='form-control' type="password" name="password" id="password" placeholder="Password">
+						</div>
+
+						<button type="submit" id="login-button" class="rounded-button blue-button"  data-trigger="focus" data-toggle="popover"data-content="Invalid username/password">LOG IN</button>
+
+						<button type="button" class="rounded-button purple-button" data-toggle="modal" data-target="#no-account">DON'T HAVE AN ACCOUNT?</button>
+
+
 					</form>
 
-					<button type="button" id="login-button" class="rounded-button blue-button">LOG IN</button>
-					<!-- TODO: add functionality  -->
-					<button type="button" class="rounded-button purple-button">DON'T HAVE AN ACCOUNT?</button>
+
 				</div>
+
 			</div>
-		</body
+
+
+			<!-- Modal -->
+			<div class="modal fade" id="no-account" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h2 class="modal-title" id="exampleModalLabel">No account?</h2>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p>Please contact your manager for your account information.</p>
+					<p>If you are the manager, check your AuthOut start-up pack!</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 
         <?php
 		$scripts = array("index_script.js");

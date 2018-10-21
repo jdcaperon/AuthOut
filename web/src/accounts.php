@@ -13,34 +13,10 @@
 		<?php include ('php_inclusions/nav.php'); ?>
 		<div class="content">
 			<div class="row row-override">
-				<div class="col-4">
-					<div class="box-outer" style="padding-right: 0">
-						<div class="box-inner">
-							<h3>Add A User</h3>
-							<form id="add-user-form">
-								<label for="firstname">First Name</label>
-								<input type="text" name="firstname">
-								<br>
-								<label for="lastname">Last Name</label>
-								<input type="text" name="lastname">
-								<br>
-								<label for="email">Email</label>
-								<input type="text" name="email">
-								<br>
-								<label for="password">Password</label>
-								<input type="text" name="password">
-								<br>
-								<label for="onfirmPassword">Confirm Password</label>
-								<input type="text" name="confirmPassword">
-								
-								<input id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">
-							</form>
-						</div>
-					</div>
-				</div>
+
 
 				<div class="col-8">
-					<div class="box-outer">
+					<div class="box-outer" style="padding-right: 0">
 						<div class="box-inner" id="table-box">
 						<h3>All Users</h3>
 						<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -58,8 +34,40 @@
 						</div>
 					</div>
 				</div>
+
+
+				<div class="col-4">
+					<div class="box-outer" >
+						<div class="box-inner">
+
+							<h4>Add A User</h4>
+							<span data-feather="user" id="user"></span>
+							<form class="form-group" id="add-user-form">
+								<div class="form-group">
+									<label  class="form-check-label" for="name">Name</label>
+									<input class="form-control" type="text" name="name" id="name" required>
+								</div>
+								<div class="form-group">
+									<label  class="form-check-label" for="email">Email</label>
+									<input class="form-control" type="email" name="email" id="email-input" required>
+
+								</div>
+								<div class="form-group">
+									<label  class="form-check-label" for="password">Password</label>
+									<input class="form-control" type="password" name="password" required>
+								</div>
+									<div class="form-group">
+									<label  class="form-check-label" for="onfirmPassword">Confirm Password</label>
+									<input class="form-control" type="password" name="confirmPassword" id="confirm-password" required>
+								</div>
+
+								<button id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			
+
 		</div>
 
 

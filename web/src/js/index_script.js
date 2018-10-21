@@ -1,44 +1,36 @@
-function loginSuccess() {
-	window.location.href = "live.php"
-}
-
-function loginFail() {
-	// TODO: notify user somehow
-	console.log("FailedLogin, Jordan change me");
-}
-
 $(document).ready(function() {
-	$("#login-button").click(function(event){
-		event.preventDefault();
-		var username = $("#username").val();
-		var password = $("#password").val();
+	var attempted = false;
+	$('[data-toggle="popover"]').popover("enable");
 
-		if (username == "") {
-			// TODO: notify user somehow
-			console.log("Need a username");
-		} else {
+	$("#login-button").click(function(event){
+
+		if($("#login-form")[0].checkValidity() ){
+			$('[data-toggle="popover"]').popover("disable");
+			event.preventDefault();
+
+
+
+			var username = $("#username").val();
+			var password = $("#password").val();
+
 			var request = $.ajax
 			({
 				type: "POST",
 				//url: "https://deco3801.wisebaldone.com/app/login.php",
 				url: "login.php",
 				data: {
-					"username": username, 
+					"username": username,
 					"password": password
 				},
 				dataType: "json",
 				success: function(data, textStatus, xhr) {
 					if (!$.isEmptyObject(data)) {
-						loginSuccess();
-					} else {
-						loginFail();
+						window.location.href = "live.php"
 					}
 				}
-				
+
 			});
-			
 		}
-		
 	});
-	
+
 });

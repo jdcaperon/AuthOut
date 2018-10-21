@@ -15,21 +15,38 @@
 	margin: 0;
 }
 
-/* ---------------------- Rigth Column ---------------------- */
-
-#child-select-box{
-	height: 15%;
-}
-#buttons-box {
-	height: 25%;
-}
-
 .center-group {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	/* TODO: make this work for all screen sizes */
+}
+
+/* ---------------------- Table ---------------------- */
+
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+
+	width:inherit;
+}
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box h3{
+text-align: left;
+width:100%;
 }
 
 /* ----------------------- Calendar ---------------------- */
@@ -59,6 +76,10 @@ p{
 	padding: 2vw 4vw !important;
 }
 /* ----------------------- Child Select -------------------- */
+
+#child-select-box{
+	height: 15%;
+}
 #child-select-list {
 	width: 100%;
 	vertical-align: middle;
@@ -83,4 +104,16 @@ p{
 #buttons-box .box-inner {
 	position: relative;
 	padding: 1vw;
+}
+#export-link{
+	line-height: 30px;
+}
+
+#export-link:hover{
+	color:white;
+
+}
+
+#buttons-box {
+	height: 25%;
 }

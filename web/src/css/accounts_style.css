@@ -9,3 +9,57 @@
 .col-8, .col-4 {
 	padding: 0;
 }
+
+#user{
+	margin: 4vh auto 1vh auto;
+	text-align: center;
+	width:calc(80px + 1vh);
+	height:calc(80px + 1vh);
+	display: block;
+	color:#03BABD;
+}
+
+#submit{
+	margin:4vh auto;
+	width:90%;
+}
+
+label{
+	font-size:calc(12px + 1vh);
+}
+input{
+	font-size:calc(12px + 1vh) !important;
+}
+
+.form-group{
+	margin: 1vh 0;
+}
+
+
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+
+	width:inherit;
+}
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box h3{
+text-align: left;
+width:100%;
+}
+
+h4{
+	text-align: center;
+}

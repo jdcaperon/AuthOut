@@ -28,14 +28,20 @@ ul{
 }
 
 #tute-image{
-width:100%;
 
+	display: block;
+	margin: auto;
+	object-fit: contain;
+	max-width: 100%;
 	max-height: 100%;
+	width: auto;
+	height: auto;
 }
+
 
 p{
 	margin:40% 0;
-	font-size: 3vh;
+	font-size:calc(14px + 1vh);
 }
 
 .no-margin{
@@ -52,7 +58,7 @@ b{
 	color: #DCA726;
 	font-family: 'roboto', sans-serif;
 	margin:2.5vh 0;
-	font-size: 4vh;
+	font-size:calc(14px + 1.5vh);
 	display: block;
 
 }
@@ -69,4 +75,19 @@ b{
 }
 .black:hover {
 	text-decoration: none;
+}
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+	width:inherit;
+}
+h3 {
+	text-align: left;
+	width: 100%;
 }
