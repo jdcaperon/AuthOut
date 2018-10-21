@@ -12,6 +12,7 @@
 
 #canvas-div{
 	height: 30vh;
+	min-height: 100px;
 
 }
 
