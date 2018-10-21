@@ -85,7 +85,7 @@ $(document).ready(function() {
 				entries = data['entries'];
 				
 				// Check if there are new entries
-				if (currentActions < entries.length) {
+				if (currentActions < entries.length) { // TODO: check if a new child has been registered
 					// Update the attendance numbers
 					updateAttendance(data["signed_in"], data["signed_out"]);
 					
