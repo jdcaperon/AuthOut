@@ -6,6 +6,7 @@ html, body {
     font-family: 'Montserrat', sans-serif;
 	background-color: #F2F3F1;
 	min-width: 960px;
+	z-index: -1000000;
 }
 
 .page_content {
@@ -54,6 +55,40 @@ html, body {
 }
 
 
+/* ------ Navigation TOPBAR -------- */
+#topbar{
+	height: 50px;
+	width: 100%;
+	background: #343a40 ;
+}
+
+#logo {
+    height: 35px;
+	display: inline-block;
+	margin: 7.5px 0.75rem;
+}
+
+#topbar a{
+	color:rgba(255,255,255,.5);
+	margin: 12px auto;
+	float:right;
+	width:10vw;
+	display: block;
+	height:25px;
+}
+
+#topbar a:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#topbar .col-md-11{
+	padding: 0;
+}
+#signout{
+
+}
+
 /* ------ Navigation SIDEBAR -------- */
 
 .sidebar{
@@ -65,7 +100,6 @@ html, body {
 	position:fixed;
 	min-width: 165px;
 	max-width: 220px;
-
 }
 
 /* Nav text and icons */
@@ -116,62 +150,11 @@ html, body {
 	text-decoration: underline;
 }
 
-
-/* ------ Navigation TOPBAR -------- */
-#topbar{
-	height: 50px;
-	width:100%;
-	background: #343a40 ;
-}
-
-#logo {
-    height: 35px;
-	display: inline-block;
-	margin: 7.5px 0.75rem;
-}
-
-#topbar a{
-	color:rgba(255,255,255,.5);
-	margin: auto;
-}
-
-#topbar a:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-#topbar .col-md-11{
-	padding: 0;
-}
-
-
-/* ---------- Dynamic navbar TODO DELETE -----------------*/
-/* @media screen and (max-width: 1050px) {
-	.nav-item {
-	    padding: 5px 10px 0 10px;
-		transition: 0.2s;
-		border-radius: 5px 5px 0px 0px;
-	}
-
-	.nav-item a {
-		font-size: 0;
-		padding: 0;
-	}
-
-	.material-icons.lighter {
-	    color: #F2F3F1;
-	    font-size: 24px;
-	    padding-right: 0px;
-	    display: inline-flex;
-	    vertical-align: top;
-	}
-} */
-
-/* ----------Content --------- */
+/* ------------------ Content ---------------- */
 .content{
-	width: calc(100% - 220px);
 	height: calc(100% - 50px);
-	left: 220px;
+	width: 82%;
+	left: 18%;
 	display: block;
 	position: absolute;
 	overflow-y: scroll;
@@ -179,16 +162,24 @@ html, body {
 	min-height: 577px;
 	min-width: 1000px;
 	top:50px;
+	z-index: -10000;
 }
 
-
-@media screen and (max-width: 1220px) {
+/* when screen is larger than 1220px */
+@media screen and (min-width: 1220px) {
   .content {
-    max-width: 82%;
-	left:12%;
+    width: calc(100% - 220px);
+	left:220px;
   }
 
+}
 
+/* when screen is smaller than 916px */
+@media screen and (max-width: 916px) {
+  .content {
+    width: calc(100% - 165px);
+	left:165px;
+  }
 
 }
 
