@@ -30,7 +30,9 @@
 
 	<!--Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+	
 	<!-- MDBootstrap Datatables  -->
 	<link href="lib/MDB/css/addons/datatables.min.css" rel="stylesheet">
 

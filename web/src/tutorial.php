@@ -18,7 +18,7 @@
 						<div class="box-inner">
 
 								<p class="no-bottom-margin">We've kept things as </p><b>simple as possible</b><p  class="no-top-margin"> to make your life easy.</p>
-								<a href="contact.php"><span data-feather="help-circle" id=help></span>
+								<a href="contact.php"><span data-feather="help-circle" id="help"></span>
 								<p>Contact Us </a> with any questions.</p>
 
 						</div>
