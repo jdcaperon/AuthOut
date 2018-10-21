@@ -254,7 +254,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
 
-                        if (true) {
+                        if (true) { // todo do an actual check here or does it error if no face is recognised
                             List<Child> childrenList = Util.buildChildList(response, false);
                             List<Child> trustedChildrenList = Util.buildChildList(response, true);
 

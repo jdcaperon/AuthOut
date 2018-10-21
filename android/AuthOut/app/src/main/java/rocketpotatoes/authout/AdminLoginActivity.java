@@ -86,7 +86,12 @@ public class AdminLoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
-                        //todo finish this
+
+                        if (true) {  //todo finish this and set hint text if wrong data
+                            Intent intent = new Intent(AdminLoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                        }
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
