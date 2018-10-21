@@ -69,12 +69,6 @@
 											<i class="fa fa-sort float-right" aria-hidden="true"></i>
 										</th>
 									</tr>
-									<tr>
-										<td>Test
-										</td>
-										<td>Test
-										</td>
-									</tr>
 								</thead>
 							</table>
 						</div>

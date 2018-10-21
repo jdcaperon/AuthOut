@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 //--------------------------------------------- Data Table ----------------------------------------------------------
 
-	// Live monitor table
+	// Accounts table
 	var table;
 
 	$.ajax({
@@ -16,6 +16,8 @@ $(document).ready(function() {
 				"bFilter": true,
 				"bAutoHeight": false,
 				"scrollY":260,
+				"scrollX": false,
+				"scrollColapse": false,
 				"displayLength":10,
 				language: {
 				searchPlaceholder: "Search records",
