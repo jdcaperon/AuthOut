@@ -60,7 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText dateOfBirth;
     private EditText takePhoto;
     private File userImage;
-    private boolean isAdminSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +72,6 @@ public class SignUpActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         dateOfBirth= findViewById(R.id.dob);
         takePhoto = findViewById(R.id.photo);
-
-        isAdminSignup = getIntent().getExtras().getBoolean("ADMIN_SIGNUP");
-
-        if (isAdminSignup) {
-            TextView title = findViewById(R.id.title);
-            title.setText(R.string.admin_signup);
-        }
 
         setUpCalendarPicker();
 
@@ -140,12 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
      */
     public void reviewContent(View v) {
         if (isValidContent()) {
-            Intent intent;
-            if (isAdminSignup) {
-                intent = new Intent(this, SignUpReviewActivity.class);
-            } else {
-                intent = new Intent(this, SignUpChildActivity.class);
-            }
+            Intent intent = new Intent(this, SignUpChildActivity.class);
             HashMap<String, String> signUpInfo = new HashMap<>();
             signUpInfo.put("FIRST_NAME", firstName.getText().toString());
             signUpInfo.put("SURNAME", surname.getText().toString());
@@ -155,7 +142,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             intent.putExtra("PARENT_DETAILS", signUpInfo);
             intent.putExtra("PHOTO", userImage);
-            intent.putExtra("ADMIN_SIGNUP", isAdminSignup);
             startActivity(intent);
         } else {
             Toast.makeText(this, R.string.fix_input, Toast.LENGTH_LONG).show();
