@@ -84,3 +84,11 @@ p{
 	position: relative;
 	padding: 1vw;
 }
+#export-link{
+	line-height: 30px;
+}
+
+#export-link:hover{
+	color:white;
+
+}

@@ -44,7 +44,11 @@
 							<div class="box-inner">
 								<div class="center-group">
 									<button type="button" id="generate-report-button" class="rounded-button purple-button">Generate Report</button>
-									<button type="button" id="save-report-button" class="rounded-button blue-button">Save Report</button>
+									<a id="export-link" class="btn  rounded-button blue-button" download="MailingList.csv" href="#" onclick="return ExcellentExport.csv(this, 'user-table');">Save Report</a>
+
+
+
+
 								</div>
 							</div>
 						</div>
@@ -64,6 +68,12 @@
 										<th class="th-sm">Attendance
 											<i class="fa fa-sort float-right" aria-hidden="true"></i>
 										</th>
+									</tr>
+									<tr>
+										<td>Test
+										</td>
+										<td>Test
+										</td>
 									</tr>
 								</thead>
 							</table>
