@@ -80,7 +80,7 @@ html, body {
 	color:rgba(255,255,255,.5);
 	margin: 12px auto;
 	float:right;
-	min-width: 130px;
+	max-width: 130px;
 	display: block;
 	height:25px;
 }
