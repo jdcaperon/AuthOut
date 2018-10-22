@@ -66,9 +66,9 @@ def generate_code_endpoint():
             code = randint(1000, 9999)
             available_code = db.session.query(OTPModel).filter_by(code=code)
 
-        #otp = OTPModel()
-        #data = {"code": code, "parent_id": parent_id}
-        #valid = otp.load(data)
+        otp = OTPModel()
+        data = {"code": code, "parent_id": parent_id}
+        valid = otp.load(data)
         #if valid:
         #    db.session.add(otp)
         #    db.session.commit()
