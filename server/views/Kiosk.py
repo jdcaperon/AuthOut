@@ -59,12 +59,12 @@ def generate_code_endpoint():
     if parent.count() == 1:
         # here we generate a code for them and add it to the Db
         code = randint(1000, 9999)
-        #available_code = db.session.query(OTPModel).filter_by(code=code)
+        available_code = db.session.query(OTPModel).filter_by(code=code)
 
         # find a new code if it's not unique
-        #while available_code.count() != 0:
-        #    code = randint(1000, 9999)
-        #    available_code = db.session.query(OTPModel).filter_by(code=code)
+        while available_code.count() != 0:
+            code = randint(1000, 9999)
+            available_code = db.session.query(OTPModel).filter_by(code=code)
 
         #otp = OTPModel()
         #data = {"code": code, "parent_id": parent_id}
