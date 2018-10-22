@@ -26,7 +26,7 @@ class OTPModel(db.Model):
         """
         return {
             "code": self.code,
-            "parent_id": self.id
+            "parent_id": self.parent_id
         }
 
     def required(self, data: dict):

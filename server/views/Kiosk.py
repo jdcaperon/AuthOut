@@ -68,18 +68,14 @@ def generate_code_endpoint():
 
         otp = OTPModel()
         data = {"code": code, "parent_id": parent_id}
-        try:
-            valid = otp.load(data)
-        except Exception as e:
-            resp.message(str(e))
-            return str(resp)
+        valid = otp.load(data)
 
-        #if valid:
-        #    db.session.add(otp)
-        #    db.session.commit()
-        resp.message("Your AuthOut code is " + str(code) + "." + "Parent id is:" + str(parent_id))
-        #else:
-        #    resp.message("Error creating AuthOut code. Please try again.")
+        if valid:
+            db.session.add(otp)
+            db.session.commit()
+            resp.message("Your AuthOut code is " + str(code) + ".")
+        else:
+            resp.message("Error creating AuthOut code. Please try again.")
     else:
         resp.message("You've messaged the Admin verification system for AuthOut, if this was intended "
                      "please contact an admin to register yourself in the system.")
