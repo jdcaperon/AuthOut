@@ -68,7 +68,7 @@ def generate_code_endpoint():
 
         otp = OTPModel()
         data = {"code": code, "parent_id": parent_id}
-        valid = otp.load(data)
+        #valid = otp.load(data)
         #if valid:
         #    db.session.add(otp)
         #    db.session.commit()
