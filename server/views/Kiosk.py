@@ -54,7 +54,7 @@ def generate_code_endpoint():
     body = request.values.get('From', None)
     local_number = "0" + body[3:]
     parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
-    parent_id = parent.first().id
+    parent_id = parent.first().as_dict()["id"]
 
     if parent.count() == 1:
         # here we generate a code for them and add it to the Db
@@ -62,7 +62,7 @@ def generate_code_endpoint():
         available_code = db.session.query(OTPModel).filter_by(code=code)
 
         # find a new code if it's not unique
-        while available_code.count() is not 0:
+        while available_code.count() != 0:
             code = randint(1000, 9999)
             available_code = db.session.query(OTPModel).filter_by(code=code)
 
@@ -94,7 +94,7 @@ def code_sign_in_endpoint():
         if parent.count() == 1:
             return jsonify((parent.first()).as_dict())
     else:
-        return Response('', 400)
+        return Response('Invalid code', 400)
 
 
 
