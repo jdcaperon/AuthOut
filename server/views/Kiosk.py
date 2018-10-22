@@ -92,7 +92,7 @@ def code_sign_in_endpoint():
 
         if code_entry.count() == 1:
             parent_id = code_entry.first().parent_id
-            parent = db.session.query(ParentModel).order_by(parent_id)
+            parent = db.session.query(ParentModel).filter_by(id=parent_id)
             if parent.count() == 1:
                 return jsonify((parent.first()).as_dict())
         else:
