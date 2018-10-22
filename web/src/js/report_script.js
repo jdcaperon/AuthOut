@@ -62,6 +62,7 @@ $(document).ready(function() {
 		"scrollX": false,
 		"scrollColapse": false,
 		"displayLength":-1,
+		"bPaginate": false,
 		language: {
 			searchPlaceholder: "Search records",
 			search: "",
@@ -78,7 +79,6 @@ $(document).ready(function() {
 	$('.dataTables_length').addClass('bs-select');
 
 // --------------------------------- Buttons --------------------------------------
-// TODO: fix bug with calendar selection after generating a report	
 	
 	$("#generate-report-button").click(function(){
 		var datePicker = $('#calendar').datepicker().data('datepicker');
@@ -102,7 +102,7 @@ $(document).ready(function() {
 				url: "https://deco3801.wisebaldone.com/api/entry/query",
 				data: JSON.stringify(toSend),
 				success: function(data) {
-					var dateArray = getDateArray(datePicker.selectedDates[0], datePicker.selectedDates[1]);
+					var dateArray = getDateArray(new Date(datePicker.selectedDates[0]), datePicker.selectedDates[1]);
 					entries = formatEntries(data['entries'], dateArray);
 					
 					table.clear();
