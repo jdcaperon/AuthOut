@@ -82,7 +82,7 @@ def generate_code_endpoint():
     return str(resp)
 
 
-@bp.route('/code', methods=['POST'])
+@bp.route('/signin_code', methods=['POST'])
 def code_sign_in_endpoint():
     data = request.get_json(force=True)
     code = data["code"]
