@@ -22,13 +22,13 @@
 					<form id="login-form" class="container clearfix">
 						<div class=" form-group clearfix">
 
-							<input  required type="text" class="form-control" name="username" id="username" placeholder="Username">
+							<input required type="email" class="form-control" name="username" id="username" placeholder="Username">
 						</div>
 						<div class="form-group clearfix">
 							<input  required title="password" class='form-control' type="password" name="password" id="password" placeholder="Password">
 						</div>
 
-						<button type="submit" id="login-button" class="rounded-button blue-button"  data-trigger="focus" data-toggle="popover"data-content="Invalid username/password">LOG IN</button>
+						<button type="submit" id="login-button" class="rounded-button blue-button">LOG IN</button>
 
 						<button type="button" class="rounded-button purple-button" data-toggle="modal" data-target="#no-account">DON'T HAVE AN ACCOUNT?</button>
 
