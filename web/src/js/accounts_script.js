@@ -83,7 +83,6 @@ $("#submit").click(function(event) {
 					table.row.add(toSend).draw();
 				} else if (data.localeCompare("Unable to create account") == 0) {
 					// Add invalid tag
-					var emailInput = document.querySelector("#email-input");
 					emailInput.setCustomValidity("Account already exists");
 					$("#add-user-form")[0].reportValidity();
 				}

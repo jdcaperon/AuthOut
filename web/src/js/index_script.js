@@ -1,14 +1,11 @@
 $(document).ready(function() {
-	var attempted = false;
-	$('[data-toggle="popover"]').popover("enable");
-
 	$("#login-button").click(function(event){
+		// Clear validity
+		var emailInput = document.querySelector("#username");
+		emailInput.setCustomValidity("");
 
 		if($("#login-form")[0].checkValidity() ){
-			$('[data-toggle="popover"]').popover("disable");
 			event.preventDefault();
-
-
 
 			var username = $("#username").val();
 			var password = $("#password").val();
@@ -25,11 +22,18 @@ $(document).ready(function() {
 				success: function(data, textStatus, xhr) {
 					if (!$.isEmptyObject(data)) {
 						window.location.href = "live.php"
+					} else {
+						// Add invalid tag
+						emailInput.setCustomValidity("Username/password combination is incorrect");
+						$("#login-form")[0].reportValidity();
 					}
+					
 				}
 
 			});
+			
 		}
+		
 	});
 
 });
