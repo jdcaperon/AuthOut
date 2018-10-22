@@ -19,10 +19,6 @@
 </nav>
 
 <nav id = "topbar" class="fixed-top  navbar-fixed-top">
-
-
-			<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
-			<a id="signout" class="col-md-1 text-nowrap">Log Out</a>
-	
-
+	<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
+	<a id="signout" class="col-md-1 text-nowrap"><span data-feather="log-out"></span>Log Out</a>
 </nav>

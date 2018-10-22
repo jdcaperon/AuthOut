@@ -68,15 +68,6 @@ html, body {
 	margin: 7.5px 0.75rem;
 }
 
-#topbar a{
-	color:rgba(255,255,255,.5);
-	margin: 12px auto;
-	float:right;
-	width:10vw;
-	display: block;
-	height:25px;
-}
-
 #topbar a:hover{
 	text-decoration: underline;
 	cursor: pointer;
@@ -85,8 +76,13 @@ html, body {
 #topbar .col-md-11{
 	padding: 0;
 }
-#signout{
-
+#topbar #signout {
+	color:rgba(255,255,255,.5);
+	margin: 12px auto;
+	float:right;
+	min-width: 130px;
+	display: block;
+	height:25px;
 }
 
 /* ------ Navigation SIDEBAR -------- */
