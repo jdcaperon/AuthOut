@@ -50,7 +50,7 @@ import rocketpotatoes.authout.Helpers.Parent;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class EnterCodeActivity extends AppCompatActivity implements View.OnClickListener{
-    private static final String AUTHOUT_CODE_URL = "http://httpbin.org/post";
+    private static final String AUTHOUT_CODE_URL = "http://deco3801.wisebaldone.com/api/kiosk/signin_code";
     private StringBuilder codeInputBuilder;
     private EditText codeInput;
     private Button submitButton;
@@ -128,7 +128,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
 
         //Adding contents to request
         try {
-            json.put("Code", code);
+            json.put("code", code);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -144,25 +144,13 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
 
 
-                        /*List<Child> childrenList = Util.buildChildList(response, false);
+                        List<Child> childrenList = Util.buildChildList(response, false);
                         List<Child> trustedChildrenList = Util.buildChildList(response, true);
 
-                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);*/
-
-                        // ----------- Creating Dummy Parent -----------------------
-                        List<Child> dummyChildren = new ArrayList<>();
-                        List<Child> dummyTrusted = new ArrayList<>();
-                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out", 1));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out", 2));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out", 3));
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
-
-
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted, 1);
-                        // ---------------------------------------------------------
+                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);
-                        intent.putExtra("PARENT", dummyParent);
+                        intent.putExtra("PARENT", parent);
                         intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
                         startActivity(intent);
                         finish();
@@ -171,6 +159,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Log.i("ResponseError", error.toString());
                     }
 
