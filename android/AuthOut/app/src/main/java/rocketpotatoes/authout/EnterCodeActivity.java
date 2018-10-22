@@ -50,7 +50,7 @@ import rocketpotatoes.authout.Helpers.Parent;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class EnterCodeActivity extends AppCompatActivity implements View.OnClickListener{
-    private static final String AUTHOUT_CODE_URL = "http://deco3801.wisebaldone.com/api/kiosk/signin_code";
+    private static final String AUTHOUT_CODE_URL = "https://deco3801.wisebaldone.com/api/kiosk/signin_code";
     private StringBuilder codeInputBuilder;
     private EditText codeInput;
     private Button submitButton;
@@ -128,7 +128,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
 
         //Adding contents to request
         try {
-            json.put("code", code);
+            json.put("code", Integer.parseInt(code));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -137,10 +137,6 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                 (Request.Method.POST, AUTHOUT_CODE_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", response.toString().substring(0, 100));
-
-                        //TODO if the code is matched move to the next activity with parent
-                        //TODO if the code is not match put up a toast/handle it
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
 
 
