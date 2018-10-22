@@ -25,6 +25,7 @@
 div.ui-datepicker{
  font-size:8px !important;
 }
+
 #cal{
 	padding:1.5vw 4vw;
 }
@@ -33,3 +34,8 @@ p{
 	margin-bottom:1vh 0 ;
 	font-size: 2vh;
 }
+
+/* -------------------------- Graphs ------------------------------ */
+ .reduced-padding {
+	padding: 2vh 2vw;
+ }

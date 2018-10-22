@@ -27,9 +27,9 @@ $(document).ready(function() {
 						// Object to store the data
 						var statistics = formatData(data);
 						
-						console.log(statistics);
-						
-						// TODO: make graphs
+						// Update graphs
+						updateAttendanceGraph(statistics['attendance']);
+						updateTimesChart(statistics['sign-ins'], statistics['sign-outs']);
 					}
 				
 				});
@@ -51,23 +51,32 @@ $(document).ready(function() {
 //--------------------------------------------- Attendance Graph ----------------------------------------------------------
 
 	var ctx = document.getElementById("attendance-graph").getContext('2d');
-	var myChart = new Chart(ctx, {
+	var attendanceChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
-			labels: ["White", "Orange", "Blue", "Pink"],
+			labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 			datasets: [{
-				label: 'Clicks Per Week',
-			    data: [12, 19, 3, 5],
+			    data: [0, 0, 0, 0, 0, 0, 0],
 			    backgroundColor: [
-					'#F2F3F1',
 			        '#DCA726',
 			        '#03BABD',
-			        '#BC72AF'
+			        '#BC72AF',
+					'#3B3E3A',
+					'#BC72AF',
+					'#03BABD',
+					'#DCA726'
 				],
 			    borderWidth: 1
 			}]
 		},
 		options: {
+			legend: {
+				display: false
+			},
+			title: {
+				display: true,
+				text: 'Average Attendance'
+			},
 			responsive:true,
 			maintainAspectRatio: false,
 			scales: {
@@ -77,29 +86,41 @@ $(document).ready(function() {
 					}
 				}]
 			}
+			
 		}
+		
 	});
 
 //--------------------------------------------- Times Graph ----------------------------------------------------------
 
 	var ctx = document.getElementById("times-graph").getContext('2d');
-	var myChart = new Chart(ctx, {
+	var timesChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: ["White", "Orange", "Blue", "Pink"],
+			labels: ["<6AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "6PM+"],
 			datasets: [{
-				label: 'Clicks Per Week',
-			    data: [12, 19, 3, 5],
-			    backgroundColor: [
-					'#F2F3F1',
-			        '#DCA726',
-			        '#03BABD',
-			        '#BC72AF'
-				],
-			    borderWidth: 1
+			    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			    backgroundColor: '#03BABD',
+				borderColor: '#03BABD',
+			    borderWidth: 1,
+				fill: false
+			},
+			{
+			    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			    backgroundColor: '#BC72AF',
+				borderColor: '#BC72AF',
+			    borderWidth: 1,
+				fill: false
 			}]
 		},
 		options: {
+			legend: {
+				display: false
+			},
+			title: {
+				display: true,
+				text: 'Average Actions During the Day'
+			},
 			responsive:true,
 			maintainAspectRatio: false,
 			scales: {
@@ -109,11 +130,69 @@ $(document).ready(function() {
 					}
 				}]
 			}
+			
 		}
+		
 	});
 
 // ------------------------------------ Functions ------------------------------------------------------
 
+	// Updates the times chart with the given times
+	function updateTimesChart(signIns, signOuts) {
+		// Remove old data
+		timesChart.data.datasets.forEach((dataset) => {
+			$(signIns).each(function(index, data) {
+				dataset.data.pop();
+			});
+			
+		});
+		
+		var index = 0;
+		
+		// Add new data
+		timesChart.data.datasets.forEach((dataset) => {
+			if (index > 0) {
+				$(signOuts).each(function(index, data) {
+					dataset.data.push(data);
+				});
+			} else {
+				$(signIns).each(function(index, data) {
+					dataset.data.push(data);
+				});
+			}
+			
+			index++;
+		});
+		
+		// Update chart
+		timesChart.update();
+	}
+
+	// Adds the given data to the attendance graph
+	function updateAttendanceGraph(data) {
+		// Remove old data
+		attendanceChart.data.datasets.forEach((dataset) => {
+			$(data).each(function() {
+				dataset.data.pop();
+			});
+			
+		});
+		
+		var index = 0;
+		
+		// Add new data
+		attendanceChart.data.datasets.forEach((dataset) => {
+			$(data).each(function() {
+				dataset.data.push(data[index]);
+				index++;
+			});
+			
+		});
+		
+		// Update chart
+		attendanceChart.update();
+	}
+	
 	// Gets the index in the time arrays from the given time
 	function getTimeIndex(time) {
 		// Create date objet
