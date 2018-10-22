@@ -6,6 +6,7 @@ from models.aws import get_id_by_image, set_parent_photo
 from db import db
 from models.ParentModel import ParentModel
 from models.ChildModel import ChildModel
+from models.OTPModel import OTPModel
 from twilio.twiml.messaging_response import MessagingResponse
 from random import randint
 
@@ -46,32 +47,55 @@ def login_endpoint():
 
 
 @bp.route('/code', methods=['POST'])
-def code_endpoint():
+def generate_code_endpoint():
     """Respond to incoming calls with a simple text message."""
     resp = MessagingResponse()
 
     body = request.values.get('From', None)
-    stored_number = "0" + body[3:]
-    parent = db.session.query(ParentModel).filter_by(mobile_number=stored_number)
+    local_number = "0" + body[3:]
+    parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
+    parent_id = parent.first().id
 
     if parent.count() == 1:
-    #    # here we generate a code for them and add it to the Db
+        # here we generate a code for them and add it to the Db
         code = randint(1000, 9999)
-    #    code_parent = db.session.query(ParentModel).filter_by(code=code)
+        available_code = db.session.query(OTPModel).filter_by(code=code)
 
-    #    # find a new code if it's not unique
-    #    while code_parent.count() is not 0:
-    #        code = randint(1000, 9999)
-    #        code_parent = db.session.query(ParentModel).filter_by(code=code)
+        # find a new code if it's not unique
+        while available_code.count() is not 0:
+            code = randint(1000, 9999)
+            available_code = db.session.query(OTPModel).filter_by(code=code)
 
-        # todo add code to parent here.
-
-        resp.message("Your AuthOut code is " + str(code) + ".")
+        otp = OTPModel()
+        data = {"code": code, "parent_id": parent_id}
+        valid = otp.load(data)
+        if valid:
+            db.session.add(otp)
+            db.session.commit()
+            resp.message("Your AuthOut code is " + str(code) + ".")
+        else:
+            resp.message("Error creating AuthOut code. Please try again.")
     else:
         resp.message("You've messaged the Admin verification system for AuthOut, if this was intended "
                      "please contact an admin to register yourself in the system.")
 
     return str(resp)
+
+
+@bp.route('/code', methods=['POST'])
+def code_sign_in_endpoint():
+    data = request.get_json(force=True)
+    code = data["code"]
+    code_entry = db.session.query(OTPModel).filter_by(code=code)
+
+    if code_entry.count() == 1:
+        parent_id = code_entry.first().parent_id
+        parent = db.session.query(ParentModel).order_by(parent_id)
+        if parent.count() == 1:
+            return jsonify((parent.first()).as_dict())
+    else:
+        return Response('', 400)
+
 
 
 @bp.route('/signin', methods=['POST'])
