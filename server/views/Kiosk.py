@@ -68,7 +68,12 @@ def generate_code_endpoint():
 
         otp = OTPModel()
         data = {"code": code, "parent_id": parent_id}
-        #valid = otp.load(data)
+        try:
+            valid = otp.load(data)
+        except Exception as e:
+            resp.message(str(e))
+            return str(resp)
+
         #if valid:
         #    db.session.add(otp)
         #    db.session.commit()
@@ -82,19 +87,26 @@ def generate_code_endpoint():
     return str(resp)
 
 
-@bp.route('/signin_code', methods=['POST'])
+@bp.route('/signin_code', methods=['GET','POST'])
 def code_sign_in_endpoint():
-    data = request.get_json(force=True)
-    code = data["code"]
-    code_entry = db.session.query(OTPModel).filter_by(code=code)
+    if request.method == 'POST':
+        data = request.get_json(force=True)
+        code = data["code"]
+        code_entry = db.session.query(OTPModel).filter_by(code=code)
 
-    if code_entry.count() == 1:
-        parent_id = code_entry.first().parent_id
-        parent = db.session.query(ParentModel).order_by(parent_id)
-        if parent.count() == 1:
-            return jsonify((parent.first()).as_dict())
+        if code_entry.count() == 1:
+            parent_id = code_entry.first().parent_id
+            parent = db.session.query(ParentModel).order_by(parent_id)
+            if parent.count() == 1:
+                return jsonify((parent.first()).as_dict())
+        else:
+            return Response('Invalid code', 400)
     else:
-        return Response('Invalid code', 400)
+        container = []
+        codes = db.session.query(OTPModel).order_by(OTPModel.parent_id)
+        for code in codes:
+            container.append(code.as_dict())
+        return jsonify(container)
 
 
 
