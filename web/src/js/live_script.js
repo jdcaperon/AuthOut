@@ -99,6 +99,11 @@ $(document).ready(function() {
 					currentActions = entries.length;
 				}
 				
+				// Update values if a new child has been added
+				if (parseInt($("#signed-out-number").text()) != data["signed_out"]) {
+					updateAttendance(data["signed_in"], data["signed_out"]);
+				}
+				
 			}
 			
 		});
