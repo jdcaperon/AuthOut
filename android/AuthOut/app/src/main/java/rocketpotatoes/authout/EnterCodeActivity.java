@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -42,7 +43,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rocketpotatoes.authout.Helpers.Child;
@@ -116,6 +116,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
         }
         codeInputBuilder.deleteCharAt(codeInputBuilder.length() - 1);
         codeInput.setText(codeInputBuilder.toString());
+        codeInput.setBackground(getDrawable(R.drawable.signup_input_background));
         submitButton.setEnabled(false);
     }
 
@@ -156,6 +157,8 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
+                        Toast.makeText(EnterCodeActivity.this, "Invalid Code", Toast.LENGTH_LONG).show();
+                        codeInput.setBackground(getDrawable(R.drawable.signup_input_error));
                         Log.i("ResponseError", error.toString());
                     }
 
