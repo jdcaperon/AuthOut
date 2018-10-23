@@ -27,7 +27,7 @@
 label{
 	font-size:calc(12px + 1vh);
 }
-input{
+form>input{
 	font-size:calc(12px + 1vh) !important;
 }
 

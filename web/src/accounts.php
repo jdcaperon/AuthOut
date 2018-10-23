@@ -57,7 +57,7 @@
 									<input class="form-control" type="password" name="password" required>
 								</div>
 									<div class="form-group">
-									<label  class="form-check-label" for="onfirmPassword">Confirm Password</label>
+									<label  class="form-check-label" for="confirmPassword">Confirm Password</label>
 									<input class="form-control" type="password" name="confirmPassword" id="confirm-password" required>
 								</div>
 
