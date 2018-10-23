@@ -86,6 +86,12 @@ $(document).ready(function() {
 		
 		// Check if both dates have been selected
 		if (selectedDates.length > 1) {
+			// Show overlay
+			$(".content").LoadingOverlay("show", {
+				image: "",
+				text: "Loading..."
+			});
+			
 			// Get variables
 			var childID = parseInt($("#child-select-list").val(), 10);
 			var startDate = formatDate(datePicker.selectedDates[0]);
@@ -107,6 +113,9 @@ $(document).ready(function() {
 					
 					table.clear();
 					table.rows.add(entries).draw();
+					
+					// Hide overlay
+					$(".content").LoadingOverlay("hide", true);
 				}
 			
 			});

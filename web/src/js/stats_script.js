@@ -11,6 +11,12 @@ $(document).ready(function() {
 		onSelect: function(formattedDate, date, inst) {
 			var dates = formattedDate.split(',');
 			if (dates.length > 1) {
+				// Show overlay
+				$(".content").LoadingOverlay("show", {
+					image: "",
+					text: "Loading..."
+				});
+				
 				var startDate = dates[0];
 				var endDate = dates[1];
 				
@@ -30,6 +36,9 @@ $(document).ready(function() {
 						// Update graphs
 						updateAttendanceGraph(statistics['attendance']);
 						updateTimesChart(statistics['sign-ins'], statistics['sign-outs']);
+						
+						// Hide overlay
+						$(".content").LoadingOverlay("hide", true);
 					}
 				
 				});

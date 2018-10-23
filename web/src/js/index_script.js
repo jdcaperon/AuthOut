@@ -5,6 +5,12 @@ $(document).ready(function() {
 		emailInput.setCustomValidity("");
 
 		if($("#login-form")[0].checkValidity() ){
+			// Show overlay
+			$.LoadingOverlay("show", {
+				image: "",
+				text: "Signing you in..."
+			});
+			
 			event.preventDefault();
 
 			var username = $("#username").val();
@@ -23,6 +29,9 @@ $(document).ready(function() {
 					if (!$.isEmptyObject(data)) {
 						window.location.href = "live.php"
 					} else {
+						// Remove overlay
+						$.LoadingOverlay("hide", true);
+					
 						// Add invalid tag
 						emailInput.setCustomValidity("Username/password combination is incorrect");
 						$("#login-form")[0].reportValidity();

@@ -17,6 +17,9 @@
 <script src="lib/dist/js/datepicker.min.js"></script>
 <script src="lib/dist/js/i18n/datepicker.en.js"></script>
 
+<!-- Loading overlay, https://gasparesganga.com/labs/jquery-loading-overlay/ -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+
 <!--jq widgest scripts-->
 <script type="text/javascript" src="lib/jqwidgets/jqxcore.js"></script>
 <script type="text/javascript" src="lib/jqwidgets/jqxdatetimeinput.js"></script>

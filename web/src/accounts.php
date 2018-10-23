@@ -38,7 +38,7 @@
 
 				<div class="col-4">
 					<div class="box-outer" >
-						<div class="box-inner">
+						<div class="box-inner" id="account-form-box">
 
 							<h4>Add A User</h4>
 							<span data-feather="user" id="user"></span>
