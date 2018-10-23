@@ -114,8 +114,9 @@ public class SignUpActivity extends AppCompatActivity {
         boolean isValid = true;
         List<EditText> inputs = new ArrayList<>(Arrays.asList(firstName, surname, mobile, email, dateOfBirth, takePhoto));
         for (EditText input : inputs) {
-            if (input.length() == 0 || input.equals(email) &&
-                    !input.getText().toString().matches(REGEX)) {
+            if (input.length() == 0
+                    || input.equals(email) && !input.getText().toString().matches(REGEX)
+                    || input.equals(email) && email.getText().toString().length() != 10) {
                 input.setBackground(getDrawable(R.drawable.signup_input_error));
                 isValid = false;
             } else {

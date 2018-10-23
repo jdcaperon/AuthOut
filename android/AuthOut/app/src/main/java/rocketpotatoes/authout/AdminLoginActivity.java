@@ -76,7 +76,23 @@ public class AdminLoginActivity extends AppCompatActivity {
 
 
     public void login(View v) {
-        requestQueue.add(createRequest());
+        boolean valid = true;
+        if (username.length() == 0) {
+            hintText.setText(getString(R.string.required_fields));
+            hintText.setTextColor(Color.RED);
+            username.setBackground(getDrawable(R.drawable.signup_input_error));
+            valid = false;
+        }
+
+        if (password.length() == 0) {
+            hintText.setText(getString(R.string.required_fields));
+            hintText.setTextColor(Color.RED);
+            password.setBackground(getDrawable(R.drawable.signup_input_error));
+            valid = false;
+        }
+        if (valid) {
+            requestQueue.add(createRequest());
+        }
     }
 
     public void cancel(View v) {
@@ -120,6 +136,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Toast.makeText(AdminLoginActivity.this, "Oops, something went wrong. Try again.", Toast.LENGTH_SHORT).show();
                         hintText.setText(getString(R.string.incorrect_info));
+                        hintText.setTextColor(Color.RED);
                         Log.i("ResponseError", error.toString());
                     }
                 }) {

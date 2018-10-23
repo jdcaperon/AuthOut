@@ -52,6 +52,7 @@
     <string name="incorrect_info">Incorrect username or password</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="required_fields">All fields required</string>
 
     <!-- Registration Texts -->
     <string name="first_name">First Name</string>
