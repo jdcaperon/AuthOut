@@ -34,8 +34,7 @@
 }
 
 #table-box div{
-
-	width:inherit;
+	width: 100%;
 }
 #table-box{
 	display: flex;
