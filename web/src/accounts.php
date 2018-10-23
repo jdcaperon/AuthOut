@@ -45,20 +45,20 @@
 							<form class="form-group" id="add-user-form">
 								<div class="form-group">
 									<label  class="form-check-label" for="name">Name</label>
-									<input class="form-control" type="text" name="name" id="name" required>
+									<input class="form-control" type="text" name="name" id="name" placeholder="Enter name" required>
 								</div>
 								<div class="form-group">
 									<label  class="form-check-label" for="email">Email</label>
-									<input class="form-control" type="email" name="email" id="email-input" required>
+									<input class="form-control" type="email" name="email" id="email-input" placeholder="Enter email" required>
 
 								</div>
 								<div class="form-group">
 									<label  class="form-check-label" for="password">Password</label>
-									<input class="form-control" type="password" name="password" required>
+									<input class="form-control" type="password" name="password" placeholder="Enter password" required>
 								</div>
 									<div class="form-group">
 									<label  class="form-check-label" for="confirmPassword">Confirm Password</label>
-									<input class="form-control" type="password" name="confirmPassword" id="confirm-password" required>
+									<input class="form-control" type="password" name="confirmPassword" id="confirm-password" placeholder="Enter password again" required>
 								</div>
 
 								<button id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">Submit</button>
