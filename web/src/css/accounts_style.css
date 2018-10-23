@@ -45,9 +45,9 @@ input{
 }
 
 #table-box div{
-
-	width:inherit;
+	width: calc(100% + 20px);
 }
+
 #table-box{
 	display: flex;
 	flex-flow: column nowrap;
