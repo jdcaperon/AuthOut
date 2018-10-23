@@ -57,6 +57,5 @@ th{
 }
 
 #table-box div{
-
-	width:inherit;
+	width: 100%;
 }
