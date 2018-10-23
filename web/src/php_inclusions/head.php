@@ -38,6 +38,11 @@
 	<!--Calendar-->
 	<link href="lib/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
 
+	<!-- Multiple Select -->
+	<link rel="stylesheet" href="lib/multiple-select-master/multiple-select.css" />
+	
+	<!-- Date range picker -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 	<!--Extra stylesheets-->
 	<?php

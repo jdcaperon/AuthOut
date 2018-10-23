@@ -2,12 +2,16 @@ $(document).ready(function() {
 	$("#nav-line2 > ul li:nth-of-type(4)").addClass("current-tab");
 	
 // ----------------------------- Calendar --------------------------------------
-	
-	// Calendar widget
-	$('#calendar').datepicker({
-		language: 'en',
-		maxDate: new Date(), // Now can select only dates, which goes after today
-		dateFormat: "dd/mm/yyyy"
+
+	$('input[name="daterange"]').daterangepicker({
+		opens: 'left',
+		autoUpdateInput: false,
+		locale: {
+			cancelLabel: 'Clear'
+		}
+	}, function(start, end, label) {
+		console.log(start);
+		console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 	});
 
 // --------------------------- Dropdown list -------------------------------------
@@ -29,6 +33,13 @@ $(document).ready(function() {
 					text: name
 				}));
 				
+			});
+			
+			// Change to multiple select plugin
+			$('#child-select-list').change(function() {
+				console.log($(this).val());
+			}).multipleSelect({
+				width: '30%'
 			});
 			
 		}
@@ -62,6 +73,13 @@ $(document).ready(function() {
 		"scrollX": false,
 		"scrollColapse": false,
 		"displayLength":-1,
+		dom: 'Bfrtip',
+		buttons: [
+			'csv',
+			'pdf',
+			'print',
+			'excel'
+		],
 		"bPaginate": false,
 		language: {
 			searchPlaceholder: "Search records",
