@@ -47,16 +47,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import rocketpotatoes.authout.Helpers.Child;
-import rocketpotatoes.authout.Helpers.Parent;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
-    private static final String AUTHOUT_ADMIN_CHECK = "https://deco3801.wisebaldone.com/api/login"; //todo fix this
+    private static final String AUTHOUT_ADMIN_CHECK = "https://deco3801.wisebaldone.com/api/login";
     private View progressOverlay;
     private RequestQueue requestQueue;
     private EditText username;

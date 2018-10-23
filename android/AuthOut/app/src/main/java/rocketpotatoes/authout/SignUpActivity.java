@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
         for (EditText input : inputs) {
             if (input.length() == 0
                     || input.equals(email) && !input.getText().toString().matches(REGEX)
-                    || input.equals(email) && email.getText().toString().length() != 10) {
+                    || input.equals(mobile) && input.getText().toString().length() != 10) {
                 input.setBackground(getDrawable(R.drawable.signup_input_error));
                 isValid = false;
             } else {

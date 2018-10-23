@@ -136,20 +136,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        boolean isAccessed = prefs.getBoolean(getString(R.string.is_accessed), false);
-        if(!isAccessed) {
-            SharedPreferences.Editor edit = prefs.edit();
-            edit.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-            edit.apply();
-            Intent intent = new Intent(this, SignUpActivity.class);
-            intent.putExtra("ADMIN_SIGNUP", true);
-            startActivity(intent);
-            finish();
-        }
-
-
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_home);
