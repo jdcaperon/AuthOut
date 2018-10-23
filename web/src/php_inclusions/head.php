@@ -4,13 +4,20 @@
     // Set timezone to GMT+10
     date_default_timezone_set ("Australia/Brisbane");
 
-    //if not signed in, redirect to index.php
+
     if(!isset($_SESSION['email'])){
-         if (!$isIndex){
-             header('Location: index.php');
-             exit();
-         }
-    }
+		 //if not signed in, redirect all pages to index.php
+        if (!$isIndex){
+            header('Location: index.php');
+            exit();
+        }
+    }else{
+		//if we are signed in, redirect index.php to live.php
+		if ($isIndex){
+			header('Location: live.php');
+			exit();
+		}
+	}
 ?>
 
 <head>
@@ -31,7 +38,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-	
+
 	<!-- MDBootstrap Datatables  -->
 	<link href="lib/MDB/css/addons/datatables.min.css" rel="stylesheet">
 
