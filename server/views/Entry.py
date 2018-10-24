@@ -1,5 +1,5 @@
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from dateutil.rrule import rrule, DAILY
 from flask import Blueprint, jsonify, request
@@ -24,11 +24,7 @@ def live():
     #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
     #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today) \
     #     .order_by(EntryModel.time)
-    entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == today)
-    things = entries.all()
-    for entry in things:
-        sys.stderr.write(entry)
-    print(date.today())
+    entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) == today)
     entries_json = []
     for entry in entries:
         print("entry {}".format(entry))
@@ -48,10 +44,10 @@ def live():
 def query():
     data = request.get_json(force=True)
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
-    upper = datetime.strptime(data['upper'], '%d/%m/%Y')
+    upper = datetime.strptime(data['upper'], '%d/%m/%Y') + timedelta(days=1)
     entries = db.session.query(EntryModel)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= lower)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= upper)\
+        .filter(EntryModel.time >= lower)\
+        .filter(EntryModel.time <= upper)\
         .filter_by(child_id=data['id'])\
         .filter_by(status=True)\
         .order_by(EntryModel.time)
