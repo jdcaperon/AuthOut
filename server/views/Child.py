@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, Response
 from db import db
 from models.ChildModel import ChildModel
+from models.ParentModel import ParentModel
 
 bp = Blueprint('child', __name__, url_prefix="/child")
 
@@ -22,6 +23,17 @@ def core():
             db.session.add(child)
             db.session.commit()
             response = {"id": child.id}
+
+            if 'parent_id' in data:
+                parent = db.session.query(ParentModel).filter_by(id=data['parent_id']).first()
+                if parent is None:
+                    return Response('', 400, {})
+                child = db.session.query(ChildModel).filter_by(id=child.id).first()
+                if child is not None:
+                    parent.children.append(child)
+                db.session.add(parent)
+                db.session.commit()
+
             return jsonify(response)
         return Response('', 400, {})
     else:
