@@ -9,6 +9,8 @@ from models.ChildModel import ChildModel
 from models.OTPModel import OTPModel
 from twilio.twiml.messaging_response import MessagingResponse
 from random import randint
+from twilio.rest import Client
+import os
 
 bp = Blueprint('kiosk', __name__, url_prefix="/kiosk")
 
@@ -109,10 +111,25 @@ def code_sign_in_endpoint():
         return jsonify(container)
 
 
+def send_text(mobile_number, body):
+    #mobile in the form 0411878988
+    mobile_number = "+61" + mobile_number[1:]
+    account_sid = str(os.environ['TWILIO_ACCOUNT_SID'])
+    auth_token = str(os.environ['TWILIO_ACCOUNT_TOKEN'])
+    authout_mobile = str(os.environ['AUTHOUT_MOBILE_NUMBER'])
+
+    client = Client(account_sid, auth_token)
+    client.messages.create(
+        from_=authout_mobile,
+        body=body,
+        to=mobile_number
+    )
 
 @bp.route('/signin', methods=['POST'])
 def signin_endpoint():
     data = request.get_json(force=True)
+
+
 
     for i in range(0, len(data['children'])):
         child_data = data['children'][i]
@@ -123,6 +140,16 @@ def signin_endpoint():
         if entry.load(individual):
             child = db.session.query(ChildModel).filter_by(id=entry.child_id)
             parent = db.session.query(ParentModel).filter_by(id=entry.parent_id)
+
+            ''
+            parents = child.first().guardians
+            for guardian in parents:
+                mobile = guardian.mobile_number
+                status = "signed out." if child_data['status'] is False else "signed in."
+                text_body = str(child.first_name) + " has been " + status
+                send_text(mobile, text_body)
+
+
             if child.count() == 1 and parent.count() == 1:
                 child = child.first()
                 child.status = entry.status
@@ -134,6 +161,8 @@ def signin_endpoint():
                 return Response('No parent or child matched', 400)
         else:
             return Response('Json Package did not contain required keys', 400)
+
+
     return Response('{}', 200)
 
 
