@@ -22,8 +22,8 @@ def live():
     upper = datetime.utcnow().date() + timedelta(days=1)
     sys.stderr.write(date.today().strftime('%d/%m/%Y'))
     entries = db.session.query(EntryModel)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= lower)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= upper) \
+        .filter(EntryModel.time >= lower)\
+        .filter(EntryModel.time <= upper) \
         .order_by(EntryModel.time)
     entries_json = []
     for entry in entries:
@@ -74,7 +74,9 @@ def stats():
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in
 
-        entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) == dt)
+        entries = db.session.query(EntryModel)\
+            .filter(EntryModel.time >= dt)\
+            .filter(EntryModel.time <= (dt + timedelta(days=1)))
         for entry in entries:
             day['entries'].append(entry.as_dict())
 
