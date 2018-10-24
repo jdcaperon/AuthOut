@@ -99,16 +99,11 @@ public class ConfirmFinishActivity extends AppCompatActivity {
 
                         Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
-                        if (parent.getFirstName().equals("Ryan") && parent.getSurname().equals("Kurz")) {
-                            Intent intent = new Intent(ConfirmFinishActivity.this, AdminActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(ConfirmFinishActivity.this, SelectStudentActivity.class);
-                            intent.putExtra("PARENT", parent);
-                            intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
-                            intent.putExtra("PHOTO", userPhoto);
-                            startActivity(intent);
-                        }
+                        Intent intent = new Intent(ConfirmFinishActivity.this, SelectStudentActivity.class);
+                        intent.putExtra("PARENT", parent);
+                        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                        intent.putExtra("PHOTO", userPhoto);
+                        startActivity(intent);
                         finish();
                     }
                 }, new Response.ErrorListener() {
