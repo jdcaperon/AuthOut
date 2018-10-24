@@ -66,11 +66,10 @@ def generate_code_endpoint():
             code = randint(1000, 9999)
             available_code = db.session.query(OTPModel).filter_by(code=code)
 
+        current_code_location = db.session.query(OTPModel).filter_by(parent_id=parent_id)
+        db.session.delete(current_code_location.first())
+        db.session.commit()
         try:
-            current_code_location = db.session.query(OTPModel).filter_by(parent_id=parent_id)
-            db.session.delete(current_code_location.first())
-            db.session.commit()
-
             otp = OTPModel()
             data = {"code": code, "parent_id": parent_id}
             valid = otp.load(data)
