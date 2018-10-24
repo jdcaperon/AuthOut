@@ -23,7 +23,7 @@ def live():
     entries = db.session.query(EntryModel)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today)
-    print(entries)
+    sys.stderr.write(entries.all())
     print(date.today())
     entries_json = []
     for entry in entries:
