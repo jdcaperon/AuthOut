@@ -15,8 +15,16 @@
 	margin: 0;
 }
 
-/* ---------------------- Table ---------------------- */
+/* -------------------------- Rows ---------------------------- */
+#top-row {
+	height: 20%;
+}
 
+#bottom-row {
+	height: 80%;
+}
+
+/* ---------------------- Table ---------------------- */
 
 #table-box{
 	display: flex;
@@ -40,33 +48,10 @@ text-align: left;
 width:100%;
 }
 
-/* ----------------------- Calendar ---------------------- */
-#calendar-box { /* TODO: delete or change this ID */
-	height: 60%;
-}
-
-#calendar-box .box-inner {
-	padding: 1vw;
-	display: flex;
-}
-
-p{
-	margin-bottom:0 ;
-	font-size: 2vh;
-	text-align: left;
-}
-
-#calendar-box p{
-	margin-bottom: 0.5vh;
-}
-
-#cal{
-	padding: 2vw 4vw !important;
-}
 /* ----------------------- Child Select -------------------- */
 
 #child-select-box{
-	height: 15%;
+	height: 20%;
 }
 #child-select-list {
 	width: 100%;
@@ -87,21 +72,4 @@ p{
 
 #generate-report-button {
 	margin-bottom: 1vh;
-}
-
-#buttons-box .box-inner {
-	position: relative;
-	padding: 1vw;
-}
-#export-link{
-	line-height: 30px;
-}
-
-#export-link:hover{
-	color:white;
-
-}
-
-#buttons-box {
-	height: 25%;
 }

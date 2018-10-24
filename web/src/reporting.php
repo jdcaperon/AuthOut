@@ -38,7 +38,7 @@
 					</div>
 				</div>
 
-				<div class="row row-override">
+				<div class="row row-override" id="bottom-row">
 					<div class="box-outer" >
 						<div class="box-inner" id="table-box">
 							<h3>Attendance Report</h3>
