@@ -20,10 +20,11 @@ def live():
     """
     today = datetime.strptime(date.today().strftime('%d/%m/%Y'), '%d/%m/%Y')
     sys.stderr.write(date.today().strftime('%d/%m/%Y'))
-    entries = db.session.query(EntryModel)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today) \
-        .order_by(EntryModel.time)
+    # entries = db.session.query(EntryModel)\
+    #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
+    #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today) \
+    #     .order_by(EntryModel.time)
+    entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == today)
     things = entries.all()
     for entry in things:
         sys.stderr.write(entry)
@@ -77,7 +78,7 @@ def stats():
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in
 
-        entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == dt)
+        entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) == dt)
         for entry in entries:
             day['entries'].append(entry.as_dict())
 
