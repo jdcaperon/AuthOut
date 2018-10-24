@@ -155,7 +155,6 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Toast.makeText(EnterCodeActivity.this, "Invalid Code", Toast.LENGTH_LONG).show();
                         codeInput.setBackground(getDrawable(R.drawable.signup_input_error));

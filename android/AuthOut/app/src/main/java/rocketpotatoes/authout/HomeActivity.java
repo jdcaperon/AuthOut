@@ -24,7 +24,6 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -32,7 +31,6 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -56,11 +54,9 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rocketpotatoes.authout.Helpers.CameraPermissionHelper;
@@ -240,24 +236,17 @@ public class HomeActivity extends AppCompatActivity {
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
 
-                        if (true) { // todo do an actual check here or does it error if no face is recognised
-                            List<Child> childrenList = Util.buildChildList(response, false);
-                            List<Child> trustedChildrenList = Util.buildChildList(response, true);
+                        List<Child> childrenList = Util.buildChildList(response, false);
+                        List<Child> trustedChildrenList = Util.buildChildList(response, true);
 
-                            Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
+                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
-                            Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                            intent.putExtra("PARENT", parent);
-                            intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
-                            intent.putExtra("PHOTO", userPhoto);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            if (dialog.getWindow() != null) {
-                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            }
-                            dialog.show();
-                        }
+                        Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                        intent.putExtra("PARENT", parent);
+                        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                        intent.putExtra("PHOTO", userPhoto);
+                        startActivity(intent);
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override

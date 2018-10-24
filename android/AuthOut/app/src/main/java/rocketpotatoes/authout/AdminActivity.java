@@ -46,12 +46,10 @@ public class AdminActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void signUpAdminClicked(View v) {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        intent.putExtra("ADMIN_SIGNUP", true);
-        startActivity(intent);
-    }
-
+    /** onClick to navigate back to the Home activity.
+     *
+     * @param v - current View
+     */
     public void back(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

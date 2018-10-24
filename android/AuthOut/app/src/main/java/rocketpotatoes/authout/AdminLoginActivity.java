@@ -25,7 +25,6 @@ package rocketpotatoes.authout;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -34,8 +33,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,7 +40,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -71,6 +67,10 @@ public class AdminLoginActivity extends AppCompatActivity {
     }
 
 
+    /** onClick for login button
+     *
+     * @param v - the current view
+     */
     public void login(View v) {
         boolean valid = true;
         if (username.length() == 0) {
@@ -91,6 +91,10 @@ public class AdminLoginActivity extends AppCompatActivity {
         }
     }
 
+    /** onClick for cancel button
+     *
+     * @param v - the current view
+     */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -108,20 +112,12 @@ public class AdminLoginActivity extends AppCompatActivity {
         final String usernameText = username.getText().toString();
         final String passwordText = password.getText().toString();
 
-        /*try {
-            json.put("email", username.getText().toString());
-            json.put("password", password.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
         return new JsonObjectRequest
                 (Request.Method.GET, AUTHOUT_ADMIN_CHECK, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
-
                         Intent intent = new Intent(AdminLoginActivity.this, AdminActivity.class);
                         startActivity(intent);
 

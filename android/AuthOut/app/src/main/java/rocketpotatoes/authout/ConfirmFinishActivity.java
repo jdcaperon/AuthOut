@@ -24,11 +24,8 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -60,7 +57,9 @@ public class ConfirmFinishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirmation);
         progressOverlay = findViewById(R.id.progress_overlay);
         requestQueue = Volley.newRequestQueue(this);
-        photo = getIntent().getExtras().getString("PHOTO");
+
+        photo = getIntent().getExtras() == null ? null : getIntent().getExtras().getString("PHOTO");
+
     }
 
     /** Clears all current activities on the back stack and stars the home activity

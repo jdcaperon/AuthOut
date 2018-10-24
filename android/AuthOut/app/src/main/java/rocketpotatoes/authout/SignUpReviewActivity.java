@@ -75,7 +75,6 @@ public class SignUpReviewActivity extends AppCompatActivity {
     private File takePhotoData;
     private Bitmap userBitmap;
     private ArrayList<ArrayList<String>> children;
-    private RecyclerView childSignupSelectorView;
     private RequestQueue requestQueue;
 
     private View progressOverlay;
