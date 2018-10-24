@@ -1,3 +1,4 @@
+import sys
 from datetime import date, datetime
 
 from dateutil.rrule import rrule, DAILY
@@ -18,6 +19,7 @@ def live():
     Default endpoint generated.
     """
     today = datetime.strptime(date.today().strftime('%d/%m/%Y'), '%d/%m/%Y')
+    sys.stderr.write(date.today().strftime('%d/%m/%Y'))
     entries = db.session.query(EntryModel)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today)
