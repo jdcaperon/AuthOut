@@ -70,7 +70,7 @@
 						<div class="box-inner">
 
 						<img  src="img/rp_logo.png" alt="3CS Logo" id="rplogo"/>
-						<img  src="img/3cs.png" alt="3CS Logo" id="threecslogo"/>
+						<img  src="img/3CS.png" alt="3CS Logo" id="threecslogo"/>
 						<p>AuthOut proudly built by Rocket Potatoes in collaboration with 3CS Software. <p>
 						</div>
 					</div>

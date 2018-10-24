@@ -81,9 +81,19 @@ $("#submit").click(function(event) {
 				if (data.localeCompare("Created Admin") == 0) {
 					// Add to table
 					table.row.add(toSend).draw();
+					
+					// Show overlay
+					$("#account-form-box").LoadingOverlay("show", {
+						image: "",
+						text: "Success!"
+					});
+					
+					// Hide overlay after 2 seconds
+					setTimeout(function(){
+						$("#account-form-box").LoadingOverlay("hide");
+					}, 2000);
 				} else if (data.localeCompare("Unable to create account") == 0) {
 					// Add invalid tag
-					var emailInput = document.querySelector("#email-input");
 					emailInput.setCustomValidity("Account already exists");
 					$("#add-user-form")[0].reportValidity();
 				}

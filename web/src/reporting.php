@@ -12,56 +12,42 @@
 		<?php include ('php_inclusions/nav.php'); ?>
 		<div class="content">
 			<div class="row row-override">
-				<div class="col-5">
-					<div id="child-select-box" class="row" >
-						<div class="box-outer" style="padding-bottom: 0; padding-right: 0;">
-							<div class="box-inner">
-								<div class="center-group">
-									<p>Select a child</p>
-									<select name="children" id="child-select-list">
-										<!-- Filled with names from the database -->
-									</select>
+				<div id="child-select-box" class="row" >
+					<div class="box-outer" style="padding-bottom: 0;">
+						<div class="box-inner">	
+							<div class="row">
+								<div class="col-4">
+									<form id="child-form">
+										<p>Select children: </p>
+										<select name="children" id="child-select-list" multiple required>
+											<!-- Filled with names from the database -->
+										</select>
+									</form>
 								</div>
-							</div>
-						</div>
-					</div>
-
-					<div id="calendar-box" class="row">
-							<div class="box-outer"  id="jordan-hack" style="padding-right: 0;">
-								<div class="box-inner" id="cal">
-									<div >
-										<p>Select a range of dates</p>
-										<div type='text' class="datepicker-here" data-position="right top" data-range="true" data-language="en" id="calendar">
-										</div>
-									</div>
-
+								
+								<div class="col-4">
+									<p>Select a range of dates: </p>
+									<input type='text' name="daterange" id="calendar" value=""/>
 								</div>
-							</div>
-					</div>
-
-					<div id="buttons-box" class="row">
-						<div class="box-outer" style="padding-top: 0;padding-right: 0;">
-							<div class="box-inner">
-								<div class="center-group">
+								
+								<div class="col-4">
 									<button type="button" id="generate-report-button" class="rounded-button purple-button">Generate Report</button>
-									<a id="export-link" class="btn  rounded-button blue-button" download="attendance_report.csv" href="#" onclick="return ExcellentExport.csv(this, 'user-table');">Save Report</a>
-
-
-
-
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-7">
+				<div class="row row-override">
 					<div class="box-outer" >
 						<div class="box-inner" id="table-box">
 							<h3>Attendance Report</h3>
 							<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
+										<th class="th-sm">Name
+											<i class="fa fa-sort float-right" aria-hidden="true"></i>
+										</th>
 										<th class="th-sm">Day
 											<i class="fa fa-sort float-right" aria-hidden="true"></i>
 										</th>
@@ -76,11 +62,16 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<?php
 			$scripts = array("report_script.js");
 			include_once ('php_inclusions/scripts.php');
 		?>
+		
+		<!-- Date range picker http://www.daterangepicker.com -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
 	</body>
 
 

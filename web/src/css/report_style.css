@@ -15,14 +15,6 @@
 	margin: 0;
 }
 
-.center-group {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	/* TODO: make this work for all screen sizes */
-}
-
 /* ---------------------- Table ---------------------- */
 
 
@@ -34,8 +26,7 @@
 }
 
 #table-box div{
-
-	width:inherit;
+	width: calc(100% + 20px);
 }
 #table-box{
 	display: flex;
@@ -50,7 +41,7 @@ width:100%;
 }
 
 /* ----------------------- Calendar ---------------------- */
-#calendar-box {
+#calendar-box { /* TODO: delete or change this ID */
 	height: 60%;
 }
 
@@ -65,9 +56,6 @@ p{
 	text-align: left;
 }
 
-#calendar {
-	flex: 1;
-}
 #calendar-box p{
 	margin-bottom: 0.5vh;
 }

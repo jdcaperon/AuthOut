@@ -12,17 +12,11 @@
 		  <li class ="nav-item nav-heading">Help</li>
 		  <li class ="nav-item"><a class="nav-link"href="tutorial.php"><span data-feather="help-circle"></span>Tutorial</a></li>
 		  <li class ="nav-item"><a class="nav-link"href="contact.php"><span data-feather="mail"></span>Contact Us</a></li>
-
-		  <li id="prod-website"><a target="_blank" href="https://deco3801-rocketpotatoes.uqcloud.net/">Product Website</a></li>
 	  </ul>
   </div>
 </nav>
 
 <nav id = "topbar" class="fixed-top  navbar-fixed-top">
-
-
-			<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
-			<a id="signout" class="col-md-1 text-nowrap">Log Out</a>
-	
-
+	<a href=https://deco3801-rocketpotatoes.uqcloud.net/ target="_blank"><img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/></a>
+	<a id="signout" class="col-md-1 text-nowrap"><span data-feather="log-out"></span>Log Out</a>
 </nav>

@@ -1,14 +1,17 @@
 $(document).ready(function() {
-	var attempted = false;
-	$('[data-toggle="popover"]').popover("enable");
-
 	$("#login-button").click(function(event){
+		// Clear validity
+		var emailInput = document.querySelector("#username");
+		emailInput.setCustomValidity("");
 
 		if($("#login-form")[0].checkValidity() ){
-			$('[data-toggle="popover"]').popover("disable");
+			// Show overlay
+			$.LoadingOverlay("show", {
+				image: "",
+				text: "Signing you in..."
+			});
+			
 			event.preventDefault();
-
-
 
 			var username = $("#username").val();
 			var password = $("#password").val();
@@ -16,7 +19,6 @@ $(document).ready(function() {
 			var request = $.ajax
 			({
 				type: "POST",
-				//url: "https://deco3801.wisebaldone.com/app/login.php",
 				url: "login.php",
 				data: {
 					"username": username,
@@ -26,11 +28,21 @@ $(document).ready(function() {
 				success: function(data, textStatus, xhr) {
 					if (!$.isEmptyObject(data)) {
 						window.location.href = "live.php"
+					} else {
+						// Remove overlay
+						$.LoadingOverlay("hide", true);
+					
+						// Add invalid tag
+						emailInput.setCustomValidity("Username/password combination is incorrect");
+						$("#login-form")[0].reportValidity();
 					}
+					
 				}
 
 			});
+			
 		}
+		
 	});
 
 });

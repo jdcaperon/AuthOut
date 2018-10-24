@@ -12,10 +12,20 @@
 
 <!-- MDBootstrap Datatables  -->
 <script type="text/javascript" src="lib/MDB/js/addons/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 
 <!--Calendar-->
 <script src="lib/dist/js/datepicker.min.js"></script>
 <script src="lib/dist/js/i18n/datepicker.en.js"></script>
+
+<!-- Loading overlay, https://gasparesganga.com/labs/jquery-loading-overlay/ -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
 
 <!--jq widgest scripts-->
 <script type="text/javascript" src="lib/jqwidgets/jqxcore.js"></script>
@@ -30,9 +40,8 @@
 	feather.replace()
 </script>
 
-<!--CSV exporting, https://github.com/jmaister/excellentexport/releases/tag/v1.4 author: Jordi Burgos-->
-<script src="lib/excellentexport/excellentexport.js" rel="javascript" type="text/javascript"></script>
-
+<!-- Multiple Select http://wenzhixin.net.cn/p/multiple-select -->
+<script src="lib/multiple-select-master/multiple-select.js"></script>
 
 <!-- Custom scripts  -->
 <script src="js/main.js" rel="javascript" type="text/javascript"></script>

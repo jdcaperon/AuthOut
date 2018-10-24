@@ -1,13 +1,22 @@
 $(document).ready(function() {
 	$("#nav-line2 > ul li:nth-of-type(4)").addClass("current-tab");
 	
-// ----------------------------- Calendar --------------------------------------
+	// Array of selected date range
+	var dates = getDateArray(new Date(), new Date());
+	// Link child names with IDs
+	var childNames = new Object();
 	
-	// Calendar widget
-	$('#calendar').datepicker({
-		language: 'en',
-		maxDate: new Date(), // Now can select only dates, which goes after today
-		dateFormat: "dd/mm/yyyy"
+// ----------------------------- Calendar --------------------------------------
+
+	$('input[name="daterange"]').daterangepicker({
+		opens: 'left',
+		maxDate: new Date(),
+		locale: {
+			format: 'DD/MM/YYYY'
+		}
+	// Save the dates when they are updated
+	}, function(start, end, label) {
+		dates = getDateArray(new Date(start['_d']), new Date(end['_d']));
 	});
 
 // --------------------------- Dropdown list -------------------------------------
@@ -24,11 +33,22 @@ $(document).ready(function() {
 				var name = data[key]['first_name'] + " " + data[key]['last_name'];
 				var id = data[key]['id'];
 				
+				// Add to dictionary
+				childNames[id] = name;
+				
+				// Add to select list
 				$("#child-select-list").append($('<option>', {
 					value: id,
 					text: name
 				}));
 				
+			});
+			
+			// Change to multiple select plugin
+			$('#child-select-list').change(function() {
+				selectedChildren = $(this).val();
+			}).multipleSelect({
+				width: '100%',
 			});
 			
 		}
@@ -51,17 +71,28 @@ $(document).ready(function() {
 	}
 	
 // --------------------------------- Data Table -----------------------------------------
+	// Set date ordering
+	$.fn.dataTable.moment('DD/MM/YYYY');
 	
 	// Create table
 	$('#user-table').DataTable({
-		"ordering": false, // false to disable sorting (or any other option),
+		"ordering": true, // false to disable sorting (or any other option),
 		"bLengthChange": false,
 		"bFilter": true,
 		"bAutoHeight": false,
 		"scrollY":260,
 		"scrollX": false,
 		"scrollColapse": false,
-		"displayLength":-1,
+		"displayLength": 10,
+		dom: 'Bfrtip',
+		buttons: [
+            'excelHtml5',
+            'csvHtml5',
+            {
+                extend: 'pdfHtml5',
+                messageTop: 'Attendance report generated with AuthOut.'
+            }
+		],
 		language: {
 			searchPlaceholder: "Search records",
 			search: "",
@@ -69,6 +100,7 @@ $(document).ready(function() {
 		"order": [1, 'asc'],
 		"data": {},
 		"columns": [
+			{"data": "name"},
 			{"data": "time"},
 			{"data": "status"},
 		]
@@ -78,41 +110,63 @@ $(document).ready(function() {
 	$('.dataTables_length').addClass('bs-select');
 
 // --------------------------------- Buttons --------------------------------------
-// TODO: fix bug with calendar selection after generating a report	
 	
-	$("#generate-report-button").click(function(){
-		var datePicker = $('#calendar').datepicker().data('datepicker');
-		var selectedDates = datePicker.selectedDates;
+	$("#generate-report-button").click(function(){		
+		// Get the selected dates
+		var IDs = $("#child-select-list").multipleSelect('getSelects');
+		// Entries for the table
+		var entries = [];
 		
-		// Check if both dates have been selected
-		if (selectedDates.length > 1) {
-			// Get variables
-			var childID = parseInt($("#child-select-list").val(), 10);
-			var startDate = formatDate(datePicker.selectedDates[0]);
-			var endDate = formatDate(datePicker.selectedDates[1]);
+		// Check children have been selected
+		if ($("#child-form")[0].checkValidity()) {
 			
-			var toSend = {
-				"lower": startDate,
-				"upper": endDate,
-				"id": childID,
-			}
-			
-			$.ajax({
-				method: "POST",
-				url: "https://deco3801.wisebaldone.com/api/entry/query",
-				data: JSON.stringify(toSend),
-				success: function(data) {
-					var dateArray = getDateArray(datePicker.selectedDates[0], datePicker.selectedDates[1]);
-					entries = formatEntries(data['entries'], dateArray);
-					console.log(entries);
-					
-					table.clear();
-					table.rows.add(entries).draw();
-				}
-			
+			// Show overlay
+			$(".content").LoadingOverlay("show", {
+				image: "",
+				text: "Loading..."
 			});
+			
+			// Get variables
+			$(IDs).each(function(key, ID) {
+				var childID = parseInt(ID, 10);
+				var startDate = formatDate(dates[0]);
+				var endDate = formatDate(dates[dates.length - 1]);
+				
+				var toSend = {
+					"lower": startDate,
+					"upper": endDate,
+					"id": childID,
+				}
+				
+				
+				$.ajax({
+					method: "POST",
+					url: "https://deco3801.wisebaldone.com/api/entry/query",
+					data: JSON.stringify(toSend),
+					success: function(data) {
+						var returned = formatEntries(data['entries'], dates, ID);
+						
+						$(returned).each(function(key, value) {
+							entries.push(value);
+						});
+						
+					}
+				
+				});
+				
+			});
+			
+			// Wait for all ajax requests to finish
+			$(document).ajaxStop(function () {				
+				table.clear();
+				table.rows.add(entries).draw();
+						
+				// Hide overlay
+				$(".content").LoadingOverlay("hide", true);				
+			});
+			
 		} else {
-			$("#calendar").effect('shake');
+			$("#child-form").effect("shake");
 		}
 		
 	});
@@ -128,8 +182,10 @@ $(document).ready(function() {
 	}
 	
 	// Formats database data into a usable form
-	function formatEntries(entries, dates) {
+	function formatEntries(entries, dates, ID) {
 		var returnArray = new Array();
+		// Get the name of the child
+		var name = childNames[ID];
 		
 		// Loop over each date in the selected range
 		$(dates).each(function (dateKey) {
@@ -144,6 +200,7 @@ $(document).ready(function() {
 					returnArray.push({
 						"time": formatDate(dates[dateKey]),
 						"status": "Yes",
+						"name": name
 					});
 				}
 				
@@ -154,6 +211,7 @@ $(document).ready(function() {
 				returnArray.push({
 					"time": formatDate(dates[dateKey]),
 					"status": "No",
+					"name": name
 				});
 			}
 			
@@ -171,14 +229,26 @@ $(document).ready(function() {
 			arr.push(new Date(start));
 			start.setDate(start.getDate() + 1);
 		}
-
+		
 		return arr;
 	}
 	
 	// Formate date to a usable format
 	function formatDate(date) {
 		var day = date.getDate();
+		
+		// Add '0' if needed
+		if (parseInt(day / 10) == 0) {
+			day = "0" + day;
+		}
+		
 		var month = date.getMonth() + 1; // months start at 0
+		
+		// Add '0' if needed
+		if (parseInt(month / 10) == 0) {
+			month = "0" + month;
+		}
+		
 		var year = date.getFullYear();
 		
 		return day + "/" + month + "/" + year;
