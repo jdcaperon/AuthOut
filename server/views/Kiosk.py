@@ -204,6 +204,7 @@ def register_endpoint():
 
         if "user_photo" in data:
             print("The parent id is : {}".format(parent.id))
+            send_text(parent.mobile_number, "Welcome to AuthOut! Please text this number to generate one time codes for sign in.")
             set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
             return jsonify({'id': parent.id})
         else:
