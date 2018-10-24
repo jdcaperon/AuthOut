@@ -129,8 +129,6 @@ def send_text(mobile_number, body):
 def signin_endpoint():
     data = request.get_json(force=True)
 
-
-
     for i in range(0, len(data['children'])):
         child_data = data['children'][i]
         individual = {'parent_id': data['parent_id'],
@@ -142,16 +140,12 @@ def signin_endpoint():
             parent = db.session.query(ParentModel).filter_by(id=entry.parent_id)
 
             ''
-            try:
-                parents = child.first().guardians
-                for guardian in parents:
-                    mobile = guardian.mobile_number
-                    status = "signed out." if child_data['status'] is False else "signed in."
-                    text_body = str(child.first_name) + " has been " + status
-                    #send_text(mobile, text_body)
-            except Exception as e:
-                #end_text("0411282134", str(e))
-
+            parents = child.first().guardians
+            for guardian in parents:
+                mobile = guardian.mobile_number
+                status = "signed out." if child_data['status'] is False else "signed in."
+                text_body = str(child.first_name) + " has been " + status
+                send_text(mobile, text_body)
 
 
             if child.count() == 1 and parent.count() == 1:
