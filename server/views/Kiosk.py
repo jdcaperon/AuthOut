@@ -52,13 +52,12 @@ def login_endpoint():
 def generate_code_endpoint():
     """Respond to incoming calls with a simple text message."""
     resp = MessagingResponse()
-    resp.message("Hello")
-    return str(resp)
     body = request.values.get('From', None)
     local_number = "0" + body[3:]
     parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
     parent_id = parent.first().as_dict()["id"]
-
+    resp.message("Parent id is " +parent_id)
+    return str(resp)
     if parent.count() == 1:
         # here we generate a code for them and add it to the Db
         code = randint(1000, 9999)
