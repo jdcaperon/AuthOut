@@ -148,9 +148,9 @@ def signin_endpoint():
                     mobile = guardian.mobile_number
                     status = "signed out." if child_data['status'] is False else "signed in."
                     text_body = str(child.first_name) + " has been " + status
-                    send_text(mobile, text_body)
+                    #send_text(mobile, text_body)
             except Exception as e:
-                send_text("0411282134", str(e))
+                #end_text("0411282134", str(e))
 
 
 
