@@ -18,13 +18,13 @@ def live():
     """
     Default endpoint generated.
     """
-    today = datetime.strptime(date.today().strftime('%d/%m/%Y'), '%d/%m/%Y')
+    lower = datetime.utcnow().date()
+    upper = datetime.utcnow().date() + timedelta(days=1)
     sys.stderr.write(date.today().strftime('%d/%m/%Y'))
-    # entries = db.session.query(EntryModel)\
-    #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
-    #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today) \
-    #     .order_by(EntryModel.time)
-    entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) == today)
+    entries = db.session.query(EntryModel)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= lower)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= upper) \
+        .order_by(EntryModel.time)
     entries_json = []
     for entry in entries:
         print("entry {}".format(entry))
@@ -62,14 +62,14 @@ def query():
 def stats():
     data = request.get_json(force=True)
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
-    upper = datetime.strptime(data['upper'], '%d/%m/%Y')
+    upper = datetime.strptime(data['upper'], '%d/%m/%Y') + timedelta(days=1)
 
     data = {'days': []}
     for dt in rrule(DAILY, dtstart=lower, until=upper):
         day = {'date': dt.strftime("%d/%m/%Y"), 'signins': 0, 'entries': []}
         # attendance count
         signed_in = db.session.query(func.Count(EntryModel.child_id))\
-            .filter(cast(func.timezone('AEST', EntryModel.time), Date) == dt)\
+            .filter(EntryModel.time == dt)\
             .filter_by(status=True)\
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in
