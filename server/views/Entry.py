@@ -17,7 +17,7 @@ def live():
     """
     Default endpoint generated.
     """
-    entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == date.today())
+    entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) == date.today())
     entries_json = []
     for entry in entries:
         dict = entry.as_dict()
@@ -38,8 +38,8 @@ def query():
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
     upper = datetime.strptime(data['upper'], '%d/%m/%Y')
     entries = db.session.query(EntryModel)\
-        .filter(cast(EntryModel.time, Date) >= lower)\
-        .filter(cast(EntryModel.time, Date) <= upper)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= lower)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= upper)\
         .filter_by(child_id=data['id'])\
         .filter_by(status=True)\
         .order_by(EntryModel.time)
@@ -61,7 +61,7 @@ def stats():
         day = {'date': dt.strftime("%d/%m/%Y"), 'signins': 0, 'entries': []}
         # attendance count
         signed_in = db.session.query(func.Count(EntryModel.child_id))\
-            .filter(cast(EntryModel.time, Date) == dt)\
+            .filter(cast(func.timezone('AEST', EntryModel.time), Date) == dt)\
             .filter_by(status=True)\
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in

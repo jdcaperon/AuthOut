@@ -16,45 +16,45 @@ $(document).ready(function() {
 					image: "",
 					text: "Loading..."
 				});
-
+				
 				var startDate = dates[0];
 				var endDate = dates[1];
-
+				
 				var toSend = {
 					"lower": startDate,
 					"upper": endDate
 				}
-
+				
 				$.ajax({
 					method: "POST",
 					url: "https://deco3801.wisebaldone.com/api/entry/stats",
 					data: JSON.stringify(toSend),
-					success: function(data) {
+					success: function(data) {						
 						// Object to store the data
 						var statistics = formatData(data);
-
+						
 						// Update graphs
 						updateAttendanceGraph(statistics['attendance']);
 						updateTimesChart(statistics['sign-ins'], statistics['sign-outs']);
-
+						
 						// Hide overlay
 						$(".content").LoadingOverlay("hide", true);
 					}
-
+				
 				});
-
+				
 			}
-
+			
 		}
-
+		
 	});
 
 	var datePicker = $('#calendar').datepicker().data('datepicker');
-
+	
 	var today = new Date();
  	var past = new Date();
 	past.setDate(past.getDate() - 6);
-
+	
 	datePicker.selectDate([past, today]);
 
 //--------------------------------------------- Attendance Graph ----------------------------------------------------------
@@ -84,7 +84,7 @@ $(document).ready(function() {
 			},
 			title: {
 				display: true,
-				text: 'Average Daily Attendance'
+				text: 'Average Attendance'
 			},
 			responsive:true,
 			maintainAspectRatio: false,
@@ -95,9 +95,9 @@ $(document).ready(function() {
 					}
 				}]
 			}
-
+			
 		}
-
+		
 	});
 
 //--------------------------------------------- Times Graph ----------------------------------------------------------
@@ -128,7 +128,7 @@ $(document).ready(function() {
 			},
 			title: {
 				display: true,
-				text: 'Average Number of Actions per Hour'
+				text: 'Average Actions During the Day'
 			},
 			responsive:true,
 			maintainAspectRatio: false,
@@ -139,9 +139,9 @@ $(document).ready(function() {
 					}
 				}]
 			}
-
+			
 		}
-
+		
 	});
 
 // ------------------------------------ Functions ------------------------------------------------------
@@ -153,11 +153,11 @@ $(document).ready(function() {
 			$(signIns).each(function(index, data) {
 				dataset.data.pop();
 			});
-
+			
 		});
-
+		
 		var index = 0;
-
+		
 		// Add new data
 		timesChart.data.datasets.forEach((dataset) => {
 			if (index > 0) {
@@ -169,10 +169,10 @@ $(document).ready(function() {
 					dataset.data.push(data);
 				});
 			}
-
+			
 			index++;
 		});
-
+		
 		// Update chart
 		timesChart.update();
 	}
@@ -184,60 +184,60 @@ $(document).ready(function() {
 			$(data).each(function() {
 				dataset.data.pop();
 			});
-
+			
 		});
-
+		
 		var index = 0;
-
+		
 		// Add new data
 		attendanceChart.data.datasets.forEach((dataset) => {
 			$(data).each(function() {
 				dataset.data.push(data[index]);
 				index++;
 			});
-
+			
 		});
-
+		
 		// Update chart
 		attendanceChart.update();
 	}
-
+	
 	// Gets the index in the time arrays from the given time
 	function getTimeIndex(time) {
 		// Create date objet
 		var entryDate = new Date(0);
 		entryDate.setUTCSeconds(time);
-
+		
 		var hours = entryDate.getHours();
-
+			
 		// Calculate index
 		if (hours < 6) {
 			return 0;
 		} else if (hours > 18) {
 			return 14;
 		} else {
-			return hours - 5;
+			return hours - 5;			
 		}
-
+		
 	}
-
+	
 	// Averages the data for unique day in a range
 	function averageData(data) {
 		var days = data['day-count'];
 		var totalDays = 0;
-
+		
 		// Average the attendance
 		$(days).each(function (dayKey) {
 			data['attendance'][dayKey] /= days[dayKey];
 			totalDays += days[dayKey]; // count total days in the range
 		});
-
+		
 		// Average the times
 		$(data['sign-ins']).each(function (key) {
 			data['sign-ins'][key] /= totalDays;
 			data['sign-outs'][key] /= totalDays;
 		});
-
+		
 		return data;
 	}
 
@@ -252,38 +252,38 @@ $(document).ready(function() {
 		};
 		// Array of days with data from the range
 		var days = data['days'];
-
+		
 		// Loop over every day
 		$(days).each(function (dayKey) {
 			var entries = days[dayKey]['entries'];
-
+			
 			// Create date object
-			var dateComponents = days[dayKey]['date'].split("/");
+			var dateComponents = days[dayKey]['date'].split("/");			
 			var date = new Date(dateComponents[2], parseInt(dateComponents[1]) - 1, dateComponents[0]);
-
+			
 			// Sum attendance for each day
 			returnObject['attendance'][date.getDay()] += days[dayKey]['signins'];
-
+			
 			// Add sign in/out times to arrays
 			$(entries).each(function (entryKey) {
 				// Get index for time array
 				var index = getTimeIndex(entries[entryKey]['time']);
-
+					
 				// Check if it was a sign in or sign out
 				if (entries[entryKey]['status'] == true) {
 					returnObject['sign-ins'][index]++;
 				} else {
 					returnObject['sign-outs'][index]++;
 				}
-
+				
 			});
-
+			
 			// Increase count of each day
 			returnObject['day-count'][date.getDay()]++;
-
+			
 		});
-
+		
 		return averageData(returnObject);
 	}
-
+	
 });
