@@ -17,7 +17,7 @@ def live():
     """
     Default endpoint generated.
     """
-    today = date.today()
+    today = datetime.strptime(date.today().strftime('%d/%m/%Y'), '%d/%m/%Y')
     entries = db.session.query(EntryModel)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today)
@@ -34,8 +34,7 @@ def live():
         entries_json.append(dict)
     data = {'signed_in': db.session.query(ChildModel).filter_by(status=True).count(),
             'signed_out': db.session.query(ChildModel).filter_by(status=False).count(),
-            'entries': entries_json,
-            'today': date.today()}
+            'entries': entries_json}
     return jsonify(data)
 
 
