@@ -52,12 +52,10 @@ def login_endpoint():
 def generate_code_endpoint():
     """Respond to incoming calls with a simple text message."""
     resp = MessagingResponse()
-
     body = request.values.get('From', None)
     local_number = "0" + body[3:]
     parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
     parent_id = parent.first().as_dict()["id"]
-
     if parent.count() == 1:
         # here we generate a code for them and add it to the Db
         code = randint(1000, 9999)
@@ -69,8 +67,9 @@ def generate_code_endpoint():
             available_code = db.session.query(OTPModel).filter_by(code=code)
 
         current_code_location = db.session.query(OTPModel).filter_by(parent_id=parent_id)
-        db.session.delete(current_code_location.first())
-        db.session.commit()
+        if current_code_location.count() == 1:
+            db.session.delete(current_code_location.first())
+            db.session.commit()
 
         otp = OTPModel()
         data = {"code": code, "parent_id": parent_id}
@@ -204,6 +203,7 @@ def register_endpoint():
 
         if "user_photo" in data:
             print("The parent id is : {}".format(parent.id))
+            send_text(parent.mobile_number, "Welcome to AuthOut! Please text this number to generate one time codes for sign in.")
             set_parent_photo(parent.id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
             return jsonify({'id': parent.id})
         else:

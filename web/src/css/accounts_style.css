@@ -10,33 +10,6 @@
 	padding: 0;
 }
 
-#user{
-	margin: 4vh auto 1vh auto;
-	text-align: center;
-	width:calc(80px + 1vh);
-	height:calc(80px + 1vh);
-	display: block;
-	color:#03BABD;
-}
-
-#submit{
-	margin:4vh auto;
-	width:90%;
-}
-
-label{
-	font-size:calc(12px + 1vh);
-}
-form>input{
-	font-size:calc(12px + 1vh) !important;
-}
-
-.form-group{
-	margin: 1vh 0;
-}
-
-
-
 #table-box{
 	display: flex;
 	flex-flow: column nowrap;
@@ -60,6 +33,61 @@ text-align: left;
 width:100%;
 }
 
+/* Add account form */
+
 h4{
 	text-align: center;
 }
+
+#user{
+	margin: 4vh auto 1vh auto;
+	text-align: center;
+	width:calc(80px + 1vh);
+	height:calc(80px + 1vh);
+	
+	display: block;
+	color:#03BABD;
+}
+
+#submit{
+	margin:4vh auto;
+	width:90%;
+}
+
+label{
+	font-size:calc(12px + 1vh);
+}
+form>input{
+	font-size:calc(12px + 1vh) !important;
+}
+
+.form-group{
+	margin: 1vh 0;
+}
+
+@media screen and ( max-height: 700px ) {
+	#user{
+		margin: 4vh auto 1vh auto;
+		text-align: center;
+		width:calc(40px + 1vh);
+		height:calc(40px + 1vh);
+
+		display: block;
+		color:#03BABD;
+	}
+
+	label{
+		font-size:calc(6px + 1vh);
+	}
+	
+	form>input{
+		font-size:calc(6px + 1vh) !important;
+	}
+}
+
+
+
+
+
+
+

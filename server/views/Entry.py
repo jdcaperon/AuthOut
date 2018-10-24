@@ -1,3 +1,4 @@
+import sys
 from datetime import date, datetime
 
 from dateutil.rrule import rrule, DAILY
@@ -17,9 +18,20 @@ def live():
     """
     Default endpoint generated.
     """
-    entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == date.today())
+    today = datetime.strptime(date.today().strftime('%d/%m/%Y'), '%d/%m/%Y')
+    sys.stderr.write(date.today().strftime('%d/%m/%Y'))
+    # entries = db.session.query(EntryModel)\
+    #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
+    #     .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today) \
+    #     .order_by(EntryModel.time)
+    entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == today)
+    things = entries.all()
+    for entry in things:
+        sys.stderr.write(entry)
+    print(date.today())
     entries_json = []
     for entry in entries:
+        print("entry {}".format(entry))
         dict = entry.as_dict()
         parent = db.session.query(ParentModel).filter_by(id=dict['parent_id']).first()
         child = db.session.query(ChildModel).filter_by(id=dict['child_id']).first()
@@ -38,8 +50,8 @@ def query():
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
     upper = datetime.strptime(data['upper'], '%d/%m/%Y')
     entries = db.session.query(EntryModel)\
-        .filter(cast(EntryModel.time, Date) >= lower)\
-        .filter(cast(EntryModel.time, Date) <= upper)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= lower)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= upper)\
         .filter_by(child_id=data['id'])\
         .filter_by(status=True)\
         .order_by(EntryModel.time)
@@ -61,12 +73,12 @@ def stats():
         day = {'date': dt.strftime("%d/%m/%Y"), 'signins': 0, 'entries': []}
         # attendance count
         signed_in = db.session.query(func.Count(EntryModel.child_id))\
-            .filter(cast(EntryModel.time, Date) == dt)\
+            .filter(cast(func.timezone('AEST', EntryModel.time), Date) == dt)\
             .filter_by(status=True)\
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in
 
-        entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == dt)
+        entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) == dt)
         for entry in entries:
             day['entries'].append(entry.as_dict())
 
