@@ -69,7 +69,8 @@ def stats():
         day = {'date': dt.strftime("%d/%m/%Y"), 'signins': 0, 'entries': []}
         # attendance count
         signed_in = db.session.query(func.Count(EntryModel.child_id))\
-            .filter(EntryModel.time == dt)\
+            .filter(EntryModel.time >= dt)\
+            .filter(EntryModel.time <= (dt + timedelta(days=1)))\
             .filter_by(status=True)\
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in
