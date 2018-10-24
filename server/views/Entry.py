@@ -31,7 +31,8 @@ def live():
         entries_json.append(dict)
     data = {'signed_in': db.session.query(ChildModel).filter_by(status=True).count(),
             'signed_out': db.session.query(ChildModel).filter_by(status=False).count(),
-            'entries': entries_json}
+            'entries': entries_json,
+            'today': date.today()}
     return jsonify(data)
 
 
