@@ -52,7 +52,8 @@ def login_endpoint():
 def generate_code_endpoint():
     """Respond to incoming calls with a simple text message."""
     resp = MessagingResponse()
-
+    resp.message("Hello")
+    return str(resp)
     body = request.values.get('From', None)
     local_number = "0" + body[3:]
     parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
