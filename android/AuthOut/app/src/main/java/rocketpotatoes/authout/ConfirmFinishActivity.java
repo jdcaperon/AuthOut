@@ -24,11 +24,8 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -60,7 +57,9 @@ public class ConfirmFinishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirmation);
         progressOverlay = findViewById(R.id.progress_overlay);
         requestQueue = Volley.newRequestQueue(this);
-        photo = getIntent().getExtras().getString("PHOTO");
+
+        photo = getIntent().getExtras() == null ? null : getIntent().getExtras().getString("PHOTO");
+
     }
 
     /** Clears all current activities on the back stack and stars the home activity
@@ -99,16 +98,11 @@ public class ConfirmFinishActivity extends AppCompatActivity {
 
                         Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
-                        if (parent.getFirstName().equals("Ryan") && parent.getSurname().equals("Kurz")) {
-                            Intent intent = new Intent(ConfirmFinishActivity.this, AdminActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(ConfirmFinishActivity.this, SelectStudentActivity.class);
-                            intent.putExtra("PARENT", parent);
-                            intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
-                            intent.putExtra("PHOTO", userPhoto);
-                            startActivity(intent);
-                        }
+                        Intent intent = new Intent(ConfirmFinishActivity.this, SelectStudentActivity.class);
+                        intent.putExtra("PARENT", parent);
+                        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                        intent.putExtra("PHOTO", userPhoto);
+                        startActivity(intent);
                         finish();
                     }
                 }, new Response.ErrorListener() {
