@@ -17,7 +17,10 @@ def live():
     """
     Default endpoint generated.
     """
-    entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) >= date.today())
+    today = date.today()
+    entries = db.session.query(EntryModel)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today)
     print(entries)
     print(date.today())
     entries_json = []
