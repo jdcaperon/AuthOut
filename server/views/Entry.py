@@ -19,8 +19,10 @@ def live():
     """
     entries = db.session.query(EntryModel).filter(cast(func.timezone('AEST', EntryModel.time), Date) >= date.today())
     print(entries)
+    print(date.today())
     entries_json = []
     for entry in entries:
+        print("entry {}".format(entry))
         dict = entry.as_dict()
         parent = db.session.query(ParentModel).filter_by(id=dict['parent_id']).first()
         child = db.session.query(ChildModel).filter_by(id=dict['child_id']).first()
