@@ -57,31 +57,34 @@ def generate_code_endpoint():
     parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
     parent_id = parent.first().as_dict()["id"]
     resp.message("Parent id is " +str(parent_id))
-    return str(resp)
     if parent.count() == 1:
-        # here we generate a code for them and add it to the Db
-        code = randint(1000, 9999)
-        available_code = db.session.query(OTPModel).filter_by(code=code)
-
-        # find a new code if it's not unique
-        while available_code.count() != 0:
+        try:
+            # here we generate a code for them and add it to the Db
             code = randint(1000, 9999)
             available_code = db.session.query(OTPModel).filter_by(code=code)
 
-        current_code_location = db.session.query(OTPModel).filter_by(parent_id=parent_id)
-        db.session.delete(current_code_location.first())
-        db.session.commit()
+            # find a new code if it's not unique
+            while available_code.count() != 0:
+                code = randint(1000, 9999)
+                available_code = db.session.query(OTPModel).filter_by(code=code)
 
-        otp = OTPModel()
-        data = {"code": code, "parent_id": parent_id}
-        valid = otp.load(data)
-
-        if valid:
-            db.session.add(otp)
+            current_code_location = db.session.query(OTPModel).filter_by(parent_id=parent_id)
+            db.session.delete(current_code_location.first())
             db.session.commit()
-            resp.message("Your AuthOut code is " + str(code) + ".")
-        else:
-            resp.message("Error creating AuthOut code. Please try again.")
+
+            otp = OTPModel()
+            data = {"code": code, "parent_id": parent_id}
+            valid = otp.load(data)
+
+            if valid:
+                db.session.add(otp)
+                db.session.commit()
+                resp.message("Your AuthOut code is " + str(code) + ".")
+            else:
+                resp.message("Error creating AuthOut code. Please try again.")
+        except Exception as e:
+            resp.message(str(e))
+            return str(resp)
     else:
         resp.message("You've messaged the Admin verification system for AuthOut, if this was intended "
                      "please contact an admin to register yourself in the system.")
