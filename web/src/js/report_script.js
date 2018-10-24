@@ -30,7 +30,7 @@ $(document).ready(function() {
 			data.sort(predicateBy("last_name"));
 			
 			$(data).each(function (key) {
-				var name = data[key]['first_name'] + " " + data[key]['last_name'];
+				var name = " " + data[key]['first_name'] + " " + data[key]['last_name'];
 				var id = data[key]['id'];
 				
 				// Add to dictionary

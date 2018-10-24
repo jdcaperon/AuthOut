@@ -31,6 +31,8 @@
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+	
+	
 }
 
 #table-box div{
@@ -53,6 +55,34 @@ width:100%;
 #child-select-box{
 	height: 20%;
 }
+
+#child-select-box h3 {
+	padding: 10px;
+}
+
+#child-select-box .box-inner {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	min-height: 180px;
+}
+
+#child-select-box .box-inner .row {
+	width: 1000px;
+}
+
+#child-select-box .col-4 {
+	min-width: 300px;
+	text-align: center;
+}
+
+#date-select input {
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	padding: 0 10px;
+}
+
 #child-select-list {
 	width: 100%;
 	vertical-align: middle;

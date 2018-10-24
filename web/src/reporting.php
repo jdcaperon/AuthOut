@@ -12,20 +12,22 @@
 		<?php include ('php_inclusions/nav.php'); ?>
 		<div class="content">
 			<div class="row row-override">
-				<div id="child-select-box" class="row" >
+				<div id="child-select-box" class="row">
 					<div class="box-outer" style="padding-bottom: 0;">
 						<div class="box-inner">	
+							<h3>Select Data</h3>
 							<div class="row">
 								<div class="col-4">
 									<form id="child-form">
 										<p>Select children: </p>
 										<select name="children" id="child-select-list" multiple required>
+											<option value="" disabled selected>Select children to display</option>
 											<!-- Filled with names from the database -->
 										</select>
 									</form>
 								</div>
 								
-								<div class="col-4">
+								<div class="col-4" id="date-select">
 									<p>Select a range of dates: </p>
 									<input type='text' name="daterange" id="calendar" value=""/>
 								</div>
