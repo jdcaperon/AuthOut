@@ -59,3 +59,9 @@ th{
 #table-box div{
 	width: 100%;
 }
+
+@media screen and ( max-height: 700px ) {
+	.data-div:not(#canvas-div){
+		margin:15% 0;
+	}
+}
