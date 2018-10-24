@@ -17,14 +17,16 @@
 						<div class="box-inner">	
 							<div class="row">
 								<div class="col-4">
-									<p>Select a child</p>
-									<select name="children" id="child-select-list" multiple>
-										<!-- Filled with names from the database -->
-									</select>
+									<form id="child-form">
+										<p>Select children: </p>
+										<select name="children" id="child-select-list" multiple required>
+											<!-- Filled with names from the database -->
+										</select>
+									</form>
 								</div>
 								
 								<div class="col-4">
-									<p>Select a range of dates</p>
+									<p>Select a range of dates: </p>
 									<input type='text' name="daterange" id="calendar" value=""/>
 								</div>
 								
@@ -69,6 +71,7 @@
 		<!-- Date range picker http://www.daterangepicker.com -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
 	</body>
 
 

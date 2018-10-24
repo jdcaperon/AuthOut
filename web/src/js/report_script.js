@@ -71,25 +71,28 @@ $(document).ready(function() {
 	}
 	
 // --------------------------------- Data Table -----------------------------------------
+	// Set date ordering
+	$.fn.dataTable.moment('DD/MM/YYYY');
 	
 	// Create table
 	$('#user-table').DataTable({
-		"ordering": false, // false to disable sorting (or any other option),
+		"ordering": true, // false to disable sorting (or any other option),
 		"bLengthChange": false,
 		"bFilter": true,
 		"bAutoHeight": false,
 		"scrollY":260,
 		"scrollX": false,
 		"scrollColapse": false,
-		"displayLength":-1,
+		"displayLength": 10,
 		dom: 'Bfrtip',
 		buttons: [
-			'csv',
-			'pdf',
-			'print',
-			'excel'
+            'excelHtml5',
+            'csvHtml5',
+            {
+                extend: 'pdfHtml5',
+                messageTop: 'Attendance report generated with AuthOut.'
+            }
 		],
-		"bPaginate": false,
 		language: {
 			searchPlaceholder: "Search records",
 			search: "",
@@ -108,16 +111,14 @@ $(document).ready(function() {
 
 // --------------------------------- Buttons --------------------------------------
 	
-	$("#generate-report-button").click(function(){
+	$("#generate-report-button").click(function(){		
 		// Get the selected dates
 		var IDs = $("#child-select-list").multipleSelect('getSelects');
 		// Entries for the table
 		var entries = [];
 		
 		// Check children have been selected
-		if (IDs.length > 0) {
-			console.log(dates);
-			console.log(IDs);
+		if ($("#child-form")[0].checkValidity()) {
 			
 			// Show overlay
 			$(".content").LoadingOverlay("show", {
@@ -156,19 +157,16 @@ $(document).ready(function() {
 			});
 			
 			// Wait for all ajax requests to finish
-			$(document).ajaxStop(function () {
-				console.log(entries);
-				
+			$(document).ajaxStop(function () {				
 				table.clear();
 				table.rows.add(entries).draw();
 						
 				// Hide overlay
-				$(".content").LoadingOverlay("hide", true);
+				$(".content").LoadingOverlay("hide", true);				
 			});
 			
 		} else {
-			console.log("not enough children");
-			// TODO: show validation message
+			$("#child-form").effect("shake");
 		}
 		
 	});
@@ -238,7 +236,19 @@ $(document).ready(function() {
 	// Formate date to a usable format
 	function formatDate(date) {
 		var day = date.getDate();
+		
+		// Add '0' if needed
+		if (parseInt(day / 10) == 0) {
+			day = "0" + day;
+		}
+		
 		var month = date.getMonth() + 1; // months start at 0
+		
+		// Add '0' if needed
+		if (parseInt(month / 10) == 0) {
+			month = "0" + month;
+		}
+		
 		var year = date.getFullYear();
 		
 		return day + "/" + month + "/" + year;
