@@ -15,15 +15,23 @@
 				<div id="child-select-box" class="row" >
 					<div class="box-outer" style="padding-bottom: 0;">
 						<div class="box-inner">	
-							<p>Select a range of dates</p>
-							<input type='text' name="daterange" id="calendar" value=""/>
-							
-							<p>Select a child</p>
-							<select name="children" id="child-select-list" multiple>
-								<!-- Filled with names from the database -->
-							</select>
-							
-							
+							<div class="row">
+								<div class="col-4">
+									<p>Select a child</p>
+									<select name="children" id="child-select-list" multiple>
+										<!-- Filled with names from the database -->
+									</select>
+								</div>
+								
+								<div class="col-4">
+									<p>Select a range of dates</p>
+									<input type='text' name="daterange" id="calendar" value=""/>
+								</div>
+								
+								<div class="col-4">
+									<button type="button" id="generate-report-button" class="rounded-button purple-button">Generate Report</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -35,6 +43,9 @@
 							<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 								<thead>
 									<tr>
+										<th class="th-sm">Name
+											<i class="fa fa-sort float-right" aria-hidden="true"></i>
+										</th>
 										<th class="th-sm">Day
 											<i class="fa fa-sort float-right" aria-hidden="true"></i>
 										</th>
@@ -44,8 +55,6 @@
 									</tr>
 								</thead>
 							</table>
-							
-							<button type="button" id="generate-report-button" class="rounded-button purple-button">Generate Report</button> <!-- TODO: delete --->
 						</div>
 					</div>
 				</div>

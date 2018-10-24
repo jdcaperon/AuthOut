@@ -1,17 +1,22 @@
 $(document).ready(function() {
 	$("#nav-line2 > ul li:nth-of-type(4)").addClass("current-tab");
 	
+	// Array of selected date range
+	var dates = getDateArray(new Date(), new Date());
+	// Link child names with IDs
+	var childNames = new Object();
+	
 // ----------------------------- Calendar --------------------------------------
 
 	$('input[name="daterange"]').daterangepicker({
 		opens: 'left',
-		autoUpdateInput: false,
+		maxDate: new Date(),
 		locale: {
-			cancelLabel: 'Clear'
+			format: 'DD/MM/YYYY'
 		}
+	// Save the dates when they are updated
 	}, function(start, end, label) {
-		console.log(start);
-		console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+		dates = getDateArray(new Date(start['_d']), new Date(end['_d']));
 	});
 
 // --------------------------- Dropdown list -------------------------------------
@@ -28,6 +33,10 @@ $(document).ready(function() {
 				var name = data[key]['first_name'] + " " + data[key]['last_name'];
 				var id = data[key]['id'];
 				
+				// Add to dictionary
+				childNames[id] = name;
+				
+				// Add to select list
 				$("#child-select-list").append($('<option>', {
 					value: id,
 					text: name
@@ -37,9 +46,9 @@ $(document).ready(function() {
 			
 			// Change to multiple select plugin
 			$('#child-select-list').change(function() {
-				console.log($(this).val());
+				selectedChildren = $(this).val();
 			}).multipleSelect({
-				width: '30%'
+				width: '100%',
 			});
 			
 		}
@@ -88,6 +97,7 @@ $(document).ready(function() {
 		"order": [1, 'asc'],
 		"data": {},
 		"columns": [
+			{"data": "name"},
 			{"data": "time"},
 			{"data": "status"},
 		]
@@ -99,11 +109,16 @@ $(document).ready(function() {
 // --------------------------------- Buttons --------------------------------------
 	
 	$("#generate-report-button").click(function(){
-		var datePicker = $('#calendar').datepicker().data('datepicker');
-		var selectedDates = datePicker.selectedDates;
+		// Get the selected dates
+		var IDs = $("#child-select-list").multipleSelect('getSelects');
+		// Entries for the table
+		var entries = [];
 		
-		// Check if both dates have been selected
-		if (selectedDates.length > 1) {
+		// Check children have been selected
+		if (IDs.length > 0) {
+			console.log(dates);
+			console.log(IDs);
+			
 			// Show overlay
 			$(".content").LoadingOverlay("show", {
 				image: "",
@@ -111,34 +126,49 @@ $(document).ready(function() {
 			});
 			
 			// Get variables
-			var childID = parseInt($("#child-select-list").val(), 10);
-			var startDate = formatDate(datePicker.selectedDates[0]);
-			var endDate = formatDate(datePicker.selectedDates[1]);
-			
-			var toSend = {
-				"lower": startDate,
-				"upper": endDate,
-				"id": childID,
-			}
-			
-			$.ajax({
-				method: "POST",
-				url: "https://deco3801.wisebaldone.com/api/entry/query",
-				data: JSON.stringify(toSend),
-				success: function(data) {
-					var dateArray = getDateArray(new Date(datePicker.selectedDates[0]), datePicker.selectedDates[1]);
-					entries = formatEntries(data['entries'], dateArray);
-					
-					table.clear();
-					table.rows.add(entries).draw();
-					
-					// Hide overlay
-					$(".content").LoadingOverlay("hide", true);
+			$(IDs).each(function(key, ID) {
+				var childID = parseInt(ID, 10);
+				var startDate = formatDate(dates[0]);
+				var endDate = formatDate(dates[dates.length - 1]);
+				
+				var toSend = {
+					"lower": startDate,
+					"upper": endDate,
+					"id": childID,
 				}
-			
+				
+				
+				$.ajax({
+					method: "POST",
+					url: "https://deco3801.wisebaldone.com/api/entry/query",
+					data: JSON.stringify(toSend),
+					success: function(data) {
+						var returned = formatEntries(data['entries'], dates, ID);
+						
+						$(returned).each(function(key, value) {
+							entries.push(value);
+						});
+						
+					}
+				
+				});
+				
 			});
+			
+			// Wait for all ajax requests to finish
+			$(document).ajaxStop(function () {
+				console.log(entries);
+				
+				table.clear();
+				table.rows.add(entries).draw();
+						
+				// Hide overlay
+				$(".content").LoadingOverlay("hide", true);
+			});
+			
 		} else {
-			$("#calendar").effect('shake');
+			console.log("not enough children");
+			// TODO: show validation message
 		}
 		
 	});
@@ -154,8 +184,10 @@ $(document).ready(function() {
 	}
 	
 	// Formats database data into a usable form
-	function formatEntries(entries, dates) {
+	function formatEntries(entries, dates, ID) {
 		var returnArray = new Array();
+		// Get the name of the child
+		var name = childNames[ID];
 		
 		// Loop over each date in the selected range
 		$(dates).each(function (dateKey) {
@@ -170,6 +202,7 @@ $(document).ready(function() {
 					returnArray.push({
 						"time": formatDate(dates[dateKey]),
 						"status": "Yes",
+						"name": name
 					});
 				}
 				
@@ -180,6 +213,7 @@ $(document).ready(function() {
 				returnArray.push({
 					"time": formatDate(dates[dateKey]),
 					"status": "No",
+					"name": name
 				});
 			}
 			
@@ -197,7 +231,7 @@ $(document).ready(function() {
 			arr.push(new Date(start));
 			start.setDate(start.getDate() + 1);
 		}
-
+		
 		return arr;
 	}
 	
