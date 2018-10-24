@@ -31,3 +31,32 @@ def core():
         for child in children:
             container.append(child.as_dict())
         return jsonify(container)
+
+
+@bp.route('/<int:child_id>', methods=['GET', 'PUT', 'DELETE'])
+def specified(child_id):
+    """
+    Endpoint for creating, updating and deleting children.
+    """
+    child = db.session.query(ChildModel).filter_by(id=child_id)
+    if child.count() != 1:
+        return Response('', 400)
+    child = child.first()
+    # Gets the information of a specific parent.
+    if request.method == 'GET':
+        return jsonify(child.as_dict())
+    # Updates a specific parent
+    elif request.method == 'PUT':
+        data = request.get_json(force=True)
+        child.load(data, check=False)
+        db.session.add(child)
+        db.session.commit()
+        return Response('', 200)
+    # Deletes a particular parent
+    elif request.method == 'DELETE':
+        db.session.delete(child)
+        db.session.commit()
+        return Response('', 200)
+    # Default case.
+    else:
+        return Response('', 404)
