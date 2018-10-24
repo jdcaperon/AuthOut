@@ -56,7 +56,7 @@ def generate_code_endpoint():
     local_number = "0" + body[3:]
     parent = db.session.query(ParentModel).filter_by(mobile_number=local_number)
     parent_id = parent.first().as_dict()["id"]
-    resp.message("Parent id is " +parent_id)
+    resp.message("Parent id is " +str(parent_id))
     return str(resp)
     if parent.count() == 1:
         # here we generate a code for them and add it to the Db
