@@ -22,7 +22,8 @@ def live():
     sys.stderr.write(date.today().strftime('%d/%m/%Y'))
     entries = db.session.query(EntryModel)\
         .filter(cast(func.timezone('AEST', EntryModel.time), Date) >= today)\
-        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today)
+        .filter(cast(func.timezone('AEST', EntryModel.time), Date) <= today) \
+        .order_by(EntryModel.time)
     things = entries.all()
     for entry in things:
         sys.stderr.write(entry)
