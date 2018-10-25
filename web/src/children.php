@@ -33,10 +33,10 @@
 
 				<div class="col-4">
 					<div class="box-outer" >
-						<div class="box-inner" id="account-form-box">
+						<div class="box-inner" id="child-form-box">
 
 							<h4 id="add-title">Add A Child</h4>
-							<span data-feather="user" id="user"></span>
+							<span data-feather="user-plus" id="user"></span>
 							<form class="form-group" id="add-child-form">
 								<div class="form-group">
 									<div id="select-wrapper">

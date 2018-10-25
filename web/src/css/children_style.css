@@ -37,12 +37,12 @@
 	width:90%;
 }
 
-#account-form-box label{
-	font-size:calc(12px + 1vh);
+#child-form-box label{
+	font-size:calc(14px);
 }
 
 #add-child-form input{
-	font-size:calc(12px + 1vh) !important;
+	font-size:calc(14px) !important;
 }
 
 .form-group{
@@ -61,11 +61,11 @@
 	}
 
 	#add-child-form label{
-		font-size:calc(6px + 1vh);
+		font-size:calc(7px);
 	}
 	
 	#add-child-form input{
-		font-size:calc(6px + 1vh) !important;
+		font-size:calc(7px) !important;
 	}
 }
 

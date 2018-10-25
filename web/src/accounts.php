@@ -41,7 +41,7 @@
 						<div class="box-inner" id="account-form-box">
 
 							<h4>Add A User</h4>
-							<span data-feather="user" id="user"></span>
+							<span data-feather="user-plus" id="user"></span>
 							<form class="form-group" id="add-user-form">
 								<div class="form-group">
 									<label  class="form-check-label" for="name">Name</label>
