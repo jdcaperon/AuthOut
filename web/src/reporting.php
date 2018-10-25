@@ -16,7 +16,7 @@
 				<div class="box-inner" id="child-reporting">
 					
 					<div id="child-select-box">
-						<h3>Select Data</h3>
+						<h3>Select Data</h3><br>
 						<div class="row">
 							<div class="col-4">
 								<form id="child-form">
@@ -39,7 +39,7 @@
 					</div>
 					
 					<div id="child-report-box">
-						<h3>Attendance Report</h3>
+						<h3>Attendance Report</h3><br>
 						<table id="user-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 							<thead>
 								<tr>
