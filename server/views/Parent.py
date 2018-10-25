@@ -139,6 +139,7 @@ def children(parent_id):
     else:
         return Response('', 404)
 
+
 @bp.route('/<int:parent_id>/children/trusted', methods=['GET', 'POST', 'DELETE'])
 def trusted_children(parent_id):
     """
@@ -171,7 +172,7 @@ def trusted_children(parent_id):
         data = request.get_json(force=True)
         if "children" in data:
             for i in data["children"]:
-                child = parent.trusted_children.filter_by(id=i).first()
+                child = db.session.query(ChildModel).filter_by(id=i).first()
                 parent.trusted_children.remove(child)
         db.session.add(parent)
         db.session.commit()
