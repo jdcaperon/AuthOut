@@ -110,7 +110,7 @@ def children(parent_id):
     parent = parent.first()
     # Gets the information of a specific parent.
     if request.method == 'GET':
-        holder = {"children:": parent.as_dict()["children"]}
+        holder = {"children": parent.as_dict()["children"]}
         return jsonify(holder)
     # Updates a specific parent
     elif request.method == 'POST':
@@ -152,7 +152,7 @@ def trusted_children(parent_id):
     parent = parent.first()
     # Gets the information of a specific parent.
     if request.method == 'GET':
-        holder = {"children:": parent.as_dict()["trusted_children"]}
+        holder = {"children": parent.as_dict()["trusted_children"]}
         return jsonify(holder)
     # Updates a specific parent
     elif request.method == 'POST':
