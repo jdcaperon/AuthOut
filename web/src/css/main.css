@@ -28,7 +28,7 @@ html, body {
 	text-align: center;
 }
 
-.rounded-button {
+.rounded-button, .narrow-rounded-button {
 	height: 40px;
 	width: 250px;
 	border: none;
@@ -42,7 +42,11 @@ html, body {
 	cursor: pointer;
 }
 
-.rounded-button:hover {
+.narrow-rounded-button {
+	width: 150px;
+}
+
+.rounded-button:hover, .narrow-rounded-button:hover {
 	background-color: #DCA726;
 }
 

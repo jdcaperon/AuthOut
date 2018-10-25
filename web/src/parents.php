@@ -50,12 +50,11 @@
 								<!-- Populated from database -->
 							</select>
 							<br>
-							<label for="trustedChildren">Trusted Children:</label>
+							<label class="modal-clear" for="trustedChildren">Trusted Children:</label>
 							<select name="trustedChildren" id="trusted-child-select-list" multiple>
 								<!-- Populated from database -->
 							</select>
-							<br>
-							<br>
+							<br><br>
 							<label for="fname">First Name:</label>
 							<input type="text" name="fname" required></input>
 							<br>
@@ -74,9 +73,9 @@
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" id="delete-button">Delete</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="save-button">Save changes</button>
+						<button type="button" class="btn btn-default narrow-rounded-button purple-button" id="delete-button">Delete</button>
+						<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+						<button type="button" class="btn btn-primary narrow-rounded-button blue-button" id="save-button">Save changes</button>
 					</div>
 				</div>
 			</div>

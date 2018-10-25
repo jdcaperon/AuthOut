@@ -21,3 +21,22 @@
   text-align: left;
   vertical-align: middle;
 }
+
+.modal-body label {
+	margin-right: 10px;
+}
+
+.modal-body input {
+	float: right;
+	white-space: nowrap;
+}
+
+.modal-clear {
+	margin-top: 10px;
+}
+
+/* Modal Buttons */
+
+.modal-footer button {
+	
+}
