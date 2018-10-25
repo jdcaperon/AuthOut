@@ -15,6 +15,20 @@
 	margin: 0;
 }
 
+/* ----------------------- Calendar ----------------------------*/
+
+.daterangepicker td.in-range {
+	background-color: rgb(3, 186, 189, .5);
+}
+
+.daterangepicker td.active, .start-date, .daterangepicker td.active:hover {
+	background-color: #03BABD;
+}
+
+#calendar {
+	width: 100%;
+}
+
 /* ---------------------- Table ---------------------- */
 
 #table-box{
