@@ -5,19 +5,35 @@ $(document).ready(function() {
 	$('#form-modal').modal({ show: false});
 	// parent ID to be edited
 	var id;
+	// selected children
+	var selectedChildren;
+	var selectedTrustedChildren;
+	// array of all children
+	var allChildren;
+	// children selected before opening the form
+	var childrenBeforeChange;
+	var trustedChildrenBeforeChange;
 	
-// -------------------------- Parents List ---------------------------------
+// -------------------------- Children List ---------------------------------
 
 	$.ajax({
 		method: "Get",
 		url: "https://deco3801.wisebaldone.com/api/child",
 		success: function(data) {
+			allChildren = data;
+			
 			$(data).each(function(kay, value) {
 				var name = value['first_name'] + " " + value['last_name'];
 				var id = value['id'];
 				
-				// Add to select list
+				// Add to child select list
 				$("#child-select-list").append($('<option>', {
+					value: id,
+					text: name
+				}));
+				
+				// Add to trusted child select list
+				$("#trusted-child-select-list").append($('<option>', {
 					value: id,
 					text: name
 				}));
@@ -27,6 +43,15 @@ $(document).ready(function() {
 					selectedChildren = $(this).val();
 				}).multipleSelect({
 					width: '100%',
+					placeholder: "Please select children"
+				});
+				
+				// Change to multiple select plugin
+				$('#trusted-child-select-list').change(function() {
+					selectedTrustedChildren = $(this).val();
+				}).multipleSelect({
+					width: '100%',
+					placeholder: "Please select trusted children"
 				});
 			
 			});
@@ -99,21 +124,47 @@ $(document).ready(function() {
 				$("input[name=email]").val(data['email']);
 				$("input[name=mobile]").val(data['mobile_number']);
 				$("input[name=dob]").val(data['date_of_birth']);
-
-				// Clear select list
-				$("#child-select-list").html("");
 				
-				// Loop over all children
+				// Tracks index of children to select in the list
+				var toSelectChildren = new Array();
+				var toSelectTrusted = new Array();
+				childrenBeforeChange = new Array();
+				trustedChildrenBeforeChange = new Array();
+				
+				// Loop over all children for this parent
 				$(data['children']).each(function (key, value) {
-					var name = value['first_name'] + " " + value['last_name'];
+					// Loop over total children
+					$(allChildren).each(function (key2, value2) {
+						if (value['id'] == value2['id']) {
+							toSelectChildren.push(value['id']);
+							childrenBeforeChange.push(value['id']);
+						}
+						
+					});
 					
-					// Add to select list
-					$("#child-select-list").append($('<option>', {
-						text: name
-					}));
+				});
+				
+				// Loop over all trusted children for this parent
+				$(data['trusted_children']).each(function (key, value) {
+					// Loop over total children
+					$(allChildren).each(function (key2, value2) {
+						if (value['id'] == value2['id']) {
+							toSelectTrusted.push(value['id']);
+						}
+						
+					});
+					
 				});
 				
 				$('#form-modal').modal('show');
+				
+				// Wait for selects to be visible before updating
+				$('#form-modal').on('shown.bs.modal', function() {
+					$('#child-select-list').multipleSelect("setSelects", toSelectChildren);
+					$('#trusted-child-select-list').multipleSelect("setSelects", toSelectTrusted);
+				});
+				
+				
 			});
 			
 		}		
@@ -149,11 +200,11 @@ $(document).ready(function() {
 		fields = document.getElementById("edit-form").elements;
 		
 		// Get values
-		var fname = fields[2].value;
-		var lname = fields[3].value;
-		var email = fields[4].value;
-		var mobile = fields[5].value;
-		var dob = fields[6].value;
+		var fname = fields[fields.length - 5].value;
+		var lname = fields[fields.length - 4].value;
+		var email = fields[fields.length - 3].value;
+		var mobile = fields[fields.length - 2].value;
+		var dob = fields[fields.length - 1].value;
 		
 		// Validate fields
 		validateMobile(mobile);
@@ -182,13 +233,153 @@ $(document).ready(function() {
 				url: "https://deco3801.wisebaldone.com/api/parent/" + id,
 				data: JSON.stringify(toSend),
 				success: function(data) {
-					updateTable();
+					// Get selected items
+					var children = toInt($('#child-select-list').multipleSelect("getSelects"));
+					var trusted = toInt($('#trusted-child-select-list').multipleSelect("getSelects"));
+					
+					// IDs to add/delete
+					var childrenToAdd = new Array();
+					var childrenToDelete = new Array();
+					var trustedToAdd = new Array();
+					var trustedToDelete = new Array();
+					
+					// Get Children to add
+					$(children).each(function(key, value) {
+						if ($.inArray(value, childrenBeforeChange) == -1) {
+							childrenToAdd.push(value);
+						}
+						
+					});
+					
+					// Get Children to delete
+					$(childrenBeforeChange).each(function(key, value) {
+						if ($.inArray(value, children) == -1) {
+							childrenToDelete.push(value);
+						}
+						
+					});
+					
+					// Get trusted to add
+					$(trusted).each(function(key, value) {
+						if ($.inArray(value, trustedChildrenBeforeChange) == -1) {
+							trustedToAdd.push(value);
+						}
+						
+					});
+					
+					// Get trusted to delete
+					$(trustedChildrenBeforeChange).each(function(key, value) {
+						if ($.inArray(value, trusted) == -1) {
+							trustedToDelete.push(value);
+						}
+						
+					});
+					
+					if (childrenToAdd.length > 0) {
+						addChildren(childrenToAdd);
+					}
+					
+					if (childrenToDelete.length > 0) {
+						console.log("Deleting children: " + childrenToDelete);
+						//deleteChildren(childrenToDelete);
+					}
+					
+					if (trustedToAdd.length > 0) {
+						addTrusted(trustedToAdd);
+					}
+					
+					if (trustedToDelete.length > 0) {
+						console.log("Deleting trusted: " + trustedToDelete);
+						//deleteTrusted(trustedToDelete);
+					}
+					
+					// Wait for all ajax requests to finish
+					$(document).ajaxStop(function () {				
+						updateTable();				
+					});
 				}
 			});
 		} else {
 			$("#edit-form")[0].reportValidity();
 		}
+		
 	});
+	
+	function deleteTrusted(children) {
+		toSend = {
+			"children": children			
+		};
+					
+		$.ajax({
+			method: "DELTE",
+			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children",
+			data: JSON.stringify(toSend),
+			success: function(data) {
+				;
+			}
+			
+		});
+		
+	}
+	
+	function addTrusted(children) {
+		toSend = {
+			"children": children			
+		};
+					
+		$.ajax({
+			method: "POST",
+			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children/trusted",
+			data: JSON.stringify(toSend),
+			success: function(data) {
+				;
+			}
+			
+		});
+	}
+		
+	
+	function deleteChildren(children) {
+		toSend = {
+			"children": children			
+		};
+					
+		$.ajax({
+			method: "DELTE",
+			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children",
+			data: JSON.stringify(toSend),
+			success: function(data) {
+				;
+			}
+			
+		});
+		
+	}
+	
+	function addChildren(children) {
+		toSend = {
+			"children": children			
+		};
+					
+		$.ajax({
+			method: "POST",
+			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children",
+			data: JSON.stringify(toSend),
+			success: function(data) {
+				;
+			}
+			
+		});
+		
+	}
+	
+	function toInt(array) {
+		$(array).each(function(key, value) {
+			array[key] = parseInt(value);
+		});
+		
+		return array;
+	}
 	
 // --------------------------- Delete Buttons ------------------------------------
 
