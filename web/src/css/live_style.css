@@ -40,7 +40,7 @@ th{
 	align-items: center;
 }
 
-#table-box div{
+#table-box > div{
 	width: 100%;
 }
 

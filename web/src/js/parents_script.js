@@ -74,7 +74,7 @@ $(document).ready(function() {
 				"bLengthChange": false,
 				"bFilter": true,
 				"bAutoHeight": false,
-				"scrollY":260,
+				"scrollY":300,
 				"scrollX": false,
 				"scrollColapse": false,
 				"displayLength":10,

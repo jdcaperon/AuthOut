@@ -46,7 +46,7 @@
 									<th class="th-sm">Name
 										<i class="fa fa-sort float-right" aria-hidden="true"></i>
 									</th>
-									<th class="th-sm">Day
+									<th class="th-sm">Date
 										<i class="fa fa-sort float-right" aria-hidden="true"></i>
 									</th>
 									<th class="th-sm">Attendance
