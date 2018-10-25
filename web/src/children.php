@@ -39,25 +39,27 @@
 							<span data-feather="user" id="user"></span>
 							<form class="form-group" id="add-child-form">
 								<div class="form-group">
-									<label  class="form-check-label" for="parents">Parents</label>
-									<select class="form-control" name="parents" id="parent-list">
-										<!-- Populated automatically -->
-									</select>
+									<div id="select-wrapper">
+										<label  class="form-check-label" for="parents">Parents</label>
+										<select class="form-control" name="parents" id="parent-select-list" multiple>
+											<!-- Populated automatically -->
+										</select>
+									</div>
 								</div>
 								<div class="form-group">
 									<label  class="form-check-label" for="fname">First Name</label>
-									<input class="form-control" type="text" name="name" id="fname" placeholder="Enter first name" required>
+									<input class="form-control" type="text" name="fname" id="fname" placeholder="Enter first name" required>
 								</div>
 								<div class="form-group">
 									<label  class="form-check-label" for="lname">Last Name</label>
-									<input class="form-control" type="lnam" name="email" id="lname" placeholder="Enter last name" required>
+									<input class="form-control" type="text" name="lname" id="lname" placeholder="Enter last name" required>
 								</div>
 								<div class="form-group">
 									<label  class="form-check-label" for="dob">Date of Birth</label>
-									<input class="form-control" type="lnam" name="don" id="lname" placeholder="DD/MM/YYYY" required>
+									<input class="form-control" type="text" name="dob" id="dob-input-add" placeholder="DD/MM/YYYY" required>
 								</div>
 
-								<button id="submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">Submit</button>
+								<button id="add-submit" name="submit" type="submit" value="Submit" class="rounded-button purple-button">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -81,15 +83,20 @@
 							<input type="text" name="id" disabled></input>
 							<br>
 							<label for="parent">Parents:</label>
-							<select name="parent" id="child-select-list" disabled multiple size="3">
+							<select name="parent" id="modal-parent-select-list" disabled multiple size="2">
+								<!-- Populated from database -->
+							</select>
+							<br>
+							<label for="parent">Trusted Parents:</label>
+							<select name="parent" id="trusted-parent-select-list" disabled multiple size="2">
 								<!-- Populated from database -->
 							</select>
 							<br>
 							<label for="fname">First Name:</label>
-							<input type="text" name="fname" required></input>
+							<input type="text" name="fname" id="modal-first-name" required></input>
 							<br>
 							<label for="lname">Last Name:</label>
-							<input type="text" name="lname" required></input>
+							<input type="text" name="lname" id="modal-last-name" required></input>
 							<br>
 							<label for="dob">Date of Birth:</label>
 							<input type="text" name="dob" id="dob-input" required></input>

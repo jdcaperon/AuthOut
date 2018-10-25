@@ -21,9 +21,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Alex+Brush|Cookie|Lobster|Playball|Tangerine" rel="stylesheet">
 
-	<!--Main stylesheet-->
-	<link href="css/main.css" rel="stylesheet" type="text/css">
-
 	<!--Widgets style sheet-->
 	<link rel="stylesheet" href="lib/jqwidgets/styles/jqx.base.css" type="text/css" />
 
@@ -33,7 +30,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 	
 	<!-- MDBootstrap Datatables  -->
-	<link href="lib/MDB/css/addons/datatables.min.css" rel="stylesheet">
+	<!--<link href="lib/MDB/css/addons/datatables.css" rel="stylesheet">-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.css"/>
+
 
 	<!--Calendar-->
 	<link href="lib/dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
@@ -43,6 +42,9 @@
 	
 	<!-- Date range picker -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	
+	<!--Main stylesheet-->
+	<link href="css/main.css" rel="stylesheet" type="text/css">
 
 	<!--Extra stylesheets-->
 	<?php

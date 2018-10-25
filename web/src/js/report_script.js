@@ -49,6 +49,7 @@ $(document).ready(function() {
 				selectedChildren = $(this).val();
 			}).multipleSelect({
 				width: '100%',
+				placeholder: "Please select a child",
 			});
 			
 		}
@@ -136,8 +137,7 @@ $(document).ready(function() {
 					"lower": startDate,
 					"upper": endDate,
 					"id": childID,
-				}
-				
+				}		
 				
 				$.ajax({
 					method: "POST",

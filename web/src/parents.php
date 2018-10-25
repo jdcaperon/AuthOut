@@ -46,9 +46,15 @@
 							<input type="text" name="id" disabled></input>
 							<br>
 							<label for="children">Children:</label>
-							<select name="children" id="child-select-list" disabled multiple size="3">
+							<select name="children" id="child-select-list"  multiple>
 								<!-- Populated from database -->
 							</select>
+							<br>
+							<label for="trustedChildren">Trusted Children:</label>
+							<select name="trustedChildren" id="trusted-child-select-list" multiple>
+								<!-- Populated from database -->
+							</select>
+							<br>
 							<br>
 							<label for="fname">First Name:</label>
 							<input type="text" name="fname" required></input>
@@ -57,7 +63,7 @@
 							<input type="text" name="lname" required></input>
 							<br>
 							<label for="email">Email:</label>
-							<input type="email" name="email" required></input>
+							<input type="text" name="email" id="email-input" required></input>
 							<br>
 							<label for="mobile">Mobile Number:</label>
 							<input type="text" name="mobile" id="mobile-input" required></input>
