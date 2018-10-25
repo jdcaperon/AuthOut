@@ -130,7 +130,7 @@ def children(parent_id):
         data = request.get_json(force=True)
         if "children" in data:
             for i in data["children"]:
-                child = parent.children.filter_by(id=i).first()
+                child = db.session.query(ChildModel).filter_by(id=i).first()
                 parent.children.remove(child)
         db.session.add(parent)
         db.session.commit()
