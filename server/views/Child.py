@@ -26,7 +26,7 @@ def core():
 
             if 'parent_id' in data:
                 for parent_id in data['parent_id']:
-                    parent = db.session.query(ParentModel).filter_by(id=data[parent_id]).first()
+                    parent = db.session.query(ParentModel).filter_by(id=parent_id).first()
                     if parent is None:
                         return Response('', 400, {})
                     child = db.session.query(ChildModel).filter_by(id=child.id).first()
