@@ -195,6 +195,7 @@ $(document).ready(function() {
 		// clear validity
 		document.querySelector("#mobile-input").setCustomValidity("");
 		document.querySelector("#dob-input").setCustomValidity("");
+		document.querySelector("#email-input").setCustomValidity("");
 		
 		// Get data from form
 		fields = document.getElementById("edit-form").elements;
@@ -209,6 +210,9 @@ $(document).ready(function() {
 		// Validate fields
 		validateMobile(mobile);
 		validateDOB(dob);
+		if (!validateEmail($("#email-input").val())) {
+			document.querySelector("#email-input").setCustomValidity("Invalid email address");
+		}
 		
 		// Check if all fields are valid
 		if($("#edit-form")[0].checkValidity()) {
@@ -485,6 +489,12 @@ $(document).ready(function() {
 			mobileInput.setCustomValidity("Mobile number is invalid.");
 		}
 		
+	}
+	
+	// Validates an email address
+	function validateEmail(email) {
+		// https://www.w3resource.com/javascript/form/email-validation.php
+		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 	}
 	
 });

@@ -159,9 +159,9 @@ $(document).ready(function() {
 		fields = document.getElementById("edit-form").elements;
 		
 		// Get values
-		var fname = fields[2].value;
-		var lname = fields[3].value;
-		var dob = fields[4].value;
+		var fname = fields[3].value;
+		var lname = fields[4].value;
+		var dob = fields[5].value;
 		
 		// Validate fields
 		validateDOB(dob, "#dob-input");

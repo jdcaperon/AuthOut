@@ -22,7 +22,7 @@
 					<form id="login-form" class="container clearfix">
 						<div class=" form-group clearfix">
 
-							<input required type="email" class="form-control" name="username" id="username" placeholder="Username">
+							<input required type="text" class="form-control" name="username" id="username" placeholder="Username">
 						</div>
 						<div class="form-group clearfix">
 							<input  required title="password" class='form-control' type="password" name="password" id="password" placeholder="Password">

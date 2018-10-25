@@ -63,7 +63,7 @@
 							<input type="text" name="lname" required></input>
 							<br>
 							<label for="email">Email:</label>
-							<input type="email" name="email" required></input>
+							<input type="text" name="email" id="email-input" required></input>
 							<br>
 							<label for="mobile">Mobile Number:</label>
 							<input type="text" name="mobile" id="mobile-input" required></input>
