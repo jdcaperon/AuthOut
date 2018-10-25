@@ -13,8 +13,8 @@
 		<div class="content">
 			<div class="box-outer">
 				<div class="box-inner">
+					<h3>All Parents</h3>
 					<p>Click on a row to edit a parent.</p>
-					<p>Remove children using the <a href="children.php">Children</a> page.</p>
 					<table id="parent-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 						<thead>
 							<tr>
