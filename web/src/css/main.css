@@ -201,6 +201,26 @@ input[data-name=selectItemparents] + span, input[data-name=selectItemchildren] +
 }
 
 /* ------------------------- Tables ------------------------------------ */
-.paginate_button .dataTables_paginate .page-item {
-	padding: 0 !important;
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0;
+	margin-top: 1.2em;
+}
+
+.paginate_button.page-item:hover {
+	/*background-color: pink !important;*/
+	padding: 0;
+	margin-top: 1.2em;
+}
+
+.dataTables_wrapper {
+    font-size: 15px;
+
+}
+
+.page-item.active .page-link{
+	background-color: #03BABD;
+	border: 1px solid #dee2e6;
+}
+.page-link {
+	color:#03BABD;
 }

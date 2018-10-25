@@ -41,7 +41,7 @@
 								<div class="form-group">
 									<div id="select-wrapper">
 										<label  class="form-check-label" for="parents">Parents</label>
-										<select class="form-control" name="parents" id="parent-select-list" multiple>
+										<select name="parents" id="parent-select-list" multiple>
 											<!-- Populated automatically -->
 										</select>
 									</div>

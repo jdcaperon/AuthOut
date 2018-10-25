@@ -45,7 +45,8 @@ $(document).ready(function() {
 					selectedChildren = $(this).val();
 				}).multipleSelect({
 					width: '100%',
-					placeholder: "Please select children"
+					placeholder: "Please select children",
+					selectAll: false
 				});
 				
 				// Change to multiple select plugin
@@ -53,7 +54,8 @@ $(document).ready(function() {
 					selectedTrustedChildren = $(this).val();
 				}).multipleSelect({
 					width: '100%',
-					placeholder: "Please select trusted children"
+					placeholder: "Please select trusted children",
+					selectAll: false
 				});
 			
 			});
