@@ -42,6 +42,11 @@ html, body {
 	cursor: pointer;
 }
 
+.rounded-button:focus{
+	border-color:transparent!important;
+	outline:none;
+}
+
 .narrow-rounded-button {
 	width: 150px;
 }

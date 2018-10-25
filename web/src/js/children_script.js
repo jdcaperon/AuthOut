@@ -1,8 +1,6 @@
 $(document).ready(function() {
 	// Data table
 	var table;
-	// Initialise modal
-	//$('#form-modal').modal({ show: false});
 	// child ID to be edited
 	var id;
 	
@@ -235,25 +233,33 @@ $(document).ready(function() {
 					"date_of_birth": dob,
 				};
 				
-				console.log(toSend);
-				
 				$.ajax({
 				method: "POST",
 				url: "https://deco3801.wisebaldone.com/api/child/",
 				data: JSON.stringify(toSend),
 				success: function(data) {
-					console.log(data);
-					
-					// Show overlay
-					$("#account-form-box").LoadingOverlay("show", {
-						image: "",
-						text: "Success!"
+					// Update the table
+					$.ajax({
+						method: "Get",
+						url: "https://deco3801.wisebaldone.com/api/child",
+						success: function(data) {
+							table.clear();
+							table.rows.add(data).draw();
+							
+							// Show overlay
+							$("#child-form-box").LoadingOverlay("show", {
+								image: "",
+								text: "Success!"
+							});
+							
+							// Hide overlay after 2 seconds
+							setTimeout(function(){
+								$("#child-form-box").LoadingOverlay("hide");
+							}, 2000);
+						}
+						
 					});
 					
-					// Hide overlay after 2 seconds
-					setTimeout(function(){
-						$("#account-form-box").LoadingOverlay("hide");
-					}, 2000);
 				}
 			});
 				

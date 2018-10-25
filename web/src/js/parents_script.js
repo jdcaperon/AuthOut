@@ -422,6 +422,7 @@ $(document).ready(function() {
 			method: "DELETE",
 			url: "https://deco3801.wisebaldone.com/api/parent/" + id,
 			success: function(data) {
+				console.log(data);
 				updateTable();
 			}
 			
