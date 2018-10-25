@@ -40,8 +40,21 @@ def core():
         # list all the parents.
         container = []
         children = db.session.query(ChildModel).order_by(ChildModel.id)
+
         for child in children:
-            container.append(child.as_dict())
+            parents = []
+            parents_query = db.session.query(ParentModel).order_by(ParentModel.id)
+            for parent in parents_query:
+                parent_dict = parent.as_dict()
+                for temp_child in parent_dict['children']:
+                    if temp_child['id'] == child.id:
+                        full_name = parent_dict['first_name'] + " " + parent_dict['last_name']
+                        parents.append(full_name)
+
+            child_dict = child.as_dict()
+            child_dict['parents'] = parents
+
+            container.append(child_dict)
         return jsonify(container)
 
 
