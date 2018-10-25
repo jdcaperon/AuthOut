@@ -136,8 +136,7 @@ $(document).ready(function() {
 					"lower": startDate,
 					"upper": endDate,
 					"id": childID,
-				}
-				
+				}		
 				
 				$.ajax({
 					method: "POST",
