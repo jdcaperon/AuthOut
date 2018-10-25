@@ -112,6 +112,31 @@ $(document).ready(function() {
 
 // --------------------------------- Buttons --------------------------------------
 	
+	$("#user-table_wrapper .dt-buttons").css({
+		"font-size" : "0"
+	});
+	
+	$(".buttons-excel, .buttons-csv, .buttons-pdf").addClass("rounded-button blue-button");
+	$(".buttons-excel, .buttons-csv, .buttons-pdf").css({
+		"max-width" : "80px",
+		"display" : "inline-block",
+		"font-size" : "14px"
+	});
+	
+	$(".buttons-excel").css({
+		"border-radius" : "200px 0 0 200px",
+	});
+	
+	$(".buttons-csv").css({
+		"border-radius" : "0px",
+		"border-left" : "1px solid white",
+		"border-right" : "1px solid white",
+	});
+
+	$(".buttons-pdf").css({
+		"border-radius" : " 0 200px 200px 0",
+	});
+	
 	$("#generate-report-button").click(function(){		
 		// Get the selected dates
 		var IDs = $("#child-select-list").multipleSelect('getSelects');
