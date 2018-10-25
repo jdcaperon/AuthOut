@@ -21,7 +21,6 @@
 									<form id="child-form">
 										<p>Select children: </p>
 										<select name="children" id="child-select-list" multiple required>
-											<option value="" disabled selected>Select children to display</option>
 											<!-- Filled with names from the database -->
 										</select>
 									</form>
