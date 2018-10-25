@@ -7,9 +7,9 @@
 		  <li class ="nav-item"><a class="nav-link"href="reporting.php"><span data-feather="file-text"></span>Reporting</a></li>
 
 		  <li class ="nav-item nav-heading">Accounts</li>
-		  <li class ="nav-item"><a class="nav-link"href="accounts.php"><span data-feather="user"></span>Admin</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="accounts.php"><span data-feather="lock"></span>Admin</a></li>
 		  <li class ="nav-item"><a class="nav-link"href="parents.php"><span data-feather="eye"></span>Parents</a></li>
-		  <li class ="nav-item"><a class="nav-link"href="children.php"><span data-feather="star"></span>Children</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="children.php"><span data-feather="users"></span>Children</a></li>
 
 		  <li class ="nav-item nav-heading">Help</li>
 		  <li class ="nav-item"><a class="nav-link"href="tutorial.php"><span data-feather="help-circle"></span>Tutorial</a></li>
