@@ -40,7 +40,6 @@ $(document).ready(function() {
 		method: "Get",
 		url: "https://deco3801.wisebaldone.com/api/child/",
 		success: function(data) {
-			
 			$('#child-table').DataTable({
 				"ordering": false, // false to disable sorting (or any other option),
 				"bLengthChange": false,
@@ -61,18 +60,24 @@ $(document).ready(function() {
 					{"data": "last_name"},
 					{"data": "date_of_birth"},
 					{"data": "id"},
-					//{"data": "children"}
+					{"data": "parents"},
+					{"data": "trusted_parents"}
 				],
 				"columnDefs": [ // Set ID and parents to be invisible and not searchable
 				{
 					"targets": [ 3 ],
 					"visible": false,
 					"searchable": false
-				//},
-				//{
-				//	"targets": [ 4 ],
-				//	"visible": false,
-				//	"searchable": false
+				},
+				{
+					"targets": [ 4 ],
+					"visible": false,
+					"searchable": false
+				},
+				{
+					"targets": [ 5 ],
+					"visible": false,
+					"searchable": false
 				}
 				],
 
@@ -93,22 +98,31 @@ $(document).ready(function() {
 				$("#delete-title").text("Are you sure you want to delete " + data['first_name'] + " " + data['last_name'] + "?");
 				// Add data to form
 				$("input[name=id]").val(id);
-				$("input[name=fname]").val(data['first_name']);
-				$("input[name=lname]").val(data['last_name']);
-				$("input[name=dob]").val(data['date_of_birth']);
+				$("#modal-first-name").val(data['first_name']);
+				$("#modal-last-name").val(data['last_name']);
+				$("#dob-input").val(data['date_of_birth']);
 
 				// Clear select list
-				$("#parent-select-list").html("");
+				$("#modal-parent-select-list").html("");
+				$("#trusted-parent-select-list").html("");
 				
-				// Loop over all children
-				/*$(data['children']).each(function (key, value) {
-					var name = value['first_name'] + " " + value['last_name'];
-					
+				// Loop over all parents
+				$(data['parents']).each(function (key, value) {
+					console.log(value);
 					// Add to select list
-					$("#child-select-list").append($('<option>', {
-						text: name
+					$("#modal-parent-select-list").append($('<option>', {
+						text: value
 					}));
-				});*/
+					
+				});
+				
+				// Loop over all trusted parents
+				$(data['trusted_parents']).each(function (key, value) {
+					// Add to select list
+					$("#trusted-parent-select-list").append($('<option>', {
+						text: value
+					}));
+				});
 				
 				$('#form-modal').modal('show');
 			});
