@@ -25,14 +25,15 @@ def core():
             response = {"id": child.id}
 
             if 'parent_id' in data:
-                parent = db.session.query(ParentModel).filter_by(id=data['parent_id']).first()
-                if parent is None:
-                    return Response('', 400, {})
-                child = db.session.query(ChildModel).filter_by(id=child.id).first()
-                if child is not None:
-                    parent.children.append(child)
-                db.session.add(parent)
-                db.session.commit()
+                for parent_id in data['parent_id']:
+                    parent = db.session.query(ParentModel).filter_by(id=data[parent_id]).first()
+                    if parent is None:
+                        return Response('', 400, {})
+                    child = db.session.query(ChildModel).filter_by(id=child.id).first()
+                    if child is not None:
+                        parent.children.append(child)
+                    db.session.add(parent)
+                    db.session.commit()
 
             return jsonify(response)
         return Response('', 400, {})
