@@ -91,7 +91,7 @@
 							<select name="parent" id="trusted-parent-select-list" disabled multiple size="2">
 								<!-- Populated from database -->
 							</select>
-							<br>
+							<br><br>
 							<label for="fname">First Name:</label>
 							<input type="text" name="fname" id="modal-first-name" required></input>
 							<br>
@@ -104,9 +104,9 @@
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" id="delete-button">Delete</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="save-button">Save changes</button>
+						<button type="button" class="btn btn-default narrow-rounded-button purple-button" id="delete-button">Delete</button>
+						<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+						<button type="button" class="btn btn-primary narrow-rounded-button blue-button" id="save-button">Save changes</button>
 					</div>
 				</div>
 			</div>
@@ -122,8 +122,8 @@
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-						<button type="button" class="btn btn-primary" id="delete-confirm">Yes</button>
+						<button type="button" class="btn btn-default narrow-rounded-button purple-button" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-primary narrow-rounded-button blue-button" id="delete-confirm">Yes</button>
 					</div>
 				</div>
 			</div>

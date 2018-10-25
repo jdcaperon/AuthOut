@@ -91,8 +91,8 @@
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-						<button type="button" class="btn btn-primary" id="delete-confirm">Yes</button>
+						<button type="button" class="btn btn-default narrow-rounded-button purple-button" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-primary narrow-rounded-button blue-button" id="delete-confirm">Yes</button>
 					</div>
 				</div>
 			</div>

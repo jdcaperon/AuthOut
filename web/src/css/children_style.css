@@ -37,10 +37,11 @@
 	width:90%;
 }
 
-label{
+#account-form-box label{
 	font-size:calc(12px + 1vh);
 }
-form>input{
+
+#add-child-form input{
 	font-size:calc(12px + 1vh) !important;
 }
 
@@ -59,11 +60,11 @@ form>input{
 		color:#03BABD;
 	}
 
-	label{
+	#add-child-form label{
 		font-size:calc(6px + 1vh);
 	}
 	
-	form>input{
+	#add-child-form input{
 		font-size:calc(6px + 1vh) !important;
 	}
 }
@@ -86,4 +87,25 @@ form>input{
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+}
+
+.modal-body label {
+	margin-right: 10px;
+}
+
+.modal-body select {
+	width: 100%;
+	height: 26px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	
+}
+
+.modal-body input {
+	float: right;
+	white-space: nowrap;
+}
+
+.modal-clear {
+	margin-top: 10px;
 }
