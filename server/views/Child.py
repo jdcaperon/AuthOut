@@ -58,7 +58,7 @@ def specified(child_id):
     if request.method == 'GET':
 
         parents = []
-        parents_query = db.session.query(ParentModel)
+        parents_query = db.session.query(ParentModel).order_by(ParentModel.id)
         for parent in parents_query:
             parent_dict = parent.as_dict()
             for temp_child in parent_dict['children']:
