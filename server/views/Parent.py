@@ -33,8 +33,6 @@ def core():
         container = []
         parents = db.session.query(ParentModel).order_by(ParentModel.id)
         for parent in parents:
-            print(parent.email)
-            print(parent.children)
             container.append(parent.as_dict())
         return jsonify(container)
 
@@ -84,7 +82,6 @@ def photo(parent_id):
     # Updates a specific parent
     elif request.method == 'PUT':
         data = request.get_json(force=True)
-        print(data)
         if 'user_photo' in data:
             set_parent_photo(parent_id, base64.decodestring(bytes(data['user_photo'], 'ASCII')))
             return Response('', 200)
