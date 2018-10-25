@@ -63,7 +63,7 @@ def specified(child_id):
             parent_dict = parent.as_dict()
             for temp_child in parent_dict['children']:
                 if temp_child['id'] == child_id:
-                    parents.append(parent_dict['first_name'])
+                    parents.append(parent_dict['first_name'] + " " + parent_dict['last_name'])
 
         child_dict = child.as_dict()
         child_dict['parents'] = parents

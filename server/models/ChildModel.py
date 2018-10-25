@@ -42,11 +42,11 @@ class ChildModel(db.Model):
                 return False
         return True
 
-    def load(self, data: dict):
+    def load(self, data: dict, check=True):
         """
         Loads a dictionaries values into the model.
         """
-        if not self.required(data):
+        if check and  not self.required(data):
             return False
         for i in self.required_keys:
             if i == "date_of_birth":
