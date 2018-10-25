@@ -46,12 +46,12 @@ class ChildModel(db.Model):
         """
         Loads a dictionaries values into the model.
         """
-        if check and  not self.required(data):
-            return False
-        for i in self.required_keys:
-            if i == "date_of_birth":
-                setattr(self, i, datetime.strptime(data[i], '%d/%m/%Y'))
-            else:
-                setattr(self, i, data[i])
+        for i in data:
+            if i in self.required_keys or i in self.extra_keys:
+                if i == "date_of_birth":
+                    setattr(self, i, datetime.strptime(data[i], '%d/%m/%Y'))
+                else:
+                    setattr(self, i, data[i])
+
         print(self)
         return True
