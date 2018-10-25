@@ -10,7 +10,12 @@
              header('Location: index.php');
              exit();
          }
-    }
+    } else {
+		if ($isIndex){
+			header('Location: live.php');
+            exit();
+        }
+	}
 ?>
 
 <head>

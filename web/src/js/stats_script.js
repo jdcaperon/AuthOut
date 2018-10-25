@@ -84,7 +84,7 @@ $(document).ready(function() {
 			},
 			title: {
 				display: true,
-				text: 'Average Attendance'
+				text: 'Average Attendance Per Day'
 			},
 			responsive:true,
 			maintainAspectRatio: false,
@@ -108,6 +108,7 @@ $(document).ready(function() {
 		data: {
 			labels: ["<6AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "6PM+"],
 			datasets: [{
+				label: "Sign-in Times",
 			    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			    backgroundColor: '#03BABD',
 				borderColor: '#03BABD',
@@ -115,6 +116,7 @@ $(document).ready(function() {
 				fill: false
 			},
 			{
+				label: "Sign-out Times",
 			    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			    backgroundColor: '#BC72AF',
 				borderColor: '#BC72AF',
@@ -124,11 +126,12 @@ $(document).ready(function() {
 		},
 		options: {
 			legend: {
-				display: false
+				display: true,
+				position: 'right'
 			},
 			title: {
 				display: true,
-				text: 'Average Actions During the Day'
+				text: 'Average Actions Per Hour'
 			},
 			responsive:true,
 			maintainAspectRatio: false,

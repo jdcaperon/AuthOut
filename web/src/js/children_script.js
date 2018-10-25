@@ -27,6 +27,7 @@ $(document).ready(function() {
 					selectedChildren = $(this).val();
 				}).multipleSelect({
 					width: '100%',
+					padding: "10px",
 					placeholder: "Please select a parent"
 				});
 			

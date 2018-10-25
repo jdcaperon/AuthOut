@@ -13,6 +13,8 @@ $(document).ready(function() {
 	// children selected before opening the form
 	var childrenBeforeChange;
 	var trustedChildrenBeforeChange;
+	// Tracks if the table is updating
+	var tableNeedsUpdate = true;
 	
 // -------------------------- Children List ---------------------------------
 
@@ -106,6 +108,8 @@ $(document).ready(function() {
 		
 			table = $('#parent-table').DataTable();
 			$('.dataTables_length').addClass('bs-select');
+			// Set update flag to false
+			var tableNeedsUpdate = false;
 			
 			// Setup function for clicking a row
 			$("#parent-table tbody").on( 'click', 'tr', function () {
@@ -150,6 +154,7 @@ $(document).ready(function() {
 					$(allChildren).each(function (key2, value2) {
 						if (value['id'] == value2['id']) {
 							toSelectTrusted.push(value['id']);
+							trustedChildrenBeforeChange.push(value['id']);
 						}
 						
 					});
@@ -182,6 +187,9 @@ $(document).ready(function() {
 						
 				// Hide overlay
 				$(".content").LoadingOverlay("hide", true);	
+				
+				// Set update flage to false
+				tableNeedsUpdate = false;
 			}
 			
 		});
@@ -223,6 +231,9 @@ $(document).ready(function() {
 				image: "",
 				text: "Updating..."
 			});
+			
+			// Set update flag to true
+			tableNeedsUpdate = true;
 			
 			var toSend = {
 				"first_name": fname,
@@ -284,8 +295,7 @@ $(document).ready(function() {
 					}
 					
 					if (childrenToDelete.length > 0) {
-						console.log("Deleting children: " + childrenToDelete);
-						//deleteChildren(childrenToDelete);
+						deleteChildren(childrenToDelete);
 					}
 					
 					if (trustedToAdd.length > 0) {
@@ -293,13 +303,15 @@ $(document).ready(function() {
 					}
 					
 					if (trustedToDelete.length > 0) {
-						console.log("Deleting trusted: " + trustedToDelete);
-						//deleteTrusted(trustedToDelete);
+						deleteTrusted(trustedToDelete);
 					}
 					
 					// Wait for all ajax requests to finish
-					$(document).ajaxStop(function () {				
-						updateTable();				
+					$(document).ajaxStop(function () {
+						if (tableNeedsUpdate == true) {
+							updateTable();
+						}
+									
 					});
 				}
 			});
@@ -315,8 +327,8 @@ $(document).ready(function() {
 		};
 					
 		$.ajax({
-			method: "DELTE",
-			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children",
+			method: "DELETE",
+			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children/trusted",
 			data: JSON.stringify(toSend),
 			success: function(data) {
 				;
@@ -349,7 +361,7 @@ $(document).ready(function() {
 		};
 					
 		$.ajax({
-			method: "DELTE",
+			method: "DELETE",
 			url: "https://deco3801.wisebaldone.com/api/parent/" + id + "/children",
 			data: JSON.stringify(toSend),
 			success: function(data) {

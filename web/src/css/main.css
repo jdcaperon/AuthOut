@@ -196,6 +196,10 @@ html, body {
 	padding: 4vw;
 }
 
+input[data-name=selectItemparents] + span, input[data-name=selectItemchildren] + span, input[data-name=selectItemtrustedChildren] + span {
+	padding-left: 10px;
+}
+
 /* ------------------------- Tables ------------------------------------ */
 .paginate_button .dataTables_paginate .page-item {
 	padding: 0 !important;
