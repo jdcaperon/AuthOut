@@ -108,7 +108,6 @@ $(document).ready(function() {
 				
 				// Loop over all parents
 				$(data['parents']).each(function (key, value) {
-					console.log(value);
 					// Add to select list
 					$("#modal-parent-select-list").append($('<option>', {
 						text: value

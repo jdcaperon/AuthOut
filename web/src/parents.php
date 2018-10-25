@@ -46,7 +46,12 @@
 							<input type="text" name="id" disabled></input>
 							<br>
 							<label for="children">Children:</label>
-							<select name="children" id="child-select-list" disabled multiple size="3">
+							<select name="children" id="child-select-list"  multiple size="3">
+								<!-- Populated from database -->
+							</select>
+							<br>
+							<label for="trustedChildren">Trusted Children:</label>
+							<select name="trustedChildren" id="trusted-child-select-list" multiple size="3">
 								<!-- Populated from database -->
 							</select>
 							<br>

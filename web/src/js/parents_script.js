@@ -5,13 +5,41 @@ $(document).ready(function() {
 	$('#form-modal').modal({ show: false});
 	// parent ID to be edited
 	var id;
+	
+// -------------------------- Parents List ---------------------------------
+
+	$.ajax({
+		method: "Get",
+		url: "https://deco3801.wisebaldone.com/api/child",
+		success: function(data) {
+			$(data).each(function(kay, value) {
+				var name = value['first_name'] + " " + value['last_name'];
+				var id = value['id'];
+				
+				// Add to select list
+				$("#child-select-list").append($('<option>', {
+					value: id,
+					text: name
+				}));
+				
+				// Change to multiple select plugin
+				$('#child-select-list').change(function() {
+					selectedChildren = $(this).val();
+				}).multipleSelect({
+					width: '100%',
+				});
+			
+			});
+
+		}
+	});
 
 // -------------------------- Table and Modal --------------------------------
 	
 	$.ajax({
 		method: "Get",
 		url: "https://deco3801.wisebaldone.com/api/parent",
-		success: function(data) {		
+		success: function(data) {
 			$('#parent-table').DataTable({
 				"ordering": false, // false to disable sorting (or any other option),
 				"bLengthChange": false,
