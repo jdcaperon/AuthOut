@@ -422,8 +422,35 @@ $(document).ready(function() {
 			method: "DELETE",
 			url: "https://deco3801.wisebaldone.com/api/parent/" + id,
 			success: function(data) {
-				console.log(data);
 				updateTable();
+			}, error: function(data) {
+				// Hide overlay
+				$(".content").LoadingOverlay("hide", true);
+				
+				// Show overlay
+				$(".box-inner").LoadingOverlay("show", {
+					image: "",
+					text: "Unable to delete."
+				});
+				
+				// Hide overlay after 2 seconds
+				setTimeout(function(){
+					$(".box-inner").LoadingOverlay("hide");
+				}, 2000);
+				
+				$.ajax({
+					method: "Get",
+					url: "https://deco3801.wisebaldone.com/api/parent",
+					success: function(data) {
+						table.clear();
+						table.rows.add(data).draw();
+						
+						// Set update flage to false
+						tableNeedsUpdate = false;
+					}
+					
+				});
+				
 			}
 			
 		});
