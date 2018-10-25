@@ -1,2 +1,6 @@
-DELETE http://localhost:5000/parent/1/children/1 HTTP/1.1
+DELETE http://localhost:5000/parent/1/children HTTP/1.1
 content-type: application/json
+
+{
+    "children": [1]
+}

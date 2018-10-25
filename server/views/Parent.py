@@ -130,8 +130,50 @@ def children(parent_id):
         data = request.get_json(force=True)
         if "children" in data:
             for i in data["children"]:
-                child = parent.children.filter_by(id=i).first()
+                child = db.session.query(ChildModel).filter_by(id=i).first()
                 parent.children.remove(child)
+        db.session.add(parent)
+        db.session.commit()
+        return Response('', 200)
+    # Default case.
+    else:
+        return Response('', 404)
+
+
+@bp.route('/<int:parent_id>/children/trusted', methods=['GET', 'POST', 'DELETE'])
+def trusted_children(parent_id):
+    """
+    Sub endpoint to get trusted children of the parents. Endpoint includes getting the children,
+    Adding children through POST and deleting children.
+    """
+    parent = db.session.query(ParentModel).filter_by(id=parent_id)
+    if parent.count() != 1:
+        return Response('', 400)
+    parent = parent.first()
+    # Gets the information of a specific parent.
+    if request.method == 'GET':
+        holder = {"children:": parent.as_dict()["trusted_children"]}
+        return jsonify(holder)
+    # Updates a specific parent
+    elif request.method == 'POST':
+        data = request.get_json(force=True)
+        if "children" in data:
+            for i in data["children"]:
+                child = db.session.query(ChildModel).filter_by(id=i).first()
+                if child is not None:
+                    parent.trusted_children.append(child)
+            db.session.add(parent)
+            db.session.commit()
+            return Response('', 200)
+        else:
+            return Response('', 400)
+    # Deletes a particular child
+    elif request.method == 'DELETE':
+        data = request.get_json(force=True)
+        if "children" in data:
+            for i in data["children"]:
+                child = db.session.query(ChildModel).filter_by(id=i).first()
+                parent.trusted_children.remove(child)
         db.session.add(parent)
         db.session.commit()
         return Response('', 200)
