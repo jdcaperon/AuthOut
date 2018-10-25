@@ -28,6 +28,7 @@ def core():
                 for parent_id in data['parent_id']:
                     parent = db.session.query(ParentModel).filter_by(id=parent_id).first()
                     if parent is None:
+                        print("Parent is none")
                         return Response('', 400, {})
                     child = db.session.query(ChildModel).filter_by(id=child.id).first()
                     if child is not None:
@@ -36,6 +37,7 @@ def core():
                     db.session.commit()
 
             return jsonify(response)
+        print("data is invalid")
         return Response('', 400, {})
     else:
         # list all the parents.
