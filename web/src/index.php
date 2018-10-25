@@ -51,12 +51,12 @@
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			      <div class="modal-body">
+			      <div class="modal-body" style="text-align: center;">
 			        <p>Please contact your manager for your account information.</p>
-					<p>If you are the manager, check your AuthOut start-up pack!</p>
+					<p style="margin-bottom: 0;">If you are the manager, check your AuthOut start-up pack!</p>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-secondary narrow-rounded-button purple-button" data-dismiss="modal">Close</button>
 			      </div>
 			    </div>
 			  </div>
