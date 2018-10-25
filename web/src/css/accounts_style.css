@@ -17,7 +17,7 @@
 	align-items: center;
 }
 
-#table-box  div{
+#table-box > div{
 	width: calc(100% + 20px);
 }
 
