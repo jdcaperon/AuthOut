@@ -56,7 +56,19 @@ def specified(child_id):
     child = child.first()
     # Gets the information of a specific parent.
     if request.method == 'GET':
-        return jsonify(child.as_dict())
+
+        parents = []
+        parents_query = db.session.query(ParentModel)
+        for parent in parents_query:
+            parent_dict = parent.as_dict()
+            for temp_child in parent_dict['children']:
+                if temp_child['id'] == child_id:
+                    parents.append(parent['first_name'])
+
+        child_dict = child.as_dict()
+        child_dict['parents'] = parents
+
+        return jsonify(child_dict)
     # Updates a specific parent
     elif request.method == 'PUT':
         data = request.get_json(force=True)
