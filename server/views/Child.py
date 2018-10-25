@@ -28,8 +28,7 @@ def core():
                 for parent_id in data['parent_id']:
                     parent = db.session.query(ParentModel).filter_by(id=parent_id).first()
                     if parent is None:
-                        sys.stderr.write("Parent is none\n")
-                        return Response('', 400, {})
+                        return Response('Parent was none', 400, {})
                     child = db.session.query(ChildModel).filter_by(id=child.id).first()
                     if child is not None:
                         parent.children.append(child)
@@ -37,8 +36,7 @@ def core():
                     db.session.commit()
 
             return jsonify(response)
-        sys.stderr.write("data is invalid\n")
-        return Response('', 400, {})
+        return Response('Invalid', 400, {})
     else:
         # list all the parents.
         container = []
