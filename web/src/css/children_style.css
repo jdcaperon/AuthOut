@@ -1,0 +1,89 @@
+/* ---------- Bootstrap Changes --------- */
+
+.row-override {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.col-8, .col-4 {
+	padding: 0;
+}
+
+/* ----------------------- Tables -------------------------- */
+#child-table tbody tr:hover {
+	background-color: rgba(0,0,0,.15);
+}
+
+
+/* -------------------- Add account form ------------------------- */
+
+#add-title {
+	text-align: center;
+}
+
+#user{
+	margin: 4vh auto 1vh auto;
+	text-align: center;
+	width:calc(80px + 1vh);
+	height:calc(80px + 1vh);
+	
+	display: block;
+	color:#03BABD;
+}
+
+#submit{
+	margin:4vh auto;
+	width:90%;
+}
+
+label{
+	font-size:calc(12px + 1vh);
+}
+form>input{
+	font-size:calc(12px + 1vh) !important;
+}
+
+.form-group{
+	margin: 1vh 0;
+}
+
+@media screen and ( max-height: 700px ) {
+	#user{
+		margin: 4vh auto 1vh auto;
+		text-align: center;
+		width:calc(40px + 1vh);
+		height:calc(40px + 1vh);
+
+		display: block;
+		color:#03BABD;
+	}
+
+	label{
+		font-size:calc(6px + 1vh);
+	}
+	
+	form>input{
+		font-size:calc(6px + 1vh) !important;
+	}
+}
+
+/* -------------------- Modal style ------------------------------ */
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}

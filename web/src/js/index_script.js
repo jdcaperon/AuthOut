@@ -3,6 +3,10 @@ $(document).ready(function() {
 		// Clear validity
 		var emailInput = document.querySelector("#username");
 		emailInput.setCustomValidity("");
+		
+		if (!validateEmail($("#username").val())) {
+			emailInput.setCustomValidity("Invalid email address");
+		}
 
 		if($("#login-form")[0].checkValidity() ){
 			// Show overlay
@@ -44,5 +48,10 @@ $(document).ready(function() {
 		}
 		
 	});
+	
+	function validateEmail(email) {
+		// https://www.w3resource.com/javascript/form/email-validation.php
+		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+	}
 
 });

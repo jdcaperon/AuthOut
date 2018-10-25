@@ -195,3 +195,8 @@ html, body {
 	width: 100%;
 	padding: 4vw;
 }
+
+/* ------------------------- Tables ------------------------------------ */
+.paginate_button .dataTables_paginate .page-item {
+	padding: 0 !important;
+}
