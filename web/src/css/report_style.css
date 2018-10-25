@@ -15,15 +15,6 @@
 	margin: 0;
 }
 
-/* -------------------------- Rows ---------------------------- */
-#top-row {
-	height: 20%;
-}
-
-#bottom-row {
-	height: 80%;
-}
-
 /* ---------------------- Table ---------------------- */
 
 #table-box{
@@ -31,8 +22,6 @@
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
-	
-	
 }
 
 #table-box div{
@@ -46,35 +35,40 @@
 }
 
 #table-box h3{
-text-align: left;
-width:100%;
+	text-align: left;
+	width:100%;
 }
 
-/* ----------------------- Child Select -------------------- */
-
-#child-select-box{
-	height: 20%;
+.content, .box-outer, .box-inner {
+	overflow: visible;
 }
 
-#child-select-box h3 {
-	padding: 10px;
-}
-
-#child-select-box .box-inner {
+.box-inner {
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
-	min-height: 180px;
 }
 
-#child-select-box .box-inner .row {
-	width: 1000px;
+/* ----------------------- Child Select and Report -------------------- */
+
+#child-reporting {
+	min-height: 780px;
+	margin-bottom: 30px;
+}
+
+#child-select-box {
+	max-height: 140px;
 }
 
 #child-select-box .col-4 {
-	min-width: 300px;
 	text-align: center;
+}
+
+#generate-button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #date-select input {
@@ -83,18 +77,9 @@ width:100%;
 	padding: 0 10px;
 }
 
-#child-select-list {
+#child-report-box {
+	padding-top: 40px;
 	width: 100%;
-	vertical-align: middle;
-}
-
-#child-select-box .center-group {
-	width: 77%;
-}
-
-#child-select-box .box-inner {
-	position: relative;
-	padding:0 4vw;
 }
 
 /* ------------------------ Buttons ------------------------ */
