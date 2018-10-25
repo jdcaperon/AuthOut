@@ -128,6 +128,8 @@ $(document).ready(function() {
 				$('#form-modal').modal('show');
 			});
 			
+			$("#child-table tbody").css("cursor", "pointer");
+			
 		}
 		
 	});

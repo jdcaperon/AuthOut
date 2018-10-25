@@ -174,6 +174,8 @@ $(document).ready(function() {
 				
 			});
 			
+			$("#parent-table tbody").css("cursor", "pointer");
+			
 		}		
 		
 	});
