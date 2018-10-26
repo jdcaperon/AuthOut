@@ -1,3 +1,26 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.app.DatePickerDialog;
@@ -6,23 +29,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.oob.SignUp;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+
 
 public class SignUpChildActivity extends AppCompatActivity {
 
@@ -31,10 +50,8 @@ public class SignUpChildActivity extends AppCompatActivity {
     public EditText firstName;
     public EditText surname;
     public EditText dateOfBirth;
-    private ListView listview;
     private ArrayList<ArrayList<String>> children;
     private ChildSignupListAdapter childSignupListAdapter;
-    private RecyclerView childSignupSelectorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +65,28 @@ public class SignUpChildActivity extends AppCompatActivity {
         setUpCalendarPicker();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        childSignupSelectorView = findViewById(R.id.child_selector);
+        RecyclerView childSignupSelectorView = findViewById(R.id.child_selector);
         assert (childSignupSelectorView != null);
 
         childSignupSelectorView.setLayoutManager(layoutManager);
         childSignupListAdapter = new ChildSignupListAdapter(children, this);
         childSignupSelectorView.setAdapter(childSignupListAdapter);
 
-
     }
 
+    /** User clicked the back button
+     *
+     * @param v - the current view
+     */
     public void backClicked(View v) {
         finish();
     }
 
+
+    /** User clicked the next button
+     *
+     * @param v - the current view
+     */
     public void nextClicked(View v) {
         if (children.size() > 0) {
             Intent intent = new Intent(this, SignUpReviewActivity.class);
@@ -74,9 +99,13 @@ public class SignUpChildActivity extends AppCompatActivity {
         }
     }
 
+    /** 'Register Child' button clicked
+     *
+     * @param v - the current view
+     */
     public void addChild(View v) {
         if (validateInputs()) {
-            children.add(new ArrayList<String>(Arrays.asList(firstName.getText().toString(),
+            children.add(new ArrayList<>(Arrays.asList(firstName.getText().toString(),
                     surname.getText().toString(), dateOfBirth.getText().toString())));
 
             childSignupListAdapter.notifyDataSetChanged();
@@ -86,12 +115,17 @@ public class SignUpChildActivity extends AppCompatActivity {
         }
     }
 
+    /** Clears the {@link EditText} widgets for child information*/
     private void clearTexts() {
         firstName.getText().clear();
         surname.getText().clear();
         dateOfBirth.getText().clear();
     }
 
+    /** Evaluates the {@link EditText} widgets on screen and checks if they are empty,
+     *
+     * @return boolean value determining if the edit texts are valid
+     */
     private boolean validateInputs() {
         boolean isValid = true;
         List<EditText> inputs = new ArrayList<>(Arrays.asList(firstName, surname, dateOfBirth));
@@ -107,6 +141,7 @@ public class SignUpChildActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /** Function to set up the calendar picker for date of births*/
     private void setUpCalendarPicker() {
 
         myCalendar = Calendar.getInstance();
@@ -134,8 +169,9 @@ public class SignUpChildActivity extends AppCompatActivity {
         });
     }
 
+    /** Updates the date of birth text based on the date selected in the calendar picker */
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
         dateOfBirth.setText(sdf.format(myCalendar.getTime()));
         dateOfBirth.setBackground(getDrawable(R.drawable.signup_input_background));

@@ -1,61 +1,56 @@
-/* Login Styling */
-
-#login header h1 {
-	color: #DCA726;
-	display: inline-block;
-	vertical-align: top;
-	font-size: 4em;
+body{
+	background-color: #FBFBFB;
 }
+/* Login Logo */
 
 #login-logo {
-	height: 150px;
-	margin: 10px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
-/* Login Icon */
+#login-logo h1 {
+	color: #DCA726;
+	vertical-align: top;
+	font-size: 2em;
+	margin: 1rem 0 3rem 0;
+}
 
-#login-icon {
-	font-size: 200px;
-	color: #3B3E3A;
-	display: block;
-	margin-bottom: 30px;
+#login-logo img {
+	height: 90px;
+	margin: 0;
 }
 
 /* Login Form */
 
 #login-form {
 	text-align: right;
-	margin-bottom: 40px;
-	width: 460px;
-}
-
-#login-form  label {
-	color: #03BABD;
-	margin: 0 10px 0 0;
-	font-size: 1.2em;
-	float: left;
-}
-
-#login-form  input {
-	float: right;
-	border: 1px solid gray;
-	width: 180px;
+	margin-bottom: 20px;
+	width: 250px;
+	margin: 0 auto 3rem auto;
+	padding:0;
 }
 
 #login-form div {
-	width: 70%;
-	margin: 0 auto;
-	margin-bottom: 10px;
+	width: 100%;
+
+}
+#login-form input[type="text"]{
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#login-form input[type="password"]{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 /* Login Window */
-
 #login-window {
-	background-color: #FBFBFB;
-	box-shadow: 0px 0px 150px #C9CAC9;
 	width: 40%;
 	min-width: 500px;
-	min-height: 550px;
+	max-width: 500px;
+	min-height: 500px;
+	max-height: 550px;
 	position: absolute;
     top: 50%;
     left: 50%;
@@ -67,4 +62,10 @@
 
 #login-content {
 	padding: 10px 0;
+	text-align: center;
+}
+
+
+#login-content h3{
+	font-size:1.5rem;
 }

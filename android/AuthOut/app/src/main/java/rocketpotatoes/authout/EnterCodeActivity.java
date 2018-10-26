@@ -35,7 +35,6 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -139,20 +138,27 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("Response", response.toString().substring(0, 100));
+
                         //TODO if the code is matched move to the next activity with parent
                         //TODO if the code is not match put up a toast/handle it
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
 
+
+                        /*List<Child> childrenList = Util.buildChildList(response, false);
+                        List<Child> trustedChildrenList = Util.buildChildList(response, true);
+
+                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);*/
+
                         // ----------- Creating Dummy Parent -----------------------
                         List<Child> dummyChildren = new ArrayList<>();
                         List<Child> dummyTrusted = new ArrayList<>();
-                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out", 1));
+                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out", 2));
+                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out", 3));
+                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
 
 
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);
+                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted, 1);
                         // ---------------------------------------------------------
 
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);

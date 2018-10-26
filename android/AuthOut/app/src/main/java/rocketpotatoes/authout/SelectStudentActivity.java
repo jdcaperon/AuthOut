@@ -23,7 +23,6 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +41,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,15 +55,15 @@ import rocketpotatoes.authout.Helpers.Parent;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class SelectStudentActivity extends AppCompatActivity {
-    private static final String AUTHOUT_SIGNINOUT_URL = "http://httpbin.org/post";
+    private static final String AUTHOUT_SIGNINOUT_URL = "https://deco3801.wisebaldone.com/api/kiosk/signin";
     private Parent currentUser;
     private Button dynamicButton;
     private TextView dynamicText;
-    private GradientDrawable dynamicButtonBackground;
     private ChildSelectorAdapter mChildSelectorAdapter;
     private RequestQueue requestQueue;
     private List<Child> displayedChildren;
     private View progressOverlay;
+    private String photo;
 
     private View.OnClickListener madeSelectionListener = new View.OnClickListener() {
         @Override
@@ -82,7 +83,16 @@ public class SelectStudentActivity extends AppCompatActivity {
 
         mChildSelectorView.setLayoutManager(layoutManager);
 
+        if (getIntent().getExtras() == null) {
+            throw new IllegalStateException("No trusted children boolean packaged with intent");
+        }
+
         currentUser = getIntent().getExtras().getParcelable("PARENT");
+        photo = getIntent().getExtras().getString("PHOTO");
+
+        if (currentUser == null) {
+            throw new IllegalStateException("No parent object packaged with intent");
+        }
 
         setUpLayout(currentUser);
 
@@ -95,14 +105,17 @@ public class SelectStudentActivity extends AppCompatActivity {
      *
      * @param parent - current signed in user
      */
-    private void setUpLayout(Parent parent) {
+    private void setUpLayout(Parent parent) throws IllegalStateException {
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(getString(R.string.welcome_message, parent.getFirstName()));
 
         progressOverlay = findViewById(R.id.progress_overlay);
         dynamicText = findViewById(R.id.dynamicText);
         dynamicButton = findViewById(R.id.dynamicButton);
-        dynamicButtonBackground = (GradientDrawable) dynamicButton.getBackground();
+
+        if (getIntent().getExtras() == null) {
+            throw new IllegalStateException("No trusted children boolean packaged with intent");
+        }
 
         boolean shouldDisplayTrustedChildren =
                 getIntent().getExtras().getBoolean("DISPLAY_TRUSTED_CHILDREN");
@@ -124,6 +137,10 @@ public class SelectStudentActivity extends AppCompatActivity {
         changeButtonSettings(getOptionByChildren(displayedChildren));
     }
 
+    /** Function called when user clicks 'Sign in Others' button
+     *
+     * @param view - the current view
+     */
     public void signInOthers(View view) {
         Intent intent = new Intent(SelectStudentActivity.this, SelectStudentActivity.class);
         intent.putExtra("PARENT", currentUser);
@@ -131,11 +148,14 @@ public class SelectStudentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    /** Function called when user clicks the dynamic button
+     *
+     * @param view - the current view
+     */
     public void onMadeSelection(View view) {
         Set<Child> selectedChildren = mChildSelectorAdapter.getSelectedItems();
-        //TODO send proper request to the server
-        requestQueue.add(createRequest(selectedChildren.toString()));
+
+        requestQueue.add(createRequest(selectedChildren));
         Util.animateView(progressOverlay, View.VISIBLE, 0.8f, 200);
     }
 
@@ -190,8 +210,8 @@ public class SelectStudentActivity extends AppCompatActivity {
 
     /**
      *
-     * @param option
-     * @param children
+     * @param option - {@link DynamicButtonOption} to change text for
+     * @param children - list of currently selected children
      */
     private void changeText(DynamicButtonOption option, List<Child> children) {
         StringBuilder text = new StringBuilder(createDynamicString(children));
@@ -263,12 +283,23 @@ public class SelectStudentActivity extends AppCompatActivity {
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
      * @return a {@link JsonObjectRequest}
      */
-    private JsonObjectRequest createRequest(String code) {
+    private JsonObjectRequest createRequest(final Set<Child> children) {
         JSONObject json = new JSONObject();
 
         //Adding contents to request
+        JSONArray childrenJSON = new JSONArray();
+
         try {
-            json.put("Code", code);
+            json.put("parent_id", currentUser.getId());
+            for (Child child : children) {
+                JSONObject temp = new JSONObject();
+                temp.put("id", child.getId());
+                boolean status = !child.getStatus().equals("Signed-In");
+                temp.put("status", status);
+                childrenJSON.put(temp);
+            }
+            json.put("children", childrenJSON);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -277,18 +308,19 @@ public class SelectStudentActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_SIGNINOUT_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO ensure there's no error, otherwise just move to final activity.
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
-                        Log.i("Response", response.toString().substring(0, 100));
+
                         Intent intent = new Intent(SelectStudentActivity.this, ConfirmFinishActivity.class);
+                        intent.putExtra("PHOTO", photo);
                         startActivity(intent);
                         finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: If this errors we retry the request.
                         Log.i("ResponseError", error.toString());
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
+                        Toast.makeText(SelectStudentActivity.this, "Oops, something went wrong. Try again.", Toast.LENGTH_SHORT).show();
                     }
 
                 });

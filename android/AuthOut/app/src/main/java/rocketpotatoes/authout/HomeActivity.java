@@ -24,6 +24,7 @@
 package rocketpotatoes.authout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -31,6 +32,8 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,10 +56,10 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int TIME_BETWEEN_PHOTOS = 500;
     private static final double SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.50;
     private static final double MIN_SIZE_OF_FACE_RELATIVE_TO_SCREEN = 0.35;
-    private static final String AUTHOUT_IMAGE_CHECK = "http://httpbin.org/post";
+    private static final String AUTHOUT_IMAGE_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login";
 
     private CameraKitView camera;
     private FaceDetector faceDetector;
@@ -81,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private AlertDialog moveCloserDialog;
     private View progressOverlay;
+    private NotRecognizedDialog dialog;
 
     private Point screenSize = new Point();
 
@@ -100,8 +104,8 @@ public class HomeActivity extends AppCompatActivity {
         public void run() {
             takePicture();
             Face face = faceProcessing();
-            // Ensure face is appropriate size to move forwards
             if (face != null) {
+                // Ensure face is appropriate size to move forwards
                 if (face.getWidth() > screenSize.x * SIZE_OF_FACE_RELATIVE_TO_SCREEN) {
                     moveCloserDialog.dismiss();
                     Log.i("MainActivity", "Face Detected");
@@ -132,6 +136,20 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean isAccessed = prefs.getBoolean(getString(R.string.is_accessed), false);
+        if(!isAccessed) {
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
+            edit.apply();
+            Intent intent = new Intent(this, SignUpActivity.class);
+            intent.putExtra("ADMIN_SIGNUP", true);
+            startActivity(intent);
+            finish();
+        }
+
+
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_home);
@@ -141,10 +159,15 @@ public class HomeActivity extends AppCompatActivity {
         builder.setTitle("Move closer");
         builder.setMessage("Please move closer to the camera.");
         moveCloserDialog = builder.create();
+        moveCloserDialog.setCanceledOnTouchOutside(false);
 
         //get screen size in order to get face size in relation to total screen size
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(screenSize);
+
+        dialog = new NotRecognizedDialog(
+                HomeActivity.this, handler, runnable, INITIAL_DELAY);
+        dialog.setCanceledOnTouchOutside(false);
 
         progressOverlay = findViewById(R.id.progress_overlay);
         camera = findViewById(R.id.camera);
@@ -161,18 +184,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-
-
         if (!StoragePermissionHelper.hasStoragePermission(this)) {
             StoragePermissionHelper.requestStoragePermission(this);
             return;
         }
-
         if (!CameraPermissionHelper.hasCameraPermission(this)) {
             CameraPermissionHelper.requestCameraPermission(this);
             return;
         }
-
         camera.onResume();
         handler.postDelayed(runnable, INITIAL_DELAY);
 
@@ -209,16 +228,21 @@ public class HomeActivity extends AppCompatActivity {
         return Util.bitmapToBase64(bitmapToSend, 50);
     }
 
+
+
+
+
+
     /**
      * Creates a {@link JsonObjectRequest} with a listener in order to handle response
      * @return a {@link JsonObjectRequest}
      */
-    private JsonObjectRequest createRequest(String userPhoto) {
+    private JsonObjectRequest createRequest(final String userPhoto) {
         JSONObject json = new JSONObject();
 
         //Adding contents to request
         try {
-            json.put("UserPhoto", userPhoto);
+            json.put("user_photo", userPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -227,43 +251,38 @@ public class HomeActivity extends AppCompatActivity {
                 (Request.Method.POST, AUTHOUT_IMAGE_CHECK, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO Create and set parent object here
-                        Log.i("Response", response.toString().substring(0, 100));
+
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
-                        //TODO if face is matched onResponse should move to the next activity
-                        //TODO if the response is null/not matched we move to a different activity
 
-                        // ----------- Creating Dummy Parent -----------------------
-                        List<Child> dummyChildren = new ArrayList<>();
-                        List<Child> dummyTrusted = new ArrayList<>();
-                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out"));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out"));
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out"));
+                        if (true) { // todo do an actual check here or does it error if no face is recognised
+                            List<Child> childrenList = Util.buildChildList(response, false);
+                            List<Child> trustedChildrenList = Util.buildChildList(response, true);
 
+                            Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted);
-                        // ---------------------------------------------------------
-
-
-                        //TODO Remove this once implementation is finished above.
-                        NotRecognizedDialog dialog = new NotRecognizedDialog(
-                                HomeActivity.this, handler, runnable, INITIAL_DELAY);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog.show();
-
-                        /*Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
-                        intent.putExtra("PARENT", dummyParent);
-                        intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
-                        startActivity(intent);
-                        finish();*/
+                            Intent intent = new Intent(HomeActivity.this, SelectStudentActivity.class);
+                            intent.putExtra("PARENT", parent);
+                            intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
+                            intent.putExtra("PHOTO", userPhoto);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            if (dialog.getWindow() != null) {
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            }
+                            dialog.show();
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Util.animateView(progressOverlay, View.GONE, 0, 200);
+                        if (dialog.getWindow() != null) {
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        }
+                        dialog.show();
                         Log.i("ResponseError", error.toString());
                     }
-
                 });
     }
 
@@ -298,7 +317,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] results) {
         if (requestCode == 0) {
             if (!StoragePermissionHelper.hasStoragePermission(this)) {
                 Toast.makeText(this, getString(R.string.storage_perms), Toast.LENGTH_LONG)
@@ -320,5 +339,10 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    public void openAdmin(View v) {
+        Intent intent = new Intent(this, AdminLoginActivity.class);
+        startActivity(intent);
     }
 }

@@ -1,18 +1,113 @@
-#chart, #piechart{
-	width:80%;
+#chart {
+	width:100%;
 	margin: auto;
 
 }
-
 #admin-content{
 	top:80px;
 	height:calc(100% - 80px);
 	padding: 0 5vw;
 	position:relative;
 	margin:auto;
+	width:100%;
 	overflow: auto;
 }
 
-h3{
-	margin: auto;
+#table-wrapper {
+	width: 60vw;
+	overflow-y: hidden;
+	margin: 0 auto 5vh 0;
+}
+
+#title{
+	margin: 3vh auto;
+}
+
+
+#admin-content .container{
+	width:100% !important;
+	margin:0;
+	max-width: none !important;
+	padding:2vh 2vw;
+}
+
+.container h5{
+	margin:2vh auto;
+	font-size: 2vh;
+}
+.row{
+	width:100% !important;
+	max-width: none !important;
+}
+.pie{
+	height:25vh;
+	width:50vh;
+	margin:auto;
+}
+
+#admin-content h3{
+	padding: 1vh 0;
+}
+
+tbody{
+	background-color: #e8e9eb !important;
+}
+
+
+.header-fixed {
+    width: 100%
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 450px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 32%;
+    float: left;
+	overflow: hidden;
+}
+
+.header-fixed > tbody > tr > .small-col,
+.header-fixed > thead > tr > .small-col {
+    width: 15%;
+    float: left;
+	overflow: hidden;
+}
+
+
+.header-fixed > tbody > tr > .medium-col,
+.header-fixed > thead > tr > .medium-col {
+    width: 21%;
+    float: left;
+	overflow: hidden;
+}
+
+#export-link{
+	background-color: #03BABD !important;
+	border: none;
+}
+
+#export-link:hover {
+	background-color: #DCA726 !important;
+
 }

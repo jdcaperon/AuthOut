@@ -143,7 +143,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/child_selector"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@id/review"
         app:layout_constraintTop_toBottomOf="@id/registeredChildren"

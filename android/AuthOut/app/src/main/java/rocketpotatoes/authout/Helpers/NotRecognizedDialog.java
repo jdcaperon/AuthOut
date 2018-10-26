@@ -80,7 +80,7 @@ public class NotRecognizedDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
-                Intent intent = new Intent(activity, AdminActivity.class);
+                Intent intent = new Intent(activity, EnterCodeActivity.class);
                 activity.startActivity(intent);
                 activity.finish();
             }

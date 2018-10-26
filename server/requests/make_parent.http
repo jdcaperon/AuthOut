@@ -1,12 +1,12 @@
 
 
-POST https://deco3801.wisebaldone.com/api/parent/ HTTP/1.1
+POST http://localhost:5000/parent/ HTTP/1.1
 content-type: application/json
 
 {
-    "email": "james@example.com",
-    "first_name": "James",
-    "last_name": "Stuart",
+    "email": "yolo@example.com",
+    "first_name": "yolo",
+    "last_name": "Steve",
     "date_of_birth": "10/11/1996",
     "mobile_number": "0411862174"
 }

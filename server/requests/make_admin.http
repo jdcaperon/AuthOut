@@ -1,0 +1,10 @@
+
+
+POST http://localhost:5000/admin/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "admin@rocketpotatoes.com",
+    "password": "rocket",
+    "name": "Tom Richardson"
+}
