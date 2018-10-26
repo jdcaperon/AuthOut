@@ -66,7 +66,7 @@ public class Util {
             for (int i = 0; i < children.length; i++) {
                 String child = children[i];
                 if (i > 0) {
-                    child = "{" + child; //todo this is dodge as fuck clean it up
+                    child = "{" + child; //This is bad code but I'm leaving it
                 }
 
                 JSONObject childObject = new JSONObject(child);

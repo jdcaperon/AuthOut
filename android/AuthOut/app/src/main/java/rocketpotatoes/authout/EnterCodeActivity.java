@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -42,7 +43,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rocketpotatoes.authout.Helpers.Child;
@@ -50,7 +50,7 @@ import rocketpotatoes.authout.Helpers.Parent;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class EnterCodeActivity extends AppCompatActivity implements View.OnClickListener{
-    private static final String AUTHOUT_CODE_URL = "http://httpbin.org/post";
+    private static final String AUTHOUT_CODE_URL = "https://deco3801.wisebaldone.com/api/kiosk/signin_code";
     private StringBuilder codeInputBuilder;
     private EditText codeInput;
     private Button submitButton;
@@ -116,6 +116,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
         }
         codeInputBuilder.deleteCharAt(codeInputBuilder.length() - 1);
         codeInput.setText(codeInputBuilder.toString());
+        codeInput.setBackground(getDrawable(R.drawable.signup_input_background));
         submitButton.setEnabled(false);
     }
 
@@ -128,7 +129,7 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
 
         //Adding contents to request
         try {
-            json.put("Code", code);
+            json.put("code", Integer.parseInt(code));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -137,32 +138,16 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                 (Request.Method.POST, AUTHOUT_CODE_URL, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Response", response.toString().substring(0, 100));
-
-                        //TODO if the code is matched move to the next activity with parent
-                        //TODO if the code is not match put up a toast/handle it
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
 
 
-                        /*List<Child> childrenList = Util.buildChildList(response, false);
+                        List<Child> childrenList = Util.buildChildList(response, false);
                         List<Child> trustedChildrenList = Util.buildChildList(response, true);
 
-                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);*/
-
-                        // ----------- Creating Dummy Parent -----------------------
-                        List<Child> dummyChildren = new ArrayList<>();
-                        List<Child> dummyTrusted = new ArrayList<>();
-                        dummyChildren.add(new Child("Ryan", "Bloggs", "Signed-Out", 1));
-                        dummyChildren.add(new Child("Jack", "Bloggs", "Signed-Out", 2));
-                        dummyChildren.add(new Child("Evan", "Bloggs", "Signed-Out", 3));
-                        dummyTrusted.add(new Child("Jack", "Bloggs", "Signed-Out", 4));
-
-
-                        Parent dummyParent = new Parent("Katie", "Bloggs", dummyChildren, dummyTrusted, 1);
-                        // ---------------------------------------------------------
+                        Parent parent = Util.buildParent(response, childrenList, trustedChildrenList);
 
                         Intent intent = new Intent(EnterCodeActivity.this, SelectStudentActivity.class);
-                        intent.putExtra("PARENT", dummyParent);
+                        intent.putExtra("PARENT", parent);
                         intent.putExtra("DISPLAY_TRUSTED_CHILDREN", false);
                         startActivity(intent);
                         finish();
@@ -170,7 +155,9 @@ public class EnterCodeActivity extends AppCompatActivity implements View.OnClick
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
+                        Toast.makeText(EnterCodeActivity.this, "Invalid Code", Toast.LENGTH_LONG).show();
+                        codeInput.setBackground(getDrawable(R.drawable.signup_input_error));
                         Log.i("ResponseError", error.toString());
                     }
 

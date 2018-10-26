@@ -1,16 +1,38 @@
+/*
+ * MIT License
+
+ Copyright (c) 2018 Ryan Kurz
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 package rocketpotatoes.authout;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,18 +40,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
-import rocketpotatoes.authout.Helpers.Child;
-import rocketpotatoes.authout.Helpers.Parent;
+import java.util.HashMap;
+import java.util.Map;
 import rocketpotatoes.authout.Helpers.Util;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
-    private static final String AUTHOUT_ADMIN_CHECK = "https://deco3801.wisebaldone.com/api/kiosk/login"; //todo fix this
+    private static final String AUTHOUT_ADMIN_CHECK = "https://deco3801.wisebaldone.com/api/login";
     private View progressOverlay;
     private RequestQueue requestQueue;
     private EditText username;
@@ -48,17 +67,34 @@ public class AdminLoginActivity extends AppCompatActivity {
     }
 
 
+    /** onClick for login button
+     *
+     * @param v - the current view
+     */
     public void login(View v) {
-        if (username.getText().toString().equals("Ryan")) {
-            Intent intent = new Intent(this, AdminActivity.class);
-            startActivity(intent);
-        } else {
-            hintText.setText("Incorrect username or password");
+        boolean valid = true;
+        if (username.length() == 0) {
+            hintText.setText(getString(R.string.required_fields));
             hintText.setTextColor(Color.RED);
+            username.setBackground(getDrawable(R.drawable.signup_input_error));
+            valid = false;
         }
-        //todo add back requestQueue.add(createRequest());
+
+        if (password.length() == 0) {
+            hintText.setText(getString(R.string.required_fields));
+            hintText.setTextColor(Color.RED);
+            password.setBackground(getDrawable(R.drawable.signup_input_error));
+            valid = false;
+        }
+        if (valid) {
+            requestQueue.add(createRequest());
+        }
     }
 
+    /** onClick for cancel button
+     *
+     * @param v - the current view
+     */
     public void cancel(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -73,24 +109,17 @@ public class AdminLoginActivity extends AppCompatActivity {
         JSONObject json = new JSONObject();
 
         //Adding contents to request
-        try {
-            json.put("email", username.getText().toString());
-            json.put("password", password.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        final String usernameText = username.getText().toString();
+        final String passwordText = password.getText().toString();
 
         return new JsonObjectRequest
-                (Request.Method.POST, AUTHOUT_ADMIN_CHECK, json , new Response.Listener<JSONObject>() {
+                (Request.Method.GET, AUTHOUT_ADMIN_CHECK, json , new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         Util.animateView(progressOverlay, View.GONE, 0, 200);
-
-                        if (true) {  //todo finish this and set hint text if wrong data
-                            Intent intent = new Intent(AdminLoginActivity.this, AdminActivity.class);
-                            startActivity(intent);
-                        }
+                        Intent intent = new Intent(AdminLoginActivity.this, AdminActivity.class);
+                        startActivity(intent);
 
                     }
                 }, new Response.ErrorListener() {
@@ -98,8 +127,19 @@ public class AdminLoginActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Util.animateView(progressOverlay, View.GONE, 0.8f, 200);
                         Toast.makeText(AdminLoginActivity.this, "Oops, something went wrong. Try again.", Toast.LENGTH_SHORT).show();
+                        hintText.setText(getString(R.string.incorrect_info));
+                        hintText.setTextColor(Color.RED);
                         Log.i("ResponseError", error.toString());
                     }
-                });
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String>  params = new HashMap<>();
+                        String userAndPassword = usernameText + ":" + passwordText;
+                        final String basicAuth = "Basic " + Base64.encodeToString(userAndPassword.getBytes(), Base64.NO_WRAP);
+                        params.put("Authorization", basicAuth);
+                        return params;
+                    }
+        };
     }
 }

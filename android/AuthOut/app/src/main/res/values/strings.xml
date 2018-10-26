@@ -18,6 +18,7 @@
     <string name="confirm">Confirm</string>
     <string name="next">Next</string>
     <string name="edit">Edit</string>
+    <string name="login">Login</string>
 
     <!-- Title Texts-->
     <string name="enter_code">Enter Four (4) Digit Code</string>
@@ -26,6 +27,7 @@
     <string name="new_admin">Register new admin</string>
     <string name="all_done">All Done!</string>
     <string name="confirm_registration">Confirm Registration</string>
+    <string name="admin_login">AuthOut Admin Portal</string>
 
     <!-- Prompt Texts -->
     <string name="choose_option">Please choose an option:</string>
@@ -35,6 +37,7 @@
     <string name="signup">User Registration</string>
     <string name="admin_signup">Admin Registration</string>
     <string name="childsignup">Child Registration</string>
+    <string name="please_login">Please log in</string>
 
     <!-- Note Texts -->
     <string name="note">Contact admin for continuous issues</string>
@@ -46,6 +49,10 @@
     <string name="user_registration_photo">Photo for user Registration</string>
     <string name="child_photo_stub">Small photo depicting a person</string>
     <string name="can_review">All details will be able to be reviewed</string>
+    <string name="incorrect_info">Incorrect username or password</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="required_fields">All fields required</string>
 
     <!-- Registration Texts -->
     <string name="first_name">First Name</string>
