@@ -1,0 +1,6 @@
+DELETE http://localhost:5000/parent/1/children/trusted HTTP/1.1
+content-type: application/json
+
+{
+    "children": [1]
+}

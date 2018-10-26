@@ -13,39 +13,6 @@ pipeline {
         }
       }
     }
-    stage('Build & Test Product Web') {
-      steps {
-        script {
-          echo "Building Product Website"
-          sh "mkdir -p build/product"
-          sh "cd product && yarn && yarn test && yarn build"
-          sh "cp -r product/build/* build/product"
-        }
-      }
-    }
-    stage('Build Web application') {
-      steps {
-        script {
-          echo "Building Web application ( Doing Nothing )"
-        }
-      }
-    }
-    stage('Build Android application') {
-      steps {
-        script {
-          echo "Building Android application"
-          sh "cd android/AuthOut && ./gradlew build"
-        }
-      }
-    }
-    stage('Build Server') {
-      steps {
-        script {
-          echo "Building Server"
-          sh "cd server && echo doing nothing"
-        }
-      }
-    }
     stage('Publish to master') {
       when {
         expression {env.GIT_BRANCH == 'origin/master'}
@@ -66,13 +33,28 @@ pipeline {
 
             sshpass -e scp -o stricthostkeychecking=no -r build/product/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/html
 
-            sshpass -e scp -o stricthostkeychecking=no -r build/web/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/app
+            sshpass -e scp -o stricthostkeychecking=no -r web/src/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/app
+            
+            sshpass -e scp -o stricthostkeychecking=no -r product/src/* rocket@deco3801.wisebaldone.com:/var/www/deco3801.wisebaldone.com/prod
 
             sshpass -e scp -o stricthostkeychecking=no -r distribution/* rocket@deco3801.wisebaldone.com:/etc/nginx/sites-available/
 
             sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo systemctl restart nginx'
+
+            sshpass -e scp -o stricthostkeychecking=no -r server/* rocket@deco3801.wisebaldone.com:/home/rocket/api 
+
+            sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && sudo pip3 install -r requirements.txt'
+
+            sshpass -e ssh rocket@deco3801.wisebaldone.com 'cd ~/api && export APP_SETTINGS="config.DevelopmentConfig" && python3 manage.py db upgrade'
+
+            sshpass -e ssh rocket@deco3801.wisebaldone.com 'sudo service supervisor restart'
           '''
-        // Reboot nginx
+        }
+        withCredentials([string(credentialsId: 'prodPass', variable: 'SSHPASS')]) {
+          sh '''
+            sshpass -e scp -o stricthostkeychecking=no -r product/src/* s4359540@moss.labs.eait.uq.edu.au:/home/students/s4359540/deco3801dump
+            sshpass -e ssh s4359540@moss.labs.eait.uq.edu.au './movedeco.sh'
+          '''
         }
       }
     }

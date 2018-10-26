@@ -1,13 +1,17 @@
+/* -------- Page Structure --------- */
 html, body {
 	height: 100%;
 	width: 100%;
     position: relative;
     font-family: 'Montserrat', sans-serif;
+	background-color: #F2F3F1;
+	min-width: 960px;
+	z-index: -1000000;
 }
 
 .page_content {
-	height: 90%;
-	width: 100%;
+	height: 100%;
+	width: 90%;
     display: inline-block;
 }
 
@@ -15,53 +19,217 @@ html, body {
     margin: 0 5% 0 5%;
 }
 
-#logo{
-    height: 65px;
-}
-.navbar{
-    position: absolute;
-    width: 100%;
-    height: 110px;
-}
-#nav-line1{
-    position:absolute;
-    top:10px;
-    width:100%
-}
-#nav-line2{
-    width:100%;
-    position:absolute;
-    bottom:0;
-    line-height: 24px
 
+
+
+/* -------- Button styling --------- */
+
+.button_wrapper {
+	text-align: center;
 }
 
-#account-svg{
-    right:24px;
-    position:absolute;
-    font-size: 50px;
+.rounded-button, .narrow-rounded-button {
+	height: 40px;
+	width: 250px;
+	border: none;
+	border-radius: 200px;
+	white-space: nowrap;
+	color: #F2F3F1;
+	font-weight: bold;
+	display: block;
+	margin: 10px auto;
+	transition: 0.5s;
+	cursor: pointer;
 }
-#page-title{
-    height: 10%;
-    width:100%;
-    display: inline-block;
-    box-shadow: 1px 5px #F2F3F1;
+
+.rounded-button:focus{
+	border-color:transparent!important;
+	outline:none;
 }
+
+.narrow-rounded-button {
+	width: 150px;
+}
+
+.rounded-button:hover, .narrow-rounded-button:hover {
+	background-color: #DCA726;
+}
+
+.blue-button {
+	background-color: #03BABD;
+}
+
+.purple-button {
+	background-color: #BC72AF;
+}
+
+
+/* ------ Navigation TOPBAR -------- */
+#topbar{
+	height: 50px;
+	width: 100%;
+	background: #343a40 ;
+}
+
+#logo {
+    height: 35px;
+	display: inline-block;
+	margin: 7.5px 0.75rem;
+}
+
+#topbar a:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#topbar .col-md-11{
+	padding: 0;
+}
+#topbar #signout {
+	color:rgba(255,255,255,.5);
+	margin: 12px auto;
+	float:right;
+	max-width: 130px;
+	display: block;
+	height:25px;
+}
+
+/* ------ Navigation SIDEBAR -------- */
+
+.sidebar{
+    display: block;
+    width: 18%;
+    height: calc(100% - 50px);
+	top:50px;
+	padding: 0;
+	position:fixed;
+	min-width: 165px;
+	max-width: 220px;
+}
+
+/* Nav text and icons */
+.sidebar ul{
+	list-style: none;
+	padding: 0;
+	color:rgba(255,255,255,.5);
+}
+
+.sidebar ul li a{
+	font-size:16px;
+	color:rgba(255,255,255,.5);
+}
+
+.sidebar ul .nav-heading{
+	font-size:12px;
+	padding-top:1.5rem;
+}
+
 .nav-link{
-    display: inline;
-    line-height: 24px;
-    font-size: 21px;
+	padding-left:0;
+}
+
+.sidebar ul li{
+	padding: 0 0.75rem;
+}
+
+.feather {
+  margin-right: 0.75rem;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
 
 }
 
-.nav-item{
-    padding: 0 10px 0 10px;
+#prod-website{
+	font-size:16px;
+	margin-top: 1rem;
+	padding: 0.75rem;
 }
 
-.material-icons.lighter {
-    color: rgba(255,255,255,.5);
-    font-size: 24px;
-    padding:0px 10px;
-    display: inline-flex;
-    vertical-align: top;
+/* Nav text and icons hover*/
+.nav-item:hover:not(.nav-heading) {
+	background: #2C3137 !important;
+}
+
+#prod-website:hover, #prod-website:hover a {
+	text-decoration: underline;
+}
+
+/* ------------------ Content ---------------- */
+.content{
+	height: calc(100% - 50px);
+	width: 82%;
+	left: 18%;
+	display: block;
+	position: absolute;
+	overflow-y: scroll;
+	overflow-x: scroll;
+	min-height: 577px;
+	min-width: 1000px;
+	top:50px;
+	z-index: -10000;
+}
+
+/* when screen is larger than 1220px */
+@media screen and (min-width: 1220px) {
+  .content {
+    width: calc(100% - 220px);
+	min-height: 577px;
+	min-width: 1000px;
+	left:220px;
+  }
+
+}
+
+/* when screen is smaller than 916px */
+@media screen and (max-width: 916px) {
+  .content {
+    width: calc(100% - 165px);
+	left:165px;
+	min-height: 577px;
+	min-width: 1000px;
+  }
+
+}
+
+.box-outer {
+	height: 100%;
+	padding: 30px;
+	width: 100%;
+}
+
+.box-inner {
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	padding: 4vw;
+}
+
+input[data-name=selectItemparents] + span, input[data-name=selectItemchildren] + span, input[data-name=selectItemtrustedChildren] + span {
+	padding-left: 10px;
+}
+
+/* ------------------------- Tables ------------------------------------ */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0;
+	margin-top: 1.2em;
+}
+
+.paginate_button.page-item:hover {
+	/*background-color: pink !important;*/
+	padding: 0;
+	margin-top: 1.2em;
+}
+
+.dataTables_wrapper {
+    font-size: 15px;
+
+}
+
+.page-item.active .page-link{
+	background-color: #03BABD;
+	border: 1px solid #dee2e6;
+}
+.page-link {
+	color:#03BABD;
 }

@@ -1,0 +1,8 @@
+POST http://localhost:5000/child/ HTTP/1.1
+content-type: application/json
+
+{
+    "first_name": "Jordan",
+    "last_name": "Holder",
+    "date_of_birth": "24/05/1996"
+}

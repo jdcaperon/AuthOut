@@ -76,7 +76,6 @@ class HomeSplash extends React.Component {
     let language = this.props.language || '';
     return (
       <SplashContainer>
-        <Logo img_src={imgUrl('docusaurus.svg')} />
         <div className="inner">
           <ProjectTitle />
         </div>
@@ -98,10 +97,12 @@ const LearnHow = props => (
   <Block background="light">
     {[
       {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('docusaurus.svg'),
+        content: 'AuthOut is a biometric check in system for child care' + 
+        'services which aims to solve inefficiencies associated with standard' +
+        ' paper-based processes.',
+        image: imgUrl('logo.png'),
         imageAlign: 'right',
-        title: 'Learn How',
+        title: 'Child Care Services Automation',
       },
     ]}
   </Block>

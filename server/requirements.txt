@@ -6,6 +6,7 @@ Flask==1.0.2
 Flask-Migrate==2.2.1
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
+flask-cors
 isort==4.3.4
 itsdangerous==0.24
 Jinja2==2.10
@@ -21,3 +22,5 @@ six==1.11.0
 SQLAlchemy==1.2.11
 Werkzeug==0.14.1
 wrapt==1.10.11
+boto3==1.9.5
+twilio==6.19.1

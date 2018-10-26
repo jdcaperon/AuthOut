@@ -1,17 +1,28 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy 
+from flask import Response, jsonify, request
+
+from models.AdminModel import AdminModel
+from views.Auth import requires_auth
+
+from db import app, db
 import views
-import os
 
-app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Register sub views.
 
-## Register sub views.
-#   /heartbeat
 app.register_blueprint(views.Heartbeat.bp)
+app.register_blueprint(views.Kiosk.bp)
+app.register_blueprint(views.Parent.bp)
+app.register_blueprint(views.Child.bp)
+app.register_blueprint(views.Entry.bp)
+app.register_blueprint(views.Admin.bp)
 
-db = SQLAlchemy(app)
+
+@app.route('/login')
+@requires_auth
+def login():
+    auth = request.authorization
+    admin = db.session.query(AdminModel).filter_by(email=auth.username).first()
+    return jsonify(admin.as_dict())
+
 
 if __name__ == '__main__':
-  app.run()
+    app.run()

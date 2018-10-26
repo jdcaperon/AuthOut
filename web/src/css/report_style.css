@@ -1,0 +1,104 @@
+/* ---------- Bootstrap Changes --------- */
+
+.row-override, #child-select-box, #buttons-box, #calendar-box {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.col-7, .col-5 {
+	padding: 0;
+}
+
+/* -------------------- Main Style Changes -------------------- */
+.rounded-button {
+	margin: 0;
+}
+
+/* ----------------------- Calendar ----------------------------*/
+
+.daterangepicker td.in-range {
+	background-color: rgb(3, 186, 189, .5);
+}
+
+.daterangepicker td.active, .start-date, .daterangepicker td.active:hover {
+	background-color: #03BABD;
+}
+
+#calendar {
+	width: 100%;
+}
+
+/* ---------------------- Table ---------------------- */
+
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box div{
+	width: calc(100% + 20px);
+}
+#table-box{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#table-box h3{
+	text-align: left;
+	width:100%;
+}
+
+.content, .box-outer, .box-inner {
+	overflow: visible;
+}
+
+.box-inner {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+/* ----------------------- Child Select and Report -------------------- */
+
+#child-reporting {
+	min-height: 780px;
+	margin-bottom: 30px;
+}
+
+#child-select-box {
+	max-height: 140px;
+}
+
+#child-select-box .col-4 {
+	text-align: center;
+}
+
+#generate-button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#date-select input {
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	padding: 0 10px;
+}
+
+#child-report-box {
+	padding-top: 40px;
+	width: 100%;
+}
+
+/* ------------------------ Buttons ------------------------ */
+
+
+#generate-report-button {
+	margin-bottom: 1vh;
+}

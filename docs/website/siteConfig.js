@@ -14,8 +14,8 @@ const users = [
     caption: 'User1',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/docusaurus.svg'.
-    image: '/docs/img/docusaurus.svg',
-    infoLink: 'https://www.facebook.com',
+    image: '/docs/img/logo.png',
+    infoLink: '',
     pinned: true,
   },
 ];
@@ -40,14 +40,14 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/docusaurus.svg',
-  footerIcon: 'img/docusaurus.svg',
+  headerIcon: 'img/logo.png',
+  footerIcon: 'img/logo.png',
   favicon: 'img/favicon.png',
 
   /* colors for website */
   colors: {
-    primaryColor: '#2E8555',
-    secondaryColor: '#205C3B',
+    primaryColor: '#1E2626',
+    secondaryColor: '#171C1C',
   },
 
   /* custom fonts for website */
@@ -66,7 +66,7 @@ const siteConfig = {
   copyright:
     'Copyright © ' +
     new Date().getFullYear() +
-    ' Your Name or Your Company Name',
+    ' RocketPotatoes',
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks
@@ -80,8 +80,8 @@ const siteConfig = {
   onPageNav: 'separate',
 
   /* Open Graph and Twitter card images */
-  ogImage: 'img/docusaurus.png',
-  twitterImage: 'img/docusaurus.png',
+  ogImage: 'img/logo.png',
+  twitterImage: 'img/logo.png',
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
