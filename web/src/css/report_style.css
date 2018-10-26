@@ -15,8 +15,21 @@
 	margin: 0;
 }
 
-/* ---------------------- Table ---------------------- */
+/* ----------------------- Calendar ----------------------------*/
 
+.daterangepicker td.in-range {
+	background-color: rgb(3, 186, 189, .5);
+}
+
+.daterangepicker td.active, .start-date, .daterangepicker td.active:hover {
+	background-color: #03BABD;
+}
+
+#calendar {
+	width: 100%;
+}
+
+/* ---------------------- Table ---------------------- */
 
 #table-box{
 	display: flex;
@@ -36,50 +49,51 @@
 }
 
 #table-box h3{
-text-align: left;
-width:100%;
-}
-
-/* ----------------------- Calendar ---------------------- */
-#calendar-box { /* TODO: delete or change this ID */
-	height: 60%;
-}
-
-#calendar-box .box-inner {
-	padding: 1vw;
-	display: flex;
-}
-
-p{
-	margin-bottom:0 ;
-	font-size: 2vh;
 	text-align: left;
+	width:100%;
 }
 
-#calendar-box p{
-	margin-bottom: 0.5vh;
+.content, .box-outer, .box-inner {
+	overflow: visible;
 }
 
-#cal{
-	padding: 2vw 4vw !important;
+.box-inner {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
 }
-/* ----------------------- Child Select -------------------- */
 
-#child-select-box{
-	height: 15%;
+/* ----------------------- Child Select and Report -------------------- */
+
+#child-reporting {
+	min-height: 780px;
+	margin-bottom: 30px;
 }
-#child-select-list {
+
+#child-select-box {
+	max-height: 140px;
+}
+
+#child-select-box .col-4 {
+	text-align: center;
+}
+
+#generate-button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#date-select input {
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	padding: 0 10px;
+}
+
+#child-report-box {
+	padding-top: 40px;
 	width: 100%;
-	vertical-align: middle;
-}
-
-#child-select-box .center-group {
-	width: 77%;
-}
-
-#child-select-box .box-inner {
-	position: relative;
-	padding:0 4vw;
 }
 
 /* ------------------------ Buttons ------------------------ */
@@ -87,21 +101,4 @@ p{
 
 #generate-report-button {
 	margin-bottom: 1vh;
-}
-
-#buttons-box .box-inner {
-	position: relative;
-	padding: 1vw;
-}
-#export-link{
-	line-height: 30px;
-}
-
-#export-link:hover{
-	color:white;
-
-}
-
-#buttons-box {
-	height: 25%;
 }

@@ -42,16 +42,16 @@ class ChildModel(db.Model):
                 return False
         return True
 
-    def load(self, data: dict):
+    def load(self, data: dict, check=True):
         """
         Loads a dictionaries values into the model.
         """
-        if not self.required(data):
-            return False
-        for i in self.required_keys:
-            if i == "date_of_birth":
-                setattr(self, i, datetime.strptime(data[i], '%d/%m/%Y'))
-            else:
-                setattr(self, i, data[i])
+        for i in data:
+            if i in self.required_keys:
+                if i == "date_of_birth":
+                    setattr(self, i, datetime.strptime(data[i], '%d/%m/%Y'))
+                else:
+                    setattr(self, i, data[i])
+
         print(self)
         return True

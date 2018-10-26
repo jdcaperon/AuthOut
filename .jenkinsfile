@@ -13,14 +13,6 @@ pipeline {
         }
       }
     }
-    stage('Build Android application') {
-      steps {
-        script {
-          echo "Building Android application"
-          sh "cd android/AuthOut && ./gradlew build"
-        }
-      }
-    }
     stage('Publish to master') {
       when {
         expression {env.GIT_BRANCH == 'origin/master'}

@@ -52,7 +52,7 @@ $(document).ready(function() {
 				"bLengthChange": false,
 				"bFilter": true,
 				"bAutoHeight": false,
-				"scrollY":260,
+				"scrollY":300,
 				"displayLength":10,
 				language: {
 				searchPlaceholder: "Search records",
@@ -144,7 +144,7 @@ $(document).ready(function() {
 			var minutes = formatTime(date.getMinutes().toString());
 			var seconds = formatTime(date.getSeconds().toString());
 			
-			var time = hours + ":" + minutes + "." + seconds;
+			var time = hours + ":" + minutes + ":" + seconds;
 			data[key]['time'] = time;
 			
 			// Format the status

@@ -1,4 +1,5 @@
-from datetime import date, datetime
+import sys
+from datetime import date, datetime, timedelta
 
 from dateutil.rrule import rrule, DAILY
 from flask import Blueprint, jsonify, request
@@ -17,9 +18,16 @@ def live():
     """
     Default endpoint generated.
     """
-    entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == date.today())
+    lower = datetime.utcnow().date()
+    upper = datetime.utcnow().date() + timedelta(days=1)
+    sys.stderr.write(date.today().strftime('%d/%m/%Y'))
+    entries = db.session.query(EntryModel)\
+        .filter(EntryModel.time >= lower)\
+        .filter(EntryModel.time <= upper) \
+        .order_by(EntryModel.time)
     entries_json = []
     for entry in entries:
+        print("entry {}".format(entry))
         dict = entry.as_dict()
         parent = db.session.query(ParentModel).filter_by(id=dict['parent_id']).first()
         child = db.session.query(ChildModel).filter_by(id=dict['child_id']).first()
@@ -36,10 +44,10 @@ def live():
 def query():
     data = request.get_json(force=True)
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
-    upper = datetime.strptime(data['upper'], '%d/%m/%Y')
+    upper = datetime.strptime(data['upper'], '%d/%m/%Y') + timedelta(days=1)
     entries = db.session.query(EntryModel)\
-        .filter(cast(EntryModel.time, Date) >= lower)\
-        .filter(cast(EntryModel.time, Date) <= upper)\
+        .filter(EntryModel.time >= lower)\
+        .filter(EntryModel.time <= upper)\
         .filter_by(child_id=data['id'])\
         .filter_by(status=True)\
         .order_by(EntryModel.time)
@@ -54,19 +62,22 @@ def query():
 def stats():
     data = request.get_json(force=True)
     lower = datetime.strptime(data['lower'], '%d/%m/%Y')
-    upper = datetime.strptime(data['upper'], '%d/%m/%Y')
+    upper = datetime.strptime(data['upper'], '%d/%m/%Y') + timedelta(days=1)
 
     data = {'days': []}
     for dt in rrule(DAILY, dtstart=lower, until=upper):
         day = {'date': dt.strftime("%d/%m/%Y"), 'signins': 0, 'entries': []}
         # attendance count
         signed_in = db.session.query(func.Count(EntryModel.child_id))\
-            .filter(cast(EntryModel.time, Date) == dt)\
+            .filter(EntryModel.time >= dt)\
+            .filter(EntryModel.time <= (dt + timedelta(days=1)))\
             .filter_by(status=True)\
             .group_by(EntryModel.child_id).count()
         day['signins'] = signed_in
 
-        entries = db.session.query(EntryModel).filter(cast(EntryModel.time, Date) == dt)
+        entries = db.session.query(EntryModel)\
+            .filter(EntryModel.time >= dt)\
+            .filter(EntryModel.time <= (dt + timedelta(days=1)))
         for entry in entries:
             day['entries'].append(entry.as_dict())
 

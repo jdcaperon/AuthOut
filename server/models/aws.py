@@ -91,12 +91,15 @@ def get_face_id_by_photo_name(photo_name, collection_id=COLLECTION, region=REGIO
 
 
 def delete_parent_photo(parental_id):
-    name = calc_photo_name(parental_id, OBJECT_PARENT)
-    key = [name]
-    delete_photo_from_s3_bucket(key)
+    try:
+        name = calc_photo_name(parental_id, OBJECT_PARENT)
+        key = [name]
+        delete_photo_from_s3_bucket(key)
 
-    face_id = get_face_id_by_photo_name(name)
-    delete_face_from_collection([face_id])
+        face_id = get_face_id_by_photo_name(name)
+        delete_face_from_collection([face_id])
+    except Exception:
+        pass
 
 
 def search_faces_by_image(encoded_image, collection_id=COLLECTION, threshold=60, region=REGION):

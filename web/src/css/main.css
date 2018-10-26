@@ -28,7 +28,7 @@ html, body {
 	text-align: center;
 }
 
-.rounded-button {
+.rounded-button, .narrow-rounded-button {
 	height: 40px;
 	width: 250px;
 	border: none;
@@ -42,7 +42,16 @@ html, body {
 	cursor: pointer;
 }
 
-.rounded-button:hover {
+.rounded-button:focus{
+	border-color:transparent!important;
+	outline:none;
+}
+
+.narrow-rounded-button {
+	width: 150px;
+}
+
+.rounded-button:hover, .narrow-rounded-button:hover {
 	background-color: #DCA726;
 }
 
@@ -194,4 +203,33 @@ html, body {
 	height: 100%;
 	width: 100%;
 	padding: 4vw;
+}
+
+input[data-name=selectItemparents] + span, input[data-name=selectItemchildren] + span, input[data-name=selectItemtrustedChildren] + span {
+	padding-left: 10px;
+}
+
+/* ------------------------- Tables ------------------------------------ */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0;
+	margin-top: 1.2em;
+}
+
+.paginate_button.page-item:hover {
+	/*background-color: pink !important;*/
+	padding: 0;
+	margin-top: 1.2em;
+}
+
+.dataTables_wrapper {
+    font-size: 15px;
+
+}
+
+.page-item.active .page-link{
+	background-color: #03BABD;
+	border: 1px solid #dee2e6;
+}
+.page-link {
+	color:#03BABD;
 }

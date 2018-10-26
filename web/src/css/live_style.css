@@ -29,22 +29,6 @@
 }
 
 
-.dataTables_wrapper {
-    font-size: 10px;
-
-}
-.page-item.active .page-link{
-	background-color: #03BABD;
-	border: 1px solid #dee2e6;
-}
-.page-link {
-	color:#03BABD;
-}
-
-.page-link:hover{
-	color: black;
-}
-
 th{
 	cursor:default;
 }
@@ -56,6 +40,12 @@ th{
 	align-items: center;
 }
 
-#table-box div{
+#table-box > div{
 	width: 100%;
+}
+
+@media screen and ( max-height: 700px ) {
+	.data-div:not(#canvas-div){
+		margin:15% 0;
+	}
 }

@@ -6,17 +6,21 @@
 		  <li class ="nav-item"><a class="nav-link"href="stats.php"><span data-feather="bar-chart-2"></span>Statistics</a></li>
 		  <li class ="nav-item"><a class="nav-link"href="reporting.php"><span data-feather="file-text"></span>Reporting</a></li>
 
-		  <li class ="nav-item nav-heading">Administration</li>
-		  <li class ="nav-item"><a class="nav-link"href="accounts.php"><span data-feather="user"></span>Accounts</a></li>
+		  <li class ="nav-item nav-heading">Accounts</li>
+		  <li class ="nav-item"><a class="nav-link"href="accounts.php"><span data-feather="lock"></span>Admin</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="parents.php"><span data-feather="eye"></span>Parents</a></li>
+		  <li class ="nav-item"><a class="nav-link"href="children.php"><span data-feather="users"></span>Children</a></li>
 
 		  <li class ="nav-item nav-heading">Help</li>
 		  <li class ="nav-item"><a class="nav-link"href="tutorial.php"><span data-feather="help-circle"></span>Tutorial</a></li>
 		  <li class ="nav-item"><a class="nav-link"href="contact.php"><span data-feather="mail"></span>Contact Us</a></li>
+		  
+		  <li id="prod-website"><a target="_blank" href="https://deco3801-rocketpotatoes.uqcloud.net/">Product Website</a></li>
 	  </ul>
   </div>
 </nav>
 
 <nav id = "topbar" class="fixed-top  navbar-fixed-top">
-	<a href=https://deco3801-rocketpotatoes.uqcloud.net/ target="_blank"><img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/></a>
+	<img  src="img/authout_full_logo.png" alt="AuthOut Logo" id="logo"/>
 	<a id="signout" class="col-md-1 text-nowrap"><span data-feather="log-out"></span>Log Out</a>
 </nav>

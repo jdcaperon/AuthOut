@@ -22,7 +22,7 @@
 					<form id="login-form" class="container clearfix">
 						<div class=" form-group clearfix">
 
-							<input required type="email" class="form-control" name="username" id="username" placeholder="Username">
+							<input required type="text" class="form-control" name="username" id="username" placeholder="Username">
 						</div>
 						<div class="form-group clearfix">
 							<input  required title="password" class='form-control' type="password" name="password" id="password" placeholder="Password">
@@ -43,7 +43,7 @@
 
 			<!-- Modal -->
 			<div class="modal fade" id="no-account" tabindex="-1" role="dialog" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h2 class="modal-title" id="exampleModalLabel">No account?</h2>
@@ -51,12 +51,12 @@
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			      <div class="modal-body">
+			      <div class="modal-body" style="text-align: center;">
 			        <p>Please contact your manager for your account information.</p>
-					<p>If you are the manager, check your AuthOut start-up pack!</p>
+					<p style="margin-bottom: 0;">If you are the manager, check your AuthOut start-up pack!</p>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-secondary narrow-rounded-button purple-button" data-dismiss="modal">Close</button>
 			      </div>
 			    </div>
 			  </div>
